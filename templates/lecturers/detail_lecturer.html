@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load account_tags %}{% load staticfiles %}
+
+{% block title_page %}{{ object.fio }}{% endblock %}
+{% block title_wrap %}{% endblock %}
+{% load staticfiles %}{% load account_tags %}
+{% block top_block %}{% endblock %}
+
+{% block js_page %}
+    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="content-block-center-item one-lecturer detail-lecturer">
+      <div class="content-block-center-item-head">
+        <div class="content-block-center-item-nohead-autor lecturer-list-letter">
+          <b>{{ object.surname|slice:':1' }}</b>
+        </div>
+        <div class="content-block-center-item-head-theme lecturer-list-fio"><span>
+            {{ object.fio_short }}
+        </span></div>
+      </div>
+      <div class="content-block-center-item-content lecturer-description">
+          <div class="lecturer-photo-container">
+            <img src="{{ object.image.url }}" alt="{{ object.fio }}" class="lecturer-photo">
+          </div>
+
+          <h1>{{ object.fio }}</h1>
+          {% if user.is_authenticated %}{{ object.content|safe|linebreaks }}{% else %}{{ object.content|truncatewords_html:15|safe|linebreaks }}{% endif %}
+          <div style="clear: both"></div>
+          <div class="lecturer-links lecturer-detail-links">
+            {% for link in object.links.all %}
+              <a href="{{ link.link }}">{{ link.text }}</a>
+            {% endfor %}
+          </div>
+
+      </div>
+  </div>
+{% endblock %}
+
+{% block right_block %}
+    <div class="content-block-right-lecturers">
+        <h2><a href="{% url "lecturers"%}">Лекторы</a></h2>
+        <ul>
+            {% for letter in lecturers_letters %}
+                <li><a href="{% url "lecturers"%}?letter={{letter}}" {% if object.surname|slice:':1'|lower == letter|lower %}class="active"{% endif %}> {{ letter }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {{ block.super }}
+{% endblock %}

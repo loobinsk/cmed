@@ -1,0 +1,14 @@
+from django import forms
+ 
+from models import UploadFile, UploadThumb
+ 
+ 
+class UploadFileForm(forms.ModelForm):
+     
+    class Meta:
+        model = UploadFile
+
+class UploadThumbForm(forms.ModelForm):
+     
+    class Meta:
+        model = UploadThumb

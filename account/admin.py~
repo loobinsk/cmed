@@ -1,0 +1,11 @@
+from django.contrib import admin
+from account.models import MyUser
+
+class MyUserAdmin(MyUser):
+    list_display = ('login', 'last_name', 'first_name',
+                    'is_staff', 'is_active')
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+    )
+
+admin.site.register(MyUserAdmin)

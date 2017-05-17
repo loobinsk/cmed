@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load account_tags %}
+{% block title_page %}Интересное{% endblock %}
+{% block title %}Интересное{% endblock %}
+{% load staticfiles %}
+{% block js_page %}
+  <script src="{% static 'js/jquery.utils.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+{% block top_block %}{% endblock %}
+{% block filter_content %}{% endblock %}
+{% block content %}
+  <!-- OUT -->
+  {% autoescape off %}{{ out }}{% endautoescape %}
+  <!-- END OUT -->
+  <!-- object_list -->
+  {% for object in object_list %}
+    {% if object.template = 'posts' %}
+      {% include 'posts/one_post.html' with circle=True %}
+    {% endif %}
+    {% if object.template = 'videos' %}
+      {% include 'videos/one_videos.html' with circle=True %}
+    {% endif %}
+    {% if object.template = 'events' %}
+      {% include 'events/one_events.html' with circle=True %}
+    {% endif %}
+    {% if object.template = 'PGalleries' %}
+      {% include 'photos/photo_ajax.html' with circle=True %}
+    {% endif %}
+    {% if object.template = 'Records' %}
+      {% include 'records/records.html' with circle=True %}
+    {% endif %}
+  {% endfor %}
+  <div id="preloaderBlock"
+       style="background:url({% static 'images/preloader.gif' %}) no-repeat; height:128px; background-position: center;">
+    <input type="hidden" name="page" value={{ page }}/></div>
+
+  <script>
+    function SendComment(result_id, form_id, url) {
+        if($(this).data('locked') == 1){
+            return false;
+        }
+        var form = $(this);
+      var text = jQuery("#" + form_id).children(".form-filed-3").val();
+      if (text.trim() == '') {
+        alert('Комментарий не может быть пустым');
+      } else {
+          $(this).data('locked', 1);
+        jQuery.ajax({
+          url: url, //Адрес подгружаемой страницы
+          type: "POST", //Тип запроса
+          dataType: "html", //Тип данных
+          data: jQuery("#" + form_id).serialize(),
+          success: function (response) { //Если все нормально
+              form.data('locked', 0);
+            document.getElementById(result_id).innerHTML = response;
+          },
+          error: function (response) { //Если ошибка
+              form.data('locked', 0);
+            document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+          }
+        });
+      }
+    }
+
+    function SendLike(id, service_id, id_result) {
+      jQuery.ajax({
+        url: 'https://vrachivmeste.ru/likes/',
+        type: 'get',
+        data: {'id': id, 'service_id': service_id, 'user_id':{{ user.id }} },
+        success: function (response) {
+          document.getElementById(id_result).innerHTML = response;
+          location.reload();
+        },
+        error: function (response) {
+          alert("Ошибка");
+        }
+      });
+    }
+
+    var thisWork = 1;
+    function getNextP() {
+      if (thisPageNum <= 2) {
+        thisPageNum = $('input[name="page"]').val();
+      }
+      if (thisWork == 1) {
+        thisWork = 0;
+        $("#preloaderBlock").css('display', 'block');
+        $.ajax({
+          type: 'get',
+          url: "{{ path }}",
+          data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(), 'search': $('input[name="search"]').val()},
+          success: function (data) {
+            $("#preloaderBlock").remove();
+            page = $(data).find('input[name="page"]').val();
+            if (page) {
+              $(data).appendTo(".content-block-center");
+              thisPageNum = page;
+              thisWork = 1;
+              $('.content-block-center-item-content img').each(function (index) {
+              })
+              $('.content-block-center-item-content hr').each(function (index) {
+                this.style.width = "100%";
+              })
+            } else {
+              $("#preloaderBlock").remove();
+            }
+          }
+        });
+      }
+    }
+
+    var scrH = $(window).height();
+    var scrHP = $(".content-block-center").height();
+
+    $(window).scroll(function () {
+      var scro = $(this).scrollTop();
+      var scrHP = $(".content-block-center").height();
+      var scrH2 = 0;
+      scrH2 = scrH + scro;
+      var leftH = scrHP - scrH2;
+      if (leftH < 300) {
+        getNextP();
+      }
+    });
+
+    $(document).ready(function () {
+
+      var image_index = 1;
+
+      function progressHandlingFunction(e) {
+        if (e.lengthComputable) {
+          $('.bar').css('width', (e.loaded / e.total) * 100);
+        }
+      }
+
+      $('#upload-file').click(function () {
+        $("#file").trigger('click');
+      });
+      $('#file').bind('change', function () {
+        $('div.content-block-center-write-form-block-2-left-photolink').fadeOut();
+        var data = new FormData();
+        var error = '';
+        jQuery.each($('#file')[0].files, function (i, file) {
+          if (file.name.length < 1) {
+            error = error + ' Файл имеет неправильный размер! ';
+          }
+          if (file.size > 10000000) {
+            error = error + ' File ' + file.name + ' is to big.';
+          }
+          data.append('file', file);
+        });
+
+        if (error != '') {
+          alert(error);
+        } else {
+          $.ajax({
+            url: '{% url "lenta.views.fileupload" %}',
+            type: 'POST',
+            xhr: function () {
+              var myXhr = $.ajaxSettings.xhr();
+              if (myXhr.upload) {
+                myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
+              }
+              return myXhr;
+            },
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            beforeSend: function () {
+              $('\
+			        <div class="content-block-center-write-form-block-2-left-photo-list-download">\
+			        <div class="progress">\
+			        <div class="bar"></div>\
+			        </div>\
+			        </div>').appendTo('.content-block-center-write-form-block-2-left-photo-container');
+              var percentVal = '0%';
+              $('.bar').css('width', percentVal);
+            },
+            success: function (data) {
+              var percentVal = '100%';
+              $('.bar').css('width', percentVal);
+            },
+            error: errorHandler = function () {
+              alert('Ошибка загрузки файлов');
+              $('#info').html('Ошибка загрузки файлов');
+            },
+            complete: function (xhr) {
+              responseText = JSON.parse(xhr.responseText);
+              if (!responseText.result) {
+                alert('Ошибка загрузки файлов');
+              } else {
+                $('.content-block-center-write-form-block-2-left-photo-container').append(
+                        '<div class="content-block-center-write-form-block-2-left-photo-list">\
+                        <div file="' + responseText.file + '" class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url(' + responseText.url + ')"></div>\
+				        <span>Фото №' + (image_index++) + '</span>\
+				        <div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото" onclick="deletephoto(\'' + responseText.url + '\', this);"></div>\
+			            </div>');
+                $('.content-block-center-write-form-block-2-left-photo-list-download').remove();
+              }
+            }
+          });
+        }
+      })
+    });
+
+  </script>{% endblock %}

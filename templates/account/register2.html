@@ -1,0 +1,15 @@
+{% extends 'account/base_register.html' %}
+{% load static %}
+{% block title %}Rango{% endblock %}
+{% block center-column %}
+<!-- Центральная колонка -->
+		<div class="content-block-center">
+			<div class="title-holder">
+				<h3>Для продолжения регистрации заполните информацию о себе. <br>Поля, отмеченные « <img src="{% static 'images/ico01.png' %}" width="15" height="13" alt="image description"> » — обязательны для заполнения </h3>
+			</div>
+			<div class="content-block-center-head">
+				<span>Редактирование личной информации</span>
+			</div>
+{{ step1_form }}
+		</div>
+{% endblock %}

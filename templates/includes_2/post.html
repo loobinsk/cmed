@@ -1,0 +1,73 @@
+{% load account_tags %}{% load staticfiles %}
+			<!-- Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 -->
+			<div class="content-block-center-item">
+				<!-- Автор и тема поста -->
+				<div class="content-block-center-item-head">
+					<div class="content-block-center-item-head-photo-bg">
+					{% if object.user_id %}<a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-head-photo" style="background-image:url({{ object.user_id.avatar }}), url({{ object.user_id.avatar }})"></div>
+					</a>{% endif %}
+					</div>
+					<div class="content-block-center-item-head-autor">
+					<span>{% if object.user_id %}
+					<strong><a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">{{ object.user_id.lastname }}<br />
+					{{ object.user_id.firstname }} {{ object.user_id.surname }}</a></strong><br />
+					{{ object.spec_id.name }}{% endif %}
+					</span>
+					</div>
+					<div class="content-block-center-item-head-theme" style="padding-right:40px; background-image:url({% static 'images/icons-preparats/2.png' %})"><span>{{ object.format_string }}</span></div>
+				</div>
+				<div class="content-block-center-item-content">
+					<!-- Заголовки и текст поста -->
+					<div class="content-block-center-item-content-date">{{ object.createdate }}</div>
+					<h1 style="width:330px"><a href="{% url 'detailpractice' object.id %}" target="_blank" style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a></h1>
+					<p>{% if user.is_authenticated %}{% if object.anons %}{{ object.anons|truncatewords_html:50|safe }}{% else %}{{ object.content|truncatewords_html:50|safe }}{% endif %}{% else %}{% if object.anons %}{{ object.anons|truncatewords_html:15|safe }}{% else %}{{ object.content|truncatewords_html:15|safe }}{% endif %}{% endif %}</p>
+					<div class="content-block-center-item-content-redmore">
+						<div class="content-block-center-item-content-redmore-link">
+						<a href="{% url 'detailpractice' object.id %}" target="_blank" title="Читать полностью">читать полностью</a> |
+						</div>
+						<div class="content-block-center-item-content-redmore-readers">{% if object.statistics %}{{ object.statistics.viewings }}{% else %}0{% endif %}</div>
+					</div>{% if object.photos|length or object.videos|length %}
+					<!-- Медиа -->
+		<div class="content-block-center-item-content-media">{% if object.photos|length %}
+                    	<script type="text/javascript">
+							$(document).ready(function() {
+								$("a[rel=tag{{object.id}}]").fancybox({
+									'transitionIn'		: 'none',
+									'transitionOut'		: 'none',
+									'titlePosition' 	: 'over',
+									'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+										return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+									}
+								});
+							});
+						</script>{% endif %}{% for photo in object.photos %}{% if forloop.first %}
+						<div class="content-block-center-item-content-media-single-photo">
+							<a href="{{ photo.picture }}" rel="tag{{object.id}}">
+                            	<img src="{% get_preview_sizexy photo.picture 223 300 %}" width="223" height="300" alt="">
+                            </a>
+						</div>{% else %}{% if forloop.counter = 2 %}
+                        <div class="content-block-center-item-content-media-more-photo-head">
+                            <span>Дополнительные фото:</span>
+                        </div>
+                        <div class="content-block-center-item-content-media-more-photo">{% endif %}
+                        	<a rel="tag{{object.id}}" href="{{ photo.picture }}">
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({{ photo.thumb }})"></div>
+                            </a>{% if forloop.last %}
+                        </div>{% endif %}
+						{% endif %}{% endfor %}{% if object.videos|length %}{% for video in object.videos %}
+                        <div class="content-block-center-item-content-media-more-photo-head">
+                            <span style="font-size: 12px;">Посмотреть видео:</span>
+                        </div>
+                        <div class="content-block-center-item-content-media-video">
+                        	<div class="content-block-center-item-content-media-video-move">
+                            	<a href="{{ video.preview }}" target="_parent" title="">
+                                    <img src="{% get_preview_sizexy video.preview 190 140 %}" width="190" height="140" alt="">
+                                </a>
+                            </div>
+                        </div>{% endfor %}{% endif %}
+					</div>
+					{% endif %}
+{% include "includes/read_all.html" %}					
+{% include "includes/likes_comments.html" with viewname="detailpractice" %}
+			</div>

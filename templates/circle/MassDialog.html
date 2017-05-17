@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block js_page %}
+	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+{% block title %}Диалоги{% endblock %}
+{% block top_block %}
+	<div class="content-block-top-block-1-window-filter" id="window-filter">
+		<div class="content-block-top-block-1-window-filter-content"></div>  
+		<div class="content-block-top-block-1-window-filter-bottom">
+			<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+		</div>
+	</div>
+{% endblock %}
+{% block content %}
+<!-- Центральная колонка -->
+		Массовое сообщение {{ msg }}!<br>
+        <a href="{% static 'sending.log' %}">Лог отправки</a>
+    {# {{ xurl }} #}
+
+{% endblock %}

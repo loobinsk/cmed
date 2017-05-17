@@ -1,0 +1,108 @@
+{% extends "base.html" %}{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}{% load staticfiles %}
+{% block js_page %}
+  <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+  <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+{% block filter_content %}
+{% endblock %}
+{% block content %}
+  {% if user.is_authenticated %}
+    {% if object_list|length %}
+      {% for object in object_list %}
+        {% include 'lecturers/one_lecturer.html' %}
+      {% endfor %}
+    {% else %}
+      <div class="content-block-center-item">
+        <div class="content-block-center-item-head">
+        </div>
+        <div class="content-block-center-item-content">
+          <p>По заданным критериям нет материалов</p>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="translation">
+      <br/><br/><br/>
+      <span class="title">Для просмотра раздела "Лекторы" войдите на сайт, используя Ваш логин и пароль. </span>
+
+      <p class="inform-panel"><a style="float:left; margin-top:10px;" class="btn" href="/account/login/">Войти</a></p>
+      <br/><br/>
+      <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
+
+      <p class="inform-panel"><a style="float:left;  margin-top:10px;" class="btn" href="/account/register1/">Регистрация</a>
+      </p>
+      <br/>
+    </div>
+  {% endif %}
+  <script>
+  {% if user.is_authenticated %}
+    var thisWork = 1;
+    function getNextP() {
+
+        if (thisWork == 1) {
+            thisWork = 0;
+
+            var queryData = {'page': thisPageNum, 'letter': '{{ request.GET.letter }}', 'search': $('input[name="search"]').val()};
+            $.ajax({
+                type: 'get',
+                url: "{{ path }}",
+                data: queryData,
+                success: function (data) {
+                    $(data).appendTo(".content-block-center");
+                    thisPageNum = thisPageNum + 1;
+                    thisWork = 1;
+                    $('.content-block-center-item-content hr').each(function (index) {
+                        this.style.width = "100%";
+                    })
+                }
+            });
+        }
+    }
+
+    var scrH = $(window).height();
+    var scrHP = $(".content-block-center").height();
+
+    $(window).scroll(function () {
+        var scro = $(this).scrollTop();
+        var scrHP = $(".content-block-center").height();
+        var scrH2 = 0;
+        scrH2 = scrH + scro;
+        var leftH = scrHP - scrH2;
+        if (leftH < 300) {
+            getNextP();
+        }
+    });
+  {% endif %}
+  </script>
+{% endblock %}
+
+
+{% block right_block %}
+    <div class="content-block-right-lecturers">
+        <h1>
+          Лекторы
+        </h1>: <br/>
+        {% if request.GET.letter %}
+          <a href="{% url "lecturers" %}" class="all-lecturers">Все</a>
+        {% else %}
+          <span class="all-lecturers">Все</span>
+        {% endif %}
+
+        <ul>
+            {% for letter in lecturers_letters %}
+                <li>
+                  {% if request.GET.letter|lower == letter|lower %}
+                    <span class="active">{{ letter }}</span>
+                  {% else %}
+                    <a href="{% url "lecturers" %}?letter={{letter}}">{{ letter }}</a>
+                  {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title_page %}Наши партнеры:{% endblock %}
+{% block title %}Наши партнеры:{% endblock %}{% load staticfiles %}{% load account_tags %}
+{% block js_page %}<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>{% endblock %}
+{% block top_block %}<div class="content-block-top-block-1-window-filter" id="window-filter">
+			<div class="content-block-top-block-1-window-filter-content">
+
+			</div>  
+			<div class="content-block-top-block-1-window-filter-bottom">
+				<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+			</div>
+		</div>{% endblock %}
+{% block content %}
+	{% for rubric in partners %}
+		<div class="content-block-center-head">
+			<span>{{rubric}}:</span>
+		</div>
+		<div class="partners">
+			<div class="partners-holder">	
+			{% for partner in partners|get_item:rubric %}
+				<div class="block">
+					<a href="{{partner.url}}" target="_blanc" style="color: transparent;">
+						<img style="max-height: 109px; max-width: 155px;" alt="{{partner.name}}" src="/media/{{partner.image}}">
+					</a>
+				</div>	
+			{% endfor %}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

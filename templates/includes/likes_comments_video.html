@@ -1,0 +1,63 @@
+{% if object.comment_show|default_if_none:True %}
+{% load account_tags %}{% load staticfiles %}
+<!-- Комментарии -->
+<div class="content-block-center-item-content-responses" id="comments{{ object.id }}">
+    {% if object.comments_list|length %}
+        {% if object.hidden_comments|length %}
+        <a href="{% url 'detailvideos' object.id %}" target="_blank"><span id="click-resp-hidden-1-1" class="content-block-center-item-content-responses-all-link" >Посмотреть предыдущие комменарии ({{ object.hidden_comments|length}})</span></a>
+        <div class="content-block-center-item-content-responses-line"></div>
+        {% endif %}
+        {% for comment in object.comments_list %}
+            <div class="content-block-center-item-content-responses-container" style="margin-left:{{ comment.1 }}px;">
+                {% if comment.0.user_id %}
+                    <a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent" title="На страницу автора">
+                        <div class="content-block-center-item-content-responses-photo"
+                             style="background-image:url({% get_avatar_preview_sizexy_hax comment.0.user_id.avatar.name 50 50 %}), url({{ comment.0.user_id.avatar }})"></div>
+                    </a>{% endif %}
+                <div class="content-block-center-item-content-responses-text" style="width:{{ comment.2 }}px;">
+                <p>
+                    {% if comment.0.user_id %}<a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent"
+                                                    title="На страницу автора">{{ comment.0.user_id.lastname }} {{ comment.0.user_id.firstname }} {{ comment.0.user_id.surname }}</a><br/>
+                        <span>{{ comment.0.user_id.spec_id.name }}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{% endif %}
+                <span>{{ comment.0.createdate }}</span>
+                </p>
+                    <p>{% if comment.0.safe %}{{ comment.0.content|safe }}{% else %}{{ comment.0.content|linebreaks }}{% endif %}</p>{% if user.is_authenticated %}
+                    {% include "includes/allow_disallow.html" %}
+                {% endif %}
+                </div>
+            </div>
+            <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+                <form action="javascript:void(null);"
+                      onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                      method="post" id="answerform{{ comment.0.id }}">
+          <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+                    <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+                    <input type="hidden" value="{{ object.SERVICE_ID }}" name="service_id" pekopt="2"/>
+                    <input type="hidden" value="{{ object.id }}" name="object_id"/>
+                    <input type="submit" value="Ответить" class="form-key-2"/>
+                </form>
+            </div>
+            <div class="content-block-center-item-content-responses-line"></div>
+        {% endfor %}
+    {% else %}
+        Комментариев нет
+    {% endif %}
+    <div class="content-block-center-item-content-answer-active">{% if user.is_authenticated and not is_no_my_group %}
+        <form action="javascript:void(null);"
+              onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ object.id }}', '/comments/')" method="post"
+              id="answerform{{ object.id }}">
+            <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+            <input type="hidden" value="0" name="parent_id"/>{% csrf_token %}
+            <input type="hidden" value="{{ object.SERVICE_ID }}" name="service_id"/>
+            <input type="hidden" value="{{ object.id }}" name="object_id"/>
+            <input type="submit" value="Опубликовать" class="form-key-2"/>
+        </form>
+    {% elif not is_no_my_group %}
+        <p style="text-align: center;">Прочесть полный текст публикации и оставить комментарий могут только
+            зарегистрированные пользователи.</p>
+    {% else %}<p style="text-align: center;">Комментарии могут оставлять только пользователи, состоящие в
+            группе</p>{% endif %}
+    </div>
+</div>
+{% endif %}
+</div>

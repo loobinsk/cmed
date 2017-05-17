@@ -1,0 +1,355 @@
+{% extends "base.html" %}{% load staticfiles %}{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block top_block %}
+        <div class="content-block-top-block-1-window-filter" id="window-filter">
+			<div class="content-block-top-block-1-window-filter-content">
+			</div>  
+			<div class="content-block-top-block-1-window-filter-bottom">
+				<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+			</div>
+		</div>{% if nonactivated > 0 %}
+		<div class="info-block"><a href="{% url 'invitation' %}">
+			<span class="title">Вас пригласили в</span>
+			<span class="info active">{{ nonactivated }} группы</span></a>
+		</div>{% endif %}
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="groups-area " id="groups-area">
+
+{% if mygroups_list|length %}
+	<div class="toggle-block slide" id="toggle-block-slide">
+	{% for object in  mygroups_list %}
+		{% if forloop.counter == 2 %}
+		<div class="slide">
+		{% endif %}
+			<div class="holder{% if forloop.last or forloop.first %} style01{% endif %}" id='group{{ object.group_id.id }}'>
+				<div class="content-block-center-item-head-photo-bg">
+					<a target="_parent" href="{% url 'detailgroup' object.group_id.id %}">
+						<div class="content-block-center-item-head-photo" style="background-image:url({% if object.group_id.image %}{{ object.group_id.image }}{% else %}{% get_preview_sizexy 'group_images/'|add:object.group_id.image 71 71 %}{% endif %})"></div>
+					</a>
+				</div>
+				<div class="description">
+					<h3><a target="_blank" href="{% url 'detailgroup' object.group_id.id %}">{{ object.group_id.title }}</a></h3>
+					<span class="info">открытая группа</span>
+					<p><em>{{ object.group_id.description|truncatewords_html:10|safe|linebreaks }}</em></p>
+					<div class="info-panel">
+						<span>Участников: {{ object.group_id.count_users }}</span>
+						<span>Публикаций: {{ object.group_id.count_posts }}</span>
+					</div>
+					{% if object.group_id.user_id %}
+					<span class="inform">Создатель группы: <a href="{% url 'lichnie2' object.group_id.user_id.id %}">{{ object.group_id.user_id.lastname }} {{ object.group_id.user_id.firstname }} {{ object.group_id.user_id.surname }}</a></span>
+		{% if forloop.first and mygroups_list|slice:"1:"|length %}
+					{% endif %}
+					{% if mygroups_list|slice:"1:"|length %}
+					<div class="opener-holder">
+						<a href="#" class="opener">Вы состоите ещё в {{ mygroups_list|slice:"1:"|length }} группах</a>
+					</div>
+					{% endif %}
+		{% endif %}
+				</div>
+				<div class="links">
+					<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');" style="color:#777777;">Выйти из группы</a>
+				</div>
+			</div>
+		{% if forloop.last and forloop.counter > 1 %}
+		</div>
+		{% endif %}
+	{% endfor %}
+	</div>
+{% else %}
+<div class="info-block" id="info-block-mygroup">
+	<span class="title">Вы пока не состоите ни в одной группе</span>
+	<!--a href="#" class="btn">Создать свою группу</a-->
+</div>
+{% endif %}
+
+	<div class="content-block-center-head">
+		<span>Созданные вами группы: <a href="#" class="add-group">создать ещё одну группу?</a></span>
+	</div>
+		<div class="info-block">
+		{% if mygroupscreate_list|length == 0 %} <span class="title" style="text-align:center;">Вы пока не создали ни одной группы</span> {% endif %}							
+		<div class="content-block-center-write-contaner" style="min-height: 0px;">
+			<div class="content-block-center-write-form">
+				<div class="content-block-center-write-form-close" title="Закрыть форму"></div>
+				<div class="content-block-center-write-form-block-1">
+					<div class="content-block-center-write-form-block-1-left">
+						<div class="content-block-center-write-form-block-1-left-block-3">
+							<div class="content-block-center-write-form-block-1-left-block-3-left">
+								<span>Выберите специальность:</span>
+							</div>
+							<div class="content-block-center-write-form-block-1-left-block-3-right">
+								<select name="spec_id" class="default form-filed-11">
+									{% for s in spec %}
+										<option value="{{s.id}}">{{s.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="content-block-center-write-form-block-1-left-block-4" style="height: 50px">
+							<div class="content-block-center-write-form-block-1-left-block-3-left">
+								<span style="font-style: italic;">Название группы:</span>
+							</div>
+							<input type="text" name="title" class="form-filed-12" placeholder="Введите заголовок"/>
+						</div>
+						<div class="content-block-center-write-form-block-1-left-block-4">
+							<div class="content-block-center-write-form-block-1-left-block-3-left" style="width: 315px">
+								<span style="font-style: italic;">Краткое описание группы (не более 500 знаков):</span>
+							</div>
+							<textarea name="description" class="form-filed-13" onFocus="if (this.value == 'Введите текст') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Введите текст';}">Введите текст</textarea>
+						</div>
+					</div>
+                	{% if not user.is_staff %}
+					<div class="content-block-center-write-form-block-1-right">
+						<!--<div class="content-block-center-write-form-block-1-right-photo" style="background-image:url(/static/images/present/1.jpg)"></div>-->
+						<p><strong>Поделитесь<br />
+						клиническим<br />
+						опытом с коллегами</strong></p>
+						<p>По итогам месяца автор публикации, понравившейся наибольшему количеству коллег, получит подарок.</p> 
+					</div>
+                	{% endif %}
+				</div>
+				<div class="content-block-center-write-form-block-2">
+					<div class="content-block-center-write-form-block-2-left" style="width: 100%;">
+						<div class="content-block-center-write-form-block-2-left-photolink">
+							<input id="file" type="file" name="file" class="form-filed-4 default" />
+						</div>
+						<div class="content-block-center-write-form-block-2-left-videolink">
+							<input type="text" name="links-video" id="links_video" class="form-filed-4 default" style="padding-top:2px; padding-bottom:2px;" value="Введите ссылку на видео в это поле" onfocus="if (this.value == 'Введите ссылку на видео в это поле') {this.value = '';$('#key-2-2').fadeIn();$('#key-2-1').fadeOut();}" onblur="if (this.value == '') {this.value = 'Введите ссылку на видео в это поле';$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();}" />
+							<input type="submit" value="OK" class="form-key-4" id="key-2-1" disabled style="height:21px;"/>
+							<input type="submit" value="OK" class="form-key-5" id="key-2-2" style="height:21px;" onClick="$('div.content-block-center-write-form-block-2-left-videolink').fadeOut();addvideo();$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();$('#links_video').val('Введите ссылку на видео в это поле');return false;" />
+						</div>
+						<div class="content-block-center-write-form-block-2-left-separator" style="background-image: none;">
+							<div class="content-block-center-write-form-block-2-left-photo-container">
+								<div class="content-block-center-write-form-block-2-left-photo">
+									<input style="display: none;" id="file" type="file" name="file">
+									<span id="upload-file" title="Добавить фото">Добавить фото</span>									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="content-block-center-write-form-block-2-right">
+						<span class="form-key-3 btn" style="width: 100px;">Создать группу</span>
+					</div>						
+				</div>
+			</div>
+			
+		</div>							
+		{% if mygroupscreate_list|length == 0 %}<!-- a style="cursor:pointer;" class="btn">Создать свою группу</a -->{% endif %}
+	</div>
+{% if mygroupscreate_list|length %}
+	<div class="toggle-block slide">
+	{% for object in  mygroupscreate_list %}
+		{% if forloop.counter = 2 %}
+		<div class="slide">
+		{% endif %}
+			<div class="holder{% if forloop.last or forloop.first %} style01{% endif %}" id='group{{ object.id }}'>
+				<div class="content-block-center-item-head-photo-bg">
+					<a target="_parent" href="{% url 'detailgroup' object.id %}">
+						<div class="content-block-center-item-head-photo" style="background-image:url({% if object.image %}{{ object.image }}{% else %}{% get_preview_sizexy 'group_images/'|add:object.image 71 71 %}{% endif %})"></div>
+					</a>
+				</div>
+				<div class="description">
+					<h3><a target="_blank" href="{% url 'detailgroup' object.id %}">{{ object.title }}</a></h3>
+					<span class="info">открытая группа</span>
+					<p><em>{{ object.description|truncatewords_html:10|safe|linebreaks }}</em></p>
+					<div class="info-panel">
+						<span>Участников: {{ object.count_users }}</span>
+						<span>Публикаций: {{ object.count_posts }}</span>
+					</div>
+					<span class="inform">Создатель группы: <a href="{% url 'lichnie2' object.user_id.id %}">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</a></span>
+		{% if forloop.first %}
+					<div class="opener-holder">
+						<a href="#" class="opener">У вас есть ещё {{ mygroupscreate_list|slice:"1:"|length }} групп</a>
+					</div>
+		{% endif %}
+				</div>
+			</div>
+		{% if forloop.last and forloop.counter > 1 %}
+		</div>
+		{% endif %}
+	{% endfor %}
+	</div>
+{% endif %}
+
+</div>
+{% endif %}
+<!-- Заголовок -->
+<div class="content-block-center-head">
+	<span>Все группы на «Врачи Вместе»</span>
+</div>
+<form class="search-form" action="{% url 'groups' %}" method="get">
+	<input type="text" name="where" value="{{ where|default:"Найти группу"   }}" />
+	<input type="submit" value="Найти" />
+</form>
+<div class="groups-area toggle-block slide">
+{% for object in object_list %}
+	{% if object.id in array_mygroups_list %}
+	{% else %}
+	<div class="holder{% if forloop.last %} style01{% endif %}" id='group{{ object.id }}'>
+		<div class="content-block-center-item-head-photo-bg">
+			<a target="_blank" href="{% url 'detailgroup' object.id %}">
+				<div class="content-block-center-item-head-photo" style="background-image:url({% if object.image %}{{ object.image }}{% else %}{% get_preview_sizexy 'group_images/'|add:object.image 71 71 %}{% endif %})"></div>
+			</a>
+		</div>
+		<div class="description">
+			{% if user.is_authenticated %}
+                <h3><a target="_blank" href="{% url 'detailgroup' object.id %}">{{ object.title }}</a></h3>
+            {% else %}
+                <h3>{{ object.title }}</h3>
+            {% endif %}
+			<span class="info">открытая группа</span>
+			<p><em>
+			{% if user.is_authenticated %}
+				{{ object.description|truncatewords_html:10|safe|linebreaks }}
+			{% else %}
+				{{ object.description|truncatewords_html:3|safe|linebreaks }}
+			{% endif %}
+			</em></p>
+			<div class="info-panel">
+				<span>Участников: {{ object.count_users }}</span>
+				<span>Публикаций: {{ object.count_posts }}</span>
+			</div>
+      {% if object.user_id %}
+			<span class="inform">Создатель группы:
+        <a href="{% url 'lichnie2' object.user_id.id %}">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</a>
+      </span>
+      {% endif %}
+		</div>
+		<div class="links">
+		{% if user.is_authenticated %}
+			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', '/groups/join');">Вступить <br> в группу</a>
+		{% endif %}
+		</div>
+	</div>
+	{% endif %}
+{% endfor %}
+</div>
+<script>
+	function getfotocount() {
+		return $('.content-block-center-write-form-block-2-left-photo-list').length;
+	}
+	function upload() {
+		var file = document.getElementById("file");
+		var formData = new FormData();
+		var error = '';
+		if(getfotocount() > 0) {
+			alert( 'Более одной картинки загружать не нужно!!!' );
+			return 0;
+		}	
+		jQuery.each($('#file')[0].files, function(i, file) {
+				if(file.name.length < 1) {
+					error = error + ' Файл имеет неправильный размер! ';    
+				}
+				if(file.size > 10000000) {
+					error = error + ' File ' + file.name + ' is to big.';
+				}
+			formData.append('file', file );
+		});
+		if (error != '')
+			alert(error);
+		else {
+			$.ajax({
+				url: 			'{% url "lenta.views.fileupload" %}',
+				type:			'POST',
+				data:			formData,
+				cache: 			false,
+				processData: 	false,
+				contentType: 	false
+			})	
+			.done( function (data) {
+				responseText = JSON.parse(data);
+        if (!responseText.result) {
+          alert('Ошибка загрузки файлов');
+        } else {
+          $('.content-block-center-write-form-block-2-left-photo-container').append(
+                  '<div class="content-block-center-write-form-block-2-left-photo-list">\
+						<div file="' + responseText.file + '" class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url(' + responseText.url + ')"></div>\
+						<div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото" onclick="deletephoto(\'' + responseText.url + '\', this);"></div>\
+					</div>');
+        }
+			})
+			.fail( function(data) {
+					alert(data);
+			});
+		}	
+	}
+	$('#upload-file').click(function(){
+		$("#file").trigger('click');
+	});
+	$('#file').bind('change', function(){
+		upload();
+	});
+	function deletephoto( photo, el ) {
+		$.post( '{% url "lenta.views.filedelete" %}', { file: photo }, function( data ) {
+			if(data.result) {
+				parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
+				parent.remove();
+			}
+		}, "json");
+	}
+	
+function JoinAGroup(id, url) {
+		jQuery.ajax({
+			url:     url, //Адрес подгружаемой страницы
+			type:     "get", //Тип запроса
+			//dataType: "html", //Тип данных
+			data: {'id': id}, 
+			success: function(response) { //Если все нормально
+				document.getElementById('group'+id).parentNode.removeChild(document.getElementById('group'+id));
+				if (document.getElementById('toggle-block-slide')) {
+					$("#toggle-block-slide").html(response);
+				}else{
+					$('#info-block-mygroup').removeClass('info-block');
+					$('#info-block-mygroup').addClass('groups-area');
+					//$('#info-block-mygroup').addClass('slide');
+					$("#info-block-mygroup").html(response);
+					//$("#info-block-mygroup").html(response);
+				}
+			},
+			error: function(response) { //Если ошибка
+				alert('Произошла ошибка. Попробуйте ещё раз'); //document.getElementById('group'+id).innerHTML = "Ошибка при отправке формы";
+			}
+		});
+	//}
+}
+
+var thisWork = 1;
+function getNextP(){
+
+	if(thisWork == 1){
+		thisWork = 0;
+		if( getParameterByName('where') != "" )
+			_where = where;
+		else	
+			_where = $('input[name="where"]').val();	
+		$.ajax({
+			type: 'get',
+			url: "{{ path }}",
+			data: {'page': thisPageNum, 'spec_id': spec_id, 'where': _where, 'format': format.join()},
+			success: function(data){
+				//$("#upBlock").css('display','none');
+				$('.groups-area.toggle-block.slide .holder:last-child').removeClass('style01');
+				$(".groups-area.toggle-block.slide").html($(".groups-area.toggle-block.slide").html()+" "+data);
+				thisPageNum = thisPageNum + 1;
+				thisWork = 1;
+			}
+		});
+	}
+}
+
+var scrH = $(window).height();
+var scrHP = $(".content-block-center").height();
+
+$(window).scroll(function(){
+	var scro = $(this).scrollTop();
+	var scrHP = $(".content-block-center").height();
+	var scrH2 = 0;
+	scrH2 = scrH + scro;
+	var leftH = scrHP - scrH2;
+	if(leftH < 300){
+		getNextP();
+	}
+});
+</script>{% endblock %}

@@ -1,0 +1,12 @@
+{% if mygroups_list|length %}
+	<div class="toggle-block slide">
+	{% for object in  mygroups_list %}
+		{% include "groups/one_group.html" %}
+	{% endfor %}
+	</div>
+{% else %}
+	<div class="info-block">
+		<span class="title">Вы пока не состоите ни в одной группе</span>
+	</div>
+{% endif %}
+

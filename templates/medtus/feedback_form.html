@@ -1,0 +1,64 @@
+<div class="content-block-top-block-3">
+  <form action="" method="post" id="feedback_form">
+    <div class="content-block-top-window-message">
+      <div class="content-block-top-window-message-arrow"></div>
+      <div class="content-block-top-window-message-block-1">
+        <div class="content-block-top-window-message-block-1-left">
+          <span>Выберите тему:</span>
+        </div>
+        <div class="content-block-top-window-message-block-1-right">
+          <select name="topic" class="default form-filed-5">
+            <option value="Пожелания">Пожелания</option>
+            <option value="Отзыв">Отзыв</option>
+            <option value="Хочу сотрудничать">Хочу сотрудничать</option>
+            <option value="Техническая проблема на сайте">Техническая проблема на сайте</option>
+            <option value="Найдена ошибка на сайте">Найдена ошибка на сайте</option>
+            <option value="Другое">Другое</option>
+          </select>
+        </div>
+      </div>
+      <div class="content-block-top-window-message-block-1">
+        <div class="content-block-top-window-message-block-1-left">
+          <span>Ваше имя:</span>
+        </div>
+        <div class="content-block-top-window-message-block-1-right">
+          <input type="text" name="name"
+                 value="{% spaceless %}
+                           {% if user.is_authenticated %}
+                         {{ user.lastname }} {{ user.firstname }} {{ user.surname }}
+                         {% endif %}{% endspaceless %}" class="form-filed-6"/>
+        </div>
+      </div>
+      <div class="content-block-top-window-message-block-1">
+        <div class="content-block-top-window-message-block-1-left">
+          <span>Ваша должность:</span>
+          <span class="color-red">*</span>
+        </div>
+        <div class="content-block-top-window-message-block-1-right">
+          <input type="text" name="position"
+                 value="{% spaceless %}
+                           {% if user.is_authenticated %}
+                         {{ user.job }}
+                         {% endif %}{% endspaceless %}" class="form-filed-6"/>
+        </div>
+      </div>
+      <div class="content-block-top-window-message-block-1">
+        <div class="content-block-top-window-message-block-1-left">
+          <span>Ваш E-mail или телефон:</span>
+          <span class="color-red">*</span>
+        </div>
+        <div class="content-block-top-window-message-block-1-right">
+          <input type="text" name="contact" class="form-filed-6" value="{% spaceless %}
+                           {% if user.is_authenticated %}
+                         {{ user.phone_number }} {{ user.email }}
+                         {% endif %}{% endspaceless %}"/>
+        </div>
+      </div>
+      <div class="content-block-top-window-message-block-2">
+        <textarea name="text" class="form-filed-7 dontresize" placeholder="Текст Вашего сообщения"></textarea>
+      </div>
+      <input type="submit" value="Отправить сообщение" class="form-key-6"/>
+    </div>
+  </form>
+  <div class="content-block-top-block-3-link"><a id="message" title="Напиcать нам">Напиcать<br/>нам</a></div>
+</div>

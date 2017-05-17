@@ -1,0 +1,24 @@
+<table>
+<thead>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>email</th>
+        <th>content</th>
+        <th>date</th>
+        <th>del</th>
+</thead>
+{% for comment in comments %}
+    <tr>
+        <td><a href="{% url "admin:comments_comments_change" comment.id %}">{{ comment.id }}</a></td>
+        <td>{{ comment.title }}</td>
+        <td>{{ comment.user_id.firstname }} {{ comment.user_id.lastname }}</td>
+        <td>{{ comment.user_id }}</td>
+        <td>{{ comment.content|safe }}</td>
+        <td>{{ comment.createdate|date:"d.m.Y H:i:s" }}</td>
+        <td>
+            <a href="{% url "admin:comments_comments_delete" comment.id %}">удалить</a>
+        </td>
+    </tr>
+{% endfor %}
+</table>

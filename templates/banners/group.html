@@ -1,0 +1,25 @@
+{% load banner %}
+
+<style>
+  .b-banner {
+    display: block;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .b-banner-{{ group.slug }} {
+    width: {{ group.width }}px;
+{#    height: {{ group.height }}px;#}
+  }
+
+  .b-banner-{{ group.slug }} img {
+    width: {{ group.width }}px;
+{#    height: {{ group.height }}px;#}
+  }
+</style>
+
+<div class="b-banner-group">
+  {% for banner in banners %}
+    {% banner_one banner.id %}
+  {% endfor %}
+</div>

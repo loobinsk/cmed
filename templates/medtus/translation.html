@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block right_column %}{% endblock %}
+{% block top_block %}{% endblock %}
+{#{% block top_block_3 %}{% endblock %}#}
+{% block content_block_style %}style="width: 785px;"{% endblock %}
+{% block page_div_style %}style="background-image:none;"{% endblock %}
+
+{% block center_column %}
+{% if user.is_authenticated %}
+    <div class="translation" style="margin-left: 40px;">
+        <input type="hidden" id="object_id" value="{{ object.id }}"/>
+        {{ object.data|safe }}
+    </div>
+    <script>
+        //Increment the time counter every 30 sec.
+        var idleInterval = setInterval(timerIncrement, 30000);
+    </script>
+{% else %}    
+    <div class="translation" style="margin-left: 40px;">
+    <br /><br /><br/>
+        <span class="title">Для просмотра онлайн трансляции войдите на сайт, используя Ваш логин и пароль. </span>
+
+     <p class="inform-panel"><a style="float:left; margin-top:10px;" class="btn" href="/account/login/">Войти</a></p>
+     <br /><br />
+       <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
+
+     <p class="inform-panel"><a style="float:left;  margin-top:10px;"  class="btn" href="/account/register1/">Регистрация</a></p>
+     <br />
+    </div>
+{% endif %}
+{% endblock %}

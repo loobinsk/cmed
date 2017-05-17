@@ -1,0 +1,331 @@
+{% load static %}
+<div class="title-holder" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+				<h3>Для продолжения регистрации заполните информацию о себе. <br>Поля, отмеченные « <img src="{% static 'images/ico01.png' %}" width="15" height="13" alt="image description"> » — обязательны для заполнения </h3>
+			</div>
+			<div class="content-block-center-head">
+				<span>Редактирование личной информации</span>
+			</div>
+			<form class="info-form style01 validate-js" action="{% url "account.views.register2" %}" method="post" enctype="multipart/form-data">
+				<input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}' />
+				<div class="section">
+					<div class="alignleft">
+						<style>
+							#upload-file-container {
+							   background: url({% static 'images/img08.png' %}) no-repeat;
+							   width: 118px;
+							   height:117px;
+                               cursor: pointer;
+							}
+							#upload-file-container input {
+							    filter: alpha(opacity=0);
+							    opacity: 0;
+                                position:absolute;
+                                top:-9999px;
+                                left:-9999px;
+							}
+						</style>
+						<script>
+							var trigger = true;
+							$(document).ready( function() {
+							  $("#id_picture").change(function(e){
+								$("#upload-file-container").css({'background': '#00A499', 'color': '#fff', 'font-size': '20px', 'line-height': '2', 'padding-top': '10px' }).append($("<span>Фото выбрано</span>"));
+                              });
+							  $("#school_select").chosen({
+								no_results_text: "Нет результатов. Добавьте свой вариант в поле ниже.",
+                                placeholder_text_single: "выберите ВУЗ"
+                              }).on('chosen:no_results', function(e, params) {
+                                  $("#no_found_school").show();
+                              });
+							});
+						</script>
+						<label id="upload-file-container" for="id_picture">
+							<input id="id_picture" type="file" name="avatar">
+						</label>
+					</div>
+					<div class="section-holder">
+						<div class="row">
+							<div class="form-unit required">
+								<input type="text" placeholder="Фамилия" value="{{ lastname }}" name="lastname" class="required" >
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-unit required">
+								<input type="text" placeholder="Имя" value="{{ firstname }}" name="firstname" class="required" >
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-unit required">
+								<input type="text" placeholder="Отчество" value="{{ surname }}" name="surname" class="required" >
+							</div> 
+						</div>				
+						<div class="panel">
+							<div class="form-holder">
+								<span class="label">Ваш пол:</span>
+								<div class="radio-field">
+									м<input class="male-field" name="sex" value="male" type="radio" {% if sex == "male" %} checked {% endif %}>
+									ж<input class="female-field" name="sex" value="female" type="radio" {% if sex == "female" %} checked {% endif %}>
+								</div>
+							</div>
+							<label style="margin-left: 25px;">Дата рождения:</label>
+							<div class="date-field">
+								<input type="text" class="mask-bd" name="birthday" value="{{ birthday }}">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-head">
+					<span>Специализация</span>
+				</div>
+				<div class="section">
+					<div class="row">
+						<div class="label-holder ">
+							<label for="text-field01">Основная специальность:</label>
+						</div>
+						<!--<div class="form-unit required">
+							<input type="text" id="text-field01" name="spec_id" class="required"  value="{{ spec_id }}">
+						</div>-->
+						<div class="row form-unit required">
+							<select name="spec_id" class="required">
+								<option value="">выберите специальность</option>
+								{% for s in spec_list %}
+									<option value="{{ s.id }}" {% if s.id|stringformat:"s" == spec_id|stringformat:"s" %} selected {% endif %}>{{ s.name }}</option>
+								{% endfor %}	
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field02">Cтаж:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field02" name="experience" value="{{ experience }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field03">Дополнительная специальность:</label>
+						</div>
+						<div class="row">
+							<select name="addspeciality" autocomplete="off">
+								<option value="0">выберите специальность</option>
+								{% for al in addspeciality_list %}
+									<option value="{{ al.id }}" {% if al.name == addspeciality %} selected {% endif %}>{{ al.name }}</option>
+								{% endfor %}	
+							</select>
+						</div>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field04">Cтаж:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field04" name="addexperience" value="{{ addexperience }}">
+						</div>
+					</div>
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Учёная степень</span>
+					</div>
+					<div class="row">
+						<select name="graduate" autocomplete="off">
+							<option value="0">выберите ученую степень</option>
+							{% for g in graduate_list %}
+								<option value="{{ g.pk }}" {% if g.pk == graduate %} selected {% endif %}>{{ g.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field05">Тема диссертации:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field05" name="dissertation" value="{{ dissertation }}">
+						</div>
+					</div>
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Звание</span>
+					</div>
+					<div class="row">
+						<select name="title" autocomplete="off">
+							<option value="0">выберите звание</option>
+							{% for t in title_list %}
+								<option value="{{ t.name }}" {% if t.name == title %} selected {% endif %}>{{ t.name }}</option>
+							{% endfor %}	
+						</select>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field06">...или напишите <br>своё звание:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field06" name="addtitle" value="{{ addtitle }}">
+						</div>
+					</div>
+					<!--<div class="link-add link-add-js"><a href="#">Добавить ещё звание</a></div>-->
+				</div>
+				<div class="content-block-center-head">
+					<span>Категория</span>
+				</div>
+				<div class="section">
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field07">Ваша категория:</label>
+						</div>
+						<div class="form-unit">
+                            <select name="category" id="category_list">
+								{% for c in category_list %}
+									<option value="{{ c.pk }}" {% if c.pk == category %} selected {% endif %}>{{ c.name }}</option>
+								{% endfor %}
+                        	</select>
+{#							<input type="text" id="text-field07" name="category" value="{{ category }}">#}
+						</div>
+					</div>
+					<!--<div class="link-add link-add-js"><a href="#">Добавить ещё категорию</a></div>-->
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Достижения и награды</span>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field08">Ваши достижения <br>и награды:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field08" name="awords" value="{{ awords }}">
+						</div>
+					</div>
+					<!--<div class="link-add link-add-js"><a href="#">Добавить ещё</a></div>-->
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Работа</span>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field09">Название организации:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field09" name="organization" value="{{ organization }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field10">Должность:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field10" name="job" value="{{ job }}">
+						</div>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field11">Сайт организации:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field11" name="site" value="{{ site }}">
+						</div>
+					</div>
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Образование</span>
+					</div>
+					<div class="row">
+						<select name="school" id="school_select">
+							{% for s in school_list %}
+								<option value="{{ s.name }}" {% if school == s.name %} selected {% endif %}>{{ s.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row" id="no_found_school" style="display: none;">
+						<div class="label-holder">
+							<label for="text-field121">Добавьте свой ВУЗ:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field121" name="no_found_school" value="{{ no_found_school }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field12">Год выпуска:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field12" name="graduate_year" value="{{ graduate_year }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="text-field13">Факультет:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field13" name="faculty" value="{{ faculty }}">
+						</div>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="text-field14">Кафедра:</label>
+						</div>
+						<div class="form-unit">
+							<input type="text" id="text-field14" name="cathedra" value="{{ cathedra }}">
+						</div>
+					</div>
+				</div>
+				<div class="section">
+					<div class="content-block-center-head">
+						<span>Контактная информация</span>
+					</div>
+					<div class="row form-unit required" id="country">
+						<select class="sel01  required" name="country" onchange="Dajaxice.account.updatecombo(Dajax.process, {'option':this.value})" autocomplete="off">
+							<option value="">Выберите страну</option>
+							{% for c in country_list %}
+								<option value="{{ c.id }}" {% if country|stringformat:"s" == c.id|stringformat:"s" %} selected {% endif %}>{{ c }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row form-unit required" id="town">
+						<select class="sel required" name="town" autocomplete="off">
+							<option value="">Выберите город</option>
+							{% for t in town_list %}
+								<option value="{{ t.id }}" {% if town|stringformat:"s" == t.id|stringformat:"s" %} selected {% endif %}>{{ t.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row contact_phone">
+						<div class="label-holder">
+							<label for="tel-field">Контактный телефон:</label>
+						</div>
+						<div class="text-holder">
+							<input type="text" id="tel-field" name="phone_number" value="{{ phone_number }}">
+							<input id="check-field" type="checkbox" name="phone_visible">
+							<label for="check-field">Не отображать на сайте</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label-holder">
+							<label for="skype-field">ICQ/Skype:</label>
+						</div>
+						<div class="text-holder">
+							<input type="text" id="skype-field"  name='ICQ_Skype' value="{{ ICQ_Skype }}">
+						</div>
+					</div>
+					<div class="row link-add-template">
+						<div class="label-holder">
+							<label for="site-field">Мой сайт / профиль <br> в социальной сети:</label>
+						</div>
+						<div class="text-holder">
+							<input type="text" id="site-field" name="social" value="{{ social }}">
+						</div>
+					</div>
+					<!--<div class="link-add link-add-js"><a href="#">Добавить ещё ссылку на профиль/сайт</a></div>-->
+				</div>
+				<div class="bottom style02">
+					{{ error|safe }}
+					<div class="next-holder">
+						<a href="#" class="btn-next" onclick="$(this).closest('form').submit();return false;">Cохранить изменения и продолжить</a>
+					</div>
+					<span class="inform">Возникли вопросы при регистрации?</span>
+					<span>Задайте их нам по e-mail: <a href="#">vrvm.redaktor@gmail.com</a> <br>Мы обязательно поможем!</span>
+				</div>
+			</form>

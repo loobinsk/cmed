@@ -1,0 +1,40 @@
+{% extends 'account/base_register.html' %}
+{% load static %}
+{% block center-column %}
+    <!-- Центральная колонка -->
+    <div class="content-block-center">
+        {% if show_form %}
+        <form class="register-form style01" action="{% url "change" token=token %}" method="post">
+            {% csrf_token %}
+            <div class="register-holder">
+                <label for="text-field01">Чтобы сменить пароль дважды введите новый:</label>
+                <input class="text01" id="text-field01" name="password1" type="text" value="">
+            </div>
+            <div class="register-holder">
+                <input class="text01" id="text-field02" name="password2" type="text" value="">
+            </div>
+            <div class="row">
+                {{ error|safe }}
+            </div>
+            <div class="bottom">
+                <div class="bottom-frame">
+                    <div class="holder">
+                        <div class="next-holder">
+                            <a href="#" class="btn-next"
+                               onclick="$(this).closest('form').submit();return false;">Сменить пароль</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% elif error %}
+            <div class="row">
+                {{ error|safe }}
+            </div>
+        {% else %}
+            <div class="row">
+                Пароль успешно заменен
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

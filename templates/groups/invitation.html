@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}{% load staticfiles %}
+{% block js_page %}<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>{% endblock %}
+{% block top_block %}<div class="content-block-top-block-1-window-filter" id="window-filter">
+			<div class="content-block-top-block-1-window-filter-content">
+			</div>  
+			<div class="content-block-top-block-1-window-filter-bottom">
+				<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+			</div>
+		</div>
+		<div class="info-block">
+			<span class="title">Вас пригласили в</span>
+			<span class="info">{{ nonactivated }} группы</span>
+		</div>{% endblock %}
+{% block content %}
+			
+			<div class="groups-area ">
+				{% if nonactivated_grouplist|length %}
+					{% for object in nonactivated_grouplist %}
+						{% include "groups/one_group.html" with invite=True %}
+					{% endfor %}
+				{% else %}
+					<div class="info-block" id="info-block-mygroup">
+						<span class="title">Вас пока не пригласили ни в одну группу</span>
+					</div>
+				{% endif %}
+				<div class="btn-holder">
+					<a href="{% url 'groups' %}" class="btn">Вернуться на страничку «Группы»</a>
+				</div>	
+			</div>
+<script>
+function JoinAGroup(id, url) {
+		jQuery.ajax({
+			url:     url,
+			type:     "get",
+			data: {'id': id}, 
+			success: function(response) { //Если все нормально
+				document.getElementById('group'+id).parentNode.removeChild(document.getElementById('group'+id));
+				if (document.getElementById('toggle-block-slide')) {
+					$("#toggle-block-slide").html(response);
+				}else{
+					$('#info-block-mygroup').removeClass('info-block');
+					$('#info-block-mygroup').addClass('groups-area');
+					$("#info-block-mygroup").html(response);
+				}
+			},
+			error: function(response) {
+				var s = "";
+				for (prop in response) {
+				   if (typeof response[prop] != "function") {
+					   s += "response[" + prop + "] = " + response[prop] + "; ";
+				   }
+				}
+				alert(s);
+			}
+		});
+}
+
+var thisWork = 1;
+function getNextP(){
+
+	if(thisWork == 1){
+		thisWork = 0;
+		$.ajax({
+			type: 'get',
+			url: "{{ path }}",
+			data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join()},
+			success: function(data){
+				$('.groups-area.toggle-block.slide .holder:last-child').removeClass('style01');
+				$(".groups-area.toggle-block.slide").html($(".groups-area.toggle-block.slide").html()+" "+data);
+				thisPageNum = thisPageNum + 1;
+				thisWork = 1;
+			}
+		});
+	}
+}
+
+var scrH = $(window).height();
+var scrHP = $(".content-block-center").height();
+
+$(window).scroll(function(){
+	var scro = $(this).scrollTop();
+	var scrHP = $(".content-block-center").height();
+	var scrH2 = 0;
+	scrH2 = scrH + scro;
+	var leftH = scrHP - scrH2;
+	if(leftH < 300){
+		getNextP();
+	}
+});
+</script>{% endblock %}

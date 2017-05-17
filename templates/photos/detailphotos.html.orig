@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+{% block title_page %}{{ object.title }}{% endblock %}
+{% load staticfiles %}{% load account_tags %}
+{% block title_wrap %}{% endblock %}
+{% block js_page %}
+  <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>{% endblock %}
+{% block content %}
+  <!-- Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 -->
+  <div class="content-block-center-item">
+    <!-- Автор и тема поста -->
+    <div class="content-block-center-item-head">
+      {% if user.is_authenticated %}
+        <div class="content-block-center-item-head-photo-bg">
+          {% if object.user %}
+            <a href="{% url 'lichnie2' object.user.id %}" target="_parent" title="На страницу автора">
+              <div class="content-block-center-item-head-photo"
+                   style="background-image:url({% get_avatar_preview_sizexy object.user.id 77 77 %}), url({{ object.user.avatar }})"></div>
+            </a>
+          {% endif %}
+        </div>
+        <div class="content-block-center-item-head-autor">
+					<span>
+					<strong><a href="{% url 'lichnie2' object.user.id %}" target="_parent"
+                     title="На страницу автора">{{ object.user.lastname }}<br/>
+            {{ object.user.firstname }} {{ object.user.surname }}</a></strong>
+					</span>
+        </div>
+      {% endif %}
+      {% if user.is_authenticated %}
+        <div class="content-block-center-item-head-theme">
+          <div class="content-block-center-item-head-theme-format">{{ object.object.format_string }}</div>
+          <div class="content-block-center-item-head-theme-spec">{{ object.object.spec_id.name }}</div>
+        </div>
+      {% else %}
+        <div class="content-block-center-item-head-theme-format">Фотогалерея</div>
+      {% endif %}
+    </div>
+    <div class="content-block-center-item-content">
+      <!-- Заголовки и текст поста -->
+      {% if user.is_authenticated %}
+        <div class="content-block-center-item-content-date">{{ object.createdate }}</div>
+      {% endif %}
+      <h1 style="width:330px">{{ object.title }}</h1>
+      {{ object.description|safe }}
+      <div class="content-block-center-item-content-redmore">
+        <div class="content-block-center-item-content-redmore-link">
+          <!--a href="" target="_parent" title="Читать полностью">читать полностью</a> |-->
+        </div>
+        <div class="content-block-center-item-content-redmore-readers">{{ viewings }}</div>
+      </div>
+      <!-- Медиа -->
+      <div class="content-block-center-item-content-media">
+        {% if user.is_authenticated %}
+          <script type="text/javascript">
+            $(document).ready(function () {
+              $("a[rel=tag{{object.id}}]").fancybox({
+                'transitionIn': 'none',
+                'transitionOut': 'none',
+                'titlePosition': 'over',
+                'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                  return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+                }
+              });
+            });
+          </script>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        {% for photo in object.PGPhotosList %}
+          {% if forloop.first %}
+            <div class="content-block-center-item-content-media-single-photo">
+              {% if user.is_authenticated %}
+                <a href="{{ photo.image.url }}" rel="tag{{ object.id }}">
+              {% endif %}
+              <img src="{{ photo.image.url }}" width="223" height="300" alt=""
+                   style="height: 100%; width: 100%;padding:10px 0;">
+              {% if user.is_authenticated %}
+                </a>
+              {% endif %}
+            </div>
+          {% else %}
+
+            {% if forloop.counter == 2 %}
+              <div class="content-block-center-item-content-media-more-photo">
+            {% endif %}
+          {% if user.is_authenticated %}
+            <a href="{{ photo.image.url }}" rel="tag{{ object.id }}">
+          {% endif %}
+          <img src="{{ photo.image.url }}" width="223" height="300" style="height: 100%; width: 100%;padding:10px 0;">
+          {% if user.is_authenticated %}
+            </a>
+          {% endif %}
+          {% if forloop.last %}</div>{% endif %}
+
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+      <!-- конец Медиа -->
+      <!-- Лайки -->
+      <div class="content-block-center-item-content-like">
+        <div class="content-block-center-item-content-like-left"
+             onClick="SendLike('{{ object.id }}', '18', 'like_{{ object.id }}');">
+          <span title="Это интересно!">Это интересно!</span>
+
+          <div class="content-block-center-item-content-like-left-rating" title="Это интересно!"
+               id='like_{{ object.id }}'>{% if object.statistics.likes != "" %}+
+            {{ object.statistics.likes|wordcount }}{% else %}0{% endif %}</div>
+        </div>
+        <div class="content-block-center-item-content-like-left-soc">
+          {% include "includes/social.html" %}
+        </div>
+        <!--a href="" target="_parent" title="Читать полностью">
+                    <div class="content-block-center-item-content-like-readmore"></div>
+                    </a-->
+      </div>
+      <!-- Комментарии -->
+      <div class="content-block-center-item-content-responses" id="comments{{ object.id }}">
+        {% if object.comments_list|length %}
+          {% if object.hidden_comments|length %}
+            <span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-{{ object.id }}-1"
+                  onClick="$('#resp-hidden-{{ object.id }}-1').slideDown();$(this).hide();$('#click-resp-hidden-{{ object.id }}-2').show();">Посмотреть предыдущие комменарии ({{ object.hidden_comments|length }})</span>
+            <span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-{{ object.id }}-2"
+                  onClick="$('#resp-hidden-{{ object.id }}-1').slideUp();$(this).hide();$('#click-resp-hidden-{{ object.id }}-1').show();"
+                  style="display:none">Скрыть предыдущие комменарии ({{ object.hidden_comments|length }})</span>
+            <div class="content-block-center-item-content-responses-line"></div>
+            <div class="content-block-center-item-content-responses-hidden" id="resp-hidden-{{ object.id }}-1">
+              {% for comment in object.hidden_comments %}
+                <div class="content-block-center-item-content-responses-container"
+                     style="margin-left:{{ comment.1 }}px;">
+                  {% if comment.0.user_id %}
+                    <a href="" target="_parent" title="На страницу автора">
+                      <div class="content-block-center-item-content-responses-photo"
+                           style="background-image:url(/media/profile_images/{{ comment.0.user.avatar }}), url({{ comment.0.user.avatar }})"></div>
+                    </a>
+                  {% else %}
+                    <div class="content-block-center-item-content-responses-photo"
+                         style="background-image:url(/media/profile_images/mt.png), url(249_399/mt.png)"></div>
+                  {% endif %}
+                  <div class="content-block-center-item-content-responses-text" style="width:{{ comment.2 }}px;">
+                    <p>{% if comment.0.user_id %}<a href="" target="_parent"
+                                                    title="На страницу автора">{{ comment.0.user.lastname }} {{ comment.0.user.firstname }} {{ comment.0.user.surname }}</a>
+                      <br/>
+                      <span>{{ comment.0.user.spec_id.name }}</span>{% endif %}</p>
+
+                    <p>{{ comment.0.content }}</p>{% if user.is_authenticated %}
+                    <div class="content-block-center-item-content-responses-text-edit">
+                      <div class="content-block-center-item-content-responses-text-edit-left"
+                           onClick="SendLike('{{ comment.0.id }}', '9999', 'like_komment_{{ comment.0.id }}');">
+                        <span title="Соглашусь!">Соглашусь!</span>
+
+                        <div class="content-block-center-item-content-responses-text-edit-left-rating"
+                             title="Соглашусь!"
+                             id='like_komment_{{ comment.0.id }}'>{% if comment.3.likes != "" %}+
+                          {{ comment.3.likes|wordcount }}{% else %}0{% endif %}</div>
+                      </div>
+                      <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                      <div class="content-block-center-item-content-responses-text-edit-right">
+                        <span title="Ответить" onClick="$('#answer{{ comment.0.id }}').slideDown();">Ответить</span>
+                      </div>
+                    </div>{% endif %}
+                  </div>
+                </div>{% if user.is_authenticated %}
+                <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+                  <form action="javascript:void(null);"
+                        onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                        method="post" id="answerform{{ comment.0.id }}">
+                    <textarea name="content" class="form-filed-3"
+                              placeholder="{{ global.placeholder_comment }}"></textarea>
+                    <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+                    <input type="hidden" value="18" name="service_id"/>
+                    <input type="hidden" value="{{ object.id }}" name="object_id"/>
+                    <input type="submit" value="Ответить" class="form-key-2"/>
+                  </form>
+                </div>{% endif %}
+                <div class="content-block-center-item-content-responses-line"></div>
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% for comment in object.comments_list %}
+            <div class="content-block-center-item-content-responses-container" style="margin-left:{{ comment.1 }}px;">
+              {% if comment.0.user_id %}
+                <a href="" target="_parent" title="На страницу автора">
+                  <div class="content-block-center-item-content-responses-photo"
+                       style="background-image:url(/media/profile_images/{{ comment.0.user.avatar }}), url({{ comment.0.user.avatar }})"></div>
+                </a>
+              {% else %}
+                <div class="content-block-center-item-content-responses-photo"
+                     style="background-image:url(/media/profile_images/mt.png), url(249_399/mt.png)"></div>
+              {% endif %}
+              <div class="content-block-center-item-content-responses-text" style="width:{{ comment.2 }}px;">
+                <p>{% if comment.0.user_id %}<a href="" target="_parent"
+                                                title="На страницу автора">{{ comment.0.user.lastname }} {{ comment.0.user.firstname }} {{ comment.0.user.surname }}</a>
+                  <br/>
+                  <span>{{ comment.0.user.spec_id.name }}</span>{% endif %}</p>
+
+                <p>{% if comment.0.safe %}{{ comment.0.content|safe }}{% else %}{{ comment.0.content }}{% endif %}</p>{% if user.is_authenticated %}
+                <div class="content-block-center-item-content-responses-text-edit">
+                  <div class="content-block-center-item-content-responses-text-edit-left"
+                       onClick="SendLike('{{ comment.0.id }}', '9999', 'like_komment_{{ comment.0.id }}');">
+                    <span title="Соглашусь!">Соглашусь!</span>
+
+                    <div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!"
+                         id='like_komment_{{ comment.0.id }}'>{% if comment.3.likes != "" %}+
+                      {{ comment.3.likes|wordcount }}{% else %}0{% endif %}</div>
+                  </div>
+                  <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                  <div class="content-block-center-item-content-responses-text-edit-right">
+                    <span title="Ответить" onClick="$('#answer{{ comment.0.id }}').slideDown();">Ответить</span>
+                  </div>
+                </div>{% endif %}
+              </div>
+            </div>{% if user.is_authenticated %}
+            <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+              <form action="javascript:void(null);"
+                    onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                    method="post" id="answerform{{ comment.0.id }}">
+                <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+                <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+                <input type="hidden" value="18" name="service_id" pekopt="1"/>
+                <input type="hidden" value="{{ object.id }}" name="object_id"/>
+                <input type="submit" value="Ответить" class="form-key-2"/>
+              </form>
+            </div>{% endif %}
+            <div class="content-block-center-item-content-responses-line"></div>
+          {% endfor %}
+        {% else %}
+          Комментариев нет
+        {% endif %}
+<<<<<<< local
+        <div class="content-block-center-item-content-answer-active">{% if user.is_authenticated %}
+          <form action="javascript:void(null);"
+                onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ object.id }}', '/comments/')"
+                method="post"
+                id="answerform{{ object.id }}">
+            <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+            <input type="hidden" value="0" name="parent_id"/>{% csrf_token %}
+            <input type="hidden" value="18" name="service_id"/>
+            <input type="hidden" value="{{ object.id }}" name="object_id"/>
+            <input type="submit" value="Опубликовать" class="form-key-2"/>
+          </form>{% else %}<p style="text-align: center;;">комментарии могут оставлять только зарегистрированные
+            пользователи</p>{% endif %}
+        </div>
+      </div>
+    </div>
+=======
+        {% for comment in object.comments_list %}
+          <div class="content-block-center-item-content-responses-container" style="margin-left:{{ comment.1 }}px;">
+          {% if comment.0.user_id %}
+            <a href="" target="_parent" title="На страницу автора">
+              <div class="content-block-center-item-content-responses-photo"
+                   style="background-image:url(/media/profile_images/{{ comment.0.user.avatar }}), url({{ comment.0.user.avatar }})"></div>
+            </a>
+          {% else %}
+            <div class="content-block-center-item-content-responses-photo" style="background-image:url(/media/profile_images/mt.png), url(249_399/mt.png)"></div>
+          {% endif %}
+          <div class="content-block-center-item-content-responses-text" style="width:{{ comment.2 }}px;">
+            <p>{% if comment.0.user_id %}<a href="" target="_parent"
+                  title="На страницу автора">{{ comment.0.user.lastname }} {{ comment.0.user.firstname }} {{ comment.0.user.surname }}</a><br/>
+              <span>{{ comment.0.user.spec_id.name }}</span>{% endif %}</p>
+
+            <p>{% if comment.0.safe %}{{ comment.0.content|safe }}{% else %}{{ comment.0.content }}{% endif %}</p>{% if user.is_authenticated %}
+            <div class="content-block-center-item-content-responses-text-edit">
+              <div class="content-block-center-item-content-responses-text-edit-left"
+                   onClick="SendLike('{{ comment.0.id }}', '9999', 'like_komment_{{ comment.0.id }}');">
+                <span title="Соглашусь!">Соглашусь!</span>
+
+                <div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!"
+                     id='like_komment_{{ comment.0.id }}'>{% if comment.3.likes != "" %}+
+                  {{ comment.3.likes|wordcount }}{% else %}0{% endif %}</div>
+              </div>
+              <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+              <div class="content-block-center-item-content-responses-text-edit-right">
+                <span title="Ответить" onClick="$('#answer{{ comment.0.id }}').slideDown();">Ответить</span>
+              </div>
+            </div>{% endif %}
+          </div>
+          </div>{% if user.is_authenticated %}
+          <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+            <form action="javascript:void(null);"
+                  onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                  method="post" id="answerform{{ comment.0.id }}">
+              <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+              <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+              <input type="hidden" value="18" name="service_id" pekopt="1"/>
+              <input type="hidden" value="{{ object.id }}" name="object_id"/>
+              <input type="submit" value="Ответить" class="form-key-2"/>
+            </form>
+          </div>{% endif %}
+          <div class="content-block-center-item-content-responses-line"></div>
+        {% endfor %}
+      {% else %}
+        Комментариев нет
+      {% endif %}
+  <div class="content-block-center-item-content-answer-active">{% if user.is_authenticated %}
+    <form action="javascript:void(null);"
+          onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ object.id }}', '/comments/')" method="post"
+          id="answerform{{ object.id }}">
+      <textarea name="content" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+      <input type="hidden" value="0" name="parent_id"/>{% csrf_token %}
+      <input type="hidden" value="18" name="service_id"/>
+      <input type="hidden" value="{{ object.id }}" name="object_id"/>
+      <input type="submit" value="Опубликовать" class="form-key-2"/>
+    </form>{% else %}<p style="text-align: center;;">комментарии могут оставлять только зарегистрированные
+    пользователи</p>{% endif %}
+  </div>
+  </div>
+  </div>
+>>>>>>> other
+  </div>
+  <script>
+    function SendComment(result_id, form_id, url) {
+      if ($(this).data('locked') == 1) {
+        return false;
+      }
+      var form = $(this);
+      var text = jQuery("#" + form_id).children(".form-filed-3").val();
+      if (text == '') {
+        alert('Комментарий не может быть пустым');
+      } else {
+        $(this).data('locked', 1);
+        jQuery.ajax({
+          url: url + '?loadhidden=1', //Адрес подгружаемой страницы
+          type: "POST", //Тип запроса
+          dataType: "html", //Тип данных
+          data: jQuery("#" + form_id).serialize(),
+          success: function (response) { //Если все нормально
+            $(this).data('locked', 0);
+            document.getElementById(result_id).innerHTML = response;
+            $('.content-block-center-item-content-responses-all-link').parent('a').click(function (e) {
+              e.preventDefault();
+              var id = $(this).data('id');
+              var type = $(this).data('type');
+              if (type == 'open') {
+                $('#resp-hidden-' + id + '-1').slideDown();
+                $(this).hide();
+                $('#click-resp-hidden-' + id + '-2').show();
+              }
+              else {
+                $('#resp-hidden-' + id + '-1').slideUp();
+                $(this).hide();
+                $('#click-resp-hidden-' + id + '-1').show();
+              }
+
+            });
+          },
+          error: function (response) { //Если ошибка
+            $(this).data('locked', 0);
+            document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+          }
+        });
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    //$(document).ready(function() {
+    $('.content-block-center-item-content img').each(function (index) {
+      this.style.width = "100%";
+      this.style.height = "100%";
+    })
+    $('.content-block-center-item-content hr').each(function (index) {
+      this.style.width = "100%";
+    })
+    //$('.contentslider').attr('style', 'width:'+sliderwidth+'px');
+    //});
+    function SendLike(id, service_id, id_result) {
+      jQuery.ajax({
+        url: '/likes', //Адрес подгружаемой страницы
+        type: 'get', //Тип запроса
+        data: {'id': id, 'service_id': service_id, 'user':{{ user.id }}},
+        success: function (response) { //Если все нормально
+          document.getElementById(id_result).innerHTML = response;
+        },
+        error: function (response) { //Если ошибка
+          alert("Ошибка");
+        }
+      });
+    }
+
+  </script>
+{% endblock %}

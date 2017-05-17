@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block js_page %}
+	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+	{% if invited|length == 0 and invite|length == 0 and circle|length == 0 %}
+		{% if is_owner %}
+			{% if invite|length != 0 %}
+				Вы пригласили
+			{% else %}
+				{{User.lastname}} {{User.firstname}} {{User.surname}}:  
+			{% endif %}
+		{% else %} 
+			Круг общения <br>{{User.lastname}} {{User.firstname}} {{User.surname}}
+		{% endif %}
+	{% else %}
+		<script>$(document).ready(function(){ $('#page_title').css('display', 'none'); });</script>
+	{% endif %}
+{% endblock %}
+
+{% block top_block %}
+	<div class="content-block-top-block-1-window-filter" id="window-filter">
+		<div class="content-block-top-block-1-window-filter-content"></div>  
+		<div class="content-block-top-block-1-window-filter-bottom">
+			<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+		</div>
+	</div>
+	{% IInvitedThem user %}
+	{% IveBeenInvited user %}
+{% endblock %}
+{% block content %}
+<!-- Центральная колонка -->
+			{% if is_owner %}
+			<div class="groups-area">
+				{% for D in invite %}
+					<div class="holder" id="invite_{{D.friend.id}}">
+						<div class="content-block-center-item-head-photo-bg">
+							<a target="_parent" href="{% url 'lichnie2' D.friend.id %}">
+							<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy D.friend.id 77 77 %}), url({{D.friend.avatar}})"></div>
+							</a>
+						</div>
+						<div class="description">
+							<h3><a href="{% url 'lichnie2' D.friend.id %}">{{D.friend.lastname}} {{D.friend.firstname}} {{D.friend.surname}}</a> <em>{{D.friend.spec_id}}</em></h3>
+							<div class="link-holder">
+								<a href="{% url 'dialog' D.friend.id %}" class="link-write">написать личное сообщение</a>
+							</div>
+						</div>
+						{% if is_owner %}
+						<div class="links">
+							<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{D.friend.id}}', 'ID':'invite_{{D.friend.id}}'})">Отозвать <br>приглашение</a>
+						</div>
+						{% endif %}
+					</div>
+				{% endfor %}	
+			</div>
+			{% endif %}
+			{% if is_owner %}
+			{% if invited %}
+			<div class="content-block-center-head">
+				<span>Вас пригласили</span>
+			</div>
+			<div class="groups-area"  id="groups-area-new">
+				{% for D in invited %}
+					<div class="holder" id="invited_{{D.parent.id}}">
+						<div class="content-block-center-item-head-photo-bg">
+							<a target="_parent" href="{% url 'lichnie2' D.parent.id %}">
+							<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy D.parent.id 77 77 %}), url({{D.parent.avatar}})"></div>
+							</a>
+						</div>
+						<div class="description">
+							<h3><a href="{% url 'lichnie2' D.parent.id %}">{{D.parent.lastname}} {{D.parent.firstname}} {{D.parent.surname}}</a> <em>{{D.parent.spec_id}}</em></h3>
+							<div class="link-holder">
+								<a href="{% url 'dialog' D.parent.id %}" class="link-write">написать личное сообщение</a>
+							</div>
+						</div>
+					{% if is_owner %}	
+						{% if D.activated == 0 %}
+						<div class="links" id="confirmbutton_{{D.parent.id}}">
+							<a class="btn-add" style="cursor:pointer;" onclick="Dajaxice.circle.confirmmycircle(Dajax.process, {'parentid':'{{D.parent.id}}'})">
+								Добавить в свой
+								<br>
+								круг общения
+							</a>
+						</div>
+						{% endif %}
+						<div class="links">
+							<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{D.parent.id}}', 'ID':'invited_{{D.parent.id}}'})">Отказаться от <br>приглашения</a>
+						</div>
+					{% endif %}		
+					</div>
+				{% endfor %}	
+			</div>
+			{% endif %}
+			{% endif %}
+			{% if is_owner %}
+			{% if circle %}
+			<div class="content-block-center-head">
+				<span>Мой круг</span>
+			</div>
+			{% endif %}
+			{% endif %}
+			<div class="groups-area" id="groups-area-old">
+				{% for U in circle %}
+					<div class="holder" id="invite_{{U.id}}">
+						<div class="content-block-center-item-head-photo-bg">
+							<a target="_parent" href="{% url 'lichnie2' U.id %}">
+							<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy U.id 77 77 %}), url({{U.avatar}})"></div>
+							</a>
+						</div>
+						<div class="description">
+							<h3><a href="{% url 'lichnie2' U.id %}">{{U.lastname}} {{U.firstname}} {{U.surname}}</a> <em>{{U.spec_id}}</em></h3>
+							<div class="link-holder">
+								<a href="{% url 'dialog' U.id %}" class="link-write">написать личное сообщение</a>
+							</div>
+						</div>
+						
+						{% if is_owner %}
+						{% if user|get_send_invite_refuse_invite_refuse_invited:U == 'tpl_refuse_invite' and is_owner%}
+						<div class="links">
+							<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{U.id}}', 'ID':'invite_{{U.id}}'})">Отозвать <br>приглашение</a>
+						</div>
+						
+						{% elif user|get_send_invite_refuse_invite_refuse_invited:U == 'tpl_send_invite' %}
+						<div class="links">
+							<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{U.id}}', 'ID':'invite_{{U.id}}'})">Удилить из круга</a>
+						</div>
+						{% elif user|get_send_invite_refuse_invite_refuse_invited:U == 'tpl_refuse_invited' and is_owner %}
+						<div class="links">
+							<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{U.id}}', 'ID':'invite_{{U.id}}'})">Удалить</a>
+						</div>
+						{% endif %}	{% endif %}
+					</div>
+				{% endfor %}	
+			</div>			
+{% endblock %}

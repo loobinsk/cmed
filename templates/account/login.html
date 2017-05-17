@@ -1,0 +1,42 @@
+{% extends 'account/base_register.html' %}
+{% load static %}
+{% block center-column %}
+    <!-- Центральная колонка -->
+    <div class="content-block-center">
+        <form class="register-form style01" action="{% url "account.views.user_login" %}" method="post">
+            {% csrf_token %}
+            <div class="register-holder">
+                <label for="text-field01">Введите адрес электронной почты:</label>
+                <input class="text01" required="" id="text-field01" name="login" type="text" value="">
+            </div>
+            <div class="row">
+                <label for="password-field01">Введите пароль:</label>
+
+                <div class="row-holder">
+                    <div class="password-holder pass-eye-js">
+                        <input id="password-field01" required="" type="password" name="password" value="">
+                        <!-- a class="eye" href="#">eye</a -->
+                    </div>
+                    {{ error|safe }}
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-frame">
+                    <div class="holder">
+                        <div class="check-holder">
+                            <input id="check-field" type="checkbox">
+                            <label for="check-field">Запомнить меня</label>
+                        </div>
+                        <div class="next-holder">
+{#                            <a href="#" class="btn-next"#}
+{#                               onclick="$(this).closest('form').submit();return false;">Войти</a>#}
+                            <button type="submit" class="btn-next">Войти</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url "forgot" %}" class="link">Забыли пароль?</a><br>
+                <a href="{% url 'register1' %}" class="link">Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

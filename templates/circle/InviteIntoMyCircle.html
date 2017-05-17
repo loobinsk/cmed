@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block js_page %}
+	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+{% block title %}Мой круг общения{% endblock %}
+{% block top_block %}
+	<div class="content-block-top-block-1-window-filter" id="window-filter">
+		<div class="content-block-top-block-1-window-filter-content"></div>  
+		<div class="content-block-top-block-1-window-filter-bottom">
+			<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+		</div>
+	</div>
+	{% IInvitedThem user %}
+	{% IveBeenInvited user %}
+{% endblock %}
+{% block content %}
+<!-- Центральная колонка -->
+			<div class="groups-area">
+				{% for c in circle %}
+					<div class="holder" id="invite_{{c.id}}">
+						<div class="content-block-center-item-head-photo-bg">
+							<a target="_parent" href="{% url 'lichnie2' c.id %}">
+							<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy c.id 77 77 %}), url({{c.avatar}})"></div>
+							</a>
+						</div>
+						<div class="description">
+							<h3><a href="{% url 'lichnie2' c.id %}">{{c.lastname}} {{c.firstname}} {{c.surname}}</a> <em>{{c.spec_id}}</em></h3>
+							<div class="link-holder">
+								<a href="{% url 'dialog' c.id %}" class="link-write">написать личное сообщение</a>
+							</div>
+						</div>
+						<div class="links">
+							<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{c.id}}', 'ID':'invite_{{c.id}}'})">Удалить из круга</a>
+						</div>
+					</div>
+				{% endfor %}		
+				<div class="btn-holder">
+					<a href="{% url 'mycircle' %}" class="btn">Посмотреть весь мой круг</a>
+				</div>
+				<form class="info-form" action="{% url 'invite' %}" method="post" id="filterinvite">
+				{% csrf_token %}
+					<span class="title">Найти коллегу</span>
+					<div class="columns">
+						<div class="column">
+							<div class="form-unit">
+								<input type="text" placeholder="Фамилия" name="lastname" value="{{session.lastname}}" >
+							</div>
+							<div class="form-unit valid">
+								<input type="text" placeholder="Имя" name="firstname" value="{{session.firstname}}" >
+							</div>
+							<div class="form-unit">
+								<input type="text" placeholder="Отчество" name="surname" value="{{session.surname}}" >
+							</div>
+							<div class="form-unit">
+								<input type="text" placeholder="День рождения" name="birthday" value="{{session.birthday}}" >
+							</div>
+						</div>
+						<div class="column">
+							<div class="form-unit valid">
+								<input type="text" placeholder="Страна" name="country" value="{{session.country}}" >
+							</div>
+							<div class="form-unit">
+								<input type="text" placeholder="Город" name="town" value="{{session.town}}" >
+							</div>
+							<div class="form-unit">
+								<input type="text" placeholder="Место учебы" name="school" value="{{session.school}}" >
+							</div>
+							<div class="form-unit valid">
+
+                                <select style="width:100%;color: #999;font-style: italic;font-size:12px;height: 22px;" name="job">
+                                <option value="">
+                                    {% for x in ""|ljust:"15" %}&nbsp;{% endfor %}
+                                    Все специальности</option>
+                                    {% for spec in specs %}
+                                        <option value="{{ spec.id }}" {% if session.job == spec.id %} selected="selected"{% endif %}>{{ spec.title }}</option>
+                                    {% endfor %}
+                                    
+                                    </select>
+								{% comment %}<input type="text" placeholder="Специальность" name="job" value="{{session.job}}" >{% endcomment %}
+							</div>
+						</div>
+					</div>
+					<div class="submit-frame">
+						<input type="submit" value="Выполнить поиск" >
+						<span>изменении параметры, снова выполните поиск</span>
+					</div>
+					<div class="content-block-center-head">
+						<span>По вашему запросу было найдено:</span>
+					</div>
+					{% for u in lookingfor %}
+						{% if u != user %}
+						<div class="holder">
+							<div class="content-block-center-item-head-photo-bg">
+								<a target="_parent" href="{% url 'lichnie2' u.id %}">
+								<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy u.id 77 77 %}), url({{u.avatar}})"></div>
+								</a>
+							</div>
+							<div class="description">
+								<h3><a href="{% url 'lichnie2' u.id %}">{{u.lastname}} {{u.firstname}} {{u.surname}}</a> <em>{{u.spec_id}}</em></h3>
+								<div class="link-holder">
+									<a href="{% url 'dialog' u.id %}" class="link-write">написать личное сообщение</a>
+								</div>
+							</div>
+						
+
+							{% if user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invite' %}
+							<div class="links">
+								<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отозвать <br>приглашение</a>
+							</div>
+							{% elif user|isUserIntoMyCircle:u == 1 %}
+							<div class="links">
+								<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{c.id}}', 'ID':'invite_{{c.id}}'})">Удалить из круга</a>
+							</div>
+							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_send_invite' %}
+							<div class="links">
+								<a class="btn-add" style="cursor:pointer;" onclick="Dajaxice.circle.inviteintomycircle(Dajax.process, {'avatar':'{% get_avatar_preview_sizexy u.id 77 77 %}', 'parent':{{user.id}}, 'friend':{{u.id}} })">Добавить в свой <br>круг общения</a>
+							</div>
+							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invited' %}
+							<div class="links">
+								<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отказаться</a>
+							</div>
+							{% endif %}
+						</div>
+						{% endif %}
+					{% endfor %}
+					{% if lookingfor|length %}		
+					<div class="content-block-center-item-dots style01"></div>
+					{% endif %}
+				</form>
+			</div>	
+<script>
+var thisWork = 1;
+function getNextP(){
+
+	if(thisWork == 1){
+		thisWork = 0;
+		var dat = jQuery("#filterinvite").serialize() + '&page=' + thisPageNum;
+		$.ajax({
+			url: "{% url 'invite' %}",
+			type:     "GET",
+			dataType: "html",
+			data: dat,
+			success: function(data){
+				$(".content-block-center-item-dots.style01").before(data);
+				thisPageNum = thisPageNum + 1;
+				thisWork = 1;
+			}
+		})
+		.fail(function(request) {
+			//alert( "$.get failed!" );
+		});
+	}
+}
+
+var scrH = $(window).height();
+var scrHP = $(".content-block-center").height();
+
+$(window).scroll(function(){
+	var scro = $(this).scrollTop();
+	var scrHP = $(".content-block-center").height();
+	var scrH2 = 0;
+	scrH2 = scrH + scro;
+	var leftH = scrHP - scrH2;
+	if(leftH < 300){
+		getNextP();
+	}
+});
+</script>
+{% endblock %}

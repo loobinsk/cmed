@@ -1,0 +1,134 @@
+{% load account_tags posts_filters %}
+{% for object in objects %}
+    {% if object.comments_list|length %}
+        {% if object.hidden_comments|length %}
+            <a href="{% url 'detailpractice' object.id %}" data-type="open" data-id="{{ object.id }}" target="_blank"
+               id="click-resp-hidden-{{ object.id }}-1"><span
+                    class="content-block-center-item-content-responses-all-link">Посмотреть предыдущие комменарии ({{ object.hidden_comments|length }})</span></a>
+            <a href="{% url 'detailpractice' object.id %}" data-type="close" data-id="{{ object.id }}" target="_blank"
+               id="click-resp-hidden-{{ object.id }}-2" style="display:none"><span
+                    class="content-block-center-item-content-responses-all-link">Скрыть предыдущие комменарии ({{ object.hidden_comments|length }})</span></a>
+            <div class="content-block-center-item-content-responses-line"></div>
+            <div class="content-block-center-item-content-responses-hidden" id="resp-hidden-{{ object.id }}-1">
+                {% if loadhidden == 1 %}
+                    {% for comment in object.hidden_comments %}
+                        <div class="content-block-center-item-content-responses-container"
+                             style="margin-left:{{ comment.1 }}px;">
+                            <a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent"
+                               title="На страницу автора">
+                                <div class="content-block-center-item-content-responses-photo"
+                                     style="background-image:url({% get_avatar_preview_sizexy comment.0.user_id.id 50 50 %}), url({{ comment.0.user_id.avatar }})"></div>
+                            </a>
+
+                            <div class="content-block-center-item-content-responses-text"
+                                 style="width:{{ comment.2 }}px;">
+                                <p><a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent"
+                                      title="На страницу автора">{{ comment.0.user_id.lastname }} {{ comment.0.user_id.firstname }} {{ comment.0.user_id.surname }}</a><br/>
+                                    <span>{{ comment.0.user_id.spec_id.name }}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>{{ comment.0.createdate }}</span>
+                                </p>
+
+                                <p>{% if comment.0.safe %}{{ comment.0.content|safe }}{% else %}{{ comment.0.content|linebreaks }}{% endif %}</p>
+
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                    <div class="content-block-center-item-content-responses-text-edit-left"
+                                         onClick="SendLike('{{ comment.0.id }}', '9999', 'like_komment_{{ comment.0.id }}');">
+                                        <span title="Соглашусь!">Соглашусь!</span>
+
+                                        <div class="content-block-center-item-content-responses-text-edit-left-rating"
+                                             title="Соглашусь!" id='like_komment_{{ comment.0.id }}'>
+                                            {% if comment.3.likes != "" %}+{{ comment.3.likes|wordcount }}{% else %}
+                                                0{% endif %}</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                        <span title="Ответить" onClick="$('#answer{{ comment.0.id }}').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+                            <form action="javascript:void(null);"
+                                  onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                                  method="post" id="answerform{{ comment.0.id }}">
+                                <textarea name="content" class="form-filed-3"
+                                          onFocus="if (this.value == 'Для того чтобы оставить отзыв, напишите здесь что-нибудь') {this.value = '';}"
+                                          onBlur="if (this.value == '') {this.value = 'Для того чтобы оставить отзыв, напишите здесь что-нибудь';}">Для того чтобы оставить отзыв, напишите здесь что-нибудь</textarea>
+                                <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+                                <input type="hidden" value="{{ service_id }}" name="service_id"/>
+                                <input type="hidden" value="{{ object.id }}" name="object_id"/>
+                                <input type="submit" value="Ответить" class="form-key-2"/>
+                            </form>
+                        </div>
+                        <div class="content-block-center-item-content-responses-line"></div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+        {% for comment in object.comments_list %}
+            <div class="content-block-center-item-content-responses-container" style="margin-left:{{ comment.1 }}px;">
+                <a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent" title="На страницу автора">
+                    <div class="content-block-center-item-content-responses-photo"
+                         style="background-image:url({% get_avatar_preview_sizexy comment.0.user_id.id 50 50 %}), url({{ comment.0.user_id.avatar }})"></div>
+                </a>
+
+                <div class="content-block-center-item-content-responses-text" style="width:{{ comment.2 }}px;">
+                    <p><a href="{% url 'lichnie2' comment.0.user_id.id %}" target="_parent"
+                          title="На страницу автора">{{ comment.0.user_id.lastname }} {{ comment.0.user_id.firstname }} {{ comment.0.user_id.surname }}</a><br/>
+                        <span>{{ comment.0.user_id.spec_id.name }}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>{{ comment.0.createdate }}</span>
+                    </p>
+
+                    <p>{% if comment.0.safe %}{{ comment.0.content|safe }}{% else %}{{ comment.0.content|linebreaks }}{% endif %}</p>
+
+                    <div class="content-block-center-item-content-responses-text-edit">
+                        <div class="content-block-center-item-content-responses-text-edit-left"
+                             onClick="SendLike('{{ comment.0.id }}', '9999', 'like_komment_{{ comment.0.id }}');">
+                            <span title="Соглашусь!">Соглашусь!</span>
+
+                            <div class="content-block-center-item-content-responses-text-edit-left-rating"
+                                 title="Соглашусь!" id='like_komment_{{ comment.0.id }}'>{% if comment.3.likes != "" %}+
+                                {{ comment.3.likes|wordcount }}{% else %}0{% endif %}</div>
+                        </div>
+                        <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                        <div class="content-block-center-item-content-responses-text-edit-right">
+                            <span title="Ответить" onClick="$('#answer{{ comment.0.id }}').slideDown();">Ответить</span>
+                        </div>
+
+                        {% if request.user == comment.0.user_id and comment.0.createdate|deletion_time_left %}
+                            <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                            <div class="content-block-center-item-content-responses-text-edit-right">
+                                <span title="Удалить" class="delete_comment" data-url="{% url 'rmcomment' %}" data-comment="{{ comment.0.id }}">Удалить</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="content-block-center-item-content-answer" id="answer{{ comment.0.id }}">
+                <form action="javascript:void(null);"
+                      onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ comment.0.id }}', '/comments/')"
+                      method="post" id="answerform{{ comment.0.id }}">
+                    <textarea name="content" class="form-filed-3"
+                              placeholder="Для того чтобы оставить отзыв, напишите здесь что-нибудь"></textarea>
+                    <input type="hidden" value="{{ comment.0.id }}" name="parent_id"/>{% csrf_token %}
+                    <input type="hidden" value="{{ service_id }}" name="service_id"/>
+                    <input type="hidden" value="{{ object.id }}" name="object_id"/>
+                    <input type="submit" value="Ответить" class="form-key-2"/>
+                </form>
+            </div>
+            <div class="content-block-center-item-content-responses-line"></div>
+        {% endfor %}
+    {% else %}
+        Комментариев нет
+    {% endif %}
+    <div class="content-block-center-item-content-answer-active">
+        <form action="javascript:void(null);"
+              onsubmit="SendComment('comments{{ object.id }}', 'answerform{{ object.id }}', '/comments/')" method="post"
+              id="answerform{{ object.id }}">
+            <textarea name="content" class="form-filed-3"
+                      placeholder="Для того чтобы оставить отзыв, напишите здесь что-нибудь"></textarea>
+            <input type="hidden" value="0" name="parent_id"/>{% csrf_token %}
+            <input type="hidden" value="{{ service_id }}" name="service_id"/>
+            <input type="hidden" value="{{ object.id }}" name="object_id"/>
+            <input type="submit" value="Опубликовать" class="form-key-2"/>
+        </form>
+    </div>
+{% endfor %}

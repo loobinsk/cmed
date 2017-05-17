@@ -1,0 +1,432 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block title %}Редактирование личной информации{% endblock %}
+{% block top_block %}<div class="content-block-top-block-1-window-filter" id="window-filter">
+			<div class="content-block-top-block-1-window-filter-content">
+
+			</div>  
+			<div class="content-block-top-block-1-window-filter-bottom">
+				<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+			</div>
+		</div>{% endblock %}
+{% block content %}
+    <script src="https://malsup.github.io/jquery.form.js"></script>
+	<form class="info-form" enctype="multipart/form-data">
+		<input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}' />
+		<div class="section">
+			<div class="alignleft">
+				<style>
+					#upload-file-container {
+					   background: url({% get_avatar_preview_sizexy user.id 118 118 %}) no-repeat;
+					   cursor: pointer;
+					   width: 118px;
+					   height:117px;
+					}
+					#upload-file-container input {
+					   filter: alpha(opacity=0);
+					   opacity: 0;
+					}
+					.bar { 
+						background-color: #E1523D; 
+						width:0%; 
+						height:10px; 
+						border-radius: 3px; 
+					}
+				</style>
+				<script>
+					var trigger = true;
+					$(document).ready(function() {
+						$('#upload-file-container').wrap('<form id="avatar-upload" action="{% url "account.views.avatarupload" sizex='118' sizey='118' %}" method="post" enctype="multipart/form-data"></form>');
+						$('#upload-file-container').click(function(){
+							if( trigger ) {
+								trigger = false;
+								$("#id_picture").trigger('click');
+							}
+						});
+
+                        $('#avatar-upload').ajaxForm({
+						beforeSend: function() {
+							var percentVal = '10%';
+							$('.bar').css('width', percentVal);
+						},
+						uploadProgress: function(event, position, total, percentComplete) {
+							var percentVal = percentComplete + '%';
+							$('.bar').css('width', percentVal);
+						},
+						success: function() {
+							var percentVal = '100%';
+							$('.bar').css('width', percentVal);
+						},
+						complete: function(xhr) {
+							responseText = JSON.parse(xhr.responseText)
+							$('#upload-file-container').css('background', 'url('+responseText.url+') no-repeat');
+							$('.left-block-content-profile-item-left-photo').css('background', 'url('+responseText.url+') no-repeat');
+							$('.bar').css('width', 0);
+						}
+					});
+					});
+
+				</script>
+				<div id="upload-file-container" onclick="trigger=true;">
+					<input id="id_picture" type="file" name="file" onchange="$(this).closest('form').submit();">
+				</div>
+				<a class="link" style="cursor: pointer;" onclick="trigger = true; $('#upload-file-container').trigger('click');">Изменить фото</a>
+				<div class="bar"></div>
+			</div>	
+			<div class="section-holder">
+				<div class="row">
+					<div class="form-unit valid required">
+						<input type="text" value="{{ user.lastname }}" name="lastname" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-unit valid required">
+						<input type="text" value="{{ user.firstname }}" name="firstname" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-unit valid required">
+						<input type="text" value="{{ user.surname }}" name="surname" >
+					</div>
+				</div>
+				<div class="panel">
+					<div class="form-holder">
+						<span class="label">Ваш пол: <font style="color:red;">*</font></span>
+						<div class="radio-field">
+							м <input class="male-field" name="sex" type="radio" {% if user.sex == "male" %} checked {% endif %} value="male">
+							ж <input class="female-field" name="sex" type="radio" {% if user.sex == "female" %} checked {% endif %} value="female">
+						</div>
+					</div>
+					<label style="  margin-left: 20px;margin-right: 10px;">Дата рождения: <font style="color:red;">*</font></label>
+					<div class="date-field">
+						<input type="text" class="mask-bd" name="birthday" value="{{ birthday|date:'dmY' }}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-block-center-head">
+			<span>Специализация</span>
+		</div>
+		<div class="section">
+			<div class="row">
+				<div class="required">
+					<label for="text-field01">Основная специальность:</label>
+				</div>
+				<select name="spec_id" autocomplete="off">
+					<option value="0">Выберите специальность</option>
+					{% for s in spec_list %}
+						<option value="{{ s.id }}" {% if s.name == user.spec_id.name %} selected="selected" {% endif %}>{{ s.name }}</option>
+					{% endfor %}	
+				</select>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="text-field02">Cтаж:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" id="text-field02" name="experience" value="{{ user.experience|IfNone }}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="text-field03">Дополнительная <br>специальность:</label>
+				</div>
+				<select name="addspeciality" autocomplete="off">
+					<option value="0">Выберите специальность</option>
+					{% for al in addspeciality_list %}
+						<option value="{{ al.id }}" {% if al.name == user.addspeciality.name %} selected {% endif %}>{{ al.name }}</option>
+					{% endfor %}	
+				</select>
+			</div>
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="text-field04">Cтаж:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" id="text-field04" name="addexperience" value="{{ user.addexperience|IfNone }}">
+				</div>
+			</div>
+			<!--<div class="link-add link-add-js"><a href="#">Добавить специальность</a></div>-->
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Учёная степень</span>
+			</div>
+			<div class="row">
+				<select name="graduate" autocomplete="off">
+					<option value="0">Выберите степень</option>
+					{% for g in graduate_list %}
+						<option value="{{ g.pk }}" {% if g.pk == user.graduate %} selected {% endif %}>{{ g.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="text-field05">Тема диссертации:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" id="text-field05" name="dissertation" value="{{ user.dissertation }}">
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Звание</span>
+			</div>
+			<div class="row">
+				<select name="title" autocomplete="off">
+					<option value="0">Выберите звание</option>
+					{% for t in title_list %}
+						<option value="{{ t.name }}" {% if t.name == user.title %} selected {% endif %}>{{ t.name }}</option>
+					{% endfor %}	
+				</select>
+			</div>
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="text-field06">...или напишите <br>своё звание:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" id="text-field06" name="addtitle" value="{{ user.addtitle|IfNone }}">
+				</div>
+			</div>
+			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё звание</a></div>-->
+		</div>
+		<div class="content-block-center-head">
+			<span>Категория</span>
+		</div>
+		<div class="section">
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="text-field07">Ваша категория:</label>
+				</div>
+				<div class="form-unit">
+					<!--<input type="text" id="text-field07" name="category" value="{{ user.category|IfNone }}">-->
+					<select class="sel01 required" name="category" autocomplete="off">
+						{% for c in category_list %}
+							<option value="{{ c.id }}" {% if user.category.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё категорию</a></div>-->
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Достижения и награды</span>
+			</div>
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="text-field08">Ваши достижения <br>и награды:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" name="awords[]" value="">
+				</div>	
+			</div>
+			<div class="link-add link-add-js"><a href="#">Добавить ещё</a></div>
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="text-field08">Ваши достижения <br>и награды:</label>
+				</div>
+				<div class="form-unit">
+					<input type="text" name="awords[]" value="{{ aword }}">
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Работа</span>
+			</div>
+			<div class="link-add-template">
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field09">Название организации:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field09" name="organization" value="{{ user.organization|normalize }}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field10">Должность:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field10" name="job" value="{{ user.job|normalize }}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field11">Сайт организации:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field11" name="site" value="{{ user.site|normalize }}">
+					</div>
+				</div>
+			</div>
+		<!--<div class="link-add link-add-js"><a href="#">Добавить ещё одно место работы</a></div>-->
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Образование</span>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="text-field12">Учебное заведение:</label>
+				</div>
+				<input type="text" id="text-field11_" name="school" value="{{ user.school }}">
+			</div>
+			<div class="link-add-template">
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field12">Год выпуска:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field12" name="graduate_year" value="{{ user.graduate_year|IfNone }}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field13">Факультет:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field13" name="faculty" value="{{ user.faculty|IfNone }}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label-holder">
+						<label for="text-field14">Кафедра:</label>
+					</div>
+					<div class="form-unit">
+						<input type="text" id="text-field14" name="cathedra" value="{{ user.cathedra|IfNone }}">
+					</div>
+				</div>
+			</div>
+			<!--<div class="link-add link-add-js"><a href="#">Добавить еще одно учебное заведение</a></div>-->
+		</div>
+		<div class="section">
+			<div class="content-block-center-head">
+				<span>Контактная информация</span>
+			</div>
+			<div class="row" id="country">
+				<select class="sel01 required" name="country" onchange="Dajaxice.account.updatecombo(Dajax.process, {'option':this.value})" autocomplete="off">
+					<option value="0">Выберите страну</option>
+					{% for c in country_list %}
+						<option value="{{ c.id }}" {% if user.country.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="row" id="town">
+				<select class="sel required" name="town" autocomplete="off">
+					<option value="0">Выберите город</option>
+					{% for t in town_list %}
+						<option value="{{ t.id }}" {% if user.town.id == t.id %} selected="selected" {% endif %}>{{ t.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="tel-field">Контактный телефон:</label>
+				</div>
+				<div class="text-holder">
+					<input type="text" id="tel-field" name="phone_number" value="{{ user.phone_number }}">
+					<input id="check-field"  type="checkbox" name="phone_visible" {% if user.phone_visible == "no_visible" %} checked {% endif %}>
+					<label for="check-field">Не отображать на сайте</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="email-field">E-mail на который <br>зарегистрирован профиль <br>в сети «Врачи Вместе»:</label>
+				</div>
+				<div class="text-holder">
+					<input type="text" id="email-field" name="email" value="{{ user.email }}" readonly="readonly">
+					<input id="check-field01"  type="checkbox" name="email_visible" {% if user.email_visible == "no_visible" %} checked {% endif %}>
+					<label for="check-field01">Не отображать на сайте</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label-holder">
+					<label for="skype-field">ICQ/Sqype:</label>
+				</div>
+				<div class="text-holder">
+					<input type="text" id="skype-field" name='ICQ_Skype' value="{{ user.ICQ_Skype }}">
+				</div>
+			</div>
+			<div class="row link-add-template">
+				<div class="label-holder">
+					<label for="site-field">Мой сайт / профиль <br> в социальной сети:</label>
+				</div>
+				<div class="text-holder">
+					<input type="text" id="site-field" name="social" value="{{ user.social|IfNone }}">
+				</div>
+			</div>
+			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё ссылку на профиль/сайт</a></div>-->
+		</div>
+		<div class="submit-holder">
+			<input type="submit" value="Cохранить изменения данных профиля" onclick="return save_profile_data();">
+		</div>
+		<div class="content-block-center-head">
+			<span>Изменение пароля</span>
+		</div>
+		<script>
+			function SaveNewPassword() {
+				Dajaxice.lichnie.ajaxrequest(Dajax.process, {
+					'oldpassword':		$("input[name='oldpassword']").val(),
+					'password':			$("input[name='password']").val(),
+					'confirmpassword':	$("input[name='confirmpassword']").val()
+				});
+			}
+			function ViewMessage(message) {
+
+				$('span#spanmessage').text(message);
+				$('.popup').css('display', 'block');
+			}
+		</script>
+		<div class="columns">
+			<div class="column">
+				<div class="old-password password-holder pass-eye-js">
+					<input type="password" name="oldpassword" placeholder="Введите старый пароль">
+					<a href="#" class="eye">eye</a>
+				</div>
+				<div class="new-password password-holder pass-eye-js">
+					<input type="text" placeholder="Введите новый пароль" name="password">
+					<a href="#" class="eye open">eye</a>
+				</div>
+				<div class="new-password password-holder pass-eye-js">
+					<input type="text" placeholder="Введите новый пароль" name="confirmpassword">
+					<a href="#" class="eye open">eye</a>
+				</div>
+				<div class="link-frame">
+					<a style="cursor: pointer;" onclick="SaveNewPassword();" class="link btn-link">Сохранить новый пароль</a>
+				</div>
+			</div>
+			<div class="column">
+				<span class="info">Если Вы забыли свой пароль, воспользуйтесь <a href="{% url 'forgot' %}">процедурой восстановления пароля</a></span>
+			</div>
+		</div>
+		<div class="submit-holder popup-holder">
+			<div class="popup">
+				<div class="popup-frame">
+					<span id="spanmessage">{{ message }}</span>
+					<a href="#" class="close">Close</a>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script>
+		$(document).ready( function() {
+			$(".info-form").submit( function() {
+				$.post( "{% url 'lichnie.views.saveprofile' %}", $(this).serialize(), function( data ) {
+					if( data.result ) {
+						window.location = "{% url 'lichnie2' %}";
+					} else {
+						alert( data.message );
+					}	
+				}, "json")
+				.fail(function(request) {
+					alert( "error" );
+				});
+				return false;
+			});		
+		});
+	</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title_page %}{{ object.title }}{% endblock %}
+{% block title_wrap %}{% endblock %}
+{% load staticfiles %}{% load account_tags %}
+{% block top_block %}{% endblock %}
+{% block js_page %}
+  <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+  <div class="content-block-center-item">
+    <form action="" method="post">
+      {% csrf_token %}
+      Вы действительно хотите удалить этот пост? Действие безвозвратно. <br/><br/>
+      <input type="submit" value="Удалить"/>
+    </form>
+  </div>
+  <div class="content-block-center-item">
+
+    <div class="content-block-center-item-head">
+      <div class="content-block-center-item-head-photo-bg">
+        {% if object.user_id.id %}
+          <a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">
+            <div class="content-block-center-item-head-photo"
+                 style="background-image:url({% get_avatar_preview_sizexy object.user_id.id 67 67 %}), url({{ object.user_id.avatar }})">
+            </div>
+          </a>
+        {% endif %}
+      </div>
+      <div class="content-block-center-item-head-autor">
+        {% if object.user_id.id %}
+          <span>
+				<strong>
+          <a href="{% url 'lichnie2' object.user_id.id %}" target="_parent"
+             title="На страницу автора">{{ object.user_id.lastname }}<br/>
+            {{ object.user_id.firstname }} {{ object.user_id.surname }}
+          </a>
+        </strong>
+			</span>
+        {% endif %}
+      </div>
+      <div class="content-block-center-item-head-theme">
+        <div class="content-block-center-item-head-theme-format">{{ object.format_string }}</div>
+        <div class="content-block-center-item-head-theme-spec">{{ object.spec_id.name }}</div>
+      </div>
+          {% for group in groups %}
+                  <div class="content-block-center-item-head-theme"><span><a href="{% url "detailgroup" group.id %}">{{ group.title }}</a></span></div>
+          {% endfor %}
+
+    </div>
+    <div class="content-block-center-item-content">
+      <!-- Заголовки и текст поста -->
+      <div class="content-block-center-item-content-date">{{ object.begindate|default:object.createdate }}</div>
+      <h1 style="width:320px">{{ object.title }}</h1>
+
+
+    </div>
+    <!-- конец Заголовки и текст поста -->
+  </div><!-- конец content-block-center-item -->
+
+{% endblock %}

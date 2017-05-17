@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <style>
+    #content {
+      width: 800px;
+      margin: 0 auto;
+    }
+    {{ page.css|safe }}
+  </style>
+</head>
+<body>
+  <div id="content">
+    {{ page.content|safe }}
+  </div>
+</body>
+</html>

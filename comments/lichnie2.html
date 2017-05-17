@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block js_page %}
+	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+{% block title %}Моя страница{% endblock %}
+{% block top_block %}{% endblock %}
+{% block content %}
+		<!-- Центральная колонка -->
+		<div class="content-block-center">
+			<div class="info-area">
+				<div class="holder">
+					<div class="block">
+						<a href="#"><img src="images/users/11.jpg" width="150" height="150" alt="image description"></a>
+						<a href="#" class="link">Изменить фото</a>
+					</div>
+					<div class="block-photos">
+						<span class="title">Ваши фото: </span>
+						<div class="toggle-block slide">
+							<div class="photos">
+								<a href="#"><img src="images/img03.png" width="53" height="53" alt="image description"></a>
+								<a href="#"><img src="images/img04.jpg" width="53" height="53" alt="image description"></a>
+								<a href="#"><img src="images/img05.jpg" width="53" height="53" alt="image description"></a>
+							</div>
+							<div class="slide">
+								<div class="photos">
+									<a href="#"><img src="images/img03.png" width="53" height="53" alt="image description"></a>
+									<a href="#"><img src="images/img04.jpg" width="53" height="53" alt="image description"></a>
+									<a href="#"><img src="images/img05.jpg" width="53" height="53" alt="image description"></a>
+								</div>
+							</div>
+							<a href="#" class="opener"><span>... ещё 999</span> <em>свернуть</em></a>
+						</div>
+					</div>
+				</div>
+				<div class="frame">
+					<div class="toggle-block slide">
+						<h2>Колмаков <br />Егор Павлович</h2>
+						<div class="link-holder">
+							<a href="#" class="link">Редактировать личную информацию</a>
+						</div>
+						<div class="info-holder">
+							<span class="info">Дата рождения: <em >24 апреля 1987</em></span>
+							<span class="info">Пол: <em>мужской</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Основная специальность: <br /> <em>Хирург</em><em class="divider">Стаж: 15 лет</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Дополнительная специальность: <em>Гавтроентеролог</em><em class="divider">Стаж: 10 лет</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Дополнительная специальность: <br><em>Мануальный терапевт  </em><em class="divider">Стаж: 1 год</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Учёная степень:  <em>кмн</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Тема диссертации: <em>Оперирование при гипертонии</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Звание:  <em>Профессор </em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Категория: <br />  <em>Врач высшей квалификационной категории <br />по специальности «Хирургия»</em></span>
+						</div>
+						<div class="info-holder">
+							<span class="info">Достижения и награды:  <em> медали есть   </em></span>
+						</div>
+						<a href="#" class="opener"><span>показать подробную информацию</span><em>скрыть подробную информацию</em></a>
+						<div class="slide">
+							<div class="info-holder">
+								<span class="info">Место работы: <br /><em>РГМУ <br />Профессор кафедры общей хирургии <br />Сайт: <a href="#">rsmu.ru</a></em></span>
+							</div>
+							<div class="info-holder">
+								<span class="info">Образование: <br /><em>РНИМУ им. Н.И.Пирогова ‘1989</em><br />Факультет: <em>Лечебный</em><br />Кафедра: <em>Кафедра общей хирургии и лучевой диагностики</em></span>
+							</div>
+							<div class="info-holder">
+								<span class="info"><em>РНИМУ им. Н.И.Пирогова</em><br />Факультет: <em>Лечебный</em><br />Форма обучения: <em>Второе высшее, очное</em></span>
+							</div>
+							<span class="heading">Контактная информация:</span>
+							<span class="contact">Россия, Москва <br />E-mail: <a href="#">&#097;&#114;&#107;&#104;&#105;&#112;&#111;&#118;&#097;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;</a> <br />Телефон: +7 (963) 694-56-21 <br />ICQ(был в старой базе)</span>
+							<span>Профили в социальных сетях/сайт:</span><br>
+							<a href="#">www.arkhipov.ru </a><br /><a href="#">www.facebook.com/arkhipoval</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Заголовок -->
+			<div class="content-block-center-head">
+				<span>Ваша лента сообщений</span>
+			</div>
+			<!-- Посты -->
+			<!-- Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 -->
+			<div class="content-block-center-item">
+			<!-- Автор и тема поста -->
+				<div class="content-block-center-item-head">
+					<div class="content-block-center-item-head-photo-bg">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-center-item-head-photo" style="background-image:url(images/users/1.jpg)"></div>
+						</a>
+					</div>
+					<div class="content-block-center-item-head-autor">
+						<span>
+					<strong><a href="" target="_parent" title="На страницу автора">Колмаков<br />
+					Егор Павлович</a></strong><br />
+					Врач-теоретик
+					</span>
+					</div>
+					<div class="content-block-center-item-head-theme" style="background-image:url(images/icons-preparats/1.png)"><span>Обсуждение препарата</span></div>
+				</div>
+				<div class="content-block-center-item-content">
+					<!-- Заголовки и текст поста -->
+					<div class="content-block-center-item-content-date">10 августа 2012 г. в 11:45</div>
+					<h1>БЕРОДУАЛ (BERODUAL)</h1>
+					<p>Комбинированный бронхолитический препарат. Содержит два компонента, обладающих бронхолитической активностью: ипратропия бромид — м-холиноблокатор и фенотерола гидробромид - бета2-адреномиметик.</p>
+					<p>Бронходилатация при ингаляционном введении ипратропия бромида обусловлена, главным образом, местным, а не системным антихолинергическим действием.</p>
+					<div class="content-block-center-item-content-redmore">
+						<div class="content-block-center-item-content-redmore-link">
+						<a href="" target="_parent" title="Читать полностью">читать полностью</a> |
+						</div>
+						<div class="content-block-center-item-content-redmore-readers">200</div>
+					</div>
+					<!-- Медиа -->
+					<div class="content-block-center-item-content-media">
+						<script type="text/javascript">
+						$(document).ready(function() {
+						$("a#photo1").fancybox();
+						});
+						</script>
+						<div class="content-block-center-item-content-media-single-photo">
+						<a href="images/img06.jpg" id="photo1">
+						<img src="images/img06.jpg" width="232" height="232" alt="БЕРОДУАЛ (BERODUAL)">
+						</a>
+						</div>
+					</div>
+					<!-- Лайки -->
+					<div class="content-block-center-item-content-like">
+						<div class="content-block-center-item-content-like-left">
+							<span title="Это интересно!">Это интересно!</span> <div class="content-block-center-item-content-like-left-rating" title="Это интересно!">+10</div>
+						</div>
+						<div class="content-block-center-item-content-like-left-soc">
+							<img src="images/basic/likes.png" width="244" height="24" alt="Социальные сети">
+						</div>
+						<a href="" target="_parent" title="Читать полностью">
+						<div class="content-block-center-item-content-like-readmore"></div>
+						</a>
+					</div>
+					<!-- Комментарии -->
+					<div class="content-block-center-item-content-responses">
+						<span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-1-1" onClick="$('#resp-hidden-1-1').slideDown();$(this).hide();$('#click-resp-hidden-1-2').show();">Посмотреть предыдущие комменарии (2)</span>
+						<span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-1-2" onClick="$('#resp-hidden-1-1').slideUp();$(this).hide();$('#click-resp-hidden-1-1').show();" style="display:none">Скрыть предыдущие комменарии (2)</span>
+						<div class="content-block-center-item-content-responses-hidden" id="resp-hidden-1-1">
+						<!-- 1-1-1 -->
+							<div class="content-block-center-item-content-responses-line"></div>
+							<div class="content-block-center-item-content-responses-container">
+								<a href="" target="_parent" title="На страницу автора">
+								<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/8.jpg)"></div>
+								</a>
+								<div class="content-block-center-item-content-responses-text" style="width:350px;">
+									<p><a href="" target="_parent" title="На страницу автора">Чвалин Евгений Самсонович</a><br />
+									<span>Врач-терапевт</span></p>
+									<p>Рекламный блок, вопреки мнению П.Друкера, недостаточно усиливает медиамикс, используя опыт предыдущих кампаний.</p>
+									<div class="content-block-center-item-content-responses-text-edit">
+										<div class="content-block-center-item-content-responses-text-edit-left">
+										    <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+										</div>
+										<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+										<div class="content-block-center-item-content-responses-text-edit-left">
+											<span title="Ответить" onClick="$('#answer-1-1-1').slideDown();">Ответить</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="content-block-center-item-content-answer" id="answer-1-1-1">
+								<form>
+									<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}"></textarea>
+									<input type="submit" value="Ответить" class="form-key-2" />
+								</form>
+							</div>
+							<!-- 1-2-1 -->
+							<div class="content-block-center-item-content-responses-line"></div>
+							<div class="content-block-center-item-content-responses-container">
+								<a href="" target="_parent" title="На страницу автора">
+								<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/9.jpg)"></div>
+								</a>
+								<div class="content-block-center-item-content-responses-text" style="width:350px;">
+									<p><a href="" target="_parent" title="На страницу автора">Горелова Елена Игоревна</a><br />
+									<span>Врач-эксперементатор</span></p>
+									<p>Поведенческий таргетинг искажает конвергентный направленный маркетинг, размещаясь во всех медиа. Рыночная информация, следовательно, традиционно порождает медиаплан, используя опыт предыдущих кампаний. Создание приверженного покупателя переворачивает системный анализ, оптимизируя бюджеты.</p>
+									<div class="content-block-center-item-content-responses-text-edit">
+										<div class="content-block-center-item-content-responses-text-edit-left">
+										    <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+										</div>
+										<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+										<div class="content-block-center-item-content-responses-text-edit-right">
+										    <span title="Ответить" onClick="$('#answer-1-2-1').slideDown();">Ответить</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="content-block-center-item-content-answer" id="answer-1-2-1">
+								<form>                 
+								<textarea name="text" class="form-filed-3"  placeholder="{{ global.placeholder_answer }}"></textarea>
+								<input type="submit" value="Ответить" class="form-key-2" />
+								</form>
+							</div>
+						</div>
+						<!-- 1-3-1 -->
+						<div class="content-block-center-item-content-responses-line"></div>
+						<div class="content-block-center-item-content-responses-container">
+							<a href="" target="_parent" title="На страницу автора">
+							<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/3.jpg)"></div>
+							</a>
+							<div class="content-block-center-item-content-responses-text" style="width:350px;">
+								<p><a href="" target="_parent" title="На страницу автора">Кондрамедова Валентина Меркуловна</a><br />
+								<span>Врач-эксперементатор</span></p>
+								<p>Доза должна подбираться индивидуально. Во время проведения терапии требуется медицинское наблюдение (лечение обычно должно начинаться с наименьшей рекомендуемой дозы).</p>
+								<div class="content-block-center-item-content-responses-text-edit">
+									<div class="content-block-center-item-content-responses-text-edit-left">
+										<span title="Соглашусь!">Соглашусь!</span>
+										<div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+									</div>
+									<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+									<div class="content-block-center-item-content-responses-text-edit-right"> 
+										<span title="Ответить" onClick="$('#answer-1-3-1').slideDown();">Ответить</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="content-block-center-item-content-answer" id="answer-1-3-1">
+							<form>                 
+							<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}"></textarea>
+							<input type="submit" value="Ответить" class="form-key-2" />
+							</form>
+						</div>
+						<!-- 1-3-2 -->
+						<div class="content-block-center-item-content-responses-line"></div>
+						<div class="content-block-center-item-content-responses-container" style="margin-left:20px;">
+							<a href="" target="_parent" title="На страницу автора">
+							<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/4.jpg)"></div>
+							</a>
+							<div class="content-block-center-item-content-responses-text" style="width:330px;">
+								<p><a href="" target="_parent" title="На страницу автора">Варимов Олег Анатольевич</a><br />
+								<span>Врач-эндокринолог</span></p>
+								<p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+								<div class="content-block-center-item-content-responses-text-edit">
+									<div class="content-block-center-item-content-responses-text-edit-left">
+									<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+									</div>
+									<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+									<div class="content-block-center-item-content-responses-text-edit-right">
+										<span title="Ответить" onClick="$('#answer-1-3-2').slideDown();">Ответить</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="content-block-center-item-content-answer" id="answer-1-3-2">
+							<form>                 
+								<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}"></textarea>
+								<input type="submit" value="Ответить" class="form-key-2" />
+							</form>
+						</div>
+						<div class="content-block-center-item-content-answer" id="answer-1-4-1">
+							<form>                 
+							<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}"></textarea>
+							<input type="submit" value="Ответить" class="form-key-2" />
+							</form>
+						</div>
+						<!-- 1-4-2 -->
+						<div class="content-block-center-item-content-responses-line"></div>
+						<div class="content-block-center-item-content-responses-container" >
+							<a href="" target="_parent" title="На страницу автора">
+							<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/7.jpg)"></div>
+							</a>
+							<div class="content-block-center-item-content-responses-text" style="width:350px;">
+								<p><a href="" target="_parent" title="На страницу автора">Кобзин Сергей Сергеевич</a><br />
+								<span>Врач-эндокринолог</span></p>
+								<p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+								<div class="content-block-center-item-content-responses-text-edit">
+									<div class="content-block-center-item-content-responses-text-edit-left">
+									<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+									</div>
+									<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+									<div class="content-block-center-item-content-responses-text-edit-right">
+										<span title="Ответить" onClick="$('#answer-1-4-2').slideDown();">Ответить</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="content-block-center-item-content-answer" id="answer-1-4-2">
+							<form>                 
+							<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+							<input type="submit" value="Ответить" class="form-key-2" />
+							</form>
+						</div>
+						<div class="content-block-center-item-content-answer-active">
+							<form>                 
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+                                <input type="submit" value="Опубликовать" class="form-key-2" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

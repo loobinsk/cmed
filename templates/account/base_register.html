@@ -1,0 +1,116 @@
+{% extends 'account/base.html' %}
+{% load static %}
+			{% block left-block %}
+			<!-- ЛЕВЫЙ БЛОК (НАЧАЛО) -->
+			<div class="left-block">
+				<div class="left-block-content">
+					<!-- Логотип -->
+					<div class="left-block-content-logo">
+						<a href="/" target="_blank" title="На главную">
+							<img src="{% static 'images/basic/logo.png' %}" alt="Врачи Вместе">
+						</a>
+					</div>
+					<!-- Профиль -->
+					<div class="left-block-content-profile">
+						<div class="left-block-content-line-1"></div>
+						<div class="info-block">
+							<span class="title">На Врачи Вместе вы сможете:</span>
+							<div class="inform">
+								<span>Общаться с коллегами</span>
+							</div>
+							<div class="inform">
+								<span>Публиковать статьи</span>
+							</div>
+							<div class="inform">
+								<span>Узнавать о мероприятиях</span>
+							</div>
+							<div class="inform">
+								<span>Искать работу</span>
+							</div>
+							<div class="inform">
+								<span>Подписываться на журналы</span>
+							</div>
+							<div class="inform">
+								<span>Планировать свое время <br>в календаре</span>
+							</div>
+							<div class="inform">
+								<span>Создавать консилиумы</span>
+							</div>
+							<div class="inform">
+								<span>Формировать персональную библиотеку</span>
+							</div>
+						</div>
+					</div>
+					<!-- Форма приглашения -->
+					<div class="left-block-content-line-2"></div>
+					<div class="promo-block"><img src="{% static 'images/img07.jpg' %}" width="200" height="300" alt="image description"></div>
+				</div>
+			</div>
+			<!-- ЛЕВЫЙ БЛОК (КОНЕЦ) -->	
+			{% endblock %}
+			{% block head-block %}
+				<!-- Верхняя плашка -->
+				<div class="content-block-top" style="width:760px">
+					<div class="content-block-top-block-1-window-filter" id="window-filter">
+						<div class="content-block-top-block-1-window-filter-content">
+							<div class="content-block-top-block-1-window-filter-content-left">
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-1" type="checkbox" name="1" value="Все" checked hidden />
+									<label for="checkbox-1">Все</label>
+								</div>
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-2" type="checkbox" name="2" value="Новость" hidden />
+									<label for="checkbox-2">Новость</label>
+								</div> 
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-3" type="checkbox" name="3" value="Научная статья" hidden />
+									<label for="checkbox-3">Научная статья</label>
+								</div> 
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-4" type="checkbox" name="4" value="Клинический случай" hidden />
+									<label for="checkbox-4">Клинический случай</label>
+								</div>
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-5" type="checkbox" name="5" value="Вопрос коллегам" hidden />
+									<label for="checkbox-5">Вопрос коллегам</label>
+								</div>       
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-6" type="checkbox" name="6" value="Частное мнение" hidden />
+									<label for="checkbox-6">Частное мнение</label>
+								</div> 
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-7" type="checkbox" name="7" value="Обсуждение препарата" hidden />
+									<label for="checkbox-7">Обсуждение препарата</label>
+								</div> 
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="checkbox-8" type="checkbox" name="8" value="Анонс мероприятия" hidden />
+									<label for="checkbox-8">Анонс мероприятия</label>
+								</div>
+								<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+									<input id="9" type="checkbox" name="9" value="Видео материалы" hidden />
+									<label for="9">Видео материалы</label>
+								</div>
+							</div>
+							<div class="content-block-top-block-1-window-filter-content-right">
+								<div class="content-block-top-block-1-window-filter-content-right-text">
+									Воспользуйтесь списком,<br />
+									для того чтобы выбрать<br />
+									нужную Вам специальность<br />
+									материалов в ленте
+								</div>
+								<div class="content-block-top-block-1-window-filter-content-right-list">
+									<div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first"></div>
+									<div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all" id="filter-scroll">
+									<div class="filter-scroll-item" id="list-1"><span>Акушерка</span></div>
+									<div class="filter-scroll-item" id="list-2"><span>Аллерголог</span></div>
+								</div>
+							</div>
+						</div>
+					</div>  
+					<div class="content-block-top-block-1-window-filter-bottom">
+						<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+					</div>
+				</div>
+				{% block steps-holder %}
+				{% endblock %}
+			{% endblock %}

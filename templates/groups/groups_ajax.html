@@ -1,0 +1,30 @@
+{% if object_list|length %}{% for object in object_list %}{% load staticfiles %}
+			<div class="holder{% if forloop.last %} style01{% endif %}" id='group{{ object.id }}'>
+					<div class="content-block-center-item-head-photo-bg">
+						<a target="_blank" href="{% url 'detailgroup' object.id %}">
+						<div class="content-block-center-item-head-photo" style="background-image:url({% if object.image %}{{ object.image }}{% else %}/media/profile_images/{{ object.image }}{% endif %})"></div>
+						</a>
+					</div>
+					<div class="description">
+						<h3><a target="_blank" href="{% url 'detailgroup' object.id %}">{{ object.title }}</a></h3>
+						<span class="info">открытая группа</span>
+						<p><em>{% if user.is_authenticated %}{{ object.description|truncatewords_html:10|safe }}{% else %}{{ object.description|truncatewords_html:3|safe }}{% endif %}</em></p>
+						<div class="info-panel">
+							<span>Участников: {{ object.count_users }}</span>
+							<span>Публикаций: {{ object.count_posts }}</span>
+						</div>
+						<span class="inform">Создатель группы: <a href="#">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</a></span>
+					</div>
+					<div class="links">{% if user.is_authenticated %}
+						<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', '/groups/join');">Вступить <br> в группу</a>{% endif %}
+					</div>
+				</div>{% endfor %}
+			{% else %}
+			<div class="content-block-center-item">
+				<div class="content-block-center-item-head">
+				</div>
+				<div class="content-block-center-item-content">
+					<p>По заданным критериям нет материалов</p>
+				</div>
+			</div>
+			{% endif %}

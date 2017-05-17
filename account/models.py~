@@ -1,0 +1,260 @@
+# -*- coding: utf-8 -*-
+from django.db import models
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser
+)
+from django.contrib.auth.models import Group, PermissionsMixin
+from django.utils import timezone
+from django.contrib.auth.hashers import (
+    check_password, make_password, is_password_usable)
+from django.contrib import auth
+import logging
+
+logger = logging.getLogger(__name__)
+
+class MyUserManager(BaseUserManager):
+    def create_user(self, email, login, firstname, lastname, spec_id, town, country, password):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+        if not login:
+            raise ValueError('Users must have an login')
+        if not firstname:
+            raise ValueError('Users must have a firstname')
+        if not lastname:
+            raise ValueError('Users must have a lastname')
+        if not spec_id:
+            raise ValueError('Users must have a spec_id')
+        if not town:
+            raise ValueError('Users must have a town')
+        if not country:
+            raise ValueError('Users must have a country')
+        if not password:
+            raise ValueError('Users must have a password')
+        
+        user = self.model(
+            #password=password,
+            email=MyUserManager.normalize_email(email),
+            login=login,
+            firstname=firstname, 
+            lastname=lastname,
+            spec_id=spec_id,
+            town=town,
+            country=country
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, login, firstname, lastname, spec_id, town, country, password):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+        if not login:
+            raise ValueError('Users must have an login')
+        if not firstname:
+            raise ValueError('Users must have a firstname')
+        if not lastname:
+            raise ValueError('Users must have a lastname')
+        if not spec_id:
+            raise ValueError('Users must have a spec_id')
+        if not town:
+            raise ValueError('Users must have a town')
+        if not country:
+            raise ValueError('Users must have a country')
+        if not password:
+            raise ValueError('Users must have a password')
+        
+        user = self.model(
+            #password=password,
+            email=MyUserManager.normalize_email(email),
+            login=login,
+            firstname=firstname, 
+            lastname=lastname,
+            spec_id=spec_id,
+            town=town,
+            country=country
+        )
+        user.set_password(password)
+        user.is_admin = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+class AbstractBaseUser_(models.Model):
+    password = models.CharField(db_column = 'pass', max_length=128)
+    last_login = models.DateTimeField('last login', default=timezone.now)
+
+    is_active = True
+
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        abstract = True
+
+    def get_username(self):
+        "Return the identifying username for this User"
+        return getattr(self, self.USERNAME_FIELD)
+
+    def __str__(self):
+        return self.get_username()
+
+    def natural_key(self):
+        return (self.get_username(),)
+
+    def is_anonymous(self):
+        """
+        Always returns False. This is a way of comparing User objects to
+        anonymous users.
+        """
+        return False
+
+    def is_authenticated(self):
+        """
+        Always return True. This is a way to tell if the user has been
+        authenticated in templates.
+        """
+        return True
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        """
+        Returns a boolean of whether the raw_password was correct. Handles
+        hashing formats behind the scenes.
+        """
+        def setter(raw_password):
+            self.set_password(raw_password)
+            self.save(update_fields=["password"])
+        return check_password(raw_password, self.password, setter)
+
+    def set_unusable_password(self):
+        # Sets a value that will never be a valid hash
+        self.password = make_password(None)
+
+    def has_usable_password(self):
+        return is_password_usable(self.password)
+
+    def get_full_name(self):
+        raise NotImplementedError()
+
+    def get_short_name(self):
+        raise NotImplementedError()
+
+"""
+id
+spec_id
+login
+pass
+firstname
+lastname
+surname
+avatar
+email
+status
+createdate
+updatedate
+lastvisit
+lastaccess
+type
+user_ptr_id 	
+"""
+
+class MyUser(AbstractBaseUser_, PermissionsMixin):
+    #Required. A hash of, and metadata about, the password. (Django doesn’t store the raw password.) Raw passwords can be arbitrarily long and can contain any character. See the password documentation.
+    # The additional attributes we wish to include.
+    #'login': '', 'firstname': '', 'lastname': '', 'email': '', 'sex': '', 'birthday': '', 'spec_id': '', 'experience': '', 'addspeciality': '',     'addexperience': '', 'graduate': '', 'dissertation': '', 'title': '', 'addtitle': '', 'category': '', 'awords': '', 'organization': '', 'job': '', 'site': '', 'school': '', 'graduate_year': '', 'faculty': '', 'cathedra': '', 'country': '', 'town': '', 'phone_number': '', 'phone_visible': '', 'ICQ_Skype': '', 'social': ''
+    login = models.CharField(max_length=256)
+    firstname = models.CharField(max_length=256)
+    lastname = models.CharField(max_length=256)
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+        db_index=True,
+    )
+    avatar = models.FileField(upload_to='profile_images', blank=True)
+    sex = models.CharField(max_length=256, blank=True, null=True)
+    birthday = models.DateField(max_length=256, blank=True, null=True)
+    spec_id = models.CharField(max_length=256)
+    experience = models.CharField(max_length=256, blank=True, null=True)
+    addspeciality = models.CharField(max_length=256, blank=True, null=True)
+    addexperience = models.CharField(max_length=256, blank=True, null=True)
+    graduate = models.CharField(max_length=256, blank=True, null=True)
+    dissertation = models.CharField(max_length=256, blank=True, null=True)
+    title = models.CharField(max_length=256, blank=True, null=True)
+    addtitle = models.CharField(max_length=256, blank=True, null=True)
+    category = models.CharField(max_length=256, blank=True, null=True)
+    awords = models.CharField(max_length=256, blank=True, null=True)
+    organization = models.CharField(max_length=256, blank=True, null=True)
+    job = models.CharField(max_length=256, blank=True, null=True)
+    site = models.CharField(max_length=256, blank=True, null=True)
+    school = models.CharField(max_length=256, blank=True, null=True)
+    graduate_year = models.CharField(max_length=256, blank=True, null=True)
+    faculty = models.CharField(max_length=256, blank=True, null=True)
+    cathedra = models.CharField(max_length=256, blank=True, null=True)
+    country = models.CharField(max_length=256)
+    town = models.CharField(max_length=256)
+    phone_number = models.CharField(max_length=256, blank=True, null=True)
+    phone_visible = models.CharField(max_length=256, blank=True, null=True)
+    ICQ_Skype = models.CharField(max_length=256, blank=True, null=True)
+    social = models.CharField(max_length=256, blank=True, null=True)
+    is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    #is_superuser = models.BooleanField(default=False)
+    #groups = models.ManyToManyField(Group)
+    surname = models.CharField(max_length=256)
+    status = models.IntegerField(default=0)
+    createdate = models.TimeField(auto_now_add=True)
+    updatedate = models.TimeField(auto_now=True)
+    lastvisit = models.DateTimeField(default=timezone.now)
+    lastaccess = models.DateTimeField(default=timezone.now)
+    type = model.IntegerField(default=0)
+    user_ptr_id = models.IntegerField(default=0)
+
+    objects = MyUserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['login', 'firstname', 'lastname', 'spec_id', 'town', 'country']
+
+    def get_full_name(self):
+        # The user is identified by their email address
+        return self.email
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.email
+
+    def __unicode__(self):
+        return self.email
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        for backend in auth.get_backends():
+            if hasattr(backend, "has_perm"):
+                if backend.has_perm(self, perm, obj):
+                    return True
+        return False
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    #@property
+    #def is_staff(self):
+    #    "Is the user a member of staff?"
+    #    # Simplest possible answer: All admins are staff
+    #    return self.is_admin
+
+    # Override the __unicode__() method to return out something meaningful!
+    #def __unicode__(self):
+    #    return self.login

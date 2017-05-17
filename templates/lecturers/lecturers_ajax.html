@@ -1,0 +1,6 @@
+{% load account_tags %}{% load staticfiles %}
+{% if object_list|length %}
+  {% for object in object_list %}
+    {% include 'lecturers/one_lecturer.html' %}
+  {% endfor %}
+{% endif %}

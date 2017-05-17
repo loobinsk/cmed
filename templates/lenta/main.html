@@ -1,0 +1,1306 @@
+{% extends 'lenta/base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block left-block %}
+	<div class="left-block">
+		<div class="left-block-content">
+			<!-- Логотип -->
+			<div class="left-block-content-logo">
+				<a href="" target="_blank" title="На главную">
+					<img src="{% static 'images/basic/logo-1.png' %}" width="200" height="75" alt="Врачи Вместе">
+				</a>
+			</div>
+			<!-- Профиль -->
+			<div class="left-block-content-profile">
+				<div class="left-block-content-line-1"></div>
+				<div class="left-block-content-profile-item">
+					<div class="left-block-content-profile-item-left">
+						<div class="left-block-content-profile-item-left-photo-bg">
+							<div class="left-block-content-profile-item-left-photo" style="background-image:url({% get_avatar_preview user.id %})"></div>
+						</div>
+					</div>
+					<div class="left-block-content-profile-item-right">
+						<p>{{ user.lastname }}<br />
+						{{ user.firstname }}<br />
+						{{ user.surname }}</p>
+						{{ user.spec_id }}
+						<div class="left-block-content-profile-item-right-exit">
+							<a href="{% url "account.views.user_logout" %}" target="_parent" title="Выход">выход</a>
+						</div>
+					</div>
+				</div>
+				<div class="left-block-content-line-1"></div>
+				<div class="left-block-content-profile-links">
+					<div class="left-block-content-profile-links-item">
+						<ul>
+							<li><a href="{% url 'lichnie.views.lichnie1' %}" target="_parent" title="Моя страница">Моя страница</a></li>
+							<li><a href="#" target="_parent" title="Врачи на Врачи Вместе">Врачи на "Врачи Вместе"</a></li>
+							<li class="active">
+								<a href="#" target="_parent" title="Личные сообщения">
+								<div class="left-block-content-profile-links-item-content">
+									Личные сообщения
+									<div class="left-block-content-profile-links-item-content-count"><span>375</span></div>
+								</div>
+								</a>
+							</li>
+							<li><a href="#" target="_parent" title="Интересное">Интересное</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Форма приглашения -->
+			<div class="left-block-content-line-2"></div>
+			<div class="left-block-content-invitation">
+				<div class="left-block-content-invitation-item">
+					<span id="invitation-1" title="Пригласить коллегу на &quot;Врачи Вместе&quot;" onClick="$('div.left-block-content-invitation-item-form').slideDown();$('#invitation-1').hide();$('#invitation-2').show();">Пригласить коллегу на &quot;Врачи Вместе&quot;</span>
+					<span id="invitation-2" style="display:none" title="Скрыть форму" onClick="$('div.left-block-content-invitation-item-form').slideUp();$('#invitation-2').hide();$('#invitation-1').show();">Скрыть форму</span>
+					<div class="left-block-content-invitation-item-form">
+						<form>
+							<input type="text" name="emails" id="emails" class="form-filed-1" value="Введите E-mail через запятую" onfocus="if (this.value == 'Введите E-mail через запятую') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Введите E-mail через запятую';}" />
+							<br />
+							Поле для редактирования текста<br />
+							для вашего приглашения<br />
+							<textarea name="text" class="form-filed-2" id="text" onFocus="if (this.value == 'Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!';}">Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!</textarea>
+							<br />
+							<input type="submit" value="отправить" class="form-key-1" />
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="left-block-content-line-2"></div>
+			<!-- Ссылки -->
+			<div class="left-block-content-links">
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Главная лента">Главная лента</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Группы">Группы</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Публикаций в ваших группах">Публикаций в ваших группах</a></span>
+				<div class="left-block-content-links-item-count"><span>10</span></div>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Мероприятия">Мероприятия</a></span>
+					<div class="left-block-content-links-item-count"><span>9</span></div>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Видеоматериалы">Видеоматериалы</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Фотогалереи">Фотогалереи</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Он-лайн консультация">Он-лайн консультация</a></span>
+					<div class="left-block-content-links-item-count"><span>Сейчас!</span></div>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Опросы и исследования">Опросы и исследования</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Тренинги">Тренинги</a></span>
+				<div class="left-block-content-links-item-count"><span>1</span></div>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Электронный журнал">Электронный журнал</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Книги и журналы">Книги и журналы</a></span>
+				<div class="left-block-content-links-item-count"><span>3</span></div>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Резюме и вакансии">Резюме и вакансии</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Премия Доктор Года">Премия Доктор Года</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Наши партнеры">Наши партнеры</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ЛЕВЫЙ БЛОК (КОНЕЦ) -->
+{% endblock %}
+{% block main-block %}
+<!-- ОСНОВНОЙ БЛОК (НАЧАЛО) -->
+<div class="content-block">
+	{% block head-block %}
+	<!-- Верхняя плашка -->
+		<div class="content-block-top">
+			<div class="content-block-top-block-1-window-filter" id="window-filter">
+				<div class="content-block-top-block-1-window-filter-content">
+					<div class="content-block-top-block-1-window-filter-content-left">
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-1" type="checkbox" name="1" value="Все" checked hidden />
+							<label for="checkbox-1">Все</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-2" type="checkbox" name="2" value="Новость" hidden />
+							<label for="checkbox-2">Новость</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-3" type="checkbox" name="3" value="Научная статья" hidden />
+							<label for="checkbox-3">Научная статья</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-4" type="checkbox" name="4" value="Клинический случай" hidden />
+							<label for="checkbox-4">Клинический случай</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-5" type="checkbox" name="5" value="Вопрос коллегам" hidden />
+							<label for="checkbox-5">Вопрос коллегам</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-6" type="checkbox" name="6" value="Частное мнение" hidden />
+							<label for="checkbox-6">Частное мнение</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-7" type="checkbox" name="7" value="Обсуждение препарата" hidden />
+							<label for="checkbox-7">Обсуждение препарата</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="checkbox-8" type="checkbox" name="8" value="Анонс мероприятия" hidden />
+							<label for="checkbox-8">Анонс мероприятия</label>
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-left-checkbox">
+							<input id="9" type="checkbox" name="9" value="Видео материалы" hidden />
+							<label for="9">Видео материалы</label>
+						</div>
+					</div>
+					<div class="content-block-top-block-1-window-filter-content-right">
+						<div class="content-block-top-block-1-window-filter-content-right-text">
+						Воспользуйтесь списком,<br />
+						для того чтобы выбрать<br />
+						нужную Вам специальность<br />
+						материалов в ленте
+						</div>
+						<div class="content-block-top-block-1-window-filter-content-right-list">
+							<div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
+							</div>
+							<div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all" id="filter-scroll">
+								<div class="filter-scroll-item" id="list-1"><span>Акушерка</span></div>
+								<div class="filter-scroll-item" id="list-2"><span>Аллерголог</span></div>
+								<div class="filter-scroll-item" id="list-3"><span>Аллерголог-иммунолог</span></div>
+								<div class="filter-scroll-item" id="list-4"><span>Ангиохирург </span></div>
+								<div class="filter-scroll-item" id="list-5"><span>Андролог</span></div>
+								<div class="filter-scroll-item" id="list-6"><span>Андролог-эндокринолог</span></div>
+								<div class="filter-scroll-item" id="list-7"><span>Анестезиолог</span></div>
+								<div class="filter-scroll-item" id="list-8"><span>Анестезиолог-реаниматолог</span></div>
+								<div class="filter-scroll-item" id="list-9"><span>Аритмолог</span></div>
+								<div class="filter-scroll-item" id="list-10"><span>Ароматерапевт</span></div>
+								<div class="filter-scroll-item" id="list-11"><span>Артролог</span></div>
+								<div class="filter-scroll-item" id="list-12"><span>Акушерка</span></div>
+								<div class="filter-scroll-item" id="list-13"><span>Аллерголог</span></div>
+								<div class="filter-scroll-item" id="list-14"><span>Аллерголог-иммунолог</span></div>
+								<div class="filter-scroll-item" id="list-15"><span>Ангиохирург </span></div>
+								<div class="filter-scroll-item" id="list-16"><span>Андролог</span></div>
+								<div class="filter-scroll-item" id="list-17"><span>Андролог-эндокринолог</span></div>
+								<div class="filter-scroll-item" id="list-18"><span>Анестезиолог</span></div>
+								<div class="filter-scroll-item" id="list-19"><span>Анестезиолог-реаниматолог</span></div>
+								<div class="filter-scroll-item" id="list-20"><span>Аритмолог</span></div>
+								<div class="filter-scroll-item" id="list-21"><span>Ароматерапевт</span></div>
+								<div class="filter-scroll-item" id="list-22"><span>Артролог</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-top-block-1-window-filter-bottom">
+					<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
+				</div>
+			</div>
+			<div class="content-block-top-block-1">
+			<span>Фильтр ленты публикаций:</span>
+				<div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+				<div class="content-block-top-block-1-filed-arrow"></div>
+				<input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+			</div>
+			</div>
+			<div class="content-block-top-separator"></div>
+			<div class="content-block-top-block-2">
+				<span>Поиск по слову:</span>
+				<form class="content-block-top-block-2-filed">
+					<div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+					<input type="text" name="search" class="form-filed-9" placeholder="Что ищем?" value="{{ search|default:'' }}" />
+				</form>
+			</div>
+			<div class="content-block-top-separator"></div>
+			{% include 'medtus/feedback_form.html' %}
+		</div>
+	<!-- Верхняя плашка -->
+	{% endblock %}
+	{% block center-column %}
+	<!-- Центральная колонка -->
+	<div class="content-block-center">
+        	<!-- Создание поста -->
+            <div class="content-block-center-write-contaner">
+                <div class="content-block-center-write" title="Написать в ленту">
+                    <span>Написать в ленту</span>
+                </div>
+                <div class="content-block-center-write-form">
+                	<div class="content-block-center-write-form-close" title="Закрыть форму"></div>
+                    <div class="content-block-center-write-form-block-1">
+                    	<div class="content-block-center-write-form-block-1-left">
+                        	<div class="content-block-center-write-form-block-1-left-block-1">
+                                <div class="content-block-center-write-form-block-1-left-block-1-left">
+                                    <span>Выберите рубрику:</span>
+                                </div>
+                                <div class="content-block-center-write-form-block-1-left-block-1-right">
+                                    <select name="post-filed-1" id="post-filed-1" class="form-filed-10">
+                                        {% for t in topic %}
+                                        <option value="{{ t.name }}">{{ t.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-2" id="post-rubric">
+
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-3">
+                                <div class="content-block-center-write-form-block-1-left-block-3-left">
+                                    <span>Выберите специальность:</span>
+                                </div>
+                                <div class="content-block-center-write-form-block-1-left-block-3-right">
+									<select name="post-filed-2"  class="form-filed-11">
+                                        {% for s in spec %}
+                                        <option value="{{ s.name }}">{{ s.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-4">
+                            	<input type="text" name="post-filed-3" class="form-filed-12-error" value="Введите заголовок" onFocus="if (this.value == 'Введите заголовок') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Введите заголовок';}"/>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-4">
+                            	<textarea name="post-filed-4" class="form-filed-13-error" onFocus="if (this.value == 'Введите текст') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Введите текст';}">Введите текст</textarea>
+                            </div>
+                        </div>
+                    	{% if not user.is_staff %}
+                    	<div class="content-block-center-write-form-block-1-right">
+                        	<div class="content-block-center-write-form-block-1-right-photo" style="background-image:url({% static 'images/present/1.jpg' %})"></div>
+                        	<p><strong>Поделитесь<br />
+                            клиническим<br />
+                            опытом с коллегами</strong></p>
+                        	<p>По итогам месяца автор публикации, понравившейся наибольшему количеству коллег, получит подарок.</p>
+                        </div>
+                    	{% endif %}
+                    </div>
+                    <div class="content-block-center-write-form-block-2">
+                    	<div class="content-block-center-write-form-block-2-left">
+                        	<div class="content-block-center-write-form-block-2-left-photolink">
+                            	<input type="text" name="links-photo" class="form-filed-4" value="Введите ссылку на фотографию в это поле" onfocus="if (this.value == 'Введите ссылку на фотографию в это поле') {this.value = '';$('#key-1-2').fadeIn();$('#key-1-1').fadeOut();}" onblur="if (this.value == '') {this.value = 'Введите ссылку на фотографию в это поле';$('#key-1-1').fadeIn();$('#key-1-2').fadeOut();}" />
+                            	<input type="submit" value="OK" class="form-key-4" id="key-1-1" disabled />
+                                <input type="submit" value="OK" class="form-key-5" id="key-1-2" onClick="$('div.content-block-center-write-form-block-2-left-photolink').fadeOut();$('#key-1-1').fadeIn();$('#key-1-2').fadeOut();$('#links-photo').val('')" />
+                            </div>
+                        	<div class="content-block-center-write-form-block-2-left-videolink">
+                            	<input type="text" name="links-video" class="form-filed-4" placeholder="Введите ссылку на видео в это поле" onfocus="if (this.value == '') {$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();}" />
+                            	<script>
+									function addvideo() {
+										if( $('input[name="links-video"]').val() ){
+											$.post( '{% url "lenta.views.videoupload" %}', { video: $('input[name="links-video"]').val() }, function( data ) {
+												html =
+												'<div class="content-block-center-write-form-block-2-left-video-list">\
+													<div file="'+data.file+'" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url('+data.furl+')"></div>\
+													<div class="content-block-center-write-form-block-2-left-video-list-gradient"></div>\
+													<span>'+data.title+'</span>\
+													<div class="content-block-center-write-form-block-2-left-video-list-del" title="Удалить видео" onclick="deletevideo(\''+data.path+'\', this);"></div>\
+												</div>';
+												if('result' in data && data['result']) {
+													$(html).appendTo('.content-block-center-write-form-block-2-left-video-container');
+													$('.content-block-center-write-form-block-2-left-videolink').css('display', 'none');
+												} else {
+													alert("Ошибка! Неправильная ссылка на видео!");
+												}
+											}, "json");
+										}
+									}
+									function deletevideo( path, el ) {
+										$.post( '{% url "lenta.views.videodelete" %}', { video: path }, function( data ) {
+											if(data == 'OK') {
+												parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
+												parent.remove();
+											}
+										});
+									}
+								</script>
+                            	<input type="submit" value="OK" class="form-key-4" id="key-2-1" onclick="if($('#links_video').val()==''){$('div.content-block-center-write-form-block-2-left-videolink').fadeOut();}return false;"
+                                   style="height:21px;"/>
+                            <input type="submit" value="OK" class="form-key-5" id="key-2-2" style="height:21px;"
+                                   onClick="$('div.content-block-center-write-form-block-2-left-videolink').fadeOut();if($('#links_video').val()!=''){addvideo();$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();}return false;"/>
+                            </div>
+                            <div class="content-block-center-write-form-block-2-left-separator">
+                            	<div class="content-block-center-write-form-block-2-left-photo-container">
+                                	<div class="content-block-center-write-form-block-2-left-photo">
+                            			<!--<span title="Добавить фото" onClick="$('div.content-block-center-write-form-block-2-left-photolink').fadeIn();">Добавить фото</span>-->
+                            			<style>
+											#upload-file-container {
+											   width: 103px;
+											   height: 0;
+											}
+											#upload-file-container input {
+											   filter: alpha(opacity=0);
+											   opacity: 0;
+											}
+											.bar {
+												background-color: #E1523D;
+												width:0%;
+												height:10px;
+												border-radius: 3px;
+											}
+										</style>
+										<form id="upload-file-container" action="{% url "lenta.views.fileupload" %}" method="post" enctype="multipart/form-data" onclick="trigger=true;">
+											<span title="Добавить фото">Добавить фото</span>
+											<input id="id_picture" type="file" name="file" onchange="$(this).closest('form').submit();">
+										</form>
+										<script>
+											var trigger = true;
+											var image_index = 1;
+											$(document).ready( function() {
+											  $('#upload-file-container').click(function(){
+												if( trigger ) {
+													trigger = false;
+													$("#id_picture").trigger('click');
+												}
+											  });
+											});
+											$('#upload-file-container').ajaxForm({
+												beforeSend: function() {
+												    $('\
+													<div class="content-block-center-write-form-block-2-left-photo-list-download">\
+														<div class="progress">\
+															<div class="bar"></div>\
+														</div>\
+													</div>').appendTo('.content-block-center-write-form-block-2-left-photo-container');
+													var percentVal = '10%';
+													$('.bar').css('width', percentVal);
+												},
+												uploadProgress: function(event, position, total, percentComplete) {
+													var percentVal = percentComplete + '%';
+													$('.bar').css('width', percentVal);
+												},
+												success: function() {
+													var percentVal = '100%';
+													$('.bar').css('width', percentVal);
+												},
+												complete: function(xhr) {
+													responseText = JSON.parse(xhr.responseText)
+													$('.content-block-center-write-form-block-2-left-photo-container').append(
+													'<div class="content-block-center-write-form-block-2-left-photo-list">\
+														<div file="'+responseText.file+'" class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url('+responseText.url+')"></div>\
+														<span>Фото №'+(image_index++)+'</span>\
+														<div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото" onclick="deletephoto(\''+responseText.url+'\', this);"></div>\
+													</div>');
+													$('.content-block-center-write-form-block-2-left-photo-list-download').remove();
+												}
+											});
+											function deletephoto( photo, el ) {
+												$.post( '{% url "lenta.views.filedelete" %}', { file: photo }, function( data ) {
+													if(data == 'OK') {
+													    parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
+													    parent.remove();
+													}
+												});
+											}
+										</script>
+                           			</div>
+                                    <!--<div class="content-block-center-write-form-block-2-left-photo-list">
+                                    	<div class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url({% static 'images/posts/photo-12-big.jpg' %})"></div>
+                            			<span>Фото №1</span>
+                                        <div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото"></div>
+                           			</div>
+                                    <div class="content-block-center-write-form-block-2-left-photo-list">
+                                    <div class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url({% static 'images/posts/photo-11-big.jpg' %})"></div>
+                            			<span>Фото №2</span>
+                                        <div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото"></div>
+                           			</div>
+                                    <div class="content-block-center-write-form-block-2-left-photo-list-download">
+										<div class="progress">
+											<div class="bar"></div>
+										</div>
+                                    </div>-->
+                                </div>
+                                <div class="content-block-center-write-form-block-2-left-video-container">
+                                    <div class="content-block-center-write-form-block-2-left-video">
+                                        <span title="Добавить видео" onClick="$('div.content-block-center-write-form-block-2-left-videolink').fadeIn();">Добавить видео</span>
+                                    </div>
+                                    <!--<div class="content-block-center-write-form-block-2-left-video-list">
+                                    	<div class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url({% static 'images/posts/photo-12-big.jpg' %})"></div>
+                                        <div class="content-block-center-write-form-block-2-left-video-list-gradient"></div>
+                            			<span>Justin Timberlake - TKO</span>
+                                        <div class="content-block-center-write-form-block-2-left-video-list-del" title="Удалить видео"></div>
+                           			</div>
+                                    <div class="content-block-center-write-form-block-2-left-video-list">
+                                    	<div class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url({% static 'images/posts/photo-12-big.jpg' %})"></div>
+                                        <div class="content-block-center-write-form-block-2-left-video-list-gradient"></div>
+                            			<span>Justin Timberlake - TKO</span>
+                                        <div class="content-block-center-write-form-block-2-left-video-list-del" title="Удалить видео"></div>
+                           			</div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+							function publicpost() {
+
+								var dict = {};
+								var photo = {};
+								var video = {};
+								dict['photo'] = photo;
+								dict['video'] = video;
+								jQuery.each($('.content-block-center-write-form-block-2-left-photo-list'), function( i ) {
+									child = $(this).children()[0];
+									photo[ i ] = $(child).attr('file');
+								});
+								jQuery.each($('.content-block-center-write-form-block-2-left-video-list'), function( i ) {
+									child = $(this).children()[0];
+									video[ i ] = $(child).attr('file');
+								});
+								dict['topic'] = $('#post-filed-1 option:selected').val();
+								dict['spec'] = $('select[name="post-filed-2"]').val();
+								dict['content'] = $('textarea[name="post-filed-4"]').val();
+								dict['title'] = $('input[name="post-filed-3"]').val();
+								$.post( '{% url "lenta.views.savepost" %}', { data: JSON.stringify(dict) }, function( response ) {
+									alert( response );
+								});
+							}
+                        </script>
+                    	<div class="content-block-center-write-form-block-2-right">
+                        	<input type="submit" value="Опубликовать" class="form-key-3" onclick = "publicpost();"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		<!-- Заголовок -->
+		<div class="content-block-center-head">
+			<span>Ваша лента сообщений</span>
+		</div>
+
+		<div class="content-block-center-item">
+		<!-- Автор и тема поста -->
+		<div class="content-block-center-item-head">
+			<div class="content-block-center-item-head-photo-bg">
+				<a href="" target="_parent" title="На страницу автора">
+				<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/users/1.jpg' %})"></div>
+				</a>
+			</div>
+			<div class="content-block-center-item-head-autor">
+				<span>
+				<strong><a href="" target="_parent" title="На страницу автора">Лабайнакачан<br />
+				Дмитрий Анатольевич</a></strong><br />
+				Врач-эксперементатор
+				</span>
+			</div>
+			<div class="content-block-center-item-head-theme" style="background-image:url({% static 'images/icons-preparats/1.png' %})"><span>Обсуждение препарата</span></div>
+		</div>
+		<div class="content-block-center-item-content">
+			<!-- Заголовки и текст поста -->
+			<div class="content-block-center-item-content-date">10 августа 2012 г. в 11:45</div>
+			<h1>БЕРОДУАЛ (BERODUAL)</h1>
+			<p>Комбинированный бронхолитический препарат. Содержит два компонента, обладающих бронхолитической активностью: ипратропия бромид — м-холиноблокатор и фенотерола гидробромид - бета2-адреномиметик.</p>
+			<p>Бронходилатация при ингаляционном введении ипратропия бромида обусловлена, главным образом, местным, а не системным антихолинергическим действием.</p>
+			<div class="content-block-center-item-content-redmore">
+				<div class="content-block-center-item-content-redmore-link">
+				<a href="" target="_parent" title="Читать полностью">читать полностью</a> |
+				</div>
+				<div class="content-block-center-item-content-redmore-readers">200</div>
+			</div>
+			<!-- Медиа -->
+			<div class="content-block-center-item-content-media">
+				<script type="text/javascript">
+				$(document).ready(function() {
+				$("a#photo1").fancybox();
+				});
+				</script>
+				<div class="content-block-center-item-content-media-single-photo">
+				<a href="{% static 'images/posts/photo-1-big.jpg' %}" id="photo1">
+				<img src="{% static 'images/posts/photo-1-small.jpg' %}" width="380" height="254" alt="БЕРОДУАЛ (BERODUAL)">
+				</a>
+			</div>
+			</div>
+			<!-- Лайки -->
+			<div class="content-block-center-item-content-like">
+				<div class="content-block-center-item-content-like-left">
+					<span title="Это интересно!">Это интересно!</span> <div class="content-block-center-item-content-like-left-rating" title="Это интересно!">+10</div>
+				</div>
+				<div class="content-block-center-item-content-like-left-soc">
+					<img src="{% static 'images/basic/likes.png' %}" width="244" height="24" alt="Социальные сети">
+				</div>
+				<a href="" target="_parent" title="Читать полностью">
+				<div class="content-block-center-item-content-like-readmore"></div>
+				</a>
+			</div>
+			<!-- Комментарии -->
+			<div class="content-block-center-item-content-responses">
+				<span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-1-1" onClick="$('#resp-hidden-1-1').slideDown();$(this).hide();$('#click-resp-hidden-1-2').show();">Посмотреть предыдущие комменарии (2)</span>
+				<span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-1-2" onClick="$('#resp-hidden-1-1').slideUp();$(this).hide();$('#click-resp-hidden-1-1').show();" style="display:none">Скрыть предыдущие комменарии (2)</span>
+				<div class="content-block-center-item-content-responses-hidden" id="resp-hidden-1-1">
+					<!-- 1-1-1 -->
+					<div class="content-block-center-item-content-responses-line"></div>
+					<div class="content-block-center-item-content-responses-container">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-center-item-content-responses-photo" style="background-image:url({%static 'images/users/8.jpg' %})"></div>
+						</a>
+						<div class="content-block-center-item-content-responses-text" style="width:350px;">
+							<p><a href="" target="_parent" title="На страницу автора">Чвалин Евгений Самсонович</a><br />
+							<span>Врач-терапевт</span></p>
+							<p>Рекламный блок, вопреки мнению П.Друкера, недостаточно усиливает медиамикс, используя опыт предыдущих кампаний.</p>
+							<div class="content-block-center-item-content-responses-text-edit">
+								<div class="content-block-center-item-content-responses-text-edit-left">
+								    <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+								</div>
+								<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+								<div class="content-block-center-item-content-responses-text-edit-left">
+									<span title="Ответить" onClick="$('#answer-1-1-1').slideDown();">Ответить</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="content-block-center-item-content-answer" id="answer-1-1-1">
+						<form>
+							<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+							<input type="submit" value="Ответить" class="form-key-2" />
+						</form>
+					</div>
+					<!-- 1-2-1 -->
+					<div class="content-block-center-item-content-responses-line"></div>
+					<div class="content-block-center-item-content-responses-container">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/9.jpg' %})"></div>
+						</a>
+						<div class="content-block-center-item-content-responses-text" style="width:350px;">
+							<p><a href="" target="_parent" title="На страницу автора">Горелова Елена Игоревна</a><br />
+							<span>Врач-эксперементатор</span></p>
+							<p>Поведенческий таргетинг искажает конвергентный направленный маркетинг, размещаясь во всех медиа. Рыночная информация, следовательно, традиционно порождает медиаплан, используя опыт предыдущих кампаний. Создание приверженного покупателя переворачивает системный анализ, оптимизируя бюджеты.</p>
+							<div class="content-block-center-item-content-responses-text-edit">
+								<div class="content-block-center-item-content-responses-text-edit-left">
+								    <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+								</div>
+								<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+								<div class="content-block-center-item-content-responses-text-edit-right">
+								    <span title="Ответить" onClick="$('#answer-1-2-1').slideDown();">Ответить</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="content-block-center-item-content-answer" id="answer-1-2-1">
+						<form>
+						<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+						<input type="submit" value="Ответить" class="form-key-2" />
+						</form>
+					</div>
+				</div>
+				<!-- 1-3-1 -->
+				<div class="content-block-center-item-content-responses-line"></div>
+				<div class="content-block-center-item-content-responses-container">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/3.jpg' %})"></div>
+					</a>
+					<div class="content-block-center-item-content-responses-text" style="width:350px;">
+						<p><a href="" target="_parent" title="На страницу автора">Кондрамедова Валентина Меркуловна</a><br />
+						<span>Врач-эксперементатор</span></p>
+						<p>Доза должна подбираться индивидуально. Во время проведения терапии требуется медицинское наблюдение (лечение обычно должно начинаться с наименьшей рекомендуемой дозы).</p>
+						<div class="content-block-center-item-content-responses-text-edit">
+							<div class="content-block-center-item-content-responses-text-edit-left">
+							<span title="Соглашусь!">Соглашусь!</span>
+								<div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+							</div>
+							<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+							<div class="content-block-center-item-content-responses-text-edit-right">
+								<span title="Ответить" onClick="$('#answer-1-3-1').slideDown();">Ответить</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-item-content-answer" id="answer-1-3-1">
+					<form>
+					<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+					<input type="submit" value="Ответить" class="form-key-2" />
+					</form>
+				</div>
+				<!-- 1-3-2 -->
+				<div class="content-block-center-item-content-responses-line"></div>
+				<div class="content-block-center-item-content-responses-container" style="margin-left:20px;">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/4.jpg' %})"></div>
+					</a>
+					<div class="content-block-center-item-content-responses-text" style="width:330px;">
+						<p><a href="" target="_parent" title="На страницу автора">Варимов Олег Анатольевич</a><br />
+						<span>Врач-эндокринолог</span></p>
+						<p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+						<div class="content-block-center-item-content-responses-text-edit">
+							<div class="content-block-center-item-content-responses-text-edit-left">
+							<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+							</div>
+							<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+							<div class="content-block-center-item-content-responses-text-edit-right">
+								<span title="Ответить" onClick="$('#answer-1-3-2').slideDown();">Ответить</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-item-content-answer" id="answer-1-3-2">
+					<form>
+						<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+						<input type="submit" value="Ответить" class="form-key-2" />
+					</form>
+				</div>
+				<!-- 1-3-3 -->
+				<div class="content-block-center-item-content-responses-line"></div>
+				<div class="content-block-center-item-content-responses-container" style="margin-left:40px;">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/5.jpg' %})"></div>
+					</a>
+					<div class="content-block-center-item-content-responses-text" style="width:310px;">
+						<p><a href="" target="_parent" title="На страницу автора">Горлова Оксана Евгеньевна</a><br />
+						<span>Врач-педиатр</span></p>
+						<p>Медийная связь масштабирует коллективный CTR, учитывая современные тенденции. Тактика выстраивания отношений с коммерсчекими агентами директивно ускоряет комплексный показ баннера, расширяя долю рынка.</p>
+						<div class="content-block-center-item-content-responses-text-edit">
+							<div class="content-block-center-item-content-responses-text-edit-left">
+								<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+							</div>
+							<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+							<div class="content-block-center-item-content-responses-text-edit-right">
+							<span title="Ответить" onClick="$('#answer-1-3-3').slideDown();">Ответить</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-item-content-answer" id="answer-1-3-3">
+					<form>
+					<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+					<input type="submit" value="Ответить" class="form-key-2" />
+					</form>
+				</div>
+				<!-- 1-4-1 -->
+				<div class="content-block-center-item-content-responses-line"></div>
+				<div class="content-block-center-item-content-responses-container">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/6.jpg' %})"></div>
+					</a>
+					<div class="content-block-center-item-content-responses-text" style="width:350px;">
+						<p><a href="" target="_parent" title="На страницу автора">Юнишева Ольга Трофимовна</a><br />
+						<span>Врач-кардиолог</span></p>
+						<p>Соц-дем характеристика аудитории, как следует из вышесказанного, стремительно допускает рекламный клаттер, полагаясь на инсайдерскую информацию. Инвестиционный продукт основательно подпорчен предыдущим опытом применения. Согласно последним исследованиям, бизнес-модель однообразно экономит целевой сегмент рынка, опираясь на опыт западных коллег. Рекламный макет индуцирует комплексный анализ рыночных цен, не считаясь с затратами.</p>
+						<div class="content-block-center-item-content-responses-text-edit">
+							<div class="content-block-center-item-content-responses-text-edit-left">
+							<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+							</div>
+							<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+							<div class="content-block-center-item-content-responses-text-edit-right">
+								<span title="Ответить" onClick="$('#answer-1-4-1').slideDown();">Ответить</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-item-content-answer" id="answer-1-4-1">
+					<form>
+					<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+					<input type="submit" value="Ответить" class="form-key-2" />
+					</form>
+				</div>
+				<!-- 1-4-2 -->
+				<div class="content-block-center-item-content-responses-line"></div>
+				<div class="content-block-center-item-content-responses-container" style="margin-left:20px;">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/7.jpg' %})"></div>
+					</a>
+					<div class="content-block-center-item-content-responses-text" style="width:330px;">
+						<p><a href="" target="_parent" title="На страницу автора">Кобзин Сергей Сергеевич</a><br />
+						<span>Врач-эндокринолог</span></p>
+						<p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+						<div class="content-block-center-item-content-responses-text-edit">
+							<div class="content-block-center-item-content-responses-text-edit-left">
+							<span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+							</div>
+							<div class="content-block-center-item-content-responses-text-edit-separator"></div>
+							<div class="content-block-center-item-content-responses-text-edit-right">
+								<span title="Ответить" onClick="$('#answer-1-4-2').slideDown();">Ответить</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-block-center-item-content-answer" id="answer-1-4-2">
+					<form>
+					<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+					<input type="submit" value="Ответить" class="form-key-2" />
+					</form>
+				</div>
+				<div class="content-block-center-item-content-answer-active">
+					<form>
+					<textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+					<input type="submit" value="Опубликовать" class="form-key-2" />
+					</form>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-block-center-item-dots"></div>
+		<!-------------------------------------------------------------------------------------------------------------------------->
+		<div class="content-block-center-item">
+            	<!-- Автор и тема поста -->
+            	<div class="content-block-center-item-head">
+                	<div class="content-block-center-item-head-photo-bg">
+                    	<a href="" target="_parent" title="На страницу автора">
+                    		<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/users/3.jpg' %})"></div>
+                        </a>
+                    </div>
+                    <div class="content-block-center-item-head-autor">
+                    	<span>
+                           	<strong><a href="" target="_parent" title="На страницу автора">Абрамова<br />
+                            Надежда Николаевна</a></strong><br />
+                            Врач-теоретик
+                        </span>
+                    </div>
+                    <div class="content-block-center-item-head-theme" style="background-image:url({% static 'images/icons-preparats/1.png' %})"><span>Обсуждение препарата</span></div>
+                </div>
+
+            	<div class="content-block-center-item-content">
+
+                	<!-- Заголовки и текст поста -->
+                	<div class="content-block-center-item-content-date">10 августа 2012 г. в 11:45</div>
+                	<h1>БЕРОДУАЛ (BERODUAL)</h1>
+                    <p>Комбинированный бронхолитический препарат. Содержит два компонента, обладающих бронхолитической активностью: ипратропия бромид — м-холиноблокатор и фенотерола гидробромид - бета2-адреномиметик.</p>
+                    <p>Бронходилатация при ингаляционном введении ипратропия бромида обусловлена, главным образом, местным, а не системным антихолинергическим действием.</p>
+					<div class="content-block-center-item-content-redmore">
+                    	<div class="content-block-center-item-content-redmore-link">
+                        	<a href="" target="_parent" title="Читать полностью">читать полностью</a> |
+                        </div>
+                        <div class="content-block-center-item-content-redmore-readers">200</div>
+                    </div>
+                    <!-- Медиа -->
+					<div class="content-block-center-item-content-media">
+                    	<script type="text/javascript">
+							$(document).ready(function() {
+								$("a[rel=tag]").fancybox({
+									'transitionIn'		: 'none',
+									'transitionOut'		: 'none',
+									'titlePosition' 	: 'over',
+									'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+										return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+									}
+								});
+							});
+						</script>
+						<div class="content-block-center-item-content-media-single-photo">
+							<a href="{% static 'images/posts/photo-2-big.jpg' %}" rel="tag">
+                            	<img src="{% static 'images/posts/photo-2-small.jpg' %}" width="223" height="300" alt="БЕРОДУАЛ (BERODUAL)">
+                            </a>
+						</div>
+                        <div class="content-block-center-item-content-media-more-photo-head">
+                            <span>Дополнительные фото:</span>
+                        </div>
+                        <div class="content-block-center-item-content-media-more-photo">
+                        	<a rel="tag" href="{% static 'images/posts/photo-3-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-3-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-4-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-4-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-5-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-5-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-6-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-6-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-7-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-7-big.jpg' %})"></div>
+                            </a>
+                            <div class="content-block-center-item-content-media-more-photo-links">
+                            	<div class="content-block-center-item-content-media-more-photo-links-item" title="еще 6 фотографий" onClick="$('#photo-more-2').slideDown();">... и ещё 6</div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-media-more-photo" style="display:none" id="photo-more-2">
+                        	<a rel="tag" href="{% static 'images/posts/photo-8-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-8-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-9-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-9-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-10-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-10-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-11-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-11-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-12-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-12-big.jpg' %})"></div>
+                            </a>
+                            <a rel="tag" href="{% static 'images/posts/photo-13-big.jpg' %}" >
+                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({% static 'images/posts/photo-13-big.jpg' %})"></div>
+                            </a>
+                        </div>
+                        <div class="content-block-center-item-content-media-more-photo-head">
+                            <span style="font-size: 12px;">Посмотреть видео:</span>
+                        </div>
+                        <div class="content-block-center-item-content-media-video">
+                        	<div class="content-block-center-item-content-media-video-move">
+                            	<a href="" target="_parent" title="Leonard Cohen - A Thousand Kisses Deep">
+                                    <img src="{% static 'images/anons/1.jpg' %}" width="190" height="140" alt="Врачи гоняют на сноубордах!" />
+                                </a>
+                            </div>
+                            <div class="content-block-center-item-content-media-video-descript">
+                            	<p><span><a href="http://www.youtube.com" target="_blank" title="Leonard Cohen - A Thousand Kisses Deep">Leonard Cohen - A Thousand Kisses Deep</a></span><br />
+                                <a href="http://www.youtube.com" target="_blank" title="www.youtube.com">www.youtube.com</a></p>
+                                <p>© 2001 Label: Columbia Records, subsidiary of Sony Music Entertainment. Leonard Cohen, Sharon Robinson</p>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-media-more-photo-head">&nbsp;</div>
+                        <div class="content-block-center-item-content-media-video">
+                        	<div class="content-block-center-item-content-media-video-move">
+                            	<a href="" target="_parent" title="Leonard Cohen - A Thousand Kisses Deep">
+                                    <img src="{% static 'images/anons/1.jpg' %}" width="190" height="140" alt="Врачи гоняют на сноубордах!" />
+                                </a>
+                            </div>
+                            <div class="content-block-center-item-content-media-video-descript">
+                            	<p><span><a href="http://www.youtube.com" target="_blank" title="Leonard Cohen - A Thousand Kisses Deep">Leonard Cohen - A Thousand Kisses Deep</a></span><br />
+                                <a href="http://www.youtube.com" target="_blank" title="www.youtube.com">www.youtube.com</a></p>
+                                <p>© 2001 Label: Columbia Records, subsidiary of Sony Music Entertainment. Leonard Cohen, Sharon Robinson</p>
+                            </div>
+                        </div>
+					</div>
+                    <!-- Лайки -->
+                    <div class="content-block-center-item-content-like">
+                    	<div class="content-block-center-item-content-like-left">
+                        	<span title="Это интересно!">Это интересно!</span> <div class="content-block-center-item-content-like-left-rating" title="Это интересно!">+10</div>
+                        </div>
+                        <div class="content-block-center-item-content-like-left-soc">
+                   	    	<img src="{% static 'images/basic/likes.png' %}" width="244" height="24" alt="Социальные сети">
+                        </div>
+                      <a href="" target="_parent" title="Читать полностью">
+                        	<div class="content-block-center-item-content-like-readmore"></div>
+                        </a>
+                    </div>
+                    <!-- Комментарии -->
+                    <div class="content-block-center-item-content-responses">
+
+                    	<span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-2-1" onClick="$('#resp-hidden-2-1').slideDown();$(this).hide();$('#click-resp-hidden-2-2').show();">Посмотреть предыдущие комменарии (2)</span>
+                        <span class="content-block-center-item-content-responses-all-link" id="click-resp-hidden-2-2" onClick="$('#resp-hidden-2-1').slideUp();$(this).hide();$('#click-resp-hidden-2-1').show();" style="display:none">Скрыть предыдущие комменарии (2)</span>
+
+                        <div class="content-block-center-item-content-responses-hidden" id="resp-hidden-2-1">
+                            <!-- 2-1-1 -->
+                            <div class="content-block-center-item-content-responses-line"></div>
+                            <div class="content-block-center-item-content-responses-container">
+                                <a href="" target="_parent" title="На страницу автора">
+                                    <div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/8.jpg)"></div>
+                                </a>
+                                <div class="content-block-center-item-content-responses-text" style="width:350px;">
+                                    <p><a href="" target="_parent" title="На страницу автора">Чвалин Евгений Самсонович</a><br />
+                                    <span>Врач-терапевт</span></p>
+                                    <p>Рекламный блок, вопреки мнению П.Друкера, недостаточно усиливает медиамикс, используя опыт предыдущих кампаний.</p>
+                                    <div class="content-block-center-item-content-responses-text-edit">
+                                        <div class="content-block-center-item-content-responses-text-edit-left">
+                                            <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+                                        </div>
+                                        <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                        <div class="content-block-center-item-content-responses-text-edit-right">
+                                            <span title="Ответить" onClick="$('#answer-2-1-1').slideDown();">Ответить</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-block-center-item-content-answer" id="answer-2-1-1">
+                                <form>
+                                    <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                    <input type="submit" value="Ответить" class="form-key-2" />
+                                </form>
+                            </div>
+                            <!-- 2-2-1 -->
+                            <div class="content-block-center-item-content-responses-line"></div>
+                            <div class="content-block-center-item-content-responses-container">
+                                <a href="" target="_parent" title="На страницу автора">
+                                    <div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/9.jpg' %})"></div>
+                                </a>
+                                <div class="content-block-center-item-content-responses-text" style="width:350px;">
+                                    <p><a href="" target="_parent" title="На страницу автора">Горелова Елена Игоревна</a><br />
+                                    <span>Врач-эксперементатор</span></p>
+                                    <p>Поведенческий таргетинг искажает конвергентный направленный маркетинг, размещаясь во всех медиа. Рыночная информация, следовательно, традиционно порождает медиаплан, используя опыт предыдущих кампаний. Создание приверженного покупателя переворачивает системный анализ, оптимизируя бюджеты.</p>
+                                    <div class="content-block-center-item-content-responses-text-edit">
+                                        <div class="content-block-center-item-content-responses-text-edit-left">
+                                            <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+                                        </div>
+                                        <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                        <div class="content-block-center-item-content-responses-text-edit-right">
+                                            <span title="Ответить" onClick="$('#answer-2-2-1').slideDown();">Ответить</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-block-center-item-content-answer" id="answer-2-2-1">
+                                <form>
+                                    <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                    <input type="submit" value="Ответить" class="form-key-2" />
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- 2-3-1 -->
+                        <div class="content-block-center-item-content-responses-line"></div>
+                        <div class="content-block-center-item-content-responses-container">
+                        	<a href="" target="_parent" title="На страницу автора">
+                        		<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/3.jpg' %})"></div>
+                            </a>
+                            <div class="content-block-center-item-content-responses-text" style="width:350px;">
+                            	<p><a href="" target="_parent" title="На страницу автора">Кондрамедова Валентина Меркуловна</a><br />
+                                <span>Врач-эксперементатор</span></p>
+                                <p>Доза должна подбираться индивидуально. Во время проведения терапии требуется медицинское наблюдение (лечение обычно должно начинаться с наименьшей рекомендуемой дозы).</p>
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                	<div class="content-block-center-item-content-responses-text-edit-left">
+                                        <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                    	<span title="Ответить" onClick="$('#answer-2-3-1').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer-2-3-1">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                <input type="submit" value="Ответить" class="form-key-2" />
+                            </form>
+                        </div>
+                        <!-- 2-3-2 -->
+                        <div class="content-block-center-item-content-responses-line"></div>
+                        <div class="content-block-center-item-content-responses-container" style="margin-left:20px;">
+                        	<a href="" target="_parent" title="На страницу автора">
+                        		<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/4.jpg' %})"></div>
+                            </a>
+                            <div class="content-block-center-item-content-responses-text" style="width:330px;">
+                            	<p><a href="" target="_parent" title="На страницу автора">Варимов Олег Анатольевич</a><br />
+                                <span>Врач-эндокринолог</span></p>
+                                <p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                	<div class="content-block-center-item-content-responses-text-edit-left">
+                                        <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                    	<span title="Ответить" onClick="$('#answer-2-3-2').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer-2-3-2">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                <input type="submit" value="Ответить" class="form-key-2" />
+                            </form>
+                        </div>
+                        <!-- 2-3-3 -->
+                        <div class="content-block-center-item-content-responses-line"></div>
+                        <div class="content-block-center-item-content-responses-container" style="margin-left:40px;">
+                        	<a href="" target="_parent" title="На страницу автора">
+                        		<div class="content-block-center-item-content-responses-photo" style="background-image:url(images/users/5.jpg)"></div>
+                            </a>
+                            <div class="content-block-center-item-content-responses-text" style="width:310px;">
+                            	<p><a href="" target="_parent" title="На страницу автора">Горлова Оксана Евгеньевна</a><br />
+                                <span>Врач-педиатр</span></p>
+                                <p>Медийная связь масштабирует коллективный CTR, учитывая современные тенденции. Тактика выстраивания отношений с коммерсчекими агентами директивно ускоряет комплексный показ баннера, расширяя долю рынка.</p>
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                	<div class="content-block-center-item-content-responses-text-edit-left">
+                                        <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                    	<span title="Ответить" onClick="$('#answer-2-3-3').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer-2-3-3">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                <input type="submit" value="Ответить" class="form-key-2" />
+                            </form>
+                        </div>
+                        <!-- 2-4-1 -->
+                        <div class="content-block-center-item-content-responses-line"></div>
+                        <div class="content-block-center-item-content-responses-container">
+                        	<a href="" target="_parent" title="На страницу автора">
+                        		<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/6.jpg' %})"></div>
+                            </a>
+                            <div class="content-block-center-item-content-responses-text" style="width:350px;">
+                            	<p><a href="" target="_parent" title="На страницу автора">Юнишева Ольга Трофимовна</a><br />
+                                <span>Врач-кардиолог</span></p>
+                                <p>Соц-дем характеристика аудитории, как следует из вышесказанного, стремительно допускает рекламный клаттер, полагаясь на инсайдерскую информацию. Инвестиционный продукт основательно подпорчен предыдущим опытом применения. Согласно последним исследованиям, бизнес-модель однообразно экономит целевой сегмент рынка, опираясь на опыт западных коллег. Рекламный макет индуцирует комплексный анализ рыночных цен, не считаясь с затратами.</p>
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                	<div class="content-block-center-item-content-responses-text-edit-left">
+                                        <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+10</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                    	<span title="Ответить" onClick="$('#answer-2-4-1').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer-2-4-1">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}">{{ global.placeholder_answer }}</textarea>
+                                <input type="submit" value="Ответить" class="form-key-2" />
+                            </form>
+                        </div>
+                        <!-- 2-4-2 -->
+                        <div class="content-block-center-item-content-responses-line"></div>
+                        <div class="content-block-center-item-content-responses-container" style="margin-left:20px;">
+                        	<a href="" target="_parent" title="На страницу автора">
+                        		<div class="content-block-center-item-content-responses-photo" style="background-image:url({% static 'images/users/7.jpg' %})"></div>
+                            </a>
+                            <div class="content-block-center-item-content-responses-text" style="width:330px;">
+                            	<p><a href="" target="_parent" title="На страницу автора">Кобзин Сергей Сергеевич</a><br />
+                                <span>Врач-эндокринолог</span></p>
+                                <p>Направленный маркетинг притягивает рекламный макет, оптимизируя бюджеты. В рамках концепции Акоффа и Стэка, спонсорство однообразно транслирует имидж, не считаясь с затратами. Воздействие на потребителя, безусловно, однородно допускает медиамикс, осознав маркетинг как часть производства. Лидерство в продажах неестественно притягивает социометрический поведенческий таргетинг, отвоевывая рыночный сегмент. </p>
+                                <div class="content-block-center-item-content-responses-text-edit">
+                                	<div class="content-block-center-item-content-responses-text-edit-left">
+                                        <span title="Соглашусь!">Соглашусь!</span><div class="content-block-center-item-content-responses-text-edit-left-rating" title="Соглашусь!">+24</div>
+                                    </div>
+                                    <div class="content-block-center-item-content-responses-text-edit-separator"></div>
+                                    <div class="content-block-center-item-content-responses-text-edit-right">
+                                    	<span title="Ответить" onClick="$('#answer-2-4-2').slideDown();">Ответить</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-block-center-item-content-answer" id="answer-2-4-2">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_answer }}"></textarea>
+                                <input type="submit" value="Ответить" class="form-key-2" />
+                            </form>
+                        </div>
+
+                        <div class="content-block-center-item-content-answer-active">
+                        	<form>
+                                <textarea name="text" class="form-filed-3" placeholder="{{ global.placeholder_comment }}"></textarea>
+                                <input type="submit" value="Опубликовать" class="form-key-2" />
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+	</div>
+	{% endblock %}
+	{% block right-column %}
+		<!-- Правая колонка -->
+		<div class="content-block-right">
+			<!-- Анонс -->
+			<div class="content-block-right-anons">
+			<!-- 1 -->
+				<div class="content-block-right-anons-item">
+					<div class="content-block-right-anons-item-flag">Сегодня</div>
+					<div class="content-block-right-anons-item-photo-video">
+					<a href="" target="_parent" title="Читать полностью">
+					<img src="{% static 'images/anons/1.jpg' %}" width="190" height="140" alt="Врачи гоняют на сноубордах!" />
+					</a>
+					</div>
+					<strong><a href="" target="_parent" title="Читать полностью">Врачи гоняют на сноубордах!</a></strong><br />
+					12 ноября 2013 - 14 ноября 2013<br />
+					Время: 16:00
+				</div>
+				<!-- 2 -->
+				<div class="content-block-right-anons-item">
+					<div class="content-block-right-anons-item-flag">Скоро</div>
+					<div class="content-block-right-anons-item-photo-video">
+						<a href="" target="_parent" title="Читать полностью">
+						<img src="{% static 'images/anons/2.jpg' %}" width="190" height="140" alt="Консультация доктора Шпалова" />
+						</a>
+					</div>
+					<strong><a href="" target="_parent" title="Читать полностью">Консультация доктора Шпалова</a></strong><br />
+					24 декабря 2013 — 28 декабря 2013<br />
+					Время: 16:00
+				</div>
+			</div>
+			<!-- Баннер -->
+      <div class="content-block-right-social">
+        {% include '_partial/social.html' %}
+      </div>
+
+			<div class="content-block-right-banner">
+			<a href="" target="_blank" title="Баннер">
+			<img src="{% static 'banners/1.jpg' %}" width="240" height="400" alt="Баннер" />
+			</a>
+			</div>
+			<!-- Сейчас читают -->
+			<div class="content-block-right-read-now">
+				<div class="content-block-right-read-now-head">Сейчас читают:</div>
+				<!-- 1 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a></p>
+					Врач-дермокосметолог
+				</div>
+				<div class="content-block-right-read-now-item-line"></div>
+				<!-- 2 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Зависимость как стимул к независимости!">Зависимость как стимул к независимости!</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Зачемкомне<br />
+					Пётр Петрович</a></p>
+					Врач-дермокосметолог
+				</div>
+				<div class="content-block-right-read-now-item-line"></div>
+				<!-- 3 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a></p>
+					Врач-дермокосметолог
+				</div>
+			</div>
+			<!-- Самые популярные -->
+			<div class="content-block-right-popular">
+			<!-- Клинические случаи -->
+			<div class="content-block-right-popular-head">Самые популярные<br />клинические случаи февраля:</div>
+			<!-- 1 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/10.jpg' %})"></div>
+					</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+				<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+				Александра Ивановна</a><br />
+				<i>Врач-дермокосметолог</i></p>
+				<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 2 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/9.jpg' %})"></div>
+					</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+						<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 3 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+				<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/8.jpg' %})"></div>
+					</a>
+				</div>
+				<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+				</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+				<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+				Александра Ивановна</a><br />
+				<i>Врач-дермокосметолог</i></p>
+				<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-dots"></div>
+			<!-- Вопросы -->
+			<div class="content-block-right-popular-head">Самые популярные<br />вопросы февраля:</div>
+			<!-- 1 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/7.jpg' %})"></div>
+						</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+						<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 2 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/6.jpg' %})"></div>
+						</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 3 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+				<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/5.jpg' %})"></div>
+					</a>
+				</div>
+				<div class="content-block-right-popular-item-left-rating">
+				<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+				</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-dashed">
+				<div class="content-block-right-popular-item-present-window">
+					<div class="content-block-right-popular-item-present-window-photo" style="background-image:url({% static 'images/present/1.jpg' %})"></div>
+					<div class="content-block-right-popular-item-present-window-descr">
+						<p><strong>Sportster® SuperLow®</strong></p>
+						<p>Плавность работы подвески, удобная посадка и совершенно неутомительное управление позволяют проделать на этом мотоцикле долгий путь.</p>
+					</div>
+				</div>
+			</div>
+			<!-- Подарок -->
+			<div class="content-block-right-popular-item-present" title="Подарки победителям!" onMouseOver="$('div.content-block-right-popular-item-present-window').fadeIn();" onMouseOut="$('div.content-block-right-popular-item-present-window').fadeOut();">
+				Подарки победителям!
+			</div>
+			</div>
+			<!-- Статистика -->
+			<div class="content-block-right-statistics">
+				<strong>40 000</strong> врачей зарегистрировано в сети<br />
+				<strong>25 000</strong> врачей из моего города<br />
+				<strong>10 000</strong> врачей моей специальности
+			</div>
+			<!-- Реклама на сайте -->
+			<div class="content-block-right-reklama">
+				<a href="" target="_parent" title="Реклама на сайте">Реклама на сайте</a>
+			</div>
+		</div>
+	{% endblock %}
+</div>
+{% endblock %}
+

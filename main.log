@@ -1,0 +1,1429 @@
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-11-25 18:54:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/management/commands/check.py:14: UserWarning: Django 1.6 introduced a new default test runner ('django.test.runner.DiscoverRunner') You should ensure your tests are all running & behaving as expected. See https://docs.djangoproject.com/en/dev/releases/1.6/#discovery-of-tests-in-any-test-module for more information.
+  warnings.warn(message)
+ (2014-11-25 18:54:21; check.py:14)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/management/commands/check.py:14: UserWarning: You have not set a default value for one or more BooleanFields: circle.Record: "moderated", photos.PGalleries: "premoder", photos.PGalleries: "status", photos.PGPhotos: "status". In Django 1.6 the default value of BooleanField was changed from False to Null when Field.default isn't defined. See https://docs.djangoproject.com/en/1.6/ref/models/fields/#booleanfieldfor more information.
+  warnings.warn(message)
+ (2014-11-25 18:54:21; check.py:14)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-11-25 18:54:24; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/management/commands/cleanup.py:10: DeprecationWarning: The `cleanup` command has been deprecated in favor of `clearsessions`.
+  DeprecationWarning)
+ (2014-11-25 18:54:24; cleanup.py:10)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-11-25 18:55:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-11-25 18:55:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 21:42:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 21:42:51; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 21:42:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 21:43:07; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 23:10:29; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-09 23:39:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 00:07:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 00:28:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 00:35:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 00:39:57; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 00:48:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 01:21:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 01:31:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 01:39:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 01:45:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 02:07:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 02:22:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 02:27:13; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-10 02:52:02; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 13:09:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 13:09:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py:164: UnicodeWarning: Unicode unequal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if confirm != 'yes':
+ (2014-12-11 13:09:58; collectstatic.py:164)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 13:10:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 18:11:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 18:11:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 18:19:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-11 18:36:51; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-12 21:20:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-12 21:44:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-12 22:29:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 01:10:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 01:13:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 01:17:12; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 01:17:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 01:55:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-13 14:26:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-15 13:47:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-16 21:32:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-16 21:40:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-17 13:28:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-19 18:48:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-19 19:16:39; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-20 15:12:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-20 15:37:49; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-20 15:46:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-20 15:47:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-20 15:53:03; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 00:38:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 01:51:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 02:32:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 02:38:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 02:58:15; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 02:58:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 02:58:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 03:12:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 12:32:20; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 12:34:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 12:36:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 15:22:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 15:22:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-21 15:24:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-23 02:53:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-23 02:53:37; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-23 03:09:07; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py:164: UnicodeWarning: Unicode unequal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if confirm != 'yes':
+ (2014-12-23 03:09:10; collectstatic.py:164)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-23 03:09:12; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-23 16:47:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-24 14:01:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-26 15:00:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-26 15:00:42; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-26 23:03:54; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-26 23:04:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-29 01:54:51; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-30 01:05:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-30 01:41:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2014-12-30 13:53:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-12 16:50:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-13 13:22:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-20 22:40:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-20 22:40:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-20 22:41:02; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-20 22:41:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-21 00:45:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-21 00:46:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-25 14:29:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-27 03:23:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-27 03:23:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-27 03:41:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 13:54:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 13:59:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 14:03:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 14:03:36; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 14:03:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-01-28 14:06:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 13:09:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 13:23:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 13:27:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 14:03:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 21:35:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 21:39:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 21:41:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 21:44:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 21:59:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:07:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:08:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:12:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:24:03; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:31:43; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:34:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:38:20; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:42:16; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 22:57:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 23:44:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py:164: UnicodeWarning: Unicode unequal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if confirm != 'yes':
+ (2015-02-01 23:44:07; collectstatic.py:164)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-01 23:44:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-02 01:27:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-03 14:24:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-11 01:44:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-12 21:50:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-12 21:51:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-20 19:20:37; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-20 19:46:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-20 21:52:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-20 22:01:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-24 16:36:16; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py:124: Warning: Specified key was too long; max key length is 767 bytes
+  return self.cursor.execute(query, args)
+ (2015-02-24 16:36:16; cursors.py:117)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-28 07:59:20; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-02-28 13:00:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-03 10:08:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-10 21:06:24; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-17 08:02:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-18 00:21:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-18 01:46:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-25 19:09:24; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-03-26 13:49:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-07 16:35:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-10 18:19:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-13 18:51:39; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-13 18:53:16; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-19 08:12:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-04-20 12:46:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-05-19 12:01:39; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-05-30 07:13:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-05-30 07:13:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-07-13 23:47:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-07-14 16:51:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-10-13 19:10:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-10-13 19:10:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:48:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:48:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:50:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:51:02; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:51:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:51:55; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 18:51:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:00:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:40:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:40:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:40:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:41:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:42:42; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:43:37; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:45:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-12 19:57:51; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-24 20:45:57; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2015-11-27 00:23:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:36:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:36:08; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:37:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:37:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:38:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:38:16; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:38:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:39:07; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:39:08; simplejson.py:12)
+ERROR:django.request: Internal Server Error: / (2016-01-21 02:39:14; base.py:226)
+Traceback (most recent call last):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 114, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/meddjango/data/projects/cmedu/posts/views.py", line 136, in Main
+    for o in query:
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 96, in __iter__
+    self._fetch_all()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 854, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 710, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 781, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'Specialities.words' in 'field list'")
+ERROR:django.request: Internal Server Error: /favicon.ico (2016-01-21 02:39:14; base.py:226)
+Traceback (most recent call last):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 152, in get_response
+    response = callback(request, **param_dict)
+  File "/var/www/meddjango/data/projects/cmedu/medtus/views.py", line 30, in medtus404
+    context_instance=RequestContext(request))
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 29, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader.py", line 169, in render_to_string
+    return t.render(context_instance)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/defaulttags.py", line 305, in render
+    return nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 891, in render
+    output = self.filter_expression.resolve(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 585, in resolve
+    obj = self.var.resolve(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 735, in resolve
+    value = self._resolve_lookup(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 771, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/utils/functional.py", line 214, in inner
+    return func(self._wrapped, *args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/fields/related.py", line 308, in __get__
+    rel_obj = qs.get()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 301, in get
+    num = len(clone)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 77, in __len__
+    self._fetch_all()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 854, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 710, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 781, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'Specialities.words' in 'field list'")
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:39:29; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:39:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:39:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:40:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:40:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:41:03; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:41:03; simplejson.py:12)
+ERROR:django.request: Internal Server Error: / (2016-01-21 02:41:07; base.py:226)
+Traceback (most recent call last):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 114, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/meddjango/data/projects/cmedu/posts/views.py", line 136, in Main
+    for o in query:
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 96, in __iter__
+    self._fetch_all()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 854, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 710, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 781, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'Specialities.words' in 'field list'")
+ERROR:django.request: Internal Server Error: /favicon.ico (2016-01-21 02:41:07; base.py:226)
+Traceback (most recent call last):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 152, in get_response
+    response = callback(request, **param_dict)
+  File "/var/www/meddjango/data/projects/cmedu/medtus/views.py", line 30, in medtus404
+    context_instance=RequestContext(request))
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 29, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader.py", line 169, in render_to_string
+    return t.render(context_instance)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/defaulttags.py", line 305, in render
+    return nodelist.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 840, in render
+    bit = self.render_node(node, context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 854, in render_node
+    return node.render(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 891, in render
+    output = self.filter_expression.resolve(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 585, in resolve
+    obj = self.var.resolve(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 735, in resolve
+    value = self._resolve_lookup(context)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/template/base.py", line 771, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/utils/functional.py", line 214, in inner
+    return func(self._wrapped, *args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/fields/related.py", line 308, in __get__
+    rel_obj = qs.get()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 301, in get
+    num = len(clone)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 77, in __len__
+    self._fetch_all()
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 854, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 710, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 781, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'Specialities.words' in 'field list'")
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:41:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:41:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:44:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:45:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:45:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2016-01-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2016-01-21 02:45:30; __init__.py:848)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2015-12-22 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2016-01-21 02:45:30; __init__.py:848)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-21 02:48:20; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-22 17:51:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-22 17:52:42; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-01-22 17:53:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-03-21 01:55:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-03-21 01:57:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-03-21 02:00:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-14 02:38:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-14 02:39:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-14 02:39:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 12:48:40; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 14:54:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py:164: UnicodeWarning: Unicode unequal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if confirm != 'yes':
+ (2016-04-18 14:54:06; collectstatic.py:164)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 14:54:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 14:57:37; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 15:04:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 15:05:52; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-18 15:08:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-04-21 15:38:02; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-05-06 12:21:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-05-22 18:10:02; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-06-07 16:34:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-18 13:00:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-18 13:00:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-28 14:18:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-28 14:18:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-28 14:18:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-28 14:19:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-28 14:36:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-30 14:20:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-30 14:45:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-30 14:48:12; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-30 14:49:49; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-07-30 14:50:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-08-02 21:17:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-08-17 19:50:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-08-17 19:51:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-09-16 16:20:07; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-09-16 18:17:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-09-16 18:18:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-10-03 21:04:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-10-03 21:04:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 19:59:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:00:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:03:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:03:28; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:03:39; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:03:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py:124: Warning: InnoDB: ROW_FORMAT=DYNAMIC requires innodb_file_per_table.
+  return self.cursor.execute(query, args)
+ (2016-12-22 20:03:45; cursors.py:117)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py:124: Warning: InnoDB: assuming ROW_FORMAT=COMPACT.
+  return self.cursor.execute(query, args)
+ (2016-12-22 20:03:45; cursors.py:117)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:03:52; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-22 20:05:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:45:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:49:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:49:58; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:50:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:51:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2016-12-27 10:51:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-16 11:47:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-16 11:47:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-16 12:49:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-16 13:40:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py:124: Warning: InnoDB: ROW_FORMAT=DYNAMIC requires innodb_file_per_table.
+  return self.cursor.execute(query, args)
+ (2017-01-16 13:40:42; cursors.py:117)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py:124: Warning: InnoDB: assuming ROW_FORMAT=COMPACT.
+  return self.cursor.execute(query, args)
+ (2017-01-16 13:40:42; cursors.py:117)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:40:43; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:41:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:41:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:42:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:44:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-20 18:45:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-22 11:31:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-22 11:32:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-22 11:32:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-22 11:52:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-22 11:52:07; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-23 23:00:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-23 23:00:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-24 13:15:23; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-24 13:15:24; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-24 23:00:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-24 23:00:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-26 13:18:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-26 13:18:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-27 14:43:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-27 14:43:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-31 21:35:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-01-31 21:35:08; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-01 21:03:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-01 21:03:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-06 11:30:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-06 11:30:48; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-08 18:58:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-02-08 18:58:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-07 16:36:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 18:53:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 18:55:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 18:55:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 18:55:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:06:29; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:08:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:09:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:12:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:13:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:13:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:13:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:13:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:13:50; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:14:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:14:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:15:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:16:12; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:17:08; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:17:23; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:17:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:20:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:20:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:20:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:21:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:21:37; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:21:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:21:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:22:40; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:22:57; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:23:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:23:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:24:15; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:24:41; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:32:11; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-08 19:32:39; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-13 11:35:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 15:03:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 15:16:54; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 15:16:55; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 15:54:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 15:54:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:10:20; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:10:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:13:30; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:13:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:17:14; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:17:15; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:31:22; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-14 20:31:23; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-20 12:51:56; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-20 12:51:57; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-22 18:34:03; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-22 18:34:04; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-28 16:48:42; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-28 16:48:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-31 14:19:31; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-31 14:19:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-31 14:21:16; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-03-31 14:21:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 11:23:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 11:23:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 12:22:54; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 12:22:55; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 12:26:32; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-03 12:26:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:02:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:03:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:27:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:27:01; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:33:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:33:47; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:37:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-04 16:38:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 19:31:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 19:31:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 19:37:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:05:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:11:13; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:11:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:11:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:11:40; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:11:52; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:12:10; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:12:19; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:22:13; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:22:35; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:27:08; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:27:09; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:50:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-10 20:50:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-11 12:26:38; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-11 12:26:40; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-11 12:29:05; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-11 12:29:06; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-12 16:43:25; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-12 16:43:26; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:39:43; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:39:44; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:43:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:43:18; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:45:33; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-18 00:45:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-25 09:23:43; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-25 09:34:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-25 09:34:36; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-25 09:34:52; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-25 09:34:53; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-29 20:48:15; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-29 20:48:17; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-29 20:50:59; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-04-29 20:51:00; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:07:27; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:07:29; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:15:45; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:15:46; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:26:21; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-05-04 14:26:22; simplejson.py:12)

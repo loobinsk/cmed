@@ -1,0 +1,158 @@
+{% extends "base.html" %}{% load account_tags %}
+{% block title_page %}Новости медицины{% endblock %}
+{% block title %}Новости медицины{% endblock %}{% load staticfiles %}
+{% block js_page %}
+    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+{% endblock %}
+{% block top_block %}
+    <div class="content-block-top-block-1" id="window-filter">
+
+    </div>
+    <div class="content-block-top-separator"></div>
+    <div class="content-block-top-block-2">
+        <span>Поиск по слову:</span>
+
+        <form action="{% url "rss"%}?feed={{feed}}&feed=" class="content-block-top-block-2-filed">
+            <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+            <input type="text" name="search" class="form-filed-9" placeholder="Что ищем?"
+                   value="{{ search|default:'' }}"/>
+            <input type="hidden" name="feed" value="{{feed}}" placeholder="{{feed}}">
+            <input type="hidden" name="cat" value="{{cat}}" placeholder="{{cat}}">
+        </form>
+    </div>
+    {% endblock %}
+{% block filter_content %}{% endblock %}
+{% block content %}
+    {% for object in object_list %}
+        {% include 'rss/one_rss2.html' %}
+    {% endfor %}
+    <script>
+    function SendComment(result_id, form_id, url) {
+        if($(this).data('locked') == 1){
+            return false;
+        }
+        var form = $(this);
+        var text = jQuery("#" + form_id).children(".form-filed-3").val();
+        if (text.trim() == '') {
+            alert('Комментарий не может быть пустым');
+        } else {
+            $(this).data('locked', 1);
+            jQuery.ajax({
+                url: url, //Адрес подгружаемой страницы
+                type: "POST", //Тип запроса
+                dataType: "html", //Тип данных
+                data: jQuery("#" + form_id).serialize(),
+                success: function (response) { //Если все нормально
+                    $(this).data('locked', 0);
+                    document.getElementById(result_id).innerHTML = response;
+                },
+                error: function (response) { //Если ошибка
+                    $(this).data('locked', 0);
+                    document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+                }
+            });
+        }
+    }
+
+    function SendLike(id, service_id, id_result) {
+        jQuery.ajax({
+            url: 'https://vrachivmeste.ru/likes/', //Адрес подгружаемой страницы
+            type: 'get', //Тип запроса
+            data: {'id': id, 'service_id': 69, 'user_id':{{ user.id }} },
+            success: function (response) { //Если все нормально
+                document.getElementById(id_result).innerHTML = response;
+            },
+            error: function (response) { //Если ошибка
+                alert("Ошибка");
+            }
+        });
+    }
+
+    function getNextP() {
+
+        if (thisWork == 1) {
+            thisWork = 0;
+            //$("#upBlock").css('display','block');
+            //if (filtr!=''){filtr = filtr + "&page="+thisPageNum;}else{filtr = "?page="+thisPageNum;}
+
+            $.ajax({
+                type: 'get',
+                url: "/newsrss/",
+                data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(),
+                  'search': $('input[name="search"]').val(), 'feed': '{{ feed }}'},
+                success: function (data) {
+                    //$("#upBlock").css('display','none');
+                    //$(".content-block-center").html($(".content-block-center").html()+" "+data);
+                    $(data).appendTo(".content-block-center");
+                    thisPageNum = thisPageNum + 1;
+                    thisWork = 1;
+                }
+            });
+        }
+    }
+
+
+    var thisWork = 1;
+
+
+    //$(document).ready(function(){
+
+    var scrH = $(window).height();
+    var scrHP = $(".content-block-center").height();
+
+    $(window).scroll(function () {
+        var scro = $(this).scrollTop();
+        var scrHP = $(".content-block-center").height();
+        var scrH2 = 0;
+        scrH2 = scrH + scro;
+        var leftH = scrHP - scrH2;
+
+        if (leftH < 300) {
+            getNextP();
+        }
+    });
+    //});
+
+
+    $(document).ready(function () {
+
+        var image_index = 1;
+
+        function progressHandlingFunction(e) {
+            if (e.lengthComputable) {
+                $('progress').attr({value: e.loaded, max: e.total});
+                $('.bar').css('width', (e.loaded / e.total) * 100);
+            }
+        }
+
+        //$('#preloader').hide();
+
+        $('#checkbox-1').prop('checked', false);
+
+
+
+    });
+
+
+    </script>{% endblock %}
+
+{% block right_block %}
+    <div class="content-block-right-specs">
+{#        <h2>Категории</h2>#}
+{#        <ul>#}
+{#            <li><a href="{% url "rss"%}?feed={{feed}}&cat=all_cat" {% if not cat or cat == 'all_cat' %}class="active"{% endif %}>Все</a></li>#}
+{#            {% for c in cat_list %}#}
+{#                <li><a href="{% url "rss"%}?feed={{feed}}&cat={{c.name}}" {% if c.name == cat %}class="active"{% endif %}>{{ c.name }}</a></li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+        <h2>Ресурсы</h2>
+        <ul>
+            <li><a href="{% url "rss"%}?cat={{cat}}&feed=all_feed" {% if not feed or feed == 'all_feed'%}class="active"{% endif %}>Все</a></li>
+            {% for f in feed_list %}
+                <li><a href="{% url "rss"%}?cat={{cat}}&feed={{f.name}}" {% if f.name == feed %}class="active"{% endif %}>{{ f.name }}</a></li>
+            {% endfor %}
+        </ul>        
+
+    </div>
+    {{ block.super }}
+{% endblock %}

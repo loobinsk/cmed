@@ -1,0 +1,5 @@
+[paths]
+default = http://artex@code.brln.tv/diffusion/VRVM/vrachivmeste/
+#[ui]
+#ssh = /usr/bin/ssh -i ./deploy_key
+

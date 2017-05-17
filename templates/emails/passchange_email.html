@@ -1,0 +1,17 @@
+Добрый день!<br/><br/>
+{{ profile.lastname }} {{ profile.firstname }} {{ profile.surname }}.<br/>
+
+Вы изменили пароль на сайте
+<a href="https://{{ host }}">
+    https://{{ host }}
+</a>
+<table>
+    <tr>
+        <td style="padding-right:15px;">Логин:</td>
+        <td>{{ profile.login }}</td>
+    </tr>
+    <tr>
+        <td style="padding-right:15px;">Пароль:</td>
+        <td>{{ password }}</td>
+    </tr>
+</table>

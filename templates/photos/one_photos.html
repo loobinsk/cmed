@@ -1,0 +1,108 @@
+{% load account_tags posts_filters %}{% load staticfiles %}
+<div class="content-block-center-item">
+  <!-- Автор и тема поста -->
+  <div class="content-block-center-item-head">
+    <div class="content-block-center-item-nohead-autor">
+      <span style="font-size:14px;color:#666">
+        {{ object.spec_id.name|default:"" }}
+      </span>
+    </div>
+
+    <div class="content-block-center-item-head-theme"><span>
+        {% if circle and group %}
+          <a href='{% url 'detailgroup' pk=group.id %}'>{{ group.title }}</a>
+        {% else %}
+          Фотогалерея
+        {% endif %}
+        </span>
+    </div>
+  </div>
+  <div class="content-block-center-item-content">
+    <!-- Заголовки и текст поста -->
+    {% if user.is_authenticated %}
+      <div class="content-block-center-item-content-date">{{ object.createdate }}</div>
+    {% endif %}
+    <h1 style="width:320px"><a href="{% url 'galleries_detail' object.id %}" target="_blank"
+                               style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a></h1>
+
+    <p>
+      {% if user.is_authenticated %}
+        {% if object.description %}
+          {{ object.description|truncatewords_html:50|safe|linebreaks }}
+        {% endif %}
+      {% endif %}
+    </p>
+
+    <div class="content-block-center-item-content-redmore">
+      <div class="content-block-center-item-content-redmore-link">
+        <a href="{% url 'galleries_detail' object.id %}" target="_blank" title="Читать полностью">читать
+          полностью</a> |
+      </div>
+
+      {% if request.user == object.user and object.createdate|deletion_time_left %}
+          <div class="content-block-center-item-content-redmore-adminedit">
+              <a href="#" class="delete_post" data-url="{% url 'rmpost' %}"
+                    data-post="{{ object.id }}" data-type="photo">Удалить</a>
+          </div>
+      {% endif %}
+
+      {% if user.is_staff %}
+          <div class="content-block-center-item-content-redmore-adminedit">
+              <a href="{% url "admin:photos_pgalleries_change" object.id %}">ред.</a>
+          </div>
+      {% endif %}
+    </div>
+    <!-- Медиа -->
+    <div class="content-block-center-item-content-media">
+      {% if user.is_authenticated %}
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $("a[rel=tag{{object.id}}]").fancybox({
+              'transitionIn': 'none',
+              'transitionOut': 'none',
+              'titlePosition': 'over',
+              'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+              }
+            });
+          });
+        </script>
+      {% endif %}
+      {% for photo in object.PGPhotosList %}
+        {% if forloop.first %}
+          <div class="content-block-center-item-content-media-single-photo">
+            {% if user.is_authenticated %}
+              <a href="{{ photo.image.url }}" rel="tag{{ object.id }}">
+            {% endif %}
+            <img src="{% get_preview_calculate photo.image.name %}" style="max-width: 420px;" alt="">
+            {% if user.is_authenticated %}
+              </a>
+            {% endif %}
+          </div>
+        {% else %}
+
+          {% if forloop.counter == 2 %}
+            <div class="content-block-center-item-content-media-more-photo-head">
+              <span>Дополнительные фото:</span>
+            </div>
+            <div class="content-block-center-item-content-media-more-photo">
+          {% endif %}
+
+        {% if user.is_authenticated %}
+          <a rel="tag{{ object.id }}" href="{{ photo.image.url }}">
+        {% endif %}
+        <div class="content-block-center-item-content-media-more-photo-item"
+             style="background-image:url({% get_preview_calculate photo.image.name %})"></div>
+        {% if user.is_authenticated %}
+          </a>
+        {% endif %}
+        {% if forloop.last %}
+          </div>
+        {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <!-- конец Медиа -->
+    {% include "includes/read_all.html" %}
+    {% include "includes/likes_comments.html" with viewname="galleries_detail" %}
+  </div>

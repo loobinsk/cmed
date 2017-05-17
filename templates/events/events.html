@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% load account_tags staticfiles %}
+{% block title_page %}{% if archive %}Архив медицинских конференций, медицинские выставки, лекции и семинары для врачей{% else %}Медицинские конференции, медицинские выставки, лекции и семинары для врачей: календарь встреч!{% endif %}{% endblock %}
+{% block title %}{% if archive %}Архив мероприятий{% else %}<b>Медицинские конференции, медицинские выставки, лекции и семинары для врачей:</b> календарь встреч!{% endif %}{% endblock %}
+{% block js_page %}
+    <script type="text/javascript" src="{% static 'js/detect.js' %}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+{% endblock %}
+{% block top_block %}
+    <div class="content-block-top-block-1-window-filter" id="window-filter">
+        <div class="content-block-top-block-1-window-filter-content">
+            <div class="content-block-top-block-1-window-filter-content-left">
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-1" type="checkbox" name="Мероприятия" uri="https://vrachivmeste.ru/events/" value="Все"
+                           checked
+                           hidden/>
+                    <label for="checkbox-1">Все</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-2" type="checkbox" name="1" value="Вебинар" hidden checked/>
+                    <label for="checkbox-2">Вебинар</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-3" type="checkbox" name="2" value="Конференция" hidden checked/>
+                    <label for="checkbox-3">Конференция</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-4" type="checkbox" name="3" value="Симпозиум" hidden checked/>
+                    <label for="checkbox-4">Симпозиум</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-5" type="checkbox" name="5" value="Семинар" hidden checked/>
+                    <label for="checkbox-5">Семинар</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-6" type="checkbox" name="6" value="Онлайн-трансляция" hidden
+                           checked/>
+                    <label for="checkbox-6">Онлайн-трансляция</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input class="default" id="checkbox-11" type="checkbox" name="11" value="Выставка" hidden
+                           checked/>
+                    <label for="checkbox-11">Выставка</label>
+                </div>
+            </div>
+            <div class="content-block-top-block-1-window-filter-content-right">
+                <div class="content-block-top-block-1-window-filter-content-right-text">
+                    Воспользуйтесь списком,<br/>
+                    для того чтобы выбрать<br/>
+                    нужную Вам специальность<br/>
+                    материалов в ленте
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-right-list">
+                    <div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
+                    </div>
+                    <div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all"
+                         id="filter-scroll">
+                        <div class="filter-scroll-item" id="list-"><span>Все специальности</span></div>
+                        {% for speciality in specialities_list %}
+                            <div class="filter-scroll-item" id="list-{{ speciality.id }}">
+                                <span>{{ speciality.name }}</span>
+                            </div>{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-block-top-block-1-window-filter-bottom">
+            <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
+        </div>
+    </div>
+    <div class="content-block-top-block-1">
+        <span style="font-size: 13px;">Поиск по специальности:</span>
+
+        <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+            <div class="content-block-top-block-1-filed-arrow"></div>
+            <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+        </div>
+    </div>
+    <div class="content-block-top-separator"></div>
+    <div class="content-block-top-block-2">
+        <span style="font-size: 13px;">Поиск по слову:</span>
+
+        <form class="content-block-top-block-2-filed">
+            <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+            <input type="text" name="search" class="form-filed-9" placeholder="Что ищем?"
+                   value="{{ search|default:'' }}"/>
+        </form>
+    </div>
+    <div class="content-block-top-separator"></div>{% endblock %}
+{% block filter_content %}
+    <form class="search-events" action="/events" id="searchEventForm">
+        {% if user.is_staff %}
+            <div class="top">
+                {#            <span class="title">Поиск мероприятия</span>#}
+                <a href="/events/add" class="btn">Разместить мероприятие</a>
+            </div>
+        {% endif %}
+        <span class="title" style="margin-top: 5px;">Дата проведения: </span>
+        <div class="columns">
+            <div class="column range-js">
+                <div class="row to">
+                    <span class="label">с:</span>
+                    <input class="day-field" type="text" value="день" name="daystart">
+                    <input class="month-field" type="text" value="месяц" name="monthstart">
+                    <input class="year-field" type="text" value="год" name="yearstart">
+                    <a href="#" class="btn-calendar">calendar</a>
+                </div>
+                <div class="row from">
+                    <span class="label">по:</span>
+                    <input class="day-field" type="text" value="день" name="dayend">
+                    <input class="month-field" type="text" value="месяц" name="monthend">
+                    <input class="year-field" type="text" value="год" name="yearend">
+                    <a href="#" class="btn-calendar">calendar</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row" id="country">
+                    <select class="sel01 required" name="country"
+                            onchange="Dajaxice.account.updatecombo(Dajax.process, {'option':this.value})"
+                            autocomplete="off">
+                        {% for country in countries_list %}
+                            {% if country.title == "Россия" %}
+                            <option value="{{ country.id }}" selected="selected">{{ country.title }}</option>
+                            {% else %}
+                                <option value="{{ country.id }}">{{ country.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="row" id="town">
+                    <select class="sel required" name="town" autocomplete="off">
+                        <option value="0">Выберите город</option>
+                        {% for town in towns_list %}
+                            {% if town.checked == 1 %}
+                            <option value="{{ town.id }}">{{ town.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Выполнить поиск">
+    </form>
+{% endblock %}
+
+
+{% block content %}
+        {% if not archive %}
+        <a href="{% url 'events_archive' %}" class="content-block-right-anons-item archive-link">
+            {% comment %}<a href="{% url 'events_archive' %}">Архив мероприятий</a>{% endcomment %}
+            Архив мероприятий
+        </a>
+    {% endif %}
+    {% for object in object_list %}
+        {% include 'events/one_events2.html' %}
+    {% endfor %}
+
+    <script>
+        function SendComment(result_id, form_id, url) {
+            if ($(this).data('locked') == 1) {
+                return false;
+            }
+            var form = $(this);
+            var text = jQuery("#" + form_id).children(".form-filed-3").val();
+            if (text.trim() == '') {
+                alert('Комментарий не может быть пустым');
+            } else {
+                $(this).data('locked', 1);
+                jQuery.ajax({
+                    url: url, //Адрес подгружаемой страницы
+                    type: "POST", //Тип запроса
+                    dataType: "html", //Тип данных
+                    data: jQuery("#" + form_id).serialize(),
+                    success: function (response) { //Если все нормально
+                        form.data('locked', 0);
+                        document.getElementById(result_id).innerHTML = response;
+                    },
+                    error: function (response) { //Если ошибка
+                        form.data('locked', 0);
+                        document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+                    }
+                });
+            }
+        }
+
+        function SendLike(id, service_id, id_result) {
+            jQuery.ajax({
+                url: 'https://vrachivmeste.ru/likes/', //Адрес подгружаемой страницы
+                type: 'get', //Тип запроса
+                data: {'id': id, 'service_id': 6, 'user_id':{{ user.id }}},
+                success: function (response) { //Если все нормально
+                    document.getElementById(id_result).innerHTML = response;
+                },
+                error: function (response) { //Если ошибка
+                    alert("Ошибка");
+                }
+            });
+        }
+
+        var country, town, start, end, thisPageNum = 2;
+        $('#searchEventForm').submit(function () {
+            country = $('select[name="country"]').val();
+            town = $('select[name="town"]').val();
+            if ($('input[name="yearstart"]').val() != 'год') {
+                start = $('input[name="yearstart"]').val() + '-' + $('input[name="monthstart"]').val() + '-' + $('input[name="daystart"]').val();
+            } else {
+                start = '0';
+            }
+            if ($('input[name="yearend"]').val() != 'год') {
+                end = $('input[name="yearend"]').val() + '-' + $('input[name="monthend"]').val() + '-' + $('input[name="dayend"]').val();
+            } else {
+                end = '0';
+            }
+            filter();
+            return false; // и этим false отменяем отправку формы
+        });
+
+        var thisWork = 1;
+        function getNextP() {
+
+            {% if not archive %}
+             //   return false;
+            {% endif %}
+            if (thisWork == 1) {
+                thisWork = 0;
+
+                $.ajax({
+                    type: 'get',
+                    {% if archive %}
+                        url: "/events/archive",
+                    {% else %}
+                        url: "/events/",
+                    {% endif %}
+                    data: {
+                        'page': thisPageNum,
+                        'spec_id': spec_id,
+                        'format': format.join(),
+                        'country': country,
+                        'town': town,
+                        'start': start,
+                        'end': end,
+                        'search': $('input[name="search"]').val()
+                    },
+                    success: function (data) {
+                        $(data).appendTo(".content-block-center");
+                        thisPageNum = thisPageNum + 1;
+
+                        thisWork = 1;
+                    },
+                    error: function () {
+                        $("#events_archive").appendTo(".content-block-center").show();
+                    }
+                });
+            }
+        }
+
+        var scrH = $(window).height();
+        var scrHP = $(".content-block-center").height();
+
+        $(window).scroll(function () {
+            var scro = $(this).scrollTop();
+            var scrHP = $(".content-block-center").height();
+            var scrH2 = 0;
+            scrH2 = scrH + scro;
+            var leftH = scrHP - scrH2;
+
+            if (leftH < 300) {
+                getNextP();
+            }
+        });
+    </script>{% endblock %}

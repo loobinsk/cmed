@@ -1,0 +1,412 @@
+<!DOCTYPE html>{% load staticfiles account_tags %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<title>{% block title_page %}Врачи Вместе{% endblock %}</title>
+	<link rel="icon" href="{% static 'favicon.ico' %}"  /><link rel="SHORTCUT ICON" href="{% static 'favicon.ico' %}"  />
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'css/jquery.fancybox-1.3.4.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'css/jquery.mCustomScrollbar.css' %}" rel="stylesheet" type="text/css" />
+	{% block style_page %}{% endblock %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.preload-images.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/preload-images.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/inji_inversion_menu.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.fancybox-1.3.4.pack.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/windows.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.openclose.js' %}"></script>
+	<script type="text/javascript" src="{% static 'dajax/jquery.dajax.core.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/dajaxice.core.js' %}"></script>
+	{% block js_page %}{% endblock %}
+</head>
+<body>
+<div class="page-div inner">
+	<!-- ЛЕВЫЙ БЛОК (НАЧАЛО) -->
+	<div class="left-block">
+		<div class="left-block-content">{% block left_block %}
+			<!-- Логотип -->
+			<div class="left-block-content-logo">
+				<a href="/" title="На главную">
+					<img src="{% static 'images/basic/logo-1.png' %}" width="200" height="75" alt="Врачи Вместе">
+				</a>
+			</div>
+			<!-- Профиль -->
+			<div class="left-block-content-profile">
+				<div class="left-block-content-line-1"></div>{% if user.is_authenticated %}
+				<div class="left-block-content-profile-item">
+					<div class="left-block-content-profile-item-left">
+						<div class="left-block-content-profile-item-left-photo-bg">
+							<div class="left-block-content-profile-item-left-photo" style="background-image:url({% get_avatar_preview user.id %})"></div>
+						</div>
+					</div>
+					<div class="left-block-content-profile-item-right">
+						<p>{{ user.lastname }}<br />
+						{{ user.firstname }}<br />
+						{{ user.surname }}</p>
+						{{ user.spec_id }}
+						<div class="left-block-content-profile-item-right-exit">
+							<a href="{% url 'logout' %}" target="_parent" title="Выход">выход</a>
+						</div>
+					</div>
+				</div>
+				<div class="left-block-content-line-1"></div>
+				<div class="left-block-content-profile-links">
+					<div class="left-block-content-profile-links-item">
+						<ul>
+							<li><a href="{% url 'lichnie.views.lichnie1' %}" target="_parent" title="Моя страница">Моя страница</a></li>
+							<li><a href="#" target="_parent" title="Врачи на Врачи Вместe">Врачи на "Врачи Вместе"</a></li>
+							<li class="active">
+								<a href="#" target="_parent" title="Личные сообщения">
+								<div class="left-block-content-profile-links-item-content">
+									Личные сообщения
+									<div class="left-block-content-profile-links-item-content-count"><span>375</span></div>
+								</div>
+								</a>
+							</li>
+							<li><a href="#" target="_parent" title="Интересное">Интересное</a></li>
+						</ul>
+					</div>
+				</div>
+				{% else %}
+				<form class="register-form" action="{% url 'login' %}" method="post">
+					{% csrf_token %}
+					<div class="holder">
+						<label for="email-field">Ваш E-mail</label>
+						<input id="email-field" type="text" name="login" value="" >
+					</div>
+					<div class="holder">
+						<label for="password-field">Ваш пароль</label>
+						<div class="password-field">
+							<input id="password-field" type="password" name="password" value="" >
+						</div>
+					</div>
+					<div class="row">
+						<div class="check-holder">
+							<input id="check-filed01"  type="checkbox" >
+							<label for="check-filed01">Запомнить меня</label>{{ error|safe }}
+						</div>
+						<a href="#" onclick="$(this).closest('form').submit();return false;" class="btn">вход</a>
+					</div>
+					<div class="left-block-content-line-1"></div>
+					<input type="button" value="Регистрация" onclick="location.href='http://medtusovka.ru/registration'" >
+					<div class="left-block-content-line-1"></div>
+					<div class="link-holder">
+						<a href="{% url "account.views.password_forgot" %}" class="link">Забыли пароль?</a>
+					</div>
+				</form>{% endif %}
+			</div>
+			<!-- Форма приглашения -->
+			<div class="left-block-content-line-2"></div>
+			{% if user.is_authenticated %}
+			<div class="left-block-content-invitation">
+				<div class="left-block-content-invitation-item">
+					<span id="invitation-1" title="Пригласить коллегу на &quot;Врачи Вместе&quot;" onClick="$('div.left-block-content-invitation-item-form').slideDown();$('#invitation-1').hide();$('#invitation-2').show();">Пригласить коллегу на &quot;Врачи Вместе&quot;</span>
+					<span id="invitation-2" style="display:none" title="Скрыть форму" onClick="$('div.left-block-content-invitation-item-form').slideUp();$('#invitation-2').hide();$('#invitation-1').show();">Скрыть форму</span>
+					<div class="left-block-content-invitation-item-form">
+						<form>
+							<input type="text" name="emails" id="emails" class="form-filed-1" value="Введите E-mail через запятую" onfocus="if (this.value == 'Введите E-mail через запятую') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Введите E-mail через запятую';}" />
+							<br />
+							Поле для редактирования текста<br />
+							для вашего приглашения<br />
+							<textarea name="text" class="form-filed-2" id="text" onFocus="if (this.value == 'Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!';}">Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи Вместе&quot;!</textarea>
+							<br />
+							<input type="submit" value="отправить" class="form-key-1" />
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="left-block-content-line-2"></div>
+			{% endif %}
+			{% block left_menu %}<!-- Ссылки -->
+			<div class="left-block-content-links">
+				<div class="left-block-content-links-item">
+					<span><a href="/" target="_parent" title="Главная лента">Главная лента</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/groups" target="_parent" title="Группы">Группы</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Публикации в ваших группах">Публикаций в ваших группах</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span ><a href="/events" target="_parent" title="Мероприятия">Мероприятия</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/videos" target="_parent" title="Видеоматериалы">Видеоматериалы</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="" target="_parent" title="Фотогалереи">Фотогалереи</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/consultations" target="_parent" title="Он-лайн консультация">Он-лайн консультация</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/practice" target="_parent" title="Опросы и исследования">Опросы и исследования</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/tranings" target="_parent" title="Тренинги">Тренинги</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/records" target="_parent" title="Электронный журнал">Электронный журнал</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/magazines" target="_parent" title="Книги и журналы">Книги и журналы</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/vacancies" target="_parent" title="Резюме и вакансии">Резюме и вакансии</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/doctor" target="_parent" title="Премия Доктор Года">Премия Доктор Года</a></span>
+				</div>
+				<div class="left-block-content-links-item">
+					<span><a href="/partners" target="_parent" title="Наши партнеры">Наши партнеры</a></span>
+				</div>
+			</div>{% endblock %}
+			{% block promoblock %}<div class="promo-block"><img src="{% static 'images/img07.jpg' %}" width="200" height="300" alt="image description"></div>{% endblock %}
+		{% endblock %}</div>
+	</div>
+	<!-- ЛЕВЫЙ БЛОК (КОНЕЦ) -->
+	<!-- ОСНОВНОЙ БЛОК (НАЧАЛО) -->
+	<div class="content-block">
+		<!-- Верхняя плашка -->
+		<div class="content-block-top">
+			{% include 'medtus/feedback_form.html' %}
+		</div>
+		<!-- Центральная колонка -->
+		<div class="content-block-center">{% if not user.is_authenticated %}
+			<div class="inform-area">
+				<span class="title">Чтобы увидеть полный текст, посмотреть видео, оставить комментарий, необходимо </span>
+				<div class="inform-panel">
+					<a href="{% url 'login' %}" class="btn">Войти</a>
+					<span>или</span>
+					<a href="{% url 'register1' %}" class="btn">Зарегистрироваться</a>
+				</div>
+			</div>{% endif %}{% block filter_content %}{% endblock %}
+			<!-- Заголовок -->
+			{% block content %}{% endblock %}
+		</div>
+		<!-- Правая колонка -->
+		<div class="content-block-right">{% block right_block %}
+			<!-- Анонс -->
+			<div class="content-block-right-anons">
+			<!-- 1 -->
+				<div class="content-block-right-anons-item">
+					<div class="content-block-right-anons-item-flag">Сегодня</div>
+					<div class="content-block-right-anons-item-photo-video">
+					<a href="" target="_parent" title="Читать полностью">
+					<img src="{% static 'images/anons/1.jpg' %}" width="190" height="140" alt="Врачи гоняют на сноубордах!" />
+					</a>
+					</div>
+					<strong><a href="" target="_parent" title="Читать полностью">Врачи гоняют на сноубордах!</a></strong><br />
+					12 ноября 2013 - 14 ноября 2013<br />
+					Время: 16:00
+				</div>
+				<!-- 2 -->
+				<div class="content-block-right-anons-item">
+					<div class="content-block-right-anons-item-flag">Скоро</div>
+					<div class="content-block-right-anons-item-photo-video">
+						<a href="" target="_parent" title="Читать полностью">
+						<img src="{% static 'images/anons/2.jpg' %}" width="190" height="140" alt="Консультация доктора Шпалова" />
+						</a>
+					</div>
+					<strong><a href="" target="_parent" title="Читать полностью">Консультация доктора Шпалова</a></strong><br />
+					24 декабря 2013 — 28 декабря 2013<br />
+					Время: 16:00
+				</div>
+			</div>
+      <div class="content-block-right-social">
+        {% include '_partial/social.html' %}
+      </div>
+			<!-- Баннер -->
+			<div class="content-block-right-banner">
+			<a href="" target="_blank" title="Баннер">
+			<img src="{% static 'banners/1.jpg' %}" width="240" height="400" alt="Баннер" />
+			</a>
+			</div>
+			<!-- Сейчас читают -->
+			<div class="content-block-right-read-now">
+				<div class="content-block-right-read-now-head">Сейчас читают:</div>
+				<!-- 1 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a></p>
+					Врач-дермокосметолог
+				</div>
+				<div class="content-block-right-read-now-item-line"></div>
+				<!-- 2 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Зависимость как стимул к независимости!">Зависимость как стимул к независимости!</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Зачемкомне<br />
+					Пётр Петрович</a></p>
+					Врач-дермокосметолог
+				</div>
+				<div class="content-block-right-read-now-item-line"></div>
+				<!-- 3 -->
+				<div class="content-block-right-read-now-item">
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a><br />
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a></p>
+					Врач-дермокосметолог
+				</div>
+			</div>
+			<!-- Самые популярные -->
+			<div class="content-block-right-popular">
+			<!-- Клинические случаи -->
+			<div class="content-block-right-popular-head">Самые популярные<br />клинические случаи февраля:</div>
+			<!-- 1 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/10.jpg' %})"></div>
+					</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+				<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+				Александра Ивановна</a><br />
+				<i>Врач-дермокосметолог</i></p>
+				<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 2 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/9.jpg' %})"></div>
+					</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+						<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 3 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+				<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/8.jpg' %})"></div>
+					</a>
+				</div>
+				<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+				</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+				<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+				Александра Ивановна</a><br />
+				<i>Врач-дермокосметолог</i></p>
+				<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-dots"></div>
+			<!-- Вопросы -->
+			<div class="content-block-right-popular-head">Самые популярные<br />вопросы февраля:</div>
+			<!-- 1 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/7.jpg' %})"></div>
+						</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+						<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 2 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+					<div class="content-block-right-popular-item-left-photo-bg">
+						<a href="" target="_parent" title="На страницу автора">
+						<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/6.jpg' %})"></div>
+						</a>
+					</div>
+					<div class="content-block-right-popular-item-left-rating">
+					<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+					</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-line"></div>
+			<!-- 3 -->
+			<div class="content-block-right-popular-item">
+				<div class="content-block-right-popular-item-left">
+				<div class="content-block-right-popular-item-left-photo-bg">
+					<a href="" target="_parent" title="На страницу автора">
+					<div class="content-block-right-popular-item-left-photo" style="background-image:url({% static 'images/users/5.jpg' %})"></div>
+					</a>
+				</div>
+				<div class="content-block-right-popular-item-left-rating">
+				<div class="content-block-right-popular-item-left-rating-val" title="Соглашусь!">+10</div>
+				</div>
+				</div>
+				<div class="content-block-right-popular-item-right">
+					<p><a href="" target="_parent" title="На страницу автора">Лицобрейка<br />
+					Александра Ивановна</a><br />
+					<i>Врач-дермокосметолог</i></p>
+					<a href="" target="_blank" title="Как сделать лицо очень красивым?">Как сделать лицо очень красивым?</a> <span>11 февраля 2013 г.</span>
+				</div>
+			</div>
+			<div class="content-block-right-popular-item-dashed">
+				<div class="content-block-right-popular-item-present-window">
+					<div class="content-block-right-popular-item-present-window-photo" style="background-image:url({% static 'images/present/1.jpg' %})"></div>
+					<div class="content-block-right-popular-item-present-window-descr">
+						<p><strong>Sportster® SuperLow®</strong></p>
+						<p>Плавность работы подвески, удобная посадка и совершенно неутомительное управление позволяют проделать на этом мотоцикле долгий путь.</p>
+					</div>
+				</div>
+			</div>
+			<!-- Подарок -->
+			<div class="content-block-right-popular-item-present" title="Подарки победителям!" onMouseOver="$('div.content-block-right-popular-item-present-window').fadeIn();" onMouseOut="$('div.content-block-right-popular-item-present-window').fadeOut();">
+				Подарки победителям!
+			</div>           
+			</div>
+			<!-- Статистика -->
+			<div class="content-block-right-statistics">
+				<strong>40 000</strong> врачей зарегистрировано в сети<br />
+				<strong>25 000</strong> врачей из моего города<br />
+				<strong>10 000</strong> врачей моей специальности
+			</div>
+			<!-- Реклама на сайте -->
+			<div class="content-block-right-reklama">
+				<a href="" target="_parent" title="Реклама на сайте">Реклама на сайте</a>
+			</div>{% endblock %}
+		</div>
+	</div>
+	<!-- ОСНОВНОЙ БЛОК (КОНЕЦ) -->
+</div>
+</body>
+</html>

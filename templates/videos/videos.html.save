@@ -1,0 +1,322 @@
+{% extends "base.html" %}{% load account_tags %}
+{% block title_page %}Видео лекции для врачей и медицинские конференции в видеозаписи, а также медицинские ролики, репортажи, интервью{% endblock %}
+{% block title %}Видео лекции для врачей и медицинские конференции в видеозаписи, а также медицинские ролики, репортажи, интервью{% endblock %}{% load staticfiles %}
+{% block js_page %}
+    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+{% endblock %}
+{% block top_block %}
+    <div class="content-block-top-block-1-window-filter" id="window-filter">
+        <div class="content-block-top-block-1-window-filter-content">
+            <div class="content-block-top-block-1-window-filter-content-left">
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                    <input id="checkbox-1" type="checkbox" name="Видео" uri="/videos" value="Все" checked hidden/>
+                    <label for="checkbox-1">Все</label>
+                </div>
+                {% for id, name in global_formats.video.items %}
+                    {% if id %}
+                        <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                            <input id="checkbox-{{ forloop.counter }}" type="checkbox" name="{{ id }}"
+                                   value="{{ name }}" hidden/>
+                            <label for="checkbox-{{ forloop.counter }}">{{ name }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="content-block-top-block-1-window-filter-content-right">
+                <div class="content-block-top-block-1-window-filter-content-right-text">
+                    Воспользуйтесь списком,<br/>
+                    для того чтобы выбрать<br/>
+                    нужную Вам специальность<br/>
+                    материалов в ленте
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-right-list">
+                    <div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
+                    </div>
+                    <div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all"
+                         id="filter-scroll">
+                        <div class="filter-scroll-item" id="list-"><span>Все специальности</span></div>
+                        {% for speciality in specialities_list %}
+                            <div class="filter-scroll-item" id="list-{{ speciality.id }}">
+                                <span>{{ speciality.name }}</span>
+                            </div>{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-block-top-block-1-window-filter-bottom">
+            <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
+        </div>
+    </div>
+    <div class="content-block-top-block-1">
+        <span>Фильтр ленты публикаций:</span>
+
+        <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+            <div class="content-block-top-block-1-filed-arrow"></div>
+            <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+        </div>
+    </div>
+    <div class="content-block-top-separator"></div>
+    <div class="content-block-top-block-2">
+        <span>Поиск по слову:</span>
+
+        <form class="content-block-top-block-2-filed">
+            <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+            <input type="text" name="search" class="form-filed-9" placeholder="Что ищем?"
+                   value="{{ search|default:'' }}"/>
+        </form>
+    </div>
+    <div class="content-block-top-separator"></div>{% endblock %}
+{% block filter_content %}
+    {% if user.is_staff %}<!-- Создание поста -->
+        <div class="content-block-center-write-contaner">
+            <div class="content-block-center-write" title="Добавить видеоматериал">
+                <span>Добавить видеоматериал</span>
+            </div>
+            <div class="content-block-center-write-form">
+                <div class="content-block-center-write-form-close" title="Закрыть форму"></div>
+                <div class="content-block-center-write-form-block-1">
+                    <div class="content-block-center-write-form-block-1-left">
+                        <div class="content-block-center-write-form-block-1-left-block-1">
+                            <div class="content-block-center-write-form-block-1-left-block-1-left">
+                                <span>Выберите тип видеоматериала:</span>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-1-right">
+                                <select name="type" id="post-filed-1" class="default form-filed-10">
+                                    {% for id, name in global_formats.video.items %}
+                                        <option type_id="{{ id }}"
+                                                value="{% if id %}{{ name }}{% endif %}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="content-block-center-write-form-block-1-left-block-2" id="post-rubric">
+                        </div>
+                        <div class="content-block-center-write-form-block-1-left-block-3">
+                            <div class="content-block-center-write-form-block-1-left-block-3-left">
+                                <span>Выберите специальность:</span>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-3-right">
+                                <select name="spec_id" class="default form-filed-11">
+                                    <option value="0">Выберите специальность</option>
+                                    {% for speciality in specialities_list %}
+                                        <option value="{{ speciality.id }}">{{ speciality.name }}</option>{% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="content-block-center-write-form-block-1-left-block-4">
+                            <input type="text" name="title" class="form-filed-12" placeholder="Введите заголовок"/>
+                        </div>
+                        <div class="content-block-center-write-form-block-1-left-block-5">
+                            <textarea id="description" name="description" class="form-filed-13"
+                                      onFocus="if (this.value == 'Введите текст') {this.value = '';}"
+                                      onBlur="if (this.value == '') {this.value = 'Введите текст';}">Введите
+                                текст</textarea>
+                        </div>
+                        <div class="content-block-center-write-form-block-1-left-block-3">
+                            <div class="content-block-center-write-form-block-1-left-block-3-left">
+                                <span>Публиковать на главной?</span>
+                            </div>
+                            <div class="content-block-center-write-form-block-1-left-block-3-right">
+                                <input type="checkbox" name="public_main" style="margin-top:7px;"/>
+                            </div>
+                        </div>
+                    </div>
+                    {% if not user.is_staff %}
+                    <div class="content-block-center-write-form-block-1-right">
+                        <div class="content-block-center-write-form-block-1-right-photo"
+                             style="background-image:url({% static 'images/present/1.jpg)' %}"></div>
+                        <p><strong>Поделитесь<br/>
+                            клиническим<br/>
+                            опытом с коллегами</strong></p>
+
+                        <p>По итогам месяца автор публикации, понравившейся наибольшему количеству коллег, получит
+                            подарок.</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="content-block-center-write-form-block-2">
+                    <div class="content-block-center-write-form-block-2-left">
+                        <div class="content-block-center-write-form-block-2-left-photolink">
+                            <input id="file" type="file" name="file" class="form-filed-4 default"/>
+                        </div>
+                        <div class="content-block-center-write-form-block-2-left-videolink">
+                            <input type="text" name="links-video" id="links_video" class="form-filed-4 default"
+                                   style="padding-top:2px; padding-bottom:2px;"
+                                   placeholder="Введите ссылку на видео в это поле"
+                                   onfocus="if (this.value == '') {$('#key-2-2').fadeIn();$('#key-2-1').fadeOut();}"
+                                   onblur="if (this.value == '') {$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();}"/>
+                            <input type="submit" value="OK" class="form-key-4" id="key-2-1" onclick="if($('#links_video').val()==''){$('div.content-block-center-write-form-block-2-left-videolink').fadeOut();}return false;"
+                                   style="height:21px;"/>
+                            <input type="submit" value="OK" class="form-key-5" id="key-2-2" style="height:21px;"
+                                   onClick="$('div.content-block-center-write-form-block-2-left-videolink').fadeOut();if($('#links_video').val()!=''){addvideo();$('#key-2-1').fadeIn();$('#key-2-2').fadeOut();}return false;"/>
+                        </div>
+                        <div class="content-block-center-write-form-block-2-left-photo-container">
+                            <div class="content-block-center-write-form-block-2-left-photo">
+                <span title="Добавить фото" id="upload-file"
+                      onClick1="$('div.content-block-center-write-form-block-2-left-photolink').fadeIn();">Добавить фото</span>
+                            </div>
+                        </div>
+                        <div class="content-block-center-write-form-block-2-left-video-container">
+                            <div class="content-block-center-write-form-block-2-left-video">
+                <span title="Добавить видео"
+                      onClick="$('div.content-block-center-write-form-block-2-left-videolink').fadeIn();">Добавить видео</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="content-block-center-write-form-block-2-right">
+                        <input type="submit" value="Опубликовать" class="form-key-3" id="addvideo"/>
+                    </div>
+                </div>
+            </div>
+        </div>{% endif %}{% endblock %}
+{% block content %}
+    {% for object in object_list %}
+        {% include 'videos/one_videos2.html' %}
+    {% endfor %}
+    <script>
+    function SendComment(result_id, form_id, url) {
+        if($(this).data('locked') == 1){
+            return false;
+    }
+        }
+        var form = $(this)    
+;
+        var text = jQuery("#" + form_id).children(".form-filed-3").val();
+        if (text == '') {
+            alert('Комментарий не может быть пустым');
+        } else {
+            $(this).data('locked', 1);
+            jQuery.ajax({
+                url: url, //Адрес подгружаемой страницы
+                type: "POST", //Тип запроса
+                dataType: "html", //Тип данных
+                data: jQuery("#" + form_id).serialize(),
+                success: function (response) { //Если все нормально
+                    $(this).data('locked', 0);
+                    document.getElementById(result_id).innerHTML = response;
+                },
+                error: function (response) { //Если ошибка
+                    $(this).data('locked', 0);
+                    document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+                }
+            });
+        }
+    }
+
+    function SendLike(id, service_id, id_result) {
+        jQuery.ajax({
+            url: '/likes', //Адрес подгружаемой страницы
+            type: 'get', //Тип запроса
+            data: {'id': id, 'service_id': 69, 'user_id':{{ user.id }} },
+            success: function (response) { //Если все нормально
+                document.getElementById(id_result).innerHTML = response;
+            },
+            error: function (response) { //Если ошибка
+                alert("Ошибка");
+            }
+        });
+    }
+
+    //var thisPageNum = 2;
+    var thisWork = 1;
+    //var filtr = '';
+    function getNextP() {
+
+        if (thisWork == 1) {
+            thisWork = 0;
+            //$("#upBlock").css('display','block');
+            //if (filtr!=''){filtr = filtr + "&page="+thisPageNum;}else{filtr = "?page="+thisPageNum;}
+            }
+            $.ajax({
+                type: 'get',
+                url: "/videos/",
+                data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(), 'search': $('input[name="search"]').val()},
+                success: function (data) {
+                    //$("#upBlock").css('display','none');
+                    //$(".content-block-center").html($(".content-block-center").html()+" "+data);
+                    $(data).appendTo(".content-block-center");
+                    thisPageNum = thisPageNum + 1;
+                    thisWork = 1;
+                }
+            });
+        }
+    
+
+    //$(document).ready(function(){
+
+    var scrH = $(window).height();
+    var scrHP = $(".content-block-center").height();
+
+    $(window).scroll(function () {
+        var scro = $(this).scrollTop();
+        var scrHP = $(".content-block-center").height();
+        var scrH2 = 0;
+        scrH2 = scrH + scro;
+        var leftH = scrHP - scrH2;
+
+        if (leftH < 300) {
+            getNextP();
+        }
+    });
+    //});
+
+
+    $(document).ready(function () {
+
+        var image_index = 1;
+
+        function progressHandlingFunction(e) {
+            if (e.lengthComputable) {
+                $('progress').attr({value: e.loaded, max: e.total});
+                $('.bar').css('width', (e.loaded / e.total) * 100);
+            }
+        }
+
+        $('#checkbox-1').prop('checked', false);
+
+
+        $("#specs_form ul li a").click(function(e) {
+            e.preventDefault();
+
+{#            // multi value filter deactivated#}
+{#            if($(this).is('.active')) {#}
+{#                $(this).removeClass('active');#}
+{#            } else {#}
+{#                $(this).addClass('active');#}
+{#            }#}
+{#            var specs = [];#}
+{#            $("#specs_form ul li a.active").each(function() {#}
+{#                specs.push($(this).attr('rel'));#}
+{#            });#}
+{#            $("#specs_form_input").val(specs.join(','));#}
+            var val = $(this).attr('rel');
+            if(val == 'all') {
+                $("#specs_form_input").remove();
+            } else {
+                $("#specs_form_input").val(val);
+            }
+            $("#specs_form").submit();
+        });
+
+    });
+</script>
+{% endblock %}
+
+{% block right_block %}
+    <div class="content-block-right-specs">
+        <h2>Темы видео</h2>
+
+        <form action="" method="get" id="specs_form">
+        <ul>
+            <li><a href="" rel="all" {% if not spec_filter %}class="active"{% endif %}>Все</a></li>
+            {% for spec in current_videos_specs %}
+                <li><a href="" rel="{{ spec.pk }}" {% if spec.pk|stringformat:"s" in spec_filter %}class="active"{% endif %}>{{ spec.name }}</a></li>
+            {% endfor %}
+        </ul>
+            <input type='hidden' name='spec_id' value='{{ spec_filter|join:',' }}' id="specs_form_input" />
+{#            <input type='hidden' name='spec_id' id="specs_form_input" />#}
+        </form>
+    </div>
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% load account_tags %}{% load staticfiles %}	
+<div class="content-block-center-item">
+				<!-- Автор и тема поста -->
+				<div class="content-block-center-item-head">
+					<div class="content-block-center-item-head-photo-bg">
+					{% if object.object.user_id.id %}	
+					<a href="{% url 'lichnie2' object.object.user_id.id %}" target="_parent" title="На страницу автора">
+					<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_preview_sizexy object.object.user_id.id 67 67 %}), url({{ object.object.user_id.avatar }})"></div>
+					</a>
+					{% endif %}
+					</div>
+					<div class="content-block-center-item-head-autor">
+					<span>	
+					<strong>
+					{% if object.object.user_id.id %}	
+					<a href="{% url 'lichnie2' object.object.user_id.id %}" target="_parent" title="На страницу автора">{{ object.object.user_id.lastname }}<br />
+					{{ object.object.user_id.firstname }} {{ object.object.user_id.surname }}
+					</a>
+					{% endif %}
+					</strong><br />
+					{{ object.object.spec_id.name }}
+					</span>
+					</div>
+					<!-- div class="content-block-center-item-head-theme" style="padding-right:40px; background-image:url({% static 'images/icons-preparats/2.png' %})"><span>{{ object.object.format_string }}</span></div -->
+                    <div class="content-block-center-item-head-theme"><span>{{ object.object.format_string }}</span></div>
+				</div>
+				<div class="content-block-center-item-content">
+					<!-- Заголовки и текст поста -->
+                        <div class="content-block-center-item-content-date">{% if object.object.createdate %}{{ object.object.createdate }}{% else %}Дата не указана{% endif %}</div>                    
+					<h1><a href="{% url 'detailvideos' object.object.id %}" target="_blank" style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.object.title }}</a></h1>
+					<p>{% if user.is_authenticated %}{{ object.object.description|truncatewords_html:50|safe|linebreaks }}{% else %}{{ object.object.description|truncatewords_html:15|safe|linebreaks }}{% endif %}</p>
+					<div class="content-block-center-item-content-redmore">
+						<div class="content-block-center-item-content-redmore-link">
+						<a href="{% url 'detailvideos' object.object.id %}" target="_blank" title="Читать полностью">читать полностью</a> |
+						</div>
+						<div class="content-block-center-item-content-redmore-readers">{% if object.object.statistics %}{{ object.object.statistics.viewings }}{% else %}0{% endif %}</div>
+                        {% if user.is_staff %}
+						<div class="content-block-center-item-content-redmore-adminedit">
+							<a href="{% url "admin:videos_videos_change" object.object.id %}">ред.</a>
+						</div>
+						{% endif %}
+					</div>
+					<!-- Медиа -->
+					<div class="content-block-center-item-content-media">
+                        {% for photo in object.object.photos %}
+                            {% if forloop.first %}
+                                <div class="content-block-center-item-content-media-single-photo">
+                                    <a href="{{ photo.picture }}" rel="tag{{ object.id }}">
+                                        <img src="{% get_preview_calculate photo.picture %}" alt="">
+                                    </a>
+                                </div>
+                            {% else %}
+                                {% if forloop.counter = 2 %}
+                                    <div class="content-block-center-item-content-media-more-photo-head">
+                                        <span>Дополнительные фото:</span>
+                                    </div>
+                                    <div class="content-block-center-item-content-media-more-photo">
+                                {% endif %}
+                            <a rel="tag{{ object.id }}" href="{{ photo.picture }}">
+                                <div class="content-block-center-item-content-media-more-photo-item"
+                                     style="background-image:url({{ photo.thumb }})"></div>
+                            </a>
+                            {% if forloop.last %}
+                                </div>
+                            {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if object.object.image %}
+						<div class="content-block-center-item-content-media-more-photo-head">
+							<span style="font-size: 12px;">Посмотреть видео:</span>
+						</div>
+						<div class="content-block-center-item-content-media-video">
+							<div class="content-block-center-item-content-media-video-move">
+							<a href="{% url 'detailvideos' object.object.id %}" target="_blank" title="{{ object.object.title }}">
+
+							<img src='{{ object.object.image }}' width="190" height="140" alt="{{ object.object.title }}"/>
+							</a>
+							</div>
+							<div class="content-block-center-item-content-media-video-descript">{{ object.object.title }}
+							</div>
+						</div>
+                        {% endif %}
+					</div>
+
+					{% include "includes/read_all2.html" with type='10' %}
+					{% include "includes/likes_comments2.html" with viewname='detailvideos' %}
+			</div>

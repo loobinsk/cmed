@@ -1,0 +1,13 @@
+{% load account_tags %}
+{% if object_list|length %}
+	{% for object in object_list %}
+		{% include 'photos/one_photos.html' %}
+	{% endfor %}
+{% else %}
+<div class="content-block-center-item">
+	<div class="content-block-center-item-head"></div>
+	<div class="content-block-center-item-content">
+		<p>По заданным критериям нет материалов</p>
+	</div>
+</div>
+{% endif %}

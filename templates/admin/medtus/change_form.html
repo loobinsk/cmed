@@ -1,0 +1,7 @@
+{% extends "admin/change_form.html" %}
+{% load account_tags %}
+{% block after_field_sets %}
+    {% if request.get_full_path|find_bool:"/translation/" == True %}
+     <div><a href="/admin/account/timer/?post__id__exact={{ original.id }}"><button type="button"><b>Таймер № {{ original.id }}</b></button></a><a href="/admin/quiz/progress/?test_id__post__id__exact={{ original.id }}"> <button type="button"><b>Тест № {{ original.id }}</b></button></a></div>
+    	{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+Добрый день!<br/><br/>
+
+Hа {{ host }} новое сообщение обратной связи {{ message.datetime|date:"d.m.Y H:i:s" }}.<br/><br/>
+
+{% url 'admin:medtus_feedback_change' message.id as the_url %}<br/>
+Посмотреть в админке можно здесь:   <a href="https://{{ host }}{{ the_url }}">http://{{ host }}{{ the_url }}</a><br/><br/>
+
+<table>
+    <tr>
+        <td>Тема</td>
+        <td>{{ message.topic }}</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{{ message.name }}</td>
+    </tr>
+    <tr>
+        <td>Должность</td>
+        <td>{{ message.position }}</td>
+    </tr>
+    <tr>
+        <td>Контакты</td>
+        <td>{{ message.contact }}</td>
+    </tr>
+    <tr>
+        <td>Текст</td>
+        <td>{{ message.text }}</td>
+    </tr>
+</table>

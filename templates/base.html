@@ -1,0 +1,681 @@
+<!DOCTYPE html>{% load staticfiles account_tags banner %}
+{# compress #}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=1024"/>
+  <meta name='yandex-verification' content='46c7f41d0e3b2305'/>
+  <meta name="mailru-domain" content="FWKOyu20k8qofR8o"/>
+  <title>{% block title_page %}Врачи вместе{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}"/>
+  <link rel="SHORTCUT ICON" href="{% static 'favicon.ico' %}"/>
+  {#{% compress css %}#}
+  <link href="{% static 'css/basic.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/jquery.fancybox-1.3.4.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'css/jquery.mCustomScrollbar.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'banners/css/slider.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/chosen.css' %}" rel="stylesheet" type="text/css"/>
+  {% block style_page %}{% endblock %}
+  {#{% endcompress %}#}
+  {#{% compress js %}#}
+  <script type="text/javascript" src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'mce_filebrowser/js/filebrowser_init.js' %}"></script>
+  <script type="text/javascript" src="{% static 'tiny_mce/tiny_mce.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.preload-images.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/inji_inversion_menu.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.fancybox-1.3.4.pack.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/autoresize.jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js' %}" charset="utf-8"></script>
+  <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.jcf.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.openclose.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.elastic.source.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/windows.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/preload-images.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/description_textareas.js' %}"></script>
+  <script type="text/javascript" src="{% static "banners/js/slider.js" %}"></script>
+  <script type="text/javascript" src="{% static "banners/js/log.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/main.js" %}"></script>
+  <script type="text/javascript" src="{% static 'dajax/jquery.dajax.core.js' %}" charset="utf-8"></script>
+  <script type="text/javascript" src="{% static 'js/dajaxice.core.js' %}" charset="utf-8"></script>
+  {% block js_page %}{% endblock %}
+  {#{% endcompress %}#}
+</head>
+<body>
+<div class="page-div inner" {% block page_div_style %}{% endblock %}>
+  {% last_access %}
+  {#<!-- ЛЕВЫЙ БЛОК (НАЧАЛО) -->#}
+  <div class="left-block">
+    <div class="left-block-content">{% block left_block %}
+      {#    <!-- Логотип -->#}
+      <div class="left-block-content-logo" style="padding-left:10px;width:220px;padding-right:10px;">
+        <a href="/" title="На главную">
+          <img src="{% static 'images/basic/logo.png' %}" alt="Врачи Вместе">
+        </a>
+      </div>
+      {#    <!-- Профиль -->#}
+      <div class="left-block-content-profile">
+        <div class="left-block-content-line-1"></div>
+          {% if user.is_authenticated %}
+        <div class="left-block-content-profile-item">
+          <div class="left-block-content-profile-item-left">
+            <div class="left-block-content-profile-item-left-photo-bg">
+              <a href="{% url 'lichnie2' %}">
+                <div class="left-block-content-profile-item-left-photo"
+                     style="background-image:url({% get_avatar_preview_sizexy user.id 77 77 %}), url({{ user.avatar }})"></div>
+              </a>
+            </div>
+          </div>
+          <div class="left-block-content-profile-item-right">
+            <a href="{% url 'lichnie2' %}" style="text-decoration: none;">
+              <p>{{ user.lastname }}<br/>
+                {{ user.firstname }}<br/>
+                {{ user.surname }}
+              </p>
+            </a>
+            {{ user.spec_id }}
+            <div class="left-block-content-profile-item-right-exit">
+              <a href="{% url 'logout' %}" target="_parent" title="Выход">выход</a>
+            </div>
+          </div>
+        </div>
+
+<div class="left-block-content-line-1"></div>
+<div id="arrow_menu" class="arrow">
+    <a href="{% url 'alldialogs' %}" target="_parent" title="Личные сообщения">
+                  <div class="left-block-content-profile-links-item-content">
+                    Личные сообщения
+                    <div class="left-block-content-profile-links-item-content-count">{% Unreaded user.id %}</div>
+                  </div>
+                </a><span onclick="openMNav()"> <img src="/static/images/down-arrow.png"/> </span>
+</div>
+
+        <div id="menu_nav" class="menunav">
+
+        <div class="left-block-content-profile-links">
+          <div class="left-block-content-profile-links-item">
+            <ul>
+              <li{% if request.get_full_path == '/lichnie/lichnie2/' %} class="active"{% endif %}><a
+                  href="{% url 'lichnie2' %}" target="_parent" title="Моя страница">Моя страница</a></li>
+              <li{% if request.get_full_path == '/circle/invite/' %} class="active"{% endif %}>
+                <a href="{% url 'invite' %}" target="_parent" title="Все врачи">
+                  <div class="left-block-content-profile-links-item-content">
+                    Все врачи
+                    <div class="left-block-content-profile-links-item-content-count">{% newinvite user %}</div>
+                  </div>
+                </a>
+              </li>
+              <li{% if request.get_full_path == '/circle/alldialogs/' %} class="active"{% endif %}>
+                <a href="{% url 'alldialogs' %}" target="_parent" title="Личные сообщения">
+                  <div class="left-block-content-profile-links-item-content">
+                    Личные сообщения
+                    <div class="left-block-content-profile-links-item-content-count">{% Unreaded user.id %}</div>
+                  </div>
+                </a>
+              </li>
+             <li{% if request.get_full_path == '/circle/nmodialogs/' %} class="active"{% endif %}>
+                <a href="{% url 'nmodialogs' %}" target="_parent" title="Мое НМО">
+                  <div class="left-block-content-profile-links-item-content">
+                    Мое НМО
+                    <div class="left-block-content-profile-links-item-content-count">{% UnreadedNmo user.id %}</div>
+                  </div>
+                </a>
+              </li>
+              <li{% if request.get_full_path == '/circle/interesting/' %} class="active"{% endif %}><a
+                  href="{% url 'Interesting' %}" target="_parent" title="Интересное">Интересное</a>
+              </li>
+            </ul>
+          <span class="uparrowmenu" onclick="closeMNav()"><img src="/static/images/up-arrow.png"/></span>
+          </div>
+        </div>
+
+
+              <div class="left-block-content-line-1"></div>
+
+        <div class="left-block-content-invitation">
+          <div class="left-block-content-invitation-item">
+          <span id="invitation-1" title="Пригласить коллегу на &quot;Врачи вместе&quot;"
+                onClick="$('div.left-block-content-invitation-item-form').slideDown();$('#invitation-1').hide();$('#invitation-2').show();">Пригласить на сайт &quot;Врачи вместе&quot;</span>
+            <span id="invitation-2" style="display:none" title="Скрыть форму"
+                  onClick="$('div.left-block-content-invitation-item-form').slideUp();$('#invitation-2').hide();$('#invitation-1').show();">Скрыть форму</span>
+
+            <div class="left-block-content-invitation-item-form">
+              <form>
+                <input type="text" name="emails" id="emails" class="form-filed-1"
+                       placeholder="Введите E-mail через запятую"/>
+                <br/>
+                Поле для редактирования текста<br/>
+                для вашего приглашения<br/>
+                <textarea name="text" class="form-filed-2" id="text">{% spaceless %}
+                  Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи вместе&quot;!
+                {% endspaceless %}</textarea>
+                <br/>
+                <script>
+                  function InviteCollegue() {
+                    Dajaxice.lichnie.InviteCollegue(Dajax.process, {
+                      'emails': $("input[name='emails']").val(),
+                      'message': $("textarea[name='text']").val()
+                    });
+                  }
+                </script>
+                <input type="submit" value="отправить" class="form-key-1" onclick="InviteCollegue(); return false;"/>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+          </div>
+      {% else %}
+        <form class="register-form" action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="holder">
+            <label for="email-field">Ваш E-mail</label>
+            <input id="email-field" required type="text" name="login" value="">
+          </div>
+          <div class="holder">
+            <label for="password-field">Ваш пароль</label>
+
+            <div class="password-field">
+              <input id="password-field" required type="password" name="password" value="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="check-holder">
+              <input id="check-filed01" type="checkbox">
+              <label for="check-filed01">Запомнить меня</label>{{ error|safe }}
+            </div>
+            <button type="submit" class="btn">вход</button>
+          </div>
+          <div class="left-block-content-line-1"></div>
+          <input type="button" value="Регистрация" onclick="location.href='/account/register1/'">
+
+          <div class="left-block-content-line-1"></div>
+          <div class="link-holder">
+            <a href="{% url "account.views.password_forgot" %}" class="link">Забыли пароль?</a>
+          </div>
+        </form>{% endif %}
+      </div>
+      {#    <!-- Форма приглашения -->#}
+
+
+      {% block left_menu %}<!-- Ссылки -->
+        <div id="main_menu" class="left-block-content-links">
+          <div class="left-block-content-links-item">
+            <span><a href="/" target="_parent" title="Главная лента">Главная лента</a></span>
+          </div>
+          <div class="left-block-content-links-item">
+            <span>
+              <a href="{% url 'rss' %}" target="_parent" title="Главная лента">Новости медицины
+                <div class="icon-rss"></div>
+              </a>
+            </span>{% count_new_events 'Rss' %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="/events" target="_parent" title="Календарь мероприятий">Календарь
+              конференций</a></span>{% count_new_events 'Events' %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="/consultations" target="_parent"
+                     title="Онлайн-трансляция">Онлайн лекции</a></span> {% count_new_events 'Posts' 3 %}
+            {% online %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="/videos" target="_parent"
+                     title="Видеоматериалы">Видеоматериалы</a></span>{% count_new_events 'Videos' %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="/photo" target="_parent"
+                     title="Фотогалерея">Фотогалерея</a></span>{% count_new_events 'PGalleries' %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="/magazines" target="_parent" title="Книги и журналы">Книги и
+              журналы</a></span>{% count_new_events 'Posts' 6 %}
+          </div>
+          <div class="left-block-content-links-item">
+            <span><a href="{% url 'lecturers' %}" target="_parent" title="Лекторы">Лекторы</a></span>
+          </div>
+          <div class="left-block-content-links-item break">
+            <span><a href="{% url 'opinion' %}" target="_parent" title="Частное мнение">Частное мнение</a></span>
+          </div>
+          {#        <div class="left-block-content-links-item">#}
+          {#          <span><a href="/newsrss" target="_parent" title="Новости медицины">Новости медицины</a></span>{% count_new_events 'Rss' 69 %}#}
+          {#        </div>        #}
+
+          <div class="left-block-content-links-item" style="">
+            <span><a href="/groups" target="_parent" title="Группы">Группы</a></span>{% nonactivated user.id %}
+          </div>
+          {% if user.is_authenticated %}
+            <div class="left-block-content-links-item">
+              <span><a href="/groups_posts" target="_parent" title="Новое в моих группах">Новое в моих
+                группах</a></span> {% count_new_events 'PostLinks' %}
+            </div>
+          {% endif %}
+          <div class="left-block-content-links-item">
+            <span><a href="/vacancies" target="_parent" title="Резюме и вакансии">Резюме и
+              вакансии</a></span>{% count_new_events 'Posts' 8 %}
+          </div>
+          <div class="left-block-content-links-item break">
+            <span><a href="/practice" target="_parent" title="Опросы и исследования">Опросы и
+              исследования</a></span> {% count_new_events 'Posts' 11 %}
+          </div>
+
+        </div>{% endblock %}
+      {% block promoblock %}{% endblock %}
+    {% endblock %}</div>
+  </div>
+  {#<!-- ЛЕВЫЙ БЛОК (КОНЕЦ) -->#}
+  {#<!-- ОСНОВНОЙ БЛОК (НАЧАЛО) -->#}
+  <div class="content-block" {% block content_block_style %}{% endblock %}>
+    {#<!-- Верхняя плашка -->#}
+    <div class="content-block-top">
+    <div id="top-center-block">
+        <div id="mission"><div class="mission-block">Медицинский образовательный сайт<br>социальная сеть для врачей</div></div>
+        <div id="counters">
+
+        <div id="top-cntr1" class="top-cntr"> <div class="content-block-right-anons-item" >
+          <strong >{% get_all_users_fake %}</strong> врачей <br/>
+        </div></div>
+        <div id="top-cntr2" class="top-cntr"><div class="content-block-right-anons-item" >
+          <strong >{% count_materials %}</strong> материала
+        </div></div>
+        </div>
+        <div id="top-btns">
+        <a href="/consultations" ><div id="top-btn1" class="top-btn"><span>Онлайн лекции</span></div></a>
+         <a href="/videos" ><div id="top-btn2" class="top-btn"><span>Архив видеоматериалов</span></div></a>
+         <a href="/events" ><div id="top-btn3" class="top-btn"><span>Календарь конференций</span></div></a>
+        </div>
+    </div>
+      <div id="top-right-block">
+
+      {% block top_block %}
+
+
+
+
+
+        {% if show_filter|default_if_none:True %} {# Если фильтр выключен во вьюхе то эта форма нам не нужна. #}
+          <div class="content-block-top-block-1-window-filter" id="window-filter">
+            <div class="content-block-top-block-1-window-filter-content">
+              <div class="content-block-top-block-1-window-filter-content-left">
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-1" type="checkbox" name="Результаты фильтрации" value="Все" hidden/>
+                  <label for="checkbox-1">Все</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-2" type="checkbox" name="1" value="Новости" hidden/>
+                  <label for="checkbox-2">Новости</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-3" type="checkbox" name="2" value="Статьи" hidden/>
+                  <label for="checkbox-3">Статьи</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-4" type="checkbox" name="12" value="Клинические случаи" hidden/>
+                  <label for="checkbox-4">Клинические случаи</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-5" type="checkbox" name="4" value="Вопрос коллегам" hidden/>
+                  <label for="checkbox-5">Вопрос коллегам</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-6" type="checkbox" name="5" value="Частное мнение" hidden/>
+                  <label for="checkbox-6">Частное мнение</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-7" type="checkbox" name="9" value="Обсуждение препарата" hidden/>
+                  <label for="checkbox-7">Обсуждение препарата</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-8" type="checkbox" name="99" value="Видеоматериалы" hidden/>
+                  <label for="checkbox-8">Видеоматериалы</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-9" type="checkbox" name="88" value="Мероприятия" hidden/>
+                  <label for="checkbox-9">Мероприятия</label>
+                </div>
+              </div>
+              <div class="content-block-top-block-1-window-filter-content-right">
+                <div class="content-block-top-block-1-window-filter-content-right-text">
+                  Воспользуйтесь списком,<br/>
+                  для того чтобы выбрать<br/>
+                  нужную Вам специальность<br/>
+                  материалов в ленте
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-right-list">
+                  <div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
+                  </div>
+                  <div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all"
+                       id="filter-scroll">
+                    <div class="filter-scroll-item" id="list-"><span>Все специальности</span></div>
+                    {% for speciality in specialities_list %}
+                      <div class="filter-scroll-item" id="list-{{ speciality.id }}"><span>{{ speciality.name }}</span>
+                      </div>{% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-block-top-block-1-window-filter-bottom">
+              <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
+            </div>
+          </div>
+        {% endif %}
+
+            <div class="content-block-top-block-1">
+          {% if show_filter|default_if_none:True %}
+            {% if isfilter %}
+              {% if isfilter == 'Y' %}
+                <span>Фильтр ленты публикаций:</span>
+                <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+                  <div class="content-block-top-block-1-filed-arrow"></div>
+                  <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+                </div>
+              {% endif %}
+            {% else %}
+              {% block filter %}
+                <span>Фильтр ленты публикаций:</span>
+                <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+                  <div class="content-block-top-block-1-filed-arrow"></div>
+                  <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+                </div>
+              {% endblock %}
+            {% endif %}
+          {% endif %}
+        </div>
+
+        {% if show_search|default_if_none:True %}
+          <div class="content-block-top-block-2">
+            <span>Поиск по слову:</span>
+            <form class="content-block-top-block-2-filed">
+              <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+              <input type="text" name="search" class="form-filed-9" value="{{ search|default:'' }}"
+                     placeholder="Что ищем?"/>
+            </form>
+          </div>
+        {% endif %}
+
+
+      {% endblock %}
+      <div id="top-social-icons">
+      {% block top_block_3 %}
+                        <div class="block-top-social">
+        {% include '_partial/social.html' %}
+      </div>
+        {% include 'medtus/feedback_form.html' %}
+      {% endblock %}
+      </div>
+    </div>
+    </div>
+    {#<!-- Центральная колонка -->#}
+  {%  online2 %}
+
+
+    {% block center_column %}
+      <div class="content-block-center">{% if not user.is_authenticated and not opinion %}
+        <div class="inform-area">
+          <span class="title">Чтобы увидеть полный текст, посмотреть видео, оставить комментарий, необходимо </span>
+
+          <div class="inform-panel">
+            <a href="{% url 'login' %}" class="btn">Войти</a>
+            <span>или</span>
+            {#  <!-- <a href="{% url 'register1' %}" class="btn">Зарегистрироваться</a>-->#}
+            <a href="/account/register1/" class="btn">Зарегистрироваться</a>
+          </div>
+        </div>{% endif %}{% block filter_content %}{% endblock %}
+        {#  <!-- Заголовок -->#}
+        {% block title_wrap %}
+          <div class="content-block-center-head" id="page_title">
+            <span>{% block title %}Главная лента{% endblock %}</span>
+          </div>
+        {% endblock %}
+        {% block content %}{% endblock %}
+
+      </div>
+    {% endblock %}
+    {#<!-- Правая колонка -->#}
+    {% block right_column %}
+
+      <div class="content-block-right">{% block right_block %}
+      {#  <!-- Анонс -->#}
+      <div class="content-block-right-anons">
+        {#    <!-- 1     -->#}
+        {% nows as now %}
+        {% if now %}
+          <div class="content-block-right-anons-item">
+            <div class="content-block-right-anons-item-flag">Сегодня</div>
+            <div class="content-block-right-anons-item-photo-video">
+              <a href="{% url 'detailevent' now.id %}" target="_parent" title="Читать полностью">
+                {% if now.photos %}
+
+                  {% with now.photos|first as photo %}
+
+                    <img src="{% get_image_url photo.picture %}" width="190" alt="{{ now.title }}"/>
+
+                  {% endwith %}
+
+                {% endif %}
+              </a>
+            </div>
+            <strong><a href="{% url 'detailevent' now.id %}" target="_parent"
+                       title="Читать полностью">{{ now.title }}</a></strong><br/>
+            {{ now.start|date:'d.m.Y' }} - {{ now.end|date:'d.m.Y' }}<br/>
+            {% if now.starttime %}
+              Время: {{ now.starttime|time:'H:i' }}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {#    <!-- 2   -->#}
+        {% afters as after %}
+        {% if after %}
+          <div class="content-block-right-anons-item">
+            <div class="content-block-right-anons-item-flag">Скоро</div>
+            <div class="content-block-right-anons-item-photo-video">
+              <a href="{% url 'detailevent' after.id %}" target="_parent" title="Читать полностью">
+                {% if after.photos %}
+
+                  {% with after.photos|first as photo %}
+
+                    <img src="{% get_image_url photo.picture %}" width="190" alt="{{ after.title }}"/>
+                  {% endwith %}
+
+                {% endif %}
+              </a>
+            </div>
+            <strong><a href="{% url 'detailevent' after.id %}" target="_parent"
+                       title="Читать полностью">{{ after.title }}</a></strong><br/>
+            {{ after.start|date:'d.m.Y' }} - {{ after.end|date:'d.m.Y' }}<br/>
+            {% if after.starttime %}
+              Время: {{ after.starttime|time:'H:i' }}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {#  <!-- Статистика -->#}
+      <div class="content-block-right-statistics">
+
+
+        {% if user.is_staff %}
+          <div class="content-block-right-anons-item" style="font-size: 14px;color:#00a499;">
+            {% count_online_users %} пользователей онлайн
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="content-block-right-partners">
+        <span><a href="/partners" target="_parent" title="Наши партнеры">Наши партнеры</a></span>
+      </div>
+
+
+      {#  <!-- Баннер -->#}
+      <div class="content-block-right-banner">
+        {% banner_group 'right_side' %}
+      </div>
+      {#  <!-- Сейчас читают -->#}
+      <div class="content-block-right-read-now">
+        <div class="content-block-right-read-now-head">Сейчас читают:</div>
+        {% most_visited %}
+      </div>
+      {#  <!-- Самые популярные -->#}
+      <div class="content-block-right-popular">
+        {#    <!-- Клинические случаи -->#}
+        {% most_popular_events 'DAY' %}
+        {% most_popular_events 'MONTH' %}
+        <!--div class="content-block-right-popular-item-dashed">
+      <div class="content-block-right-popular-item-present-window">
+        <div class="content-block-right-popular-item-present-window-photo"
+             style="background-image:url({% static 'images/present/1.jpg' %})"></div>
+        <div class="content-block-right-popular-item-present-window-descr">
+          <p><strong>Vrvm vrvm®</strong></p>
+
+          <p></p>
+        </div>
+      </div>
+    </div -->
+        {#    <!-- Подарок -->#}
+        {% comment %}  <!-- div class="content-block-right-popular-item-present" title="Подарки победителям!"
+         onMouseOver="$('div.content-block-right-popular-item-present-window').fadeIn();"
+         onMouseOut="$('div.content-block-right-popular-item-present-window').fadeOut();">
+      Подарки победителям!
+    </div -->  
+    {% endcomment %}
+      </div>
+
+      {#  <!-- Реклама на сайте -->#}
+      <div class="content-block-right-reklama">
+        <a href="" target="_parent" title="Реклама на сайте">Реклама на сайте</a><br/>
+        <!--LiveInternet counter-->
+        <script type="text/javascript"><!--
+        document.write("<a href='//www.liveinternet.ru/click' " +
+            "target=_blank><img src='//counter.yadro.ru/hit?t42.12;r" +
+            escape(document.referrer) + ((typeof(screen) == "undefined") ? "" :
+            ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
+                screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+            ";" + Math.random() +
+            "' alt='' title='LiveInternet' " +
+            "border='0' width='31' height='31'><\/a>")
+        //--></script><!--/LiveInternet-->
+        <br/>
+        <a href="http://vprosto.ru" target="_blank" title="Разработчики портала Vrvm">Разработчики портала Vrvm</a><br/>
+      </div>
+
+    {% endblock %}{% endblock %}
+    {% if user.is_staff %}
+      <div class="content-block-right-by-spec">
+        <div class="left-block-content-links-item">
+          <h1 style="width: 240px;margin-left: 10px;">По специальностям</h1>
+          <table style="width: 240px;margin-left: 10px;">
+            {% users_by_spec as u_by_spec %}
+            {% for spec in u_by_spec %}
+              {% if spec.spec_id__name %}
+                <tr>
+                  <td>{{ spec.spec_id__name }}</td>
+                  <td>{{ spec.count }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+  {#<!-- ОСНОВНОЙ БЛОК (КОНЕЦ) -->#}
+</div>
+</body>
+
+<script>
+    function openMNav() {
+    x=document.getElementById("menu_nav");
+        x.style.visibility = "visible";
+        x.style.height = "160px";
+    y=document.getElementById("arrow_menu");
+        y.style.visibility = "hidden";
+        y.style.height='0';
+
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeMNav() {
+    x=document.getElementById("menu_nav");
+        x.style.visibility = "hidden";
+        x.style.height = "0";
+
+    y=document.getElementById("arrow_menu");
+        y.style.visibility = "visible";
+        y.style.height='30px';
+}
+
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-20221533-1', 'auto');
+  ga('create', 'UA-20221533-2', 'auto');
+  ga('create', 'UA-20221533-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function () {
+      try {
+        w.yaCounter30770953 = new Ya.Metrika({
+          id: 30770953,
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+          trackHash: true,
+          ecommerce: "dataLayer"
+        });
+      } catch (e) {
+      }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () {
+          n.parentNode.insertBefore(s, n);
+        };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else {
+      f();
+    }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>
+  <div><img src="https://mc.yandex.ru/watch/30770953" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = 'apKh6rWwGT';var d=document;var w=window;function l(){
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+</html>

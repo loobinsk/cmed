@@ -1,0 +1,22 @@
+<div class="title-holder">
+    <h3>Для окончания регистрации ответьте, пожалуйста, на вопросы теста:</h3>
+</div>
+<form class="info-form style01" action="{% url "account.views.register3" %}" method="post">
+    <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}'/>
+
+    {% for file in questions %}
+        {% with "account/forms/questionsstep3/"|add:file|add:".html" as template %}
+            {% include template %}
+        {% endwith %}
+    {% endfor %}
+
+    <div class="bottom style02">
+        {{ error|safe }}
+        <div class="next-holder">
+            <a href="#" class="btn-next" onclick="$(this).css('pointer-events', 'none'); $(this).closest('form').submit(); return false;">Cохранить ответы и
+                продолжить</a>
+        </div>
+        <span class="inform">Возникли вопросы при регистрации?</span>
+        <span>Задайте их нам по e-mail: <a href="#">vrvm.redaktor@gmail.com</a> <br>Мы обязательно поможем!</span>
+    </div>
+</form>

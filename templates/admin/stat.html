@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+{% load admin_static %}
+
+
+{% block content %}
+  <h1>По городам</h1>
+  <table>
+    {% for town in context.by_city %}
+      <tr>
+        <td>{{ town.town__name }}</td>
+        <td>{{ town.count }}</td>
+      </tr>
+    {% endfor %}
+    <hr/>
+  </table>
+  <h1>По специальностям</h1>
+  <table>
+    {% for spec in context.by_spec %}
+      <tr>
+        <td>{{ spec.spec_id__name }}</td>
+        <td>{{ spec.count }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
