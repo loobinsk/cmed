@@ -11,6 +11,7 @@ from textblob.classifiers import NaiveBayesClassifier
 
 def proces(entrie, feed, categorys, cl):
     ok = False
+	
     for filt in feed.filters.filter(active=True):
         words = filt.words.split(' ')
         points = process.extractOne(entrie.summary, words)[1] if words else 0
@@ -28,15 +29,13 @@ def proces(entrie, feed, categorys, cl):
         max_dist = prob_dist.max()
         cat = Specialities.objects.filter(title=max_dist)
         cat = cat[0] if cat else None
-
-        if cat and round(prob_dist.prob(max_dist), 3) * 100 >= cat.passval:
+        if cat and round(prob_dist.prob(max_dist), 3) * 100 >= 20:		    
             Posts.objects.create(feed=feed, spec_id=cat, published=pub, title=entrie.title[:249], text=entrie.summary,
                                  href=entrie.get('link'), code='', format=0, show=1)
 
 
 class Command(BaseCommand):
     help = 'Парсим rss'
-
     def handle(self, *args, **options):
         categorys = [(cat.words or '', cat.title) for cat in Specialities.objects.filter(show=True) if cat.words]
         cl = NaiveBayesClassifier(categorys)
