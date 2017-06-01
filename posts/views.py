@@ -106,7 +106,7 @@ def Main(request):
 
     # если формат не задан или формат 99 (видео формат), то показываем видео в списке
     if not post_format or '99' in post_format.split(','):
-        q = Q(show_medtus=1, status=1, public_main=1)
+        q = Q(show_medtus=1, status=1, public_main=True)
         if search != u'Что ищем?' and search != '':
             q = q & (Q(title__icontains=search) | Q(description__icontains=search))
         query = Videos.objects.filter(q).order_by('-createdate')
@@ -117,7 +117,7 @@ def Main(request):
 
     # если формат не задан или формат 88 (Мероприятия формат), то показываем Мероприятия в списке
     if not post_format or '88' in post_format.split(','):
-        q = Q(public_main=1)
+        q = Q(public_main=True)
         if search != u'Что ищем?' and search != '':
             q = q & (Q(content__icontains=search) | Q(title__icontains=search))
         query = Events.objects.filter(q).order_by('-createdate')
@@ -128,7 +128,7 @@ def Main(request):
 
     # если формат не задан, то показываем галерею в списке
     if not request.GET.get('format', None) and not spec_id:
-        q = Q(status=1, public_main=1)
+        q = Q(status=1, public_main=True)
         if search != u'Что ищем?' and search != '':
             q = q & (Q(title__icontains=search) | Q(description__icontains=search))
         query = PGalleries.objects.filter(q).order_by('-createdate')
