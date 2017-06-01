@@ -78,7 +78,7 @@ def Main(request):
 
     object_list = []
 
-    q = Q(status=0)
+    q = Q(status=0, public_main=True)
     if search != u'Что ищем?' and search != '':
         q = q & (Q(content__icontains=search) | Q(title__icontains=search))
     query = Posts.objects.filter(q).order_by('-createdate')

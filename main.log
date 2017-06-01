@@ -1427,3 +1427,72 @@ WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/pytho
 WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
   from django.utils import simplejson
  (2017-05-04 14:26:22; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-01 19:56:13; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-01 19:56:17; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-01 19:56:58; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-01 19:56:59; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-01 19:59:12; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-01 19:59:44; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-01 20:00:01; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-01 20:00:01; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 00:05:20; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 00:05:22; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 00:06:34; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-03 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 00:06:34; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/core/cache/backends/base.py:205: CacheKeyWarning: Cache key will cause errors if used with memcached: :1:autolink|lists|spellchecker|pagebreak|style|layer|table|save|advhr|advimage|advlink|emotions|iespell|inlinepopups|insertdatetime|preview|media|searchreplace|print|contextmenu|paste|directionality|fullscreen|noneditable|visualchars|nonbreaking|xhtmlxtras|template|ru|advanced (longer than 250)
+  CacheKeyWarning)
+ (2017-06-02 00:26:33; base.py:205)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 00:33:01; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 00:33:12; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-03 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 00:33:12; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 01:19:10; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 01:19:14; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-03 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 01:19:14; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 01:19:30; simplejson.py:12)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-06-02 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 01:19:37; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-05-03 00:00:00) while time zone support is active.
+  RuntimeWarning)
+ (2017-06-02 01:19:37; __init__.py:848)
+WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-06-02 01:22:31; simplejson.py:12)
