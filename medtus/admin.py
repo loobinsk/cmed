@@ -23,13 +23,14 @@ class PhotoAdmin(admin.ModelAdmin):
 
         path = os.path.join(settings.MEDIA_ROOT, file_path[0])
         url = os.path.join(settings.MEDIA_URL, file_path[0])
+        url1 = os.path.join('/media/post_images/', file_path[1])
         infile = file_path[1]
 
         outfile = os.path.join(path, u'thumb_{0}'.format(infile))
 
         resize_and_crop(u'{0}/{1}'.format(path, infile), outfile, size)
         output_url = os.path.join(url, u'thumb_{0}'.format(infile))
-
+        obj.picture = url1
         obj.thumb = output_url
 
         obj.save()

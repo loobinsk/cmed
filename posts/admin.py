@@ -5,7 +5,6 @@ from django.contrib import admin
 from django import forms
 from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django.utils.safestring import mark_safe
-from django.conf import settings
 
 from posts.models import Posts
 from account.models import MyUser
@@ -117,11 +116,11 @@ class ModelLinkWidget(forms.Widget):
                 return mark_safe(u'')
 
             return mark_safe(
-                u'<a target="_blank" href="../../../%s/%s/%s/"><img src="%s%s" width="100"/></a>' %
+                u'<a target="_blank" href="../../../%s/%s/%s/"><img src="%s" width="100"/></a>' %
                 (
                     object._meta.app_label,
                     object._meta.object_name.lower(),
-                    object.pk, settings.MEDIA_URL, img
+                    object.pk, img
                 )
             )
         else:
