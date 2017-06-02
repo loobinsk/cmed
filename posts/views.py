@@ -34,7 +34,7 @@ from django.db.models.loading import get_model
 
 TYPE_LIST = dict([
     (u'', u'Тип материала'),
-    (u'/', ['1,2,4,5,9,12,88,99', u'Главная лента Врачи Вместе - профессиональная социальная '
+    (u'/', ['1,2,88,99', u'Главная лента Врачи Вместе - профессиональная социальная '
                                   u'сеть для врачей, образовательный портал для врачей', '0', 'Y']),
     (u'/opinion/', ['1,2,4,5,9,12,88,99', u'Частное мненией врачей портала Врачи Вместе - профессиональная социальная '
                                   u'сеть для врачей, образовательный портал для врачей', '0', 'Y']),
@@ -78,7 +78,7 @@ def Main(request):
 
     object_list = []
 
-    q = Q(status=0, public_main=True)
+    q = Q(status=0)
     if search != u'Что ищем?' and search != '':
         q = q & (Q(content__icontains=search) | Q(title__icontains=search))
     query = Posts.objects.filter(q).order_by('-createdate')
@@ -216,7 +216,7 @@ def Opinion(request):
             if search != u'Что ищем?' and search != '':
                 q = q & (Q(title__icontains=search) | Q(description__icontains=search))
             query = Videos.objects.filter(q).order_by('-createdate')
-            query = query.filter(user_id__is_staff=0)
+           # query = query.filter(user_id__is_staff=0)
             if spec_id:
                 query = query.filter(spec_id__id__in=spec_id.split(','))
             sql = "DATE(`Videos`.`createdate`)>=DATE('" + str(start) + "')"
