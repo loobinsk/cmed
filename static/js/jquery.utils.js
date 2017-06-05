@@ -168,6 +168,7 @@ function rangeDate() {
 				//inputTo.datepicker('option', 'minDate', new Date(dateFrom));
 			}
 		});
+/*
 		inputFromDay.on('focus', function() {
 			inputFrom.focus();
 		});
@@ -177,6 +178,7 @@ function rangeDate() {
 		inputFromYear.on('focus', function() {
 			inputFrom.focus();
 		});
+*/
 
 
 		inputTo.datepicker({
@@ -195,7 +197,7 @@ function rangeDate() {
 				//inputFrom.datepicker('option', 'maxDate', new Date(dateTo));
 			}
 		});
-		inputToDay.on('focus', function() {
+/*		inputToDay.on('focus', function() {
 			inputTo.focus();
 		});
 		inputToMonth.on('focus', function() {
@@ -203,7 +205,7 @@ function rangeDate() {
 		});
 		inputToYear.on('focus', function() {
 			inputTo.focus();
-		});
+		});*/
 
 
         //inputFrom.datepicker('option', 'maxDate', new Date());
