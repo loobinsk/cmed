@@ -232,10 +232,10 @@ def AdmUnreaded_one(user_id):
 def NmoUnreaded_one(user_id):
     msgs = AllMsg.objects.get(user=user_id, type=1)
     if msgs.unreaded:
-        return u'<a href="/circle/dialog/admin"><p class="groups-area holder description link01" style="float:left;width:10px;' \
+        return u'<a href="/circle/dialog/nmo"><p class="groups-area holder description link01" style="float:left;width:10px;' \
                u'color:#fff;border-radius:3px;background-color:#e1523d;padding-top:2px;padding-left:5px;padding-right:5px;padding-bottom:2px;width:70px;">Новых: {0}</p></a>'.format(msgs.unreaded)
     else:
-        return '<a href="/circle/dialog/admin"><p class="groups-area holder description link01" style="float:left;width:10px;' \
+        return '<a href="/circle/dialog/nmo"><p class="groups-area holder description link01" style="float:left;width:10px;' \
                'color:#fff;border-radius:3px;background-color:#e1523d;padding-top:2px;padding-left:5px;padding-right:5px;padding-bottom:2px;width:70px;">Сообщения</p></a>'
 
 

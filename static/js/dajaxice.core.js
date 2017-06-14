@@ -82,7 +82,7 @@ var Dajaxice = {
 
     oXMLHttpRequest.open(method, '/dajaxice/' + dajaxice_function + '/', true);
     oXMLHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    oXMLHttpRequest.setRequestHeader("Content-length", send_data.length);
+   // oXMLHttpRequest.setRequestHeader("Content-length", send_data.length);
     oXMLHttpRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
     oXMLHttpRequest.setRequestHeader("X-CSRFToken", Dajaxice.get_cookie('csrftoken'));
     oXMLHttpRequest.onreadystatechange = function () {
