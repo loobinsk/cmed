@@ -3,7 +3,7 @@
 Hа {{ host }} новое сообщение обратной связи {{ message.datetime|date:"d.m.Y H:i:s" }}.<br/><br/>
 
 {% url 'admin:medtus_feedback_change' message.id as the_url %}<br/>
-Посмотреть в админке можно здесь:   <a href="https://{{ host }}{{ the_url }}">http://{{ host }}{{ the_url }}</a><br/><br/>
+Посмотреть в админке можно здесь:   <a href="https://{{ host }}{{ the_url }}">https://{{ host }}{{ the_url }}</a><br/><br/>
 
 <table>
     <tr>
