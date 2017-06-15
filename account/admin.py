@@ -91,6 +91,13 @@ class TimerAdmin(CSVTruncateAdmin):
          # return u"Тест пройден"
           return progress.overallscore
         return u"Нет результатов"
+    # def test_score(self, obj):
+    #     quiz = Quiz.objects.filter(post=obj.post).first()
+    #     progress=Progress.objects.filter(test_id=quiz, user=obj.user).first()
+    #     if progress:
+    #      # return u"Тест пройден"
+    #       return progress.overallscore
+    #     return u"Нет результатов"
     test_score.short_description = 'Результаты тестов'
 
     def post_title(self, obj):

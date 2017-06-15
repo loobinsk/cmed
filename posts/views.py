@@ -183,7 +183,7 @@ def Opinion(request):
         if search != u'Что ищем?' and search != '':
             q = q & (Q(content__icontains=search) | Q(title__icontains=search))
         query = Posts.objects.filter(q).order_by('-createdate')
-        query = query.filter(user_id__is_staff=0)
+       # query = query.filter(user_id__is_staff=0)
         post_format = request.GET.get('format')
         if not post_format:
             post_format = TYPE_LIST[request.path][0]
