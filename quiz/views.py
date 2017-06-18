@@ -238,8 +238,10 @@ class QuizTake(FormView):
             'previous': self.previous,
         }
 
-
+        progress = Progress.objects.get(user=self.request.user, test_id=self.quiz)
+        progress.finish_quiz()
         self.sitting.mark_quiz_complete()
+
 
         if self.quiz.answers_at_end:
             results['questions'] =\

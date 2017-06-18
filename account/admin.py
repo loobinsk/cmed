@@ -78,7 +78,7 @@ class TestProgress(admin.SimpleListFilter):
 class TimerAdmin(CSVTruncateAdmin):
     list_display = ('id', 'user_id', 'user', 'post_title', 'timer',
                     'user_lname', 'user_fname', 'user_surname', 'user_town',
-                    'user_country', 'user_spec_id', 'user_graduate', 'time_join', 'time_leave', 'test_score')
+                    'user_country', 'user_spec_id', 'user_graduate', 'time_join', 'time_leave', 'finish_time', 'test_score')
     search_fields = ('user__firstname', 'user__lastname', 'user__surname', 'user__email', 'post__title')
     raw_id_fields = ('user',)
     list_filter = (('post',custom_titled_filter('Трансляция:')), TestProgress,)
@@ -91,14 +91,16 @@ class TimerAdmin(CSVTruncateAdmin):
          # return u"Тест пройден"
           return progress.overallscore
         return u"Нет результатов"
-    # def test_score(self, obj):
-    #     quiz = Quiz.objects.filter(post=obj.post).first()
-    #     progress=Progress.objects.filter(test_id=quiz, user=obj.user).first()
-    #     if progress:
-    #      # return u"Тест пройден"
-    #       return progress.overallscore
-    #     return u"Нет результатов"
+
+    def finish_time(self, obj):
+        quiz = Quiz.objects.filter(post=obj.post).first()
+        progress=Progress.objects.filter(test_id=quiz, user=obj.user).first()
+        if progress:
+          return progress.finish_time
+        return u"Тест не пройден"
+
     test_score.short_description = 'Результаты тестов'
+    finish_time.short_description = 'Время завершения теста'
 
     def post_title(self, obj):
         return obj.post.title

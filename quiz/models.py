@@ -198,6 +198,7 @@ class Progress(models.Model):
 
     test_id = models.ForeignKey(Quiz, verbose_name=_("Test"))
 
+    finish_time = models.DateTimeField(null=True, blank=True, verbose_name=_("FinishTime"))
 
     class Meta:
         verbose_name = _("User Progress")
@@ -275,6 +276,10 @@ class Progress(models.Model):
         Does not return anything.
         """
         self.score += str(question)+':'+str(score_to_add)+', '
+
+    def finish_quiz(self):
+        self.finish_time = now()
+        self.save()
 
 
     #    category_test = Category.objects.filter(category=question.category)\
