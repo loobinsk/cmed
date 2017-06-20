@@ -29,7 +29,7 @@ def feedback(request, topic, name, position, contact, text):
     msg=render_to_string('emails/new_feedback_email.html', context)
     if message.pk:
         try:
-            send_mail(u"Новое сообщение обратной связи", msg, 'feedback@vrvm.ru', ['artexmail@gmail.com'], fail_silently=True)
+            send_mail(u"Новое сообщение обратной связи", msg, 'feedback@vrvm.ru', [settings.COORD_EMAIL], fail_silently=True)
             dajax.alert(u'Спасибо! Сообщение отправлено. Мы обязательно ответим Вам.')
             dajax.script("$('#message').click();")
         except:
