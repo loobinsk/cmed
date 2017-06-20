@@ -26,7 +26,7 @@ def feedback(request, topic, name, position, contact, text):
     'contact': contact,
     'position': position
     }
-    msg=render_to_string('emails/feedback_email.html', context)
+    msg=render_to_string('emails/new_feedback_email.html', context)
     if message.pk:
         try:
             send_mail(u"Новое сообщение обратной связи", msg, 'feedback@vrvm.ru', ['artexmail@gmail.com'], fail_silently=True)
