@@ -47,7 +47,7 @@
 				</div>
 				<div class="dialogs-area">
 
-
+        {% if all_msgs != '' %}
         {% for msg in all_msgs.msgs|allmsgs_cut %}
 
                     <div id="admindialog" class="admindialogtext">
@@ -61,7 +61,7 @@
                     </div>
 
         {% endfor %}
-
+        {% endif %}
 
 				</div>
 			</div>

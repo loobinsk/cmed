@@ -211,6 +211,8 @@ class NmoDialogsView(generic.ListView):
             pass
         if msg != '':
             context['all_msgs'] = msg
+        else:
+            context['all_msgs'] = ""
 
         return context
 

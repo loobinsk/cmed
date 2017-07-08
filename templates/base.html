@@ -121,8 +121,8 @@
                   </div>
                 </a>
               </li>
-             <li{% if request.get_full_path == '/circle/nmodialogs/' %} class="active"{% endif %}>
-                <a href="{% url 'nmodialogs' %}" target="_parent" title="Мое НМО">
+             <li{% if request.get_full_path == '/circle/dialog/nmo' %} class="active"{% endif %}>
+                <a href="{% url 'nmo' %}" target="_parent" title="Мое НМО">
                   <div class="left-block-content-profile-links-item-content">
                     Мое НМО
                     <div class="left-block-content-profile-links-item-content-count">{% UnreadedNmo user.id %}</div>
