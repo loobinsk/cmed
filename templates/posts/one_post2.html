@@ -47,8 +47,15 @@
     <div class="content-block-center-item-content">
         <!-- Заголовки и текст поста -->
         <div class="content-block-center-item-content-date">{{ object.begindate|default:object.createdate }}</div>
-        <h1 style="width:320px"><a href="{{ object.content|find:"/translation/.*?/" }}" target="_blank"
-                                   style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a></h1>
+        <h1 style="width:320px">
+            {% if id == '3' %}
+            <a href="{{ object.content|find:"/translation/.*?/" }}" target="_blank"
+                                   style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a>
+        {% else %}
+            <a href="{% url 'detailpractice' object.id %}" target="_blank"
+                                   style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a>
+        {% endif %}
+        </h1>
         {% if user.is_authenticated %}
             {% if object.anons %}
                 {{ object.anons|truncatewords_html:50|safe|linebreaks }}
