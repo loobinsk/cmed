@@ -16,7 +16,7 @@
 						<span class="inform">Создатель группы: <a href="#">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</a></span>
 					</div>
 					<div class="links">{% if user.is_authenticated %}
-						<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', '/groups/join');">Вступить <br> в группу</a>{% endif %}
+						<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', 'https://vrachivmeste.ru/groups/join');">Вступить <br> в группу</a>{% endif %}
 					</div>
 				</div>{% endfor %}
 			{% else %}
