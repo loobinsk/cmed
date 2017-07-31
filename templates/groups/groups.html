@@ -50,7 +50,7 @@
 		{% endif %}
 				</div>
 				<div class="links">
-					<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', 'https://vrachivmeste.ru/groups/unjoin');" style="color:#777777;">Выйти из группы</a>
+					<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');" style="color:#777777;">Выйти из группы</a>
 				</div>
 			</div>
 		{% if forloop.last and forloop.counter > 1 %}
@@ -219,7 +219,7 @@
 		</div>
 		<div class="links">
 		{% if user.is_authenticated %}
-			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', 'https://vrachivmeste.ru/groups/join');">Вступить <br> в группу</a>
+			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.id }}', '/groups/join/');">Вступить <br> в группу</a>
 		{% endif %}
 		</div>
 	</div>
@@ -297,7 +297,16 @@ function JoinAGroup(id, url) {
 			//dataType: "html", //Тип данных
 			data: {'id': id}, 
 			success: function(response) { //Если все нормально
-location.reload();
+				document.getElementById('group'+id).parentNode.removeChild(document.getElementById('group'+id));
+				if (document.getElementById('toggle-block-slide')) {
+					$("#toggle-block-slide").html(response);
+				}else{
+					$('#info-block-mygroup').removeClass('info-block');
+					$('#info-block-mygroup').addClass('groups-area');
+					//$('#info-block-mygroup').addClass('slide');
+					$("#info-block-mygroup").html(response);
+					//$("#info-block-mygroup").html(response);
+				}
 			},
 			error: function(response) { //Если ошибка
 				alert('Произошла ошибка. Попробуйте ещё раз'); //document.getElementById('group'+id).innerHTML = "Ошибка при отправке формы";

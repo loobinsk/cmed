@@ -98,10 +98,10 @@
             <div class="links block popup-holder popup-active groups">
                 {% if user.is_authenticated and is_no_my_group %}
                     <a class="add-group" href="javascript:void(0)"
-                       onClick="JoinAGroup('{{ object.id }}', 'https://vrachivmeste.ru/groups/join');">Вступить в группу</a><br>
+                       onClick="JoinAGroup('{{ object.id }}', '/groups/join');">Вступить в группу</a><br>
                     {% else %}{% if not is_no_my_group %}
                         <a class="delete-group" href="javascript:void(0)"
-                           onClick="JoinAGroup('{{ object.id }}', 'https://vrachivmeste.ru/groups/unjoin');">Выйти из группы</a>
+                           onClick="JoinAGroup('{{ object.id }}', '/groups/unjoin');">Выйти из группы</a>
                     {% endif %}{% endif %}
                 {% if not is_no_my_group %}
                     <a href="javascript:void(0)" class="write-to-group" id="write-to-group">написать в
