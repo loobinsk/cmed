@@ -23,10 +23,10 @@
 	</div>
 	<div class="links">
 		{% if object.activated == False %}
-			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/activated');">Вступить <br> в группу</a>
-			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');">Отказаться</a>
+			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/activated/');">Вступить <br> в группу</a>
+			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin/');">Отказаться</a>
 		{% else %}
-			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');" style="color:#777777;">Выйти из группы</a>
+			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin/');" style="color:#777777;">Выйти из группы</a>
 		{% endif %}
 	</div>
 </div>
