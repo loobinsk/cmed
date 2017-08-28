@@ -313,7 +313,7 @@ class PostsList(ListView):
         else:
             self.template_name = 'posts/posts.html'
         query = Posts.objects.filter(Q(status=0) & query).order_by('-createdate')
-        if 'archive' in self.request.GET:
+        if TYPE_LIST[self.request.path][0] != '6' and 'archive' in self.request.GET:
             query = query.filter(archive=1)
         else:
             query = query.filter(archive=0)

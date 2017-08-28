@@ -142,6 +142,7 @@ class Translation(models.Model):
         Translation
     """
     title = models.CharField(max_length=255, blank=False, default=u'Трансляция')
+    data_open = HTMLField(default=None, blank=True, verbose_name=u'Открытые данные')
     data = HTMLField(default=None, blank=True, verbose_name=u'Данные')
     active = models.BooleanField(default=True, verbose_name=u'Активность')
 
