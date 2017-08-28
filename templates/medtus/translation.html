@@ -17,8 +17,20 @@
     </script>
 {% else %}    
      <div class="translation" style="margin-left: 40px;">
-        <input type="hidden" id="object_id" value="{{ object.id }}"/>
+        {% if object.data_open %}
+             <input type="hidden" id="object_id" value="{{ object.id }}"/>
         {{ object.data_open|safe }}
+            {% else %}
+           <br /><br /><br/>
+        <span class="title">Для просмотра онлайн трансляции войдите на сайт, используя Ваш логин и пароль. </span>
+
+     <p class="inform-panel"><a style="float:left; margin-top:10px;" class="btn" href="/account/login/">Войти</a></p>
+     <br /><br />
+       <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
+
+     <p class="inform-panel"><a style="float:left;  margin-top:10px;"  class="btn" href="/account/register1/">Регистрация</a></p>
+     <br />
+            {% endif %}
     </div>
     <script>
         //Increment the time counter every 30 sec.
