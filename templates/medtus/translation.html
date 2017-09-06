@@ -10,13 +10,7 @@
         {% if object.data_open %}
              <input type="hidden" id="object_id" value="{{ object.id }}"/>
         {{ object.data_open|safe }}
-
-            {% if user.is_authenticated %}
-                 <br>
-        {{ object.data|safe }}
-                {% endif %}
-
-            {% else %}
+          {% else %}
            <br /><br /><br/>
         <span class="title">Для просмотра онлайн трансляции войдите на сайт, используя Ваш логин и пароль. </span>
 
@@ -25,12 +19,17 @@
        <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
 
      <p class="inform-panel"><a style="float:left;  margin-top:10px;"  class="btn" href="/account/register1/">Регистрация</a></p>
-     <br />
+     {% endif %}
+            {% if user.is_authenticated %}
+                 <br>
+        {{ object.data|safe }}
+                {% endif %}
+
     </div>
 
     <script>
         //Increment the time counter every 30 sec.
         var idleInterval = setInterval(timerIncrement, 30000);
     </script>
-{% endif %}
+
 {% endblock %}
