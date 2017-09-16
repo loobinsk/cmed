@@ -47,7 +47,7 @@ def get_all_users():
 
 @register.simple_tag
 def get_all_users_fake():
-    return 87213+(MyUser.objects.all().count()-69249)*5
+    return 101518+(MyUser.objects.all().count()-72110)
 
 
 @register.simple_tag
