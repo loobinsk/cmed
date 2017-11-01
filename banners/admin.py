@@ -24,10 +24,10 @@ class BannerAdminInline(admin.StackedInline):
 
 
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'url', 'sort', 'views', 'clicks', 'public', 'created_at', 'updated_at')
+    list_display = ('__unicode__', 'url', 'sort', 'views', 'clicks', 'public', 'onlyauth', 'created_at', 'updated_at')
     search_fields = ('title', 'url', 'sort', 'views', 'clicks', 'public', 'created_at', 'updated_at')
     list_filter = ['public']
-    list_editable = ['sort', 'public']
+    list_editable = ['sort', 'onlyauth', 'public']
 
 
 admin.site.register(Banner, BannerAdmin)

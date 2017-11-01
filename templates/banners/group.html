@@ -20,6 +20,8 @@
 
 <div class="b-banner-group">
   {% for banner in banners %}
+      {% if user.is_authenticated or not banner.onlyauth %}
     {% banner_one banner.id %}
+      {% endif %}
   {% endfor %}
 </div>

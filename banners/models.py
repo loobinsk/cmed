@@ -72,7 +72,7 @@ class Banner(models.Model):
 
     html = models.BooleanField(verbose_name=_('Is HTML?'), default=False)
     flash = models.BooleanField(verbose_name=_('Is Flash?'), default=False)
-
+    onlyauth = models.BooleanField(verbose_name=_('OnlyForAuth'), default=False)
     public = models.BooleanField(verbose_name=_('Public'), default=True)
     created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
