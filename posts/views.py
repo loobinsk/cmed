@@ -77,65 +77,66 @@ def Main(request):
         page = 1
 
     object_list = []
-
+    post_format = request.GET.get('format')
+    spec_id = request.GET.get('spec_id')
     q = Q(status=0)
     if search != u'Что ищем?' and search != '':
-        q = q & (Q(content__icontains=search) | Q(title__icontains=search))
-    query = Posts.objects.filter(q).order_by('-createdate')
-    post_format = request.GET.get('format')
-    if not post_format:
-        post_format = TYPE_LIST[request.path][0]
+        q = (Q(content__icontains=search) | Q(title__icontains=search))
+        query = Posts.objects.filter(q).order_by('-createdate')
 
-    query = query.filter(type__in=post_format.split(','))
-    spec_id = request.GET.get('spec_id')
+        if not post_format:
+            post_format = TYPE_LIST[request.path][0]
 
-    if spec_id:
-        query = query.filter(spec_id__id__in=spec_id.split(','))
+        query = query.filter(type__in=post_format.split(','))
 
-    if TYPE_LIST[request.path][2] != '0':
-        postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
-        query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
 
-    for o in query:
-        object_list.append({'object': o, 'template': 'posts'})
-
-    # adding group posts to list
-    group_posts = Posts.objects.filter(public_main=True)
-    for o in group_posts:
-        object_list.append({'object': o, 'template': 'posts'})
-
-    # если формат не задан или формат 99 (видео формат), то показываем видео в списке
-    if not post_format or '99' in post_format.split(','):
-        q = Q(show_medtus=1, status=1, public_main=True)
-        if search != u'Что ищем?' and search != '':
-            q = q & (Q(title__icontains=search) | Q(description__icontains=search))
-        query = Videos.objects.filter(q).order_by('-createdate')
         if spec_id:
             query = query.filter(spec_id__id__in=spec_id.split(','))
-        for o in query:
-            object_list.append({'object': o, 'template': 'videos'})
 
-    # если формат не задан или формат 88 (Мероприятия формат), то показываем Мероприятия в списке
-    if not post_format or '88' in post_format.split(','):
-        q = Q(public_main=True)
-        if search != u'Что ищем?' and search != '':
-            q = q & (Q(content__icontains=search) | Q(title__icontains=search))
-        query = Events.objects.filter(q).order_by('-createdate')
-        if spec_id:
-            query = query.filter(spec_id__id__in=spec_id.split(','))
-        for o in query:
-            object_list.append({'object': o, 'template': 'events'})
+        if TYPE_LIST[request.path][2] != '0':
+            postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
+            query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
 
-    # если формат не задан, то показываем галерею в списке
-    if not request.GET.get('format', None) and not spec_id:
-        q = Q(status=1, public_main=True)
-        if search != u'Что ищем?' and search != '':
-            q = q & (Q(title__icontains=search) | Q(description__icontains=search))
-        query = PGalleries.objects.filter(q).order_by('-createdate')
-        if spec_id:
-            query = query.filter(spec_id__id__in=spec_id.split(','))
         for o in query:
-            object_list.append({'object': o, 'template': 'photos'})
+            object_list.append({'object': o, 'template': 'posts'})
+    else:
+        # adding group posts to list
+        group_posts = Posts.objects.filter(public_main=True)
+        for o in group_posts:
+            object_list.append({'object': o, 'template': 'posts'})
+
+        # если формат не задан или формат 99 (видео формат), то показываем видео в списке
+        if not post_format or '99' in post_format.split(','):
+            q = Q(show_medtus=1, status=1, public_main=True)
+            if search != u'Что ищем?' and search != '':
+                q = q & (Q(title__icontains=search) | Q(description__icontains=search))
+            query = Videos.objects.filter(q).order_by('-createdate')
+            if spec_id:
+                query = query.filter(spec_id__id__in=spec_id.split(','))
+            for o in query:
+                object_list.append({'object': o, 'template': 'videos'})
+
+        # если формат не задан или формат 88 (Мероприятия формат), то показываем Мероприятия в списке
+        if not post_format or '88' in post_format.split(','):
+            q = Q(public_main=True)
+            if search != u'Что ищем?' and search != '':
+                q = q & (Q(content__icontains=search) | Q(title__icontains=search))
+            query = Events.objects.filter(q).order_by('-createdate')
+            if spec_id:
+                query = query.filter(spec_id__id__in=spec_id.split(','))
+            for o in query:
+                object_list.append({'object': o, 'template': 'events'})
+
+        # если формат не задан, то показываем галерею в списке
+        if not request.GET.get('format', None) and not spec_id:
+            q = Q(status=1, public_main=True)
+            if search != u'Что ищем?' and search != '':
+                q = q & (Q(title__icontains=search) | Q(description__icontains=search))
+            query = PGalleries.objects.filter(q).order_by('-createdate')
+            if spec_id:
+                query = query.filter(spec_id__id__in=spec_id.split(','))
+            for o in query:
+                object_list.append({'object': o, 'template': 'photos'})
 
     # trying to sort result by createdate
     object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
@@ -307,12 +308,12 @@ class PostsList(ListView):
         if self.search != u'Что ищем?' and self.search != '':
             query = Q(content__icontains=self.search) | Q(title__icontains=self.search)
         else:
-            query = Q()
+            query = Posts.objects.filter(Q(status=0)).order_by('-createdate')
         if self.request.is_ajax():
             self.template_name = 'posts/posts_ajax.html'
         else:
             self.template_name = 'posts/posts.html'
-        query = Posts.objects.filter(Q(status=0) & query).order_by('-createdate')
+
         if TYPE_LIST[self.request.path][0] != '6' and 'archive' in self.request.GET:
             query = query.filter(archive=1)
         else:
