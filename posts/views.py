@@ -79,11 +79,9 @@ def Main(request):
     object_list = []
     post_format = request.GET.get('format')
     spec_id = request.GET.get('spec_id')
-    q = Q(status=0)
     if search != u'Что ищем?' and search != '':
         q = (Q(content__icontains=search) | Q(title__icontains=search))
         query = Posts.objects.filter(q).order_by('-createdate')
-
         if not post_format:
             post_format = TYPE_LIST[request.path][0]
 
@@ -97,11 +95,31 @@ def Main(request):
             postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
             query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
 
+
         for o in query:
             object_list.append({'object': o, 'template': 'posts'})
     else:
+        q = Q(status=0)
+        query = Posts.objects.filter(q).order_by('-createdate')
+        if not post_format:
+            post_format = TYPE_LIST[request.path][0]
+
+        query = query.filter(type__in=post_format.split(','))
+
+
+        if spec_id:
+            query = query.filter(spec_id__id__in=spec_id.split(','))
+
+        if TYPE_LIST[request.path][2] != '0':
+            postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
+            query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
+
+
+        for o in query:
+            object_list.append({'object': o, 'template': 'posts'})
         # adding group posts to list
         group_posts = Posts.objects.filter(public_main=True)
+
         for o in group_posts:
             object_list.append({'object': o, 'template': 'posts'})
 
