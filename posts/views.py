@@ -84,6 +84,21 @@ def Main(request):
         q = (Q(content__icontains=search) | Q(title__icontains=search))
         query = Posts.objects.filter(q).order_by('-createdate')
 
+        if not post_format:
+            post_format = TYPE_LIST[request.path][0]
+
+        query = query.filter(type__in=post_format.split(','))
+
+
+        if spec_id:
+            query = query.filter(spec_id__id__in=spec_id.split(','))
+
+        if TYPE_LIST[request.path][2] != '0':
+            postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
+            query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
+
+        for o in query:
+            object_list.append({'object': o, 'template': 'posts'})
     else:
         # adding group posts to list
         group_posts = Posts.objects.filter(public_main=True)
@@ -123,21 +138,6 @@ def Main(request):
             for o in query:
                 object_list.append({'object': o, 'template': 'photos'})
 
-    if not post_format:
-        post_format = TYPE_LIST[request.path][0]
-
-    query = query.filter(type__in=post_format.split(','))
-
-
-    if spec_id:
-        query = query.filter(spec_id__id__in=spec_id.split(','))
-
-    if TYPE_LIST[request.path][2] != '0':
-        postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
-        query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
-
-    for o in query:
-        object_list.append({'object': o, 'template': 'posts'})
     # trying to sort result by createdate
     object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
     p = Paginator(object_list, paginate_by)
