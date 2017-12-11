@@ -52,5 +52,10 @@ def medtus500(request):
 
 
 def trs(request):
-    page = ContentPage.objects.first()
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=1)
+    return render(request, 'medtus/content_page.html', {'page': page})
+
+def education(request):
+    page = ContentPage.objects.get(id=2)
     return render(request, 'medtus/content_page.html', {'page': page})

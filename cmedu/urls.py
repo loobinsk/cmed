@@ -74,6 +74,7 @@ urlpatterns = patterns('',
     url(r'^practice/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
 
     url(r'^trs/$', 'medtus.views.trs', name='trs'),
+     url(r'^education/$', 'medtus.views.education', name='education'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

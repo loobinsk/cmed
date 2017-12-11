@@ -426,7 +426,7 @@ def allmsgcodes(request, **kwargs):
         htmsg="не отправлено, ошибка в кодах"
         return render(request, 'circle/MassDialog.html',{'msg':htmsg})
     if len(codes)<len(users):
-        htmsg="не отправлено, недостаточно кодов"
+        htmsg="не отправлено, недостаточно кодов: "+str(len(codes))+" < "+str(len(users))
         return render(request, 'circle/MassDialog.html',{'msg':htmsg})
     file_content=u'Сообщение:\n'+message+u'\nВремя отправки:'+str(timezone.now())+u'\nСообщение с кодами отправлено пользователям: \n'
     for i,user in enumerate(users):
@@ -437,10 +437,10 @@ def allmsgcodes(request, **kwargs):
         msg.datetime=str(msg.datetime)+str(timezone.now())+'|'
         msg.type=1
         msg.save()
-    # f = open(os.path.join(settings.STATIC_ROOT,
-    #                       'sending.log'), 'w+')
-    # f.write(file_content.encode("utf-8"))
-    # f.close()
+    f = open(os.path.join(settings.STATIC_ROOT,
+                          'sending.log'), 'w+')
+    f.write(file_content.encode("utf-8"))
+    f.close()
 
     htmsg="отправлено"
     return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg})

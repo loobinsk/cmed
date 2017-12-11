@@ -198,6 +198,9 @@ class ContentPage(models.Model):
     title = models.CharField(max_length=100, blank=True)
     content = HTMLField()
 
+    def __unicode__(self):
+        return u"%s" % (self.title,)
+
     class Meta:
-        verbose_name = u'Страница /trs/'
-        verbose_name_plural = u'Страница /trs/'
+        verbose_name = u'Страницы'
+        verbose_name_plural = u'Страницы'
