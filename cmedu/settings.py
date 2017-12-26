@@ -24,7 +24,7 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 SECRET_KEY = '@=6=2e@!f-vj&o*@u97#tgm0q$(ftxu(85=n*2-6vygardy%-y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['127.0.0.1', 'vrvm.ru', 'vrachivmeste.ru']
@@ -160,7 +160,6 @@ LOGIN_URL = '/account/login'
 EMAIL_PORT = 25
 EMAIL_HOST = '127.0.0.1'
 ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
-COORD_EMAIL = 'vrvm.koordinator@gmail.com'
 AVATAR_SIZE = 200, 200
 SITE_URL = 'http://87.242.77.123:83/'
 
