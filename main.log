@@ -1745,3 +1745,9 @@ WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-pack
 WARNING:py.warnings: /home/vagrant/.envs/venv-vrvm/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:848: RuntimeWarning: DateTimeField Like.createdate received a naive datetime (2017-11-11 00:00:00) while time zone support is active.
   RuntimeWarning)
  (2017-12-11 22:22:31; __init__.py:848)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-12-27 23:44:34; simplejson.py:12)
+WARNING:py.warnings: /var/www/meddjango/data/.virtualenvs/medtus/local/lib/python2.7/site-packages/sorl/thumbnail/helpers.py:5: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+ (2017-12-27 23:44:36; simplejson.py:12)
