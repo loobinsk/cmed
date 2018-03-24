@@ -130,7 +130,7 @@ def password_change(request, **kwargs):
     context = RequestContext(request)
     params = {'error': '', 'token': kwargs.get('token', ''), 'show_form': True}
     token = PassToken.objects.filter(token=kwargs.get('token'))
-    fift_min_ago = timezone.now() - timedelta(minutes=30)
+    fift_min_ago = timezone.now() - timedelta(minutes=120)
 
     if token.exists():
         if token.first().time > fift_min_ago:
