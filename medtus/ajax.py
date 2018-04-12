@@ -2,7 +2,7 @@
 
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
-from settings.views import send_email
+#from settings.views import send_email
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import Feedback
