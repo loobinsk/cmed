@@ -156,10 +156,11 @@ TEMPLATE_DIRS = (
 AUTH_USER_MODEL = 'account.MyUser'
 
 LOGIN_URL = '/account/login'
-
+COORD_EMAIL = 'vrvm.koordinator@gmail.com'
 EMAIL_PORT = 25
 EMAIL_HOST = '127.0.0.1'
 ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
+
 AVATAR_SIZE = 200, 200
 SITE_URL = 'http://87.242.77.123:83/'
 
