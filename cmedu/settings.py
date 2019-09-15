@@ -163,7 +163,7 @@ TEMPLATE_DIRS = (
 AUTH_USER_MODEL = 'account.MyUser'
 
 LOGIN_URL = '/account/login'
-<<<<<<< HEAD
+
 
 # EMAIL_PORT = 25
 # EMAIL_HOST = '127.0.0.1'
@@ -177,12 +177,12 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'vrvm.ru@gmail.com'
 EMAIL_HOST_PASSWORD = 'KAG2e{bTp?'
 
-=======
+
 COORD_EMAIL = 'vrvm.koordinator@gmail.com'
 EMAIL_PORT = 25
 EMAIL_HOST = '127.0.0.1'
 ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
->>>>>>> 41af175b6508ae5c14089e0e14a70ec7196d6ef8
+
 
 AVATAR_SIZE = 200, 200
 SITE_URL = 'vrachivmeste.ru'
