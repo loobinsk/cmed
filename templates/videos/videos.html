@@ -65,7 +65,10 @@
                    value="{{ search|default:'' }}"/>
         </form>
     </div>
-    <div class="content-block-top-separator"></div>{% endblock %}
+    <div class="content-block-top-separator"></div><div class="quick_urls" style="top: 140px; position: absolute; padding: 5px;">
+            <div class="quick_url"><a href="/groups/305/">Информация для менеджеров</a></div>
+            <div class="quick_url"><a href="/contacts">Контакты</a></div>
+        </div>{% endblock %}
 {% block filter_content %}
     {% if user.is_staff %}<!-- Создание поста -->
         <div class="content-block-center-write-contaner">

@@ -50,11 +50,56 @@ def medtus500(request):
     response.status_code = 500
     return response
 
+def static_page(request, page_alias):    # page_alias holds the part of the url
+    request.META['CSRF_COOKIE_USED'] = True
+    client = request.session
+    try:
+        page = ContentPage.objects.get(page_alias=page_alias)
+        return render(request, 'medtus/content_page.html', {'page': page})
+    except ContentPage.DoesNotExist:
+        raise Http404("Page does not exist")    
+
+# class static_page(generic.DetailView):
+#     model = ContentPage
+#     template_name = 'medtus/content_page.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(DetailView, self).get_context_data(**kwargs)
+#         page_alias = self.kwargs['page_alias']
+#         context['page'] = ContentPage.objects.get(page_alias=page_alias)
+#         return context
+
 
 def trs(request):
     # page = ContentPage.objects.first()
     page = ContentPage.objects.get(id=1)
     return render(request, 'medtus/content_page.html', {'page': page})
+
+def trs2(request):
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=3)
+    return render(request, 'medtus/content_page.html', {'page': page})
+
+
+def trs3(request):
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=5)
+    return render(request, 'medtus/content_page.html', {'page': page})   
+
+def trs4(request):
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=6)
+    return render(request, 'medtus/content_page.html', {'page': page})   
+
+def trs5(request):
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=7)
+    return render(request, 'medtus/content_page.html', {'page': page})
+
+def mediakit(request):
+    # page = ContentPage.objects.first()
+    page = ContentPage.objects.get(id=9)
+    return render(request, 'medtus/content_page.html', {'page': page})        
 
 def education(request):
     page = ContentPage.objects.get(id=2)

@@ -24,10 +24,11 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 SECRET_KEY = '@=6=2e@!f-vj&o*@u97#tgm0q$(ftxu(85=n*2-6vygardy%-y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1', 'vrvm.ru', 'vrachivmeste.ru']
+ALLOWED_HOSTS = ['127.0.0.1', 'vrvm.ru', 'vrachivmeste.ru', 'www.vrachivmeste.ru', '87.242.77.90']
 
 # Application definition
 
@@ -104,10 +105,10 @@ WSGI_APPLICATION = 'cmedu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'medtusdj_db_migrate',
+        'NAME': 'medtusdj_db_migrate',
         'USER': 'medtusdj_user',
         'PASSWORD': '71qno0GqH3',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'OPTIONS': {
             'init_command': "SET foreign_key_checks = 0;",
         }
@@ -136,10 +137,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/media'
+#MEDIA_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/media'
+#MEDIA_URL = '/media/'
+#PUBLIC_HTML_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name'
+#STATIC_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/static'
+
+MEDIA_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/media'
 MEDIA_URL = '/media/'
-PUBLIC_HTML_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name'
-STATIC_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/static'
+PUBLIC_HTML_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name'
+STATIC_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/static'
+
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
@@ -157,11 +164,23 @@ AUTH_USER_MODEL = 'account.MyUser'
 
 LOGIN_URL = '/account/login'
 
-EMAIL_PORT = 25
-EMAIL_HOST = '127.0.0.1'
+# EMAIL_PORT = 25
+# EMAIL_HOST = '127.0.0.1'
+
 ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
+COORD_EMAIL = 'vrvm.koordinator@gmail.com'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'vrvm.ru@gmail.com'
+EMAIL_HOST_PASSWORD = 'KAG2e{bTp?'
+
+
 AVATAR_SIZE = 200, 200
-SITE_URL = 'http://87.242.77.123:83/'
+SITE_URL = 'vrachivmeste.ru'
+
+
 
 TINYMCE_JS_URL = os.path.join(SITE_URL, '/static/tiny_mce/tiny_mce_src.js')
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")

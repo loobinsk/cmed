@@ -18,17 +18,27 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def banner_group(context, group, tpl='banners/group.html'):
+
     try:
         page_url = context['request'].path_info
+        
         group = BannerGroup.objects.get(slug=group)
+        context['my'] = False
         good_urls = []
+
         for url in URL.objects.filter(public=True):
+            
             if url.regex:
                 url_re = re.compile(url.url)
+                
                 if url_re.findall(page_url):
-                    good_urls.append(url)
+
+                    good_urls.append(url)                  
             elif page_url == url.url:
                 good_urls.append(url)
+        
+
+
         banners_all = Banner.objects.filter(public=True, group=group, urls__in=good_urls)
 
         banners = [banner for banner in banners_all if banner.often == 10]

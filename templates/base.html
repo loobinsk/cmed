@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="viewport" content="width=1024"/>
+  <!-- <meta name="viewport" content="width=1024"/> -->
+  <meta name="viewport" content="width=device-width">
   <meta name='yandex-verification' content='46c7f41d0e3b2305'/>
   <meta name="mailru-domain" content="FWKOyu20k8qofR8o"/>
   <title>{% block title_page %}Врачи вместе{% endblock %}</title>
@@ -15,11 +16,14 @@
   <link href="{% static 'css/jquery.mCustomScrollbar.css' %}" rel="stylesheet" type="text/css"/>
   <link href="{% static 'banners/css/slider.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'css/chosen.css' %}" rel="stylesheet" type="text/css"/>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.1/css/font-awesome.min.css"> -->
+ 
   {% block style_page %}{% endblock %}
   {#{% endcompress %}#}
   {#{% compress js %}#}
   <script type="text/javascript" src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'mce_filebrowser/js/filebrowser_init.js' %}"></script>
+  <script src="https://kit.fontawesome.com/11a50a571d.js"></script>
   <script type="text/javascript" src="{% static 'tiny_mce/tiny_mce.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery.preload-images.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/inji_inversion_menu.js' %}"></script>
@@ -46,27 +50,120 @@
   <script type="text/javascript" src="{% static "js/main.js" %}"></script>
   <script type="text/javascript" src="{% static 'dajax/jquery.dajax.core.js' %}" charset="utf-8"></script>
   <script type="text/javascript" src="{% static 'js/dajaxice.core.js' %}" charset="utf-8"></script>
+
   {% block js_page %}{% endblock %}
   {#{% endcompress %}#}
 <script charset="UTF-8" src="//cdn.sendpulse.com/28edd3380a1c17cf65b137fe96516659/js/push/2f49b6f66aa0025e30475afcaae0395b_1.js" async></script>
 </head>
 <body>
-<div class="page-div inner" {% block page_div_style %}{% endblock %}>
-  {% last_access %}
-  {#<!-- ЛЕВЫЙ БЛОК (НАЧАЛО) -->#}
-  <div class="left-block">
-    <div class="left-block-content">{% block left_block %}
-      {#    <!-- Логотип -->#}
-      <div class="left-block-content-logo" style="padding-left:10px;width:220px;padding-right:10px;">
-        <a href="/" title="На главную">
-          <img src="{% static 'images/basic/logo.png' %}" alt="Врачи Вместе">
-        </a>
-      </div>
-      {#    <!-- Профиль -->#}
-      <div class="left-block-content-profile">
-        <div class="left-block-content-line-1"></div>
-          {% if user.is_authenticated %}
-        <div class="left-block-content-profile-item">
+
+
+
+
+	  {#<!-- Мобильное меню (начало) -->#}
+  <nav>
+  <ul>
+  	<li><a href="/"><img src="https://vrachivmeste.ru/media/profile_images/thumb_67_67_153LDGNU8E.png"></a></li>
+    <li>
+   		<a href="/consultations">Онлайн-лекции </a> {% count_new_events 'Posts' 3 %}
+    	{% online %}
+    </li>
+    {% if user.is_authenticated %}
+    <li><a href="https://vrachivmeste.ru/circle/dialog/nmo">НМО </a> <div class="left-block-content-profile-links-item-content-count">{% UnreadedNmo user.id %}</div></li>
+    {% else %}
+    <li><a href="https://vrachivmeste.ru/translation/51">НМО </a></li>
+    {% endif %}
+    <li><a href="/events">Календарь конференций</a>{% count_new_events 'Events' %}</li>
+    <li><a href="/videos">Видеоматериалы </a> {% count_new_events 'Videos' %}</li>
+    <li><a href="{% url 'opinion' %}" >Частное мнение </a></li>
+    <li><a href="/magazines">Книги и журналы </a> {% count_new_events 'Posts' 6 %} </li>
+    <li><a href="/groups">Группы  </a> {% count_new_events 'PostLinks' %}</li>
+    <li><a href="/vacancies">Резюме и вакансии </a> {% count_new_events 'Posts' 8 %}</li>
+    <li><a href="{% url 'lecturers' %}">Лекторы  </a></li>
+    <li><a href="/photo">Фотогалерея  </a> {% count_new_events 'PGalleries' %}</li>
+    <li><a href="{% url 'rss' %}">Новости медицины </a> {% count_new_events 'Rss' %}</li>
+    <li><a href="/practice">Опросы и исследования</a> {% count_new_events 'Posts' 11 %}</li>
+   
+<li><hr></li>
+    <li><a href="/partners">Наши партнеры </a></li>
+    <li><a href="/groups/305/">Информация для менеджеров </a></li>
+    <li><a href="/contacts">Контакты </a></li>
+    <!-- <li><a href="#">Написать нам </a></li> -->
+
+
+{% if user.is_authenticated %}
+<li><hr></li>
+
+<li><a href="{% url 'alldialogs' %}">Личные сообщения </a>{% Unreaded user.id %}</li>
+<li><a href="{% url 'Interesting' %}">Интересное</a></li>
+
+<li><hr></li>
+
+<li>
+  <div class="left-block-content-profile-item-left-photo-bg">
+  <a href="{% url 'lichnie2' %}">
+    <div class="left-block-content-profile-item-left-photo"
+         style="background-image:url({% get_avatar_preview_sizexy user.id 77 77 %}), url({{ user.avatar }})">
+        </div>
+  </a>
+</div>
+
+<div class="block-content">
+  <a href="{% url 'lichnie2' %}" style="text-decoration: none; font-size: 21px;">
+    <p>{{ user.lastname }}
+      {{ user.firstname }}
+      {{ user.surname }}
+    </p>
+  </a>
+  {{ user.spec_id }}
+  <div class="left-block-content-profile-item-right-exit">
+    <a href="{% url 'logout' %}" target="_parent" title="Выход">выход</a>
+  </div>
+</div>
+</li>
+
+{% else %}
+<li><hr></li>
+
+<li>
+<form class="register-form" action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  <div class="holder">
+    <label for="email-field">Ваш E-mail</label>
+    <input id="email-field" required type="text" name="login" value="">
+  </div>
+  <div class="holder">
+    <label for="password-field">Ваш пароль</label>
+
+    <div class="password-field">
+      <input id="password-field" required type="password" name="password" value="">
+    </div>
+  </div>
+  <div class="row">
+    <div class="check-holder">
+      <input id="check-filed01" type="checkbox">
+      <label for="check-filed01">Запомнить меня</label>{{ error|safe }}
+    </div>
+    <button type="submit" class="btn">вход</button>
+  </div>
+  <div class="link-holder">
+    <a href="{% url "account.views.password_forgot" %}" class="link">Забыли пароль?</a>
+  </div>
+  <hr>
+  <!-- <div class="left-block-content-line-1"></div> -->
+  <!-- <input type="button" value="Регистрация" onclick="location.href='/account/register1/'"> -->
+  <a type="link" class="btn" href='/account/register1/'>Регистрация</a>
+
+  <!-- <div class="left-block-content-line-1"></div> -->
+
+</form>
+</li>
+<li></li>
+
+{% endif %}
+	<!-- <li>
+ {% if user.is_authenticated %}
+ <div class="left-block-content-profile-item">
           <div class="left-block-content-profile-item-left">
             <div class="left-block-content-profile-item-left-photo-bg">
               <a href="{% url 'lichnie2' %}">
@@ -206,6 +303,202 @@
           </div>
         </form>{% endif %}
       </div>
+	</li> -->
+
+    <li>
+      <a href="#">
+        <i class="fa fa-bars"></i>
+      </a>
+    </li>
+
+    <i class="fas fa-search"></i>
+
+    <form class="content-block-top-block-2-filed" style="display: none;">
+              <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+              <input type="text" name="search" class="form-filed-9" value="{{ search|default:'' }}"
+                     placeholder="Что ищем?"/>
+    </form>
+    
+    {% if user.is_authenticated %}
+    
+   		<a href="https://vrachivmeste.ru/lichnie/lichnie2/"><i class="far fa-user-circle"></i></a>
+   
+    {% else %}
+   
+    	<a href="https://vrachivmeste.ru/account/login/"><i class="far fa-user-circle"></i>
+    
+	
+	{% endif %}
+
+    <a href="/contacts"><i class="fa fa-phone"></i></a>
+
+
+  </ul>
+</nav>
+  {#<!-- Мобильное меню (конец) -->#}
+
+
+
+
+
+
+<div class="page-div inner" {% block page_div_style %}{% endblock %}>
+  {% last_access %}
+
+
+  {#<!-- ЛЕВЫЙ БЛОК (НАЧАЛО) -->#}
+  <div class="left-block">
+    <div class="left-block-content">{% block left_block %}
+      {#    <!-- Логотип -->#}
+      <div class="left-block-content-logo" style="padding-left:10px;width:220px;padding-right:10px;">
+        <a href="/" title="На главную">
+          <img src="{% static 'images/basic/logo.png' %}" alt="Врачи Вместе">
+        </a>
+      </div>
+      {#    <!-- Профиль -->#}
+      <div class="left-block-content-profile">
+        <div class="left-block-content-line-1"></div>
+          {% if user.is_authenticated %}
+        <div class="left-block-content-profile-item">
+          <div class="left-block-content-profile-item-left">
+            <div class="left-block-content-profile-item-left-photo-bg">
+              <a href="{% url 'lichnie2' %}">
+                <div class="left-block-content-profile-item-left-photo"
+                     style="background-image:url({% get_avatar_preview_sizexy user.id 77 77 %}), url({{ user.avatar }})"></div>
+              </a>
+            </div>
+          </div>
+          <div class="left-block-content-profile-item-right">
+            <a href="{% url 'lichnie2' %}" style="text-decoration: none;">
+              <p>{{ user.lastname }}<br/>
+                {{ user.firstname }}<br/>
+                {{ user.surname }}
+              </p>
+            </a>
+            {{ user.spec_id }}
+            <div class="left-block-content-profile-item-right-exit">
+              <a href="{% url 'logout' %}" target="_parent" title="Выход">выход</a>
+            </div>
+          </div>
+        </div>
+
+<div class="left-block-content-line-1"></div>
+<div id="arrow_menu" class="arrow">
+    <a href="{% url 'alldialogs' %}" target="_parent" title="Личные сообщения">
+                  <div class="left-block-content-profile-links-item-content">
+                    Личные сообщения
+                    <div class="left-block-content-profile-links-item-content-count">{% Unreaded user.id %}</div>
+                  </div>
+                </a><span onclick="openMNav()"> <img src="/static/images/down-arrow.png"/> </span>
+</div>
+
+        <div id="menu_nav" class="menunav">
+
+        <div class="left-block-content-profile-links">
+          <div class="left-block-content-profile-links-item">
+            <ul>
+              <li{% if request.get_full_path == '/lichnie/lichnie2/' %} class="active"{% endif %}><a
+                  href="{% url 'lichnie2' %}" target="_parent" title="Моя страница">Моя страница</a></li>
+              <li{% if request.get_full_path == '/circle/invite/' %} class="active"{% endif %}>
+                <a href="{% url 'invite' %}" target="_parent" title="Все врачи">
+                  <div class="left-block-content-profile-links-item-content">
+                    Все врачи
+                    <div class="left-block-content-profile-links-item-content-count">{% newinvite user %}</div>
+                  </div>
+                </a>
+              </li>
+              <li{% if request.get_full_path == '/circle/alldialogs/' %} class="active"{% endif %}>
+                <a href="{% url 'alldialogs' %}" target="_parent" title="Личные сообщения">
+                  <div class="left-block-content-profile-links-item-content">
+                    Личные сообщения
+                    <div class="left-block-content-profile-links-item-content-count">{% Unreaded user.id %}</div>
+                  </div>
+                </a>
+              </li>
+             <!-- <li{% if request.get_full_path == '/circle/dialog/nmo' %} class="active"{% endif %}>
+                <a href="{% url 'nmo' %}" target="_parent" title="Мое НМО">
+                  <div class="left-block-content-profile-links-item-content">
+                    Мое НМО
+                    <div class="left-block-content-profile-links-item-content-count">{% UnreadedNmo user.id %}</div>
+                  </div>
+                </a>
+              </li> -->
+              <li{% if request.get_full_path == '/circle/interesting/' %} class="active"{% endif %}><a
+                  href="{% url 'Interesting' %}" target="_parent" title="Интересное">Интересное</a>
+              </li>
+            </ul>
+          <span class="uparrowmenu" onclick="closeMNav()"><img src="/static/images/up-arrow.png"/></span>
+          </div>
+        </div>
+
+
+              <div class="left-block-content-line-1"></div>
+
+        <div class="left-block-content-invitation">
+          <div class="left-block-content-invitation-item">
+          <span id="invitation-1" title="Пригласить коллегу на &quot;Врачи вместе&quot;"
+                onClick="$('div.left-block-content-invitation-item-form').slideDown();$('#invitation-1').hide();$('#invitation-2').show();">Пригласить на сайт &quot;Врачи вместе&quot;</span>
+            <span id="invitation-2" style="display:none" title="Скрыть форму"
+                  onClick="$('div.left-block-content-invitation-item-form').slideUp();$('#invitation-2').hide();$('#invitation-1').show();">Скрыть форму</span>
+
+            <div class="left-block-content-invitation-item-form">
+              <form>
+                <input type="text" name="emails" id="emails" class="form-filed-1"
+                       placeholder="Введите E-mail через запятую"/>
+                <br/>
+                Поле для редактирования текста<br/>
+                для вашего приглашения<br/>
+                <textarea name="text" class="form-filed-2" id="text">{% spaceless %}
+                  Уважаемый коллега, приглашаю Вас в социальную сеть для врачей &quot;Врачи вместе&quot;!
+                {% endspaceless %}</textarea>
+                <br/>
+                <script>
+                  function InviteCollegue() {
+                    Dajaxice.lichnie.InviteCollegue(Dajax.process, {
+                      'emails': $("input[name='emails']").val(),
+                      'message': $("textarea[name='text']").val()
+                    });
+                  }
+                </script>
+                <input type="submit" value="отправить" class="form-key-1" onclick="InviteCollegue(); return false;"/>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+          </div>
+      {% else %}
+        <form class="register-form" action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="holder">
+            <label for="email-field">Ваш E-mail</label>
+            <input id="email-field" required type="text" name="login" value="">
+          </div>
+          <div class="holder">
+            <label for="password-field">Ваш пароль</label>
+
+            <div class="password-field">
+              <input id="password-field" required type="password" name="password" value="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="check-holder">
+              <input id="check-filed01" type="checkbox">
+              <label for="check-filed01">Запомнить меня</label>{{ error|safe }}
+            </div>
+            <button type="submit" class="btn">вход</button>
+          </div>
+          <div class="left-block-content-line-1"></div>
+          <input type="button" value="Регистрация" onclick="location.href='/account/register1/'">
+
+          <div class="left-block-content-line-1"></div>
+          <div class="link-holder">
+            <a href="{% url "account.views.password_forgot" %}" class="link">Забыли пароль?</a>
+          </div>
+        </form>{% endif %}
+      </div>
       {#    <!-- Форма приглашения -->#}
 
 
@@ -213,6 +506,10 @@
         <div id="main_menu" class="left-block-content-links">
           <div class="left-block-content-links-item">
             <span><a href="/" target="_parent" title="Главная лента">Главная лента</a></span>
+          </div>
+
+          <div class="left-block-content-links-item">
+            <span><a href="{% url 'nmo' %}" target="_parent" title="НМО">НМО</a></span>{% UnreadedNmo user.id %}
           </div>
           <div class="left-block-content-links-item">
             <span>
@@ -296,6 +593,7 @@
          <a href="/events" ><div id="top-btn3" class="top-btn"><span>Календарь конференций</span></div></a>
         </div>
     </div>
+    
       <div id="top-right-block">
 
       {% block top_block %}
@@ -403,6 +701,10 @@
             </form>
           </div>
         {% endif %}
+        <div class="quick_urls" style="top: 150px; position: absolute; padding: 5px;">
+            <div class="quick_url"><a href="/groups/305/">Информация для менеджеров</a></div>
+            <div class="quick_url"><a href="/contacts">Контакты</a></div>
+        </div>
 
 
       {% endblock %}
@@ -421,7 +723,11 @@
 
 
     {% block center_column %}
-      <div class="content-block-center">{% if not user.is_authenticated and not opinion %}
+      <div class="content-block-center">
+        <div style="width: 100%; vertical-align: middle;  font-size: 18px;  display: table;">    
+      {% banner_group 'center_side' %}
+    </div>
+        {% if not user.is_authenticated and not opinion %}
         <div class="inform-area">
           <span class="title">Чтобы увидеть полный текст, посмотреть видео, оставить комментарий, необходимо </span>
 
@@ -593,9 +899,36 @@
   </div>
   {#<!-- ОСНОВНОЙ БЛОК (КОНЕЦ) -->#}
 </div>
+<a id="show_popup_banner" href="#popup_banner_container">Показать окно</a>
+<div style="display: none">
+<div id="popup_banner_container" >
+  {% banner_group 'popup' %}
+</div>
+</div>
+
+
+ {#<!-- Кнопка вверх-->#}
+
+<div id="button-up">
+    <i class="fa fa-chevron-up"></i>	
+</div>
+
 </body>
 
 <script>
+
+$(document).ready(function() {
+  $("#show_popup_banner").fancybox();
+  if(!readCookie('popupIsShown')){
+    $("#show_popup_banner").trigger('click');
+    createCookie('popupIsShown', true, 1);
+  } 
+});
+
+
+
+
+
     function openMNav() {
     x=document.getElementById("menu_nav");
         x.style.visibility = "visible";

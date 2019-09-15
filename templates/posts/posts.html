@@ -217,7 +217,7 @@
         Архив трансляций
     </a>
     {% endif %}
-    {% if object_list|length %}
+    {% if object_list|length %}        
         {% for object in object_list %}
             {% include "posts/one_post2.html" %}
         {% endfor %}

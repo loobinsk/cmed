@@ -5,10 +5,11 @@ from django.contrib import admin
 from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django.conf import settings
 
-from medtus.models import MaterialVideo, MaterialPhoto, Translation, Feedback, Specialities, Towns, ContentPage, \
+from medtus.models import MaterialVideo, PrivateContentPageUsers, MaterialPhoto, Translation, Feedback, Specialities, Towns, ContentPage, \
     TranslationVisit
 from cuter.cuter import resize_and_crop
 from lenta.views import do_URL
+from account.mixins import CSVTruncateAdmin
 
 
 class PhotoAdmin(admin.ModelAdmin):
@@ -118,10 +119,16 @@ class TownAdmin(MCEFilebrowserAdmin):
 
 
 
-class ContentPageAdmin(admin.ModelAdmin):
-    def has_add_permission(self, request):
-        return not ContentPage.objects.exists()
+class ContentPageAdmin(MCEFilebrowserAdmin):
+    list_display = ('title', 'page_alias')
+    # def has_add_permission(self, request):
+    #     return not ContentPage.objects.exists()
 
+class PrivateContentPageUsersAdmin(CSVTruncateAdmin, admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'speciality', 'city', 'page', 'dt_create')
+    list_filter = ('page',)
+    list_per_page = 100
+    csv_record_limit = 100000
 
 class TranslationVisitAdmin(admin.ModelAdmin):
     list_display = ('dt_create', 'dt_update', 'post', 'user')
@@ -135,4 +142,5 @@ admin.site.register(Specialities, SpecAdmin)
 admin.site.register(Towns, TownAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ContentPage, ContentPageAdmin)
+admin.site.register(PrivateContentPageUsers, PrivateContentPageUsersAdmin)
 admin.site.register(TranslationVisit, TranslationVisitAdmin)

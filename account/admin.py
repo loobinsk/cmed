@@ -208,7 +208,7 @@ class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
     form = MyUserAdminForm
     change_password_form = MyAdminPasswordChangeForm
     list_display = ('id', 'login', 'email', 'firstname', 'lastname', 'surname', 'phone_number', 'town', 'country',
-                    'graduate', 'spec_id', 'createdate',)
+                    'graduate', 'spec_id', 'createdate')
     list_filter = ('town', 'spec_id', 'graduate', 'country')
     search_fields = ('firstname', 'lastname', 'surname', 'email',
                      'town__name', 'spec_id__name', 'graduate__name', 'country__name')
@@ -253,6 +253,10 @@ class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
     def login(self, obj):
         return obj.login
 
+
+class AllMsgAdmin(admin.ModelAdmin):
+    list_filter = ('id', 'msgs', 'datetime', 'unreaded')
+admin.site.register(AllMsg, AllMsgAdmin)
 
 admin.site.register(Timer, TimerAdmin)
 admin.site.register(MyUser, MyUserAdmin)

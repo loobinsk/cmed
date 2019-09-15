@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'medtusdj_db_migrate',
         'USER': 'medtusdj_user',
         'PASSWORD': '71qno0GqH3',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'OPTIONS': {
              "init_command": "SET foreign_key_checks = 0;",
         },

@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView
 
-from .forms import QuestionForm, EssayForm
+from .forms import QuestionForm, EssayForm, QuestionMultipleForm
 from .models import *
 
 
@@ -135,7 +135,7 @@ class QuizMarkingDetail(QuizMarkerMixin, DetailView):
 
 
 class QuizTake(FormView):
-    form_class = QuestionForm
+    form_class = QuestionMultipleForm
     template_name = 'question.html'
 
     @method_decorator(login_required)
@@ -203,7 +203,11 @@ class QuizTake(FormView):
         progress, c = Progress.objects.get_or_create(user=self.request.user, test_id=self.quiz)
         if (self.sitting.progress()[0]==0):
             progress.clear()
+
         guess = form.cleaned_data['answers']
+        if isinstance(guess, list): 
+            guess = guess[0]
+            
         is_correct = self.question.check_if_correct(guess)
         if is_correct is True:
             self.sitting.add_to_score(1)

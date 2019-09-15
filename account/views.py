@@ -361,7 +361,7 @@ def handle_uploaded_file(f, path):
         return False
 
 
-def allmsg(request, **kwargs):
+def allmsg(request, **kwargs):    
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
         xx=re.sub("[?]","",xxx)
@@ -374,10 +374,10 @@ def allmsg(request, **kwargs):
     else:
         users = MyUser.objects.all()
     message=request.POST.get('allmsg')
-    file_content=''
-    file_content=u'Сообщение:\n'+message+u'\nВремя отправки: '+str(timezone.now())+u'\nСообщение отправлено пользователям: \n'
+    # file_content=''
+    # file_content=u'Сообщение:\n'+message+u'\nВремя отправки: '+str(timezone.now())+u'\nСообщение отправлено пользователям: \n'
     for i,user in enumerate(users):
-        file_content+=str(i+1)+u'. '+str(user)+u'\n'
+        # file_content+=str(i+1)+u'. '+str(user)+u'\n'
         msg, created = AllMsg.objects.get_or_create(user=user, type=0)
         msg.unreaded=int(msg.unreaded)+1
         msg.msgs=msg.msgs+message+'|'

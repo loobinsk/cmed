@@ -94,3 +94,17 @@ class Videos(models.Model):
         verbose_name = u'Видео материалл'
         verbose_name_plural = u'Видео материаллы'
 
+    def __unicode__(self):
+        return u"%s" % (self.title)    
+
+class VideoStatistics(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id')
+    video = models.ForeignKey('videos.Videos')
+    user = models.ForeignKey('account.MyUser')
+    createdate = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = u'videostatistics'
+        verbose_name = u'Статистика раздела видео'
+        verbose_name_plural = u'Статистика раздела видео'        
+

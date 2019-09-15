@@ -1,7 +1,7 @@
 /**
  * Created by PekopT on 04.12.14.
  */
-function timerIncrement() {
+ function timerIncrement() {
     jQuery.ajax({
         url: "/account/timer/",
         type: "post",
@@ -95,18 +95,18 @@ $(function () {
         var url = $(this).data('url');
         var csrftoken = getCookie('csrftoken');
         var postData = {'comment_id': comment_id,
-                        'csrfmiddlewaretoken': csrftoken
-        };
-        var self = this;
-        $.post(url, postData, function(data) {
-            if (data == 'OK') {
-                location.reload();
-            } else {
-                alert('Невозможно удалить');
-                $(self).hide();
-            }
-        });
+        'csrfmiddlewaretoken': csrftoken
+    };
+    var self = this;
+    $.post(url, postData, function(data) {
+        if (data == 'OK') {
+            location.reload();
+        } else {
+            alert('Невозможно удалить');
+            $(self).hide();
+        }
     });
+});
 
     $(document).on('click', '.delete_post', function(e) {
         e.preventDefault();
@@ -115,23 +115,23 @@ $(function () {
         var post_type = $(this).data('type');
         var csrftoken = getCookie('csrftoken');
         var postData = {'post_id': post_id,
-                        'type': post_type,
-                        'csrfmiddlewaretoken': csrftoken
-        };
-        var self = this;
-        $.post(url, postData, function(data) {
-            if (data == 'OK') {
-                if ($(self).data('to_main')) {
-                    location.href = '/';
-                } else {
-                    location.reload();
-                }
+        'type': post_type,
+        'csrfmiddlewaretoken': csrftoken
+    };
+    var self = this;
+    $.post(url, postData, function(data) {
+        if (data == 'OK') {
+            if ($(self).data('to_main')) {
+                location.href = '/';
             } else {
-                alert('Невозможно удалить');
-                $(self).hide();
+                location.reload();
             }
-        });
+        } else {
+            alert('Невозможно удалить');
+            $(self).hide();
+        }
     });
+});
 });
 
 
@@ -145,4 +145,60 @@ var showLoader = function (status) {
         $('#preloader').remove();
     }
 }
+
+
+
+// Кнопка наверх
+
+
+$(document).ready(function() { 
+  var button = $('#button-up'); 
+  $(window).scroll (function () {
+    if ($(this).scrollTop () > 300) {
+      button.fadeIn();
+    } else {
+      button.fadeOut();
+    }
+});  
+button.on('click', function(){
+$('body, html').animate({
+scrollTop: 0
+}, 800);
+return false;
+});      
+});
+
+//Поиск
+
+$(document).ready(function() {
+     
+            $(".fa-search").click(function() {
+               $(".content-block-top-block-2-filed").toggle();
+               $(".form-filed-9").focus();
+             });
+ 
+        });
+
+
+// Разворачиваем мобильное меню
+
+$(function() {
+  var ulLi = $('nav ul > li'),
+      fa = $('nav ul > li:last-of-type a .fa');
+  
+   $('nav ul').append('<ol></ol>');
+  
+   $('nav').each(function() {
+     for (var i=0; i <= ulLi.length - 3; i++) {
+       $('nav ul > ol').append("<li>"+ i +"</li>");
+       $('nav ul > ol > li').eq(i).html(ulLi.eq(i+1).html());
+     }
+  });
+
+  $('nav ul > li:last-of-type').on('click', function() {
+    fa.toggleClass('fa-bars');
+    fa.toggleClass('fa-times');
+    $(this).parent().children('ol').slideToggle(500);
+  });
+});
 

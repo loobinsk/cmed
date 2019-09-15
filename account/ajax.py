@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-
+import logging
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 from django.http import HttpResponse
@@ -31,7 +31,10 @@ def timer(request):
         try:
             timers = Timer.objects.get_or_create(user_id=request.user.id, post_id=request.POST.get('id'))
             timers[0].increment()
+            
         except Timer.MultipleObjectsReturned:
+            logging.basicConfig(filename="timers.log", level=logging.INFO)
+            logging.debug("Timer exception worked")
             timers = Timer.objects.filter(user_id=request.user.id, post_id=request.POST.get('id'))[:1].values_list("id",
                                                                                                                    flat=True)
             Timer.objects.exclude(pk__in=list(timers)).delete()

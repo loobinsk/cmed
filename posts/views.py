@@ -159,6 +159,7 @@ def Main(request):
     # trying to sort result by createdate
     object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
     p = Paginator(object_list, paginate_by)
+    
 
     context = RequestContext(request, {
         'object_list': p.page(page),
@@ -206,7 +207,7 @@ def Opinion(request):
         post_format = request.GET.get('format')
         if not post_format:
             post_format = TYPE_LIST[request.path][0]
-
+        
         query = query.filter(type__in=post_format.split(','))
         spec_id = request.GET.get('spec_id')
         if spec_id:
@@ -312,7 +313,7 @@ def Opinion(request):
 
 class PostsList(ListView):
     paginate_by = '5'
-    search = ''
+    search = ''    
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.path == '/posts/':
@@ -326,7 +327,15 @@ class PostsList(ListView):
         if self.search != u'Что ищем?' and self.search != '':
             query = Q(content__icontains=self.search) | Q(title__icontains=self.search)
         else:
-            query = Posts.objects.filter(Q(status=0)).order_by('-createdate')
+            # query = Posts.objects.filter(Q(status=0)).order_by('-createdate')            
+            if TYPE_LIST[self.request.path][0] == '3':
+               query = Posts.objects.filter(Q(status=0)).order_by('createdate')
+            else:
+               query = Posts.objects.filter(Q(status=0)).order_by('-createdate')
+        
+
+
+
         if self.request.is_ajax():
             self.template_name = 'posts/posts_ajax.html'
         else:

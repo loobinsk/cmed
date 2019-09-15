@@ -166,16 +166,16 @@ CREATE TABLE `account_myuser_user_permissions` (
 	CONSTRAINT `myuser_id_refs_id_62ed4079` FOREIGN KEY (`myuser_id`) REFERENCES `account_myuser___` (`id`),
 	CONSTRAINT `permission_id_refs_id_6c32d930` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)) ENGINE=`InnoDB` AUTO_INCREMENT=1 COMMENT='' CHECKSUM=0 DELAY_KEY_WRITE=0;
 
-DROP TABLE IF EXISTS `account_timer`;
-CREATE TABLE `account_timer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_id_refs_id_01e2d4ff` (`post_id`),
-  CONSTRAINT `account_timer_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `medtus_translation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+--DROP TABLE IF EXISTS `account_timer`;
+--CREATE TABLE `account_timer` (
+--  `id` int(11) NOT NULL AUTO_INCREMENT,
+--  `user_id` int(11) NOT NULL,
+--  `post_id` int(11) NOT NULL,
+--  `time` int(11) NOT NULL,
+--  PRIMARY KEY (`id`),
+--  KEY `post_id_refs_id_01e2d4ff` (`post_id`),
+--  CONSTRAINT `account_timer_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `medtus_translation` (`id`)
+--) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE `auth_group` CHANGE COLUMN `name` `name` varchar(80) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL after `id`;
 ALTER TABLE `auth_group` ENGINE=`InnoDB` AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ROW_FORMAT=COMPACT COMMENT='' CHECKSUM=0 DELAY_KEY_WRITE=0;

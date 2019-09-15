@@ -11,7 +11,7 @@ admin.autodiscover()
 from partners.views import PartnersListView
 from photos.views import PGalleriesListView, PGalleriesDetailView
 from django.views.generic.base import RedirectView
-from medtus.views import medtus403, medtus404, medtus500
+from medtus.views import medtus403, medtus404, medtus500, static_page
 
 handler403 = medtus403
 handler404 = medtus404
@@ -73,8 +73,17 @@ urlpatterns = patterns('',
     url(r'^magazines/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
     url(r'^practice/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
 
-    url(r'^trs/$', 'medtus.views.trs', name='trs'),
-     url(r'^about/$', 'medtus.views.education', name='education'),
+    # url(r'^trs/$', 'medtus.views.trs', name='trs'),
+    # url(r'^trs2/$', 'medtus.views.trs2', name='trs2'),
+    # url(r'^trs3/$', 'medtus.views.trs3', name='trs3'),
+    # url(r'^trs4/$', 'medtus.views.trs4', name='trs4'),
+    # url(r'^trs5/$', 'medtus.views.trs5', name='trs5'),
+    # url(r'^mediakit/$', 'medtus.views.mediakit', name='mediakit'),
+    url(r'^about/$', 'medtus.views.education', name='education'),
+
+    url(r'^(?P<page_alias>.+?)/$', 'medtus.views.static_page'),
+
+
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

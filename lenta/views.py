@@ -96,7 +96,7 @@ def videoupload(request):
                 address = do_URL(request.POST['video'])
                 if 'v' not in address:
                     return HttpResponse(
-                        json.JSONEncoder().encode({'message': 'can not get video info', 'result': False}))
+                        json.JSONEncoder().encode({'message': 'can not get video info 1', 'result': False}))
                 address = address['v']
             except:
                 address = request.POST['video']
@@ -110,7 +110,7 @@ def videoupload(request):
                 title = urllib.unquote('"{0}"'.format(content.get('title', ''))).decode('utf8')
             except:
                 return HttpResponse(
-                    json.JSONEncoder().encode({'message': 'can not get video info %s' % address, 'result': False}))
+                    json.JSONEncoder().encode({'message': 'can not get video info 2 %s' % address, 'result': False}))
             path = os.path.join(
                 os.path.join(os.path.join(os.path.join(settings.MEDIA_ROOT, 'temporary'), 'post'), request.user.login),
                 'video')

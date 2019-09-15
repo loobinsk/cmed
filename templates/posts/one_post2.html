@@ -80,7 +80,7 @@
                 {% endif %}
 
             </div>
-            <div class="content-block-center-item-content-redmore-readers">
+            <div class="content-block-center-item-content-redmore-readers" style="{% if id == '3' %}display: none;{% endif %}">
                 {% if object.statistics %}
                     {{ object.statistics.viewings }}
                 {% else %}

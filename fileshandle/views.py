@@ -147,7 +147,7 @@ def OneFileUpload(f, dirname, sizex=0, sizey=0):
                 {'message': u'cannot create thumbnail for {0}'.format(infile), 'result': False})
     else:
         return json.JSONEncoder().encode(
-            {'message': 'cannot upload file {0} - {1}'.format(f.name, path), 'result': False})
+            {'message': u'cannot upload file {0} - {1}'.format(f.name, path), 'result': False})
 
 
 def FileUploadTo(request, dirname, sizex=0, sizey=0):

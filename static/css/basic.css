@@ -420,7 +420,7 @@ h1 { width:320px;
 .content-block-top-block-1 {
 	position: absolute;
     /* float: left; */
-    top: 130px;
+	top: 95px;
     width: 330px;
     margin-left: 5px;
     /* height: 24px; */
@@ -628,7 +628,7 @@ h1 { width:320px;
 }
 .content-block-top-block-2 {
     position: absolute;
-    top: 70px;
+    top: 48px;
     /* float: left; */
     width: 250px;
     height: 24px;
@@ -5202,7 +5202,7 @@ a.link-write:hover{text-decoration:underline;}
     height: auto;
 }
 .page-div.inner .content-block .translation iframe {
-    width:760px;
+    width:100%;
     /*height: 660px;*/
 }
 .archive-link{background-color:#00a499;font-size: 14px;display:block;text-decoration: none !important;margin:0 auto;text-align:center;color:#fff !important;}
@@ -5431,3 +5431,335 @@ a.link-write:hover{text-decoration:underline;}
 	margin-top:10px;
 	float: right;
 }
+
+
+
+.translation{
+	margin-left: 0 !important;
+}
+
+.translation > table{
+	width:100% !important;
+	margin: auto;
+}
+
+#top-right-block .quick_url a{
+	color: #fff;
+}
+
+
+nav ul li a {
+  color: rgb(0, 164, 153);
+  text-decoration: none;
+}
+
+nav ul {
+  background-color: #f0f0f0;
+}
+nav ul > li {
+  padding: 23px 15px;
+  display: inline-block;
+  transition: all .3s ease;
+  margin-left: -5px
+}
+
+nav ul > li > a {
+    text-align: center;
+}
+
+nav ul > img {
+  height: 60px;
+  margin: 15px;
+}
+
+nav ul > i {
+	float: right;
+	font-size: 40px;
+	margin: 27px 23px;
+	color: rgb(0, 164, 153);
+}
+
+nav ul > a {
+	float: right;
+	font-size: 40px;
+	margin: 24px 23px;
+	color: rgb(0, 164, 153) !important;
+} 
+
+nav ul > li:not(:last-of-type):hover {
+  background-color: rgb(0, 164, 153);
+}
+nav ul > li:first-of-type {
+  background-color: #f0f0f0;
+  padding: 12px 20px;
+}
+nav ul > li:last-of-type {
+  float: right;
+}
+nav ul > li:last-of-type a .fa {
+  font-size: 48px;
+  width: 48px;
+  color: #888888;
+}
+
+nav ul > li:last-of-type {
+  position: relative;
+  display: none
+}
+nav ul > ol {
+  /*position: absolute;*/
+  top: 78px;
+  right: 0;
+  background: #f0f0f0;
+  text-align: center;
+  list-style: none;
+  display: none;
+  z-index: 111;
+}
+nav ul > ol > li {
+  width: 80%;
+  color: #FFF;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all .3s ease;
+  text-align: left;
+  margin-left: 10%;
+}
+
+nav ul > ol > li > a{
+    text-decoration: none !important;
+    color: #888888 !important;
+    font-size: 28px;
+}
+
+nav ul > ol > li:hover a {
+  /* margin: 20px; */
+}
+nav ul > ol > li:hover {
+  background: #f0f0f0;
+  cursor: pointer
+}
+nav ul input {
+  opacity: .7;
+  padding: 5px;
+  /*float: right;*/
+  display: none
+}
+/* Start Menue Right */
+
+@media screen and (min-width:425px) {
+  nav {
+    display:none
+  }
+
+  #button-up{
+    display: none;  
+  }
+
+  #button-up span{
+    display: none;  
+  }
+
+}
+
+@media (max-width: 425px){
+
+
+	#button-up {
+		display: none;
+		position: fixed;
+		right: 25px;
+		bottom: 120px;
+		border-radius: 55px;
+		color: #44bb6e;
+		/* background-color: #44bb6e; */
+		text-align: center;
+		font-size: 50px;
+		padding: 20px;
+		/* transition: .3s; */
+		z-index: 111;
+		width: 65px;
+		height: 65px;
+	}
+ 
+
+
+	.left-block-content{
+		display: none;
+	}
+	.content-block-right{
+		display: none;
+	}
+	#top-right-block{
+		display: none;
+	}
+	.page-div.inner{
+		width: 100%;
+	}
+	.page-div{
+		background-image: none;
+	}
+	body{
+		min-width: 540px;
+	}
+
+
+	nav ul > li:not(:first-child) {
+    display:none
+  }
+  nav ul > li:last-of-type {
+    display: block;
+    margin-left: 15px;
+  }
+  nav ul input {
+    display: inline
+  }
+
+
+.left-block-content-links-item-count{
+	float: right;
+    margin-top: 8px;
+    position: relative;
+}
+
+.left-block-content-links-item-count span{
+	font-size: 15px;
+}
+
+.content-block-top-block-1-filed-search {
+    position: absolute;
+    top: 7px;
+    right: 1px;
+    width: 40px;
+    height: 40px;
+    background-image: url(../images/basic/content-block-top-block-1-filed-search.png);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.content-block-top-block-2-filed{
+	position: absolute;
+    z-index: 111;
+    right: 0;
+    width: 100%;
+    height: auto;
+}
+
+.form-filed-9 {
+    width: 100%;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    color: #666666;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    border: 3px solid #f0f0f0;
+    background-color: #fcfcfc;
+    opacity: 1;
+}
+
+.form-filed-9:hover {
+    background-color: #fff;
+}
+
+.content-block{
+	width: 100% !important;
+}
+
+.left-block-content-profile-item-left-photo-bg {
+	float: left;
+	margin-right: 20px;
+	/* margin-top: 50px; */
+}
+
+.left-block-content-profile-item-right-exit{
+	background-image: none;
+}
+
+.block-content{
+	color: #888;
+	/* margin-top: 50px; */
+}
+
+nav ul > ol{
+	padding-bottom: 50px;
+}
+
+.register-form .input-placeholder-text,
+.register-form input[type="password"],
+.register-form input[type="text"] {
+    display: block;
+    font-size: 30px;
+    line-height: 15px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    color: #2c2c2c;
+    padding: 6px 4px 7px;
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+}
+
+.register-form label {
+    display: block;
+    color: #999;
+	font-size: 16px;
+}
+
+.register-form .row label {
+	font-size: 16px;
+	color: #888;
+}
+
+.register-form .row .btn, nav .btn {
+    float: right;
+    color: #fff;
+    background: #00a499;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 15px 20px;
+    margin: 0 6px 0 0;
+    font-size: 21px;
+    line-height: 15px;
+    text-decoration: none;
+}
+
+nav hr {
+	margin: 15px 0;
+}
+
+.register-form .link-holder {
+    text-align: left;
+    padding: 6px 0 21px;
+}
+
+.register-form .link-holder .link {
+    color: #888;
+    font-size: 16px;
+    line-height: 14px;
+    font-style: italic;
+}
+
+.translation > table{
+	width:100% !important;
+	margin: auto;
+}
+
+.page-div.inner .content-block .translation iframe{
+	width: 100%;
+}
+
+}
+	
+

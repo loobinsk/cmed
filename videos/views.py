@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 from django.db.models import Q, Sum
 
-from videos.models import Videos
+from videos.models import Videos, VideoStatistics
 from medtus.models import Specialities, Statistics, MaterialPhoto, MaterialVideo
 from account.models import MyUser
 from medtus.models import Visited
@@ -74,6 +74,12 @@ class DetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        video = Videos.objects.get(id=self.kwargs['pk'])  
+
+        if not user.is_anonymous():
+            VideoStatistics.objects.create(video=video, user=user)
+        
         statistics = Statistics.objects.filter(material_id=self.kwargs['pk'], service_id=10)
         if statistics:
             statistics[0].viewings = statistics[0].viewings + 1
