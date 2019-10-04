@@ -212,11 +212,13 @@
         </div>    {% endif %}
 {% endif %}{% endif %}{% endblock %}
 {% block content %}
+        {% comment %}
         {% if show_archive %}
         <a href="{{ archive_url }}" class="content-block-right-anons-item archive-link">
         Архив трансляций
     </a>
     {% endif %}
+    {% endcomment %}
     {% if object_list|length %}        
         {% for object in object_list %}
             {% include "posts/one_post2.html" %}

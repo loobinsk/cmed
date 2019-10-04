@@ -20,8 +20,13 @@
 {% endblock %}
 {% block content %}
 <!-- Центральная колонка -->
+        {% if msg %}
 		Массовое сообщение {{ msg }}!<br>
-        <a href="{% static 'sending.log' %}">Лог отправки</a>
+        {% endif %}
+        Логи отправки:<br>
+        {% for logfile in log_files %}
+            <a href="/static/{{ logfile }}" target="_blank">{{ logfile }}</a><br>
+        {% endfor %}
     {# {{ xurl }} #}
 
 {% endblock %}

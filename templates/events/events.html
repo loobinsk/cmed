@@ -7,91 +7,111 @@
     <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
 {% endblock %}
 {% block top_block %}
-    <div class="content-block-top-block-1-window-filter" id="window-filter">
-        <div class="content-block-top-block-1-window-filter-content">
-            <div class="quick_urls" style="top: 140px; position: absolute; padding: 5px;">
+      {% if show_filter|default_if_none:True %} {# Если фильтр выключен во вьюхе то эта форма нам не нужна. #}
+          <div class="content-block-top-block-1-window-filter" id="window-filter">
+            <div class="content-block-top-block-1-window-filter-content">
+              <div class="content-block-top-block-1-window-filter-content-left">
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-1" type="checkbox" name="Результаты фильтрации" value="Все" hidden/>
+                  <label for="checkbox-1">Все</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-2" type="checkbox" name="1" value="Новости" hidden/>
+                  <label for="checkbox-2">Новости</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-3" type="checkbox" name="2" value="Статьи" hidden/>
+                  <label for="checkbox-3">Статьи</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-4" type="checkbox" name="12" value="Клинические случаи" hidden/>
+                  <label for="checkbox-4">Клинические случаи</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-5" type="checkbox" name="4" value="Вопрос коллегам" hidden/>
+                  <label for="checkbox-5">Вопрос коллегам</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-6" type="checkbox" name="5" value="Частное мнение" hidden/>
+                  <label for="checkbox-6">Частное мнение</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-7" type="checkbox" name="9" value="Обсуждение препарата" hidden/>
+                  <label for="checkbox-7">Обсуждение препарата</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-8" type="checkbox" name="99" value="Видеоматериалы" hidden/>
+                  <label for="checkbox-8">Видеоматериалы</label>
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
+                  <input id="checkbox-9" type="checkbox" name="88" value="Мероприятия" hidden/>
+                  <label for="checkbox-9">Мероприятия</label>
+                </div>
+              </div>
+              <div class="content-block-top-block-1-window-filter-content-right">
+                <div class="content-block-top-block-1-window-filter-content-right-text">
+                  Воспользуйтесь списком,<br/>
+                  для того чтобы выбрать<br/>
+                  нужную Вам специальность<br/>
+                  материалов в ленте
+                </div>
+                <div class="content-block-top-block-1-window-filter-content-right-list">
+                  <div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
+                  </div>
+                  <div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all"
+                       id="filter-scroll">
+                    <div class="filter-scroll-item" id="list-"><span>Все специальности</span></div>
+                    {% for speciality in specialities_list %}
+                      <div class="filter-scroll-item" id="list-{{ speciality.id }}"><span>{{ speciality.name }}</span>
+                      </div>{% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-block-top-block-1-window-filter-bottom">
+              <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
+            </div>
+          </div>
+        {% endif %}
+
+            <div class="content-block-top-block-1">
+          {% if show_filter|default_if_none:True %}
+            {% if isfilter %}
+              {% if isfilter == 'Y' %}
+                <span>Фильтр ленты публикаций:</span>
+                <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+                  <div class="content-block-top-block-1-filed-arrow"></div>
+                  <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+                </div>
+              {% endif %}
+            {% else %}
+              {% block filter %}
+                <span>Фильтр ленты публикаций:</span>
+                <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
+                  <div class="content-block-top-block-1-filed-arrow"></div>
+                  <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
+                </div>
+              {% endblock %}
+            {% endif %}
+          {% endif %}
+        </div>
+
+        {% if show_search|default_if_none:True %}
+          <div class="content-block-top-block-2">
+            <span>Поиск по слову:</span>
+            <form class="content-block-top-block-2-filed">
+              <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
+              <input type="text" name="search" class="form-filed-9" value="{{ search|default:'' }}"
+                     placeholder="Что ищем?"/>
+            </form>
+          </div>
+        {% endif %}
+        <div class="quick_urls" style="top: 150px; position: absolute; padding: 5px;">
             <div class="quick_url"><a href="/groups/305/">Информация для менеджеров</a></div>
             <div class="quick_url"><a href="/contacts">Контакты</a></div>
         </div>
-            <div class="content-block-top-block-1-window-filter-content-left">
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-1" type="checkbox" name="Мероприятия" uri="https://vrachivmeste.ru/events/" value="Все"
-                           checked
-                           hidden/>
-                    <label for="checkbox-1">Все</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-2" type="checkbox" name="1" value="Вебинар" hidden checked/>
-                    <label for="checkbox-2">Вебинар</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-3" type="checkbox" name="2" value="Конференция" hidden checked/>
-                    <label for="checkbox-3">Конференция</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-4" type="checkbox" name="3" value="Симпозиум" hidden checked/>
-                    <label for="checkbox-4">Симпозиум</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-5" type="checkbox" name="5" value="Семинар" hidden checked/>
-                    <label for="checkbox-5">Семинар</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-6" type="checkbox" name="6" value="Онлайн-трансляция" hidden
-                           checked/>
-                    <label for="checkbox-6">Онлайн-трансляция</label>
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-left-checkbox">
-                    <input class="default" id="checkbox-11" type="checkbox" name="11" value="Выставка" hidden
-                           checked/>
-                    <label for="checkbox-11">Выставка</label>
-                </div>
-            </div>
-            <div class="content-block-top-block-1-window-filter-content-right">
-                <div class="content-block-top-block-1-window-filter-content-right-text">
-                    Воспользуйтесь списком,<br/>
-                    для того чтобы выбрать<br/>
-                    нужную Вам специальность<br/>
-                    материалов в ленте
-                </div>
-                <div class="content-block-top-block-1-window-filter-content-right-list">
-
-                    <div class="content-block-top-block-1-window-filter-content-right-list-all-item" id="list-first">
-                    </div>
-                    <div class="filter-scroll content-block-top-block-1-window-filter-content-right-list-all"
-                         id="filter-scroll">
-                        <div class="filter-scroll-item" id="list-"><span>Все специальности</span></div>
-                        {% for speciality in specialities_list %}
-                            <div class="filter-scroll-item" id="list-{{ speciality.id }}">
-                                <span>{{ speciality.name }}</span>
-                            </div>{% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content-block-top-block-1-window-filter-bottom">
-            <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
-        </div>
-    </div>
-    <div class="content-block-top-block-1">
-        <span style="font-size: 13px;">Поиск по специальности:</span>
-
-        <div class="content-block-top-block-1-filed" title="Изменить фильтр публикаций" id="filter">
-            <div class="content-block-top-block-1-filed-arrow"></div>
-            <input type="text" name="filter" id="filter-value" class="form-filed-8"/>
-        </div>
-    </div>
-    <div class="content-block-top-separator"></div>
-    <div class="content-block-top-block-2">
-        <span style="font-size: 13px;">Поиск по слову:</span>
-
-        <form class="content-block-top-block-2-filed">
-            <div class="content-block-top-block-1-filed-search" title="Начать поиск"></div>
-            <input type="text" name="search" class="form-filed-9" placeholder="Что ищем?"
-                   value="{{ search|default:'' }}"/>
-        </form>
-    </div>
-    <div class="content-block-top-separator"></div>{% endblock %}
+    
+{% endblock %}
 {% block filter_content %}
     <form class="search-events" action="/events" id="searchEventForm">
         {% if user.is_staff %}

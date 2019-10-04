@@ -2,7 +2,6 @@
 import httplib
 import os
 import random
-
 import datetime
 from PIL import Image
 from django import template
@@ -191,7 +190,7 @@ def IInvitedThem(user):
         s = u'%s врачей' % count
     return invite.format(reverse('mycircle'), u'Вы пригласили в свой круг ', 'active',
                          s) + '<div class="content-block-top-separator"></div>'
-
+                         
 
 @register.simple_tag
 def IveBeenInvited(user):
@@ -327,7 +326,7 @@ def allmsgsdate_cut(string):
     date=list()
     for msg in msgs:
         if msg!='':
-            date.append(datetime.datetime.strptime(msg, "%Y-%m-%d %H:%M:%S.%f+00:00"))
+            date.append(datetime.datetime.strptime(msg.split(".")[0], "%Y-%m-%d %H:%M:%S"))
     return date
 
 

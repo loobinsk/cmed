@@ -1564,6 +1564,20 @@ height:33px;
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
 }
+.content-block-center-item-head-theme-left {
+	position: relative;
+	float: left;
+	height: 50px;
+	font-size: 6px;
+	font-weight: bold;
+	text-align: left;
+	display: table;
+	vertical-align: middle;
+	color: #000000;
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+}
+
 .content-block-center-item-head-theme em{
 	font-size:12px;
 	line-height:14px;
@@ -1572,7 +1586,9 @@ height:33px;
 	display:block;
 	margin:-2px 0 0;
 }
+
 .content-block-center-item-head-theme.style01{padding-right:40px;}
+
 .content-block-center-item-head-theme span {
 	display: table-cell; 
 	vertical-align: inherit;

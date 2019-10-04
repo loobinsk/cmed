@@ -182,7 +182,7 @@ def Main(request):
 
 def Opinion(request):
     paginate_by = 5
-    page = 1
+    page = 100
     search = ''
     if 'search' in request.GET:
         search = request.GET['search'].strip()

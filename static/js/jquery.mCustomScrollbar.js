@@ -231,7 +231,8 @@ plugin home: http://manos.malihu.gr/jquery-custom-content-scroller
 					mCustomScrollBoxH=mCustomScrollBox.height(),
 					mCSB_containerH=mCSB_container.outerHeight();
 			}
-			if(mCSB_containerH>mCustomScrollBoxH && !$this.data("horizontalScroll") && !$(document).data("mCS-is-touch-device")){ /*content needs vertical scrolling*/
+			if(mCSB_containerH>mCustomScrollBoxH && //!$this.data("horizontalScroll") && 
+			!$(document).data("mCS-is-touch-device")){ /*content needs vertical scrolling*/
 				mCSB_scrollTools.css("display","block");
 				var mCSB_draggerContainerH=mCSB_draggerContainer.height();
 				/*auto adjust scrollbar dragger length analogous to content*/

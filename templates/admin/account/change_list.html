@@ -9,14 +9,16 @@
  <script type="text/javascript" src="{% static 'js/windows.js' %}"></script>
                <script type="text/javascript" src="{% static 'js/description_textareas.js' %}"></script>
 <div id="footer">
+<div><a href="/account/allmsgs/"><b>Логи отправки</b></a></div><br>
 <h2>Отправить сообщение пользователям:</h2>
-
     <form class="dialogs-form" action="/account/allmsg/" method="post">
     {% csrf_token %}
     <textarea  name="allmsg" cols="30" rows="10" autofocus></textarea>
 	<input type="submit" value="отправить" >
 	<input name="url" type="hidden" value="{{ request.get_full_path }}">
-	</form></div>
+	</form>    
+    </div>
+  
     {% endif %}
 
 
@@ -27,6 +29,7 @@
  <script type="text/javascript" src="{% static 'js/windows.js' %}"></script>
                <script type="text/javascript" src="{% static 'js/description_textareas.js' %}"></script>
 <div id="footer">
+<div><a href="/account/allmsgs/"><b>Логи отправки</b></a></div><br>
 <h2>Отправить сообщение пользователям:</h2>
 
     <form class="dialogs-form" action="/account/allmsgcodes/" method="post">
@@ -36,7 +39,8 @@
         <textarea  name="codes" cols="30" rows="10" style="width:40%" required></textarea><br>
 	<input type="submit" value="отправить" >
 	<input name="url" type="hidden" value="{{ request.get_full_path }}">
-	</form></div>
+    </form></div>
+    
     {% endif %}
 					{% endblock %}
 

@@ -24,8 +24,8 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 SECRET_KEY = '@=6=2e@!f-vj&o*@u97#tgm0q$(ftxu(85=n*2-6vygardy%-y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['127.0.0.1', 'vrvm.ru', 'vrachivmeste.ru', 'www.vrachivmeste.ru', '87.242.77.90']

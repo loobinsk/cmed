@@ -542,7 +542,7 @@
           <div class="left-block-content-links-item">
             <span><a href="{% url 'lecturers' %}" target="_parent" title="Лекторы">Лекторы</a></span>
           </div>
-          <div class="left-block-content-links-item break">
+          <div class="left-block-content-links-item">
             <span><a href="{% url 'opinion' %}" target="_parent" title="Частное мнение">Частное мнение</a></span>
           </div>
           {#        <div class="left-block-content-links-item">#}
@@ -562,7 +562,7 @@
             <span><a href="/vacancies" target="_parent" title="Резюме и вакансии">Резюме и
               вакансии</a></span>{% count_new_events 'Posts' 8 %}
           </div>
-          <div class="left-block-content-links-item break">
+          <div class="left-block-content-links-item">
             <span><a href="/practice" target="_parent" title="Опросы и исследования">Опросы и
               исследования</a></span> {% count_new_events 'Posts' 11 %}
           </div>
@@ -723,10 +723,10 @@
 
 
     {% block center_column %}
-      <div class="content-block-center">
-        <div style="width: 100%; vertical-align: middle;  font-size: 18px;  display: table;">    
+    <div style="width: 100%; vertical-align: middle;  font-size: 18px;  display: table;">    
       {% banner_group 'center_side' %}
     </div>
+      <div class="content-block-center">
         {% if not user.is_authenticated and not opinion %}
         <div class="inform-area">
           <span class="title">Чтобы увидеть полный текст, посмотреть видео, оставить комментарий, необходимо </span>

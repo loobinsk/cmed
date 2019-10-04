@@ -2,6 +2,11 @@
 <div class="content-block-center-item">
     <!-- Автор и тема поста -->
     <div class="content-block-center-item-head">
+	<div class="content-block-center-item-head-theme-left">
+	<span>
+	{% online %}
+	</span>
+	</div>
         {% if id != '3' %}
             <div class="content-block-center-item-head-photo-bg">
                 {% if object.user_id.id %}

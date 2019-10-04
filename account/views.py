@@ -16,6 +16,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.utils import timezone
+from django.db.transaction import commit_on_success
 
 from quiz.models import Quiz
 from account.forms import RegisterStep1Form, RegisterStep2Form, RegisterStep3Form
@@ -361,6 +362,19 @@ def handle_uploaded_file(f, path):
         return False
 
 
+def logfiles():
+    logpath="/var/www/vrachivmeste.ru/medtus.djangohost.name/static/"
+    logfiles=[]
+    onlyfiles = [f for f in os.listdir(logpath) if os.path.isfile(os.path.join(logpath, f))]
+    for file in onlyfiles:
+        if "sending" in file:
+            logfiles.append(file)
+    return logfiles
+    
+def allmsgs(request, **kwargs):    
+    return render(request, 'circle/MassDialog.html',{'log_files': logfiles()})
+
+@commit_on_success    
 def allmsg(request, **kwargs):    
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
@@ -374,23 +388,24 @@ def allmsg(request, **kwargs):
     else:
         users = MyUser.objects.all()
     message=request.POST.get('allmsg')
-    # file_content=''
-    # file_content=u'Сообщение:\n'+message+u'\nВремя отправки: '+str(timezone.now())+u'\nСообщение отправлено пользователям: \n'
-    for i,user in enumerate(users):
-        # file_content+=str(i+1)+u'. '+str(user)+u'\n'
+    file_content=''
+    file_content=u'Сообщение:\n'+message+u'\nВремя отправки: '+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+u'\nСообщение отправлено '+str(len(users))+u' пользователям: \n'
+    for i,user in enumerate(users):        
         msg, created = AllMsg.objects.get_or_create(user=user, type=0)
         msg.unreaded=int(msg.unreaded)+1
         msg.msgs=msg.msgs+message+'|'
-        msg.datetime=str(msg.datetime)+str(timezone.now())+'|'
+        msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
         msg.type=0
         msg.save()
-    # f = open(os.path.join(settings.STATIC_ROOT,
-    #                       'sending.log'), 'w+')
-    # f.write(file_content.encode("utf-8"))
-    # f.close()
-    htmsg="отправлено"
-    return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg})
+        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u' - доставлено\n'
+    f = open(os.path.join(settings.STATIC_ROOT,
+                           'sending-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')                   
+    f.write(file_content.encode("utf-16"))
+    f.close()
+    htmsg="отправлено "+str(len(users))+" пользователям"
+    return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg, 'log_files': logfiles()})
 
+@commit_on_success
 def allmsgcodes(request, **kwargs):
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
@@ -428,22 +443,21 @@ def allmsgcodes(request, **kwargs):
     if len(codes)<len(users):
         htmsg="не отправлено, недостаточно кодов: "+str(len(codes))+" < "+str(len(users))
         return render(request, 'circle/MassDialog.html',{'msg':htmsg})
-    file_content=u'Сообщение:\n'+message+u'\nВремя отправки:'+str(timezone.now())+u'\nСообщение с кодами отправлено пользователям: \n'
-    for i,user in enumerate(users):
-        file_content+=str(i+1)+u'. '+str(user).decode("utf-8")+u' код:'+codes[i]+u'\n'
+    file_content=u'Сообщение:\n'+message+u'\nВремя отправки:'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+u'\nСообщение с кодами НМО отправлено '+str(len(users))+u' пользователям: \n'
+    for i,user in enumerate(users):        
         msg, created = AllMsg.objects.get_or_create(user=user, type=1)
         msg.unreaded=int(msg.unreaded)+1
         msg.msgs=msg.msgs+message+u'<br><b>КОД: </b>'+codes[i]+'|'
-        msg.datetime=str(msg.datetime)+str(timezone.now())+'|'
-        msg.type=1
+        msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
+        msg.type=1        
         msg.save()
+        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u' код:'+codes[i]+u' - доставлено\n'
     f = open(os.path.join(settings.STATIC_ROOT,
-                          'sending.log'), 'w+')
-    f.write(file_content.encode("utf-8"))
+                          'sending-NMO.log-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')
+    f.write(file_content.encode("utf-16"))
     f.close()
-
-    htmsg="отправлено"
-    return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg})
+    htmsg="отправлено "+str(len(users))+" пользователям"
+    return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg, 'log_files': logfiles()})
 
 
 @csrf_exempt
