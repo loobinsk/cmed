@@ -559,6 +559,18 @@ def online2():
     else:
         return u''
 
+@register.simple_tag
+def online3(trans_id):
+    on = Settings.objects.all()[:1]
+    if on.exists() and on[0].online:
+        if on[0].translation and on[0].translation==trans_id:
+            from django.core.urlresolvers import reverse
+            url = reverse('detailtranslation', kwargs={'pk': on[0].translation.pk})
+            return u'<div class="left-block-content-links-item-count" style="top: 2px;right: -7px;"><a href="{url}"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></a></div>'.format(
+                url=url)
+    else:
+        return u''
+
 @register.simple_tag(takes_context=True)
 def count_new_events(context, model, service_id=None):
     count = 0
