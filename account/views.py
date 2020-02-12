@@ -454,10 +454,10 @@ def allmsgcodes(request, **kwargs):
         msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
         msg.type=1        
         msg.save()
-        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+str(user.firstname.encode('ascii', 'ignore').decode('ascii'))+u' '+\
-                      str(user.lastname.encode('ascii', 'ignore').decode('ascii'))+u', '+\
-                      str(user.spec_id.name.encode('ascii', 'ignore').decode('ascii'))+u', '+str(user.town.name.encode('ascii', 'ignore').decode('ascii'))+u', '+\
-                      str(user.country.name.encode('ascii', 'ignore').decode('ascii'))+\
+        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')+u' '+\
+                      user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
+                      user.spec_id.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
+                      user.country.name.encode('UTF-8', 'ignore').decode('UTF-8')+\
                       u' код:'+codes[i]+u' - доставлено\n'
     f = open(os.path.join(settings.STATIC_ROOT,
                           'sending-NMO.log-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')
