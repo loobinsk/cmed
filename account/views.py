@@ -397,10 +397,9 @@ def allmsg(request, **kwargs):
         msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
         msg.type=0
         msg.save()
-        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+str(user.firstname.encode('ascii', 'ignore').decode('ascii'))+u' '+\
-                      str(user.lastname.encode('ascii', 'ignore').decode('ascii'))+u', '+\
-                      str(user.spec_id.name.encode('ascii', 'ignore').decode('ascii'))+u', '+str(user.town.name.encode('ascii', 'ignore').decode('ascii'))+u', '+\
-                      str(user.country.name.encode('ascii', 'ignore').decode('ascii'))+u' - доставлено\n'
+        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+str(user.firstname)+u' '+\
+                      str(user.lastname)+u', '+str(user.spec_id.name)+u', '+str(user.town.name)+u', '+\
+                      str(user.country.name)+u' - доставлено\n'
     f = open(os.path.join(settings.STATIC_ROOT,
                            'sending-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')                   
     f.write(file_content.encode("utf-16"))
