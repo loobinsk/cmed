@@ -20,6 +20,7 @@
 {% endblock %}
 {% block content %}
 <!-- Центральная колонка -->
+        {% if user.is_authenticated %}
         {% if msg %}
 		Массовое сообщение {{ msg }}!<br>
         {% endif %}
@@ -28,5 +29,5 @@
             <a href="/static/{{ logfile }}" target="_blank">{{ logfile }}</a><br>
         {% endfor %}
     {# {{ xurl }} #}
-
+        {% endif %}
 {% endblock %}
