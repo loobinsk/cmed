@@ -263,7 +263,7 @@ LOGGING = {
         'production_file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'main.log',
+            'filename': '_logging_main.log',
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 7,
             'formatter': 'main_formatter',
@@ -271,7 +271,7 @@ LOGGING = {
         'debug_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'main_debug.log',
+            'filename': '_logging_main_debug.log',
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 7,
             'formatter': 'main_formatter',
