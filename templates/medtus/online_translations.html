@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% load account_tags staticfiles %}
+{% block title_page %}{{ title|striptags }}{% endblock %}
+{% block title %}{{ title|safe }}{% endblock %}
+{% block js_page %}
+    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+    <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+{{ type_is }}
+{% block filter_content %}
+{% endblock %}
+{% block content %}
+    {% if online_translations|length %}        
+        {% for object in online_translations %}
+            {% include "medtus/one_translation.html" %}
+        {% endfor %}
+    {% else %}
+        <div class="content-block-center-item">
+            <div class="content-block-center-item-head"></div>
+            <div class="content-block-center-item-content" style="width:800px;">
+                <p>По заданным критериям нет материалов!</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+<style type="text/css">
+    br{
+        display:none!important;
+    }
+</style>

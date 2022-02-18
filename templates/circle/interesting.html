@@ -14,26 +14,26 @@
   {% autoescape off %}{{ out }}{% endautoescape %}
   <!-- END OUT -->
   <!-- object_list -->
+    <div id="lenta">
   {% for object in object_list %}
-    {% if object.template = 'posts' %}
+    {% if object.template == 'posts' %}
       {% include 'posts/one_post.html' with circle=True %}
     {% endif %}
-    {% if object.template = 'videos' %}
+    {% if object.template == 'videos' %}
       {% include 'videos/one_videos.html' with circle=True %}
     {% endif %}
-    {% if object.template = 'events' %}
+    {% if object.template == 'events' %}
       {% include 'events/one_events.html' with circle=True %}
     {% endif %}
-    {% if object.template = 'PGalleries' %}
+    {% if object.template == 'PGalleries' %}
       {% include 'photos/photo_ajax.html' with circle=True %}
     {% endif %}
-    {% if object.template = 'Records' %}
+    {% if object.template == 'Records' %}
       {% include 'records/records.html' with circle=True %}
     {% endif %}
   {% endfor %}
-  <div id="preloaderBlock"
-       style="background:url({% static 'images/preloader.gif' %}) no-repeat; height:128px; background-position: center;">
-    <input type="hidden" name="page" value={{ page }}/></div>
+    </div>
+<button id="next10" class="btn-default btn m-t-50 m-auto ">Показать еще</button>
 
   <script>
     function SendComment(result_id, form_id, url) {
@@ -89,7 +89,10 @@
         $.ajax({
           type: 'get',
           url: "{{ path }}",
-          data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(), 'search': $('input[name="search"]').val()},
+          data: {	'page': thisPageNum,
+					//'spec_id': spec_id,
+					//'format': format.join(),
+					'search': $('input[name="search"]').val()},
           success: function (data) {
             $("#preloaderBlock").remove();
             page = $(data).find('input[name="page"]').val();
@@ -109,6 +112,42 @@
         });
       }
     }
+
+
+        </script>
+
+<script>
+	var thisWork = 1;
+    thisPageNum = 2;
+	$('#next10').click(function (){ showLoader(true);
+		if (thisWork == 1) {
+			thisWork = 0;
+			jQuery.ajax({
+			  type: 'get',
+              url: "{{ path }}",
+              data: {'page': thisPageNum, 'spec_id': '', 'format': '', 'search': $('input[name="search"]').val()},
+				success: function (data) {
+					//var page = $(data).find('input[name="page"]').val();
+					//if (page) {
+						showLoader(false);  $(data).appendTo("#lenta");
+						thisPageNum+=1;
+						thisWork = 1;
+						$('.content-block-center-item-content img').each(function (index) {
+						});
+						$('.content-block-center-item-content hr').each(function (index) {
+							this.style.width = "100%";
+						});
+					//}
+				},
+				error: function() {
+
+				}
+			});
+		}
+	});
+    </script>
+
+<script>
 
     var scrH = $(window).height();
     var scrHP = $(".content-block-center").height();
@@ -155,7 +194,7 @@
           alert(error);
         } else {
           $.ajax({
-            url: '{% url "lenta.views.fileupload" %}',
+            url: '{% url "fileupload" %}',
             type: 'POST',
             xhr: function () {
               var myXhr = $.ajaxSettings.xhr();

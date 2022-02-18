@@ -1,8 +1,8 @@
 import hashlib
 
 from django.contrib.auth.hashers import BasePasswordHasher, mask_hash
-from django.utils.datastructures import SortedDict
-
+#from django.utils.datastructures import SortedDict
+from collections import OrderedDict as SortedDict
 
 class MySQLHasher(BasePasswordHasher):
     algorithm = "mysqlsha1_sha1"

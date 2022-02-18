@@ -4,19 +4,20 @@ from datetime import datetime, timedelta
 import os
 import json
 import re
+import sys
 
 from django.db.models import Count
 from django.template import RequestContext
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
 from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.utils import timezone
-from django.db.transaction import commit_on_success
+from django.db.transaction import atomic
 
 from quiz.models import Quiz
 from account.forms import RegisterStep1Form, RegisterStep2Form, RegisterStep3Form
@@ -24,10 +25,10 @@ from .models import MyUser, AdditionalImage, AllMsg
 from medtus.models import Specialities, Towns, Countries
 from cuter.cuter import resize_and_crop
 from fileshandle.views import FileUploadTo
+from simplejson import dumps, loads
 
 size = settings.AVATAR_SIZE
 logger = logging.getLogger(__name__)
-
 step2_form = ""
 
 
@@ -37,13 +38,14 @@ def user_logout(request):
 
 
 def user_login(request):
-    context = RequestContext(request)
-    error = ''
+    error=''
     if request.method == 'POST':
         username = request.POST['login']
         password = request.POST['password']
+        #print(password)
         try:
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
+            print(user)
         except (MultipleObjectsReturned, UnicodeEncodeError):
             user = None
         if user is not None:
@@ -58,6 +60,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
+
                 if request.META.get('HTTP_REFERER', False) and 'account/login' not in request.META.get('HTTP_REFERER'):
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                 else:
@@ -69,16 +72,14 @@ def user_login(request):
         else:
             # Bad login details were provided. So we can't log the user in.
             error = u'<span class="inform-error">Логин или пароль ошибочны!  ' \
-                    u'<br>попробуйте ввести пароли еще раз.</span>'
-    return render_to_response(
-        'account/login.html',
-        {'error': error},
-        context)
+                    u'<br>попробуйте ввести их еще раз.</span>'
+    return render(request,
+        'account/login.html',{'error': error})
 
-
+@csrf_protect
 def password_forgot(request, **kwargs):
-    context = RequestContext(request)
     error = ''
+    context = RequestContext(request)
     if request.method == 'POST':
         email = request.POST['email']
         user = MyUser.objects.filter(email=email)
@@ -96,29 +97,28 @@ def password_forgot(request, **kwargs):
                 from settings.views import send_email
                 send_email(request, email, 'forgot_email', u'Восстановление пароля на vrvm.ru', token=token.token)
 
-                return render_to_response(
+                return render(request,
                     'account/forgot.html',
                     {
                         'error': error,
                         'sent': True
                     },
-                    context
+                    context.flatten()
                 )
             else:
                 error = u'Аккаунт не активен'
         else:
             error = u'Аккаунта с такой почтой у нас нет.'
 
-        return render_to_response(
+        return render(request,
             'account/forgot.html',
-            {'error': error},
-            context
+             { 'error': error},
+                    context.flatten()
         )
     else:
-        return render_to_response(
+        return render(request,
             'account/forgot.html',
-            {'error': error},
-            context
+                    context.flatten()
         )
 
 
@@ -127,12 +127,10 @@ def password_change(request, **kwargs):
     from datetime import timedelta
     from django.utils import timezone
     from django.core.urlresolvers import reverse
-
     context = RequestContext(request)
     params = {'error': '', 'token': kwargs.get('token', ''), 'show_form': True}
     token = PassToken.objects.filter(token=kwargs.get('token'))
     fift_min_ago = timezone.now() - timedelta(minutes=120)
-
     if token.exists():
         if token.first().time > fift_min_ago:
             if request.method == 'POST':
@@ -165,10 +163,10 @@ def password_change(request, **kwargs):
         params['show_form'] = False
         params['error'] = u'Ссылка не действительна. <a href="{url}">Запросите ссылку еще раз</a>'.format(url=reverse('forgot'))
 
-    return render_to_response(
+    return render(request,
         'account/change.html',
         params,
-        context
+	context.flatten()
     )
 
 
@@ -181,54 +179,58 @@ def agreement(request):
 
     context = RequestContext(request)
 
-    return render_to_response(
+    return render(request,
         'account/agreement.html',
-        {'content': content},
-        context)
+        {'content': content}
+        )
 
 
 def register1(request):
     # Like before, get the request's context.
-    context = RequestContext(request)
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('account.views.register4'))
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('register4'))
     if request.method == 'POST':
         step1_form = RegisterStep1Form(data=request.POST)
         if step1_form.is_valid(request):
-            return HttpResponseRedirect(reverse('account.views.register2'))
+            return HttpResponseRedirect(reverse('register2'))
     else:
         step1_form = RegisterStep1Form()
     # Render the template depending on the context.
-    return render_to_response(
+    return render(request,
         'account/register.html',
-        {'register_form': step1_form.render(request), 'step1_active': 'active', 'step': 1},
-        context)
+        {'register_form': step1_form.render(request), 'step1_active': 'active', 'step': 1}
+        )
 
 
 def register2(request):
     # Like before, get the request's context.
-    context = RequestContext(request)
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('account.views.register4'))
+    if request.method == 'GET' and request.is_ajax():
+        town_list = Towns.objects.filter(country_id=request.GET.get('country')).order_by('name')
+        out = []
+        out.append(u'<option value="0">Выберите город</option>')
+        for town in town_list:
+            out.append(u'<option value="{0}">{1}</option>'.format(town.id, town.name))
+        return HttpResponse(out)
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('register4'))
     step2_form = RegisterStep2Form()
     if request.method == 'POST':
         step2_form = RegisterStep2Form(data=request.POST)
         if step2_form.is_valid(request):
-            return HttpResponseRedirect(reverse('account.views.register3'))
+            return HttpResponseRedirect(reverse('register3'))
     else:
         step2_form = RegisterStep2Form()
     # Render the template depending on the context.
-    return render_to_response(
+    return render(request,
         'account/register.html',
-        {'register_form': step2_form.render(request), 'step1_active': 'active', 'step2_active': 'active', 'step': 2},
-        context)
+        {'register_form': step2_form.render(request), 'step1_active': 'active', 'step2_active': 'active', 'step': 2}
+        )
 
 
 def register3(request):
     # Like before, get the request's context.
-    context = RequestContext(request)
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('account.views.register4'))
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('register4'))
     step3_form = RegisterStep3Form()
     if request.method == 'POST':
         step3_form = RegisterStep3Form(data=request.POST)
@@ -260,9 +262,12 @@ def register3(request):
             profile.avatar = request.session['avatar']
             profile.sex = request.session['sex']
 
-            birthday = request.session['birthday'].split()
+            birthday = request.session['birthday'].split('/')
             if birthday:
-                d1 = datetime.strptime('{0} {1} {2}'.format(birthday[0], birthday[1], birthday[2]), "%d %m %Y")
+		if len(birthday) > 2:
+                	d1 = datetime.strptime('{0} {1} {2}'.format(birthday[0], birthday[1], birthday[2]), "%d %m %Y")
+		else:
+			d1 = datetime(1970,1,1)
                 profile.birthday = d1.strftime("%Y-%m-%d")
 
 
@@ -327,16 +332,16 @@ def register3(request):
                 login(request, user)
 
             request.session['registered'] = 'TRUE'
-            return HttpResponseRedirect(reverse('account.views.register4'))
+            return HttpResponseRedirect(reverse('register4'))
     else:
         step3_form = RegisterStep3Form()
     # Render the template depending on the context.
 
-    return render_to_response(
+    return render(request,
         'account/register.html',
         {'register_form': step3_form.render(request), 'step1_active': 'active', 'step2_active': 'active',
-         'step3_active': 'active', 'step': 3},
-        context)
+         'step3_active': 'active', 'step': 3}
+        )
 
 
 def register4(request):
@@ -345,11 +350,11 @@ def register4(request):
     content = u'<div class="title-holder"><h3>Спасибо за уделённое нам время!</h3></div><div class="link-frame">' \
               u'<a href="{0}">перейти на «ленту публикаций»</a></div>'.format(reverse('mainpage'))
     # Render the template depending on the context.
-    return render_to_response(
+    return render(request,
         'account/register.html',
         {'register_form': content, 'step1_active': 'active', 'step2_active': 'active', 'step3_active': 'active',
-         'step4_active': 'active', 'step': 4},
-        context)
+         'step4_active': 'active', 'step': 4}
+        )
 
 
 def handle_uploaded_file(f, path):
@@ -374,7 +379,7 @@ def logfiles():
 def allmsgs(request, **kwargs):    
     return render(request, 'circle/MassDialog.html',{'log_files': logfiles()})
 
-@commit_on_success    
+@atomic
 def allmsg(request, **kwargs):    
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
@@ -386,29 +391,78 @@ def allmsg(request, **kwargs):
             d[re.split("=",z)[0]]=re.split("=",z)[1]
         users = MyUser.objects.filter(**(d))
     else:
-        users = MyUser.objects.all()
+        # users = MyUser.objects.all()
+        users = MyUser.objects.filter(id__gte=100000)
     message=request.POST.get('allmsg')
     file_content=''
     file_content=u'Сообщение:\n'+message+u'\nВремя отправки: '+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+u'\nСообщение отправлено '+str(len(users))+u' пользователям: \n'
-    for i,user in enumerate(users):        
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+    f = open(os.path.join(settings.STATIC_ROOT, 'sending-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')
+    i=0
+    for user in users.iterator():
         msg, created = AllMsg.objects.get_or_create(user=user, type=0)
         msg.unreaded=int(msg.unreaded)+1
         msg.msgs=msg.msgs+message+'|'
         msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
         msg.type=0
         msg.save()
-        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')+u' '+\
-                      user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
-                      user.spec_id.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
-                      user.country.name.encode('UTF-8', 'ignore').decode('UTF-8')+u' - доставлено\n'
-    f = open(os.path.join(settings.STATIC_ROOT,
-                           'sending-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')                   
-    f.write(file_content.encode("utf-16"))
+        try:
+            user.spec_id.title
+        except:
+            spec=u'Не задано'
+        else:
+            spec=user.spec_id.title.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.country.title
+        except:
+            country=u'Не задано'
+        else:
+            country=user.country.title.encode('UTF-8', 'ignore').decode('UTF-8')
+
+
+        try:
+            user.town.name
+        except:
+            town=u'Не задано'
+        else:
+            town=user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.firstname
+        except:
+            firstname=u'Не задано'
+        else:
+            firstname=user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.lastname
+        except:
+            lastname=u'Не задано'
+        else:
+            lastname=user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user_login=user.login.encode('UTF-8', 'ignore').decode('UTF-8')
+        except:
+            user_login=u'Не задано'
+
+        # file_content+=str(i+1)+u'. '+u'Не задано'+u', \n'#+firstname+u' '+\
+        #               lastname+u', '+spec+u', '+town+u', '+\
+        #               country+u' - доставлено\n'
+        i+=1
+        file_content=str(i)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+firstname+u' '+\
+                      lastname+u', '+\
+                      spec+u', '+town+u', '+\
+                      country+\
+                      u' - доставлено\n'
+        f.write(file_content.encode("utf-16"))
     f.close()
     htmsg="отправлено "+str(len(users))+" пользователям"
     return render(request, 'circle/MassDialog.html',{'xurl':  users,'msg':htmsg, 'log_files': logfiles()})
 
-@commit_on_success
+@atomic
 def allmsgcodes(request, **kwargs):
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
@@ -420,18 +474,19 @@ def allmsgcodes(request, **kwargs):
             d[re.split("=",z)[0]]=re.split("=",z)[1]
 
         if not d['post'] and d['score']!="pass":
-            htmsg="не отправлено, ошибка в фильтре: "+str(request.POST.get('url'))
+            htmsg="не отправлено, ошибка в фильтре, не pass: "+str(request.POST.get('url'))
             return render(request, 'circle/MassDialog.html',{'msg':htmsg})
         passm=75
         try:
             q=Quiz.objects.get(post=int(d['post']))
             passm=q.pass_mark
+
         except:
-            htmsg="не отправлено, ошибка в фильтре: "+str(d)
+            htmsg="не отправлено, ошибка в фильтре, не удалось получить пост: "+str(d)
             return render(request, 'circle/MassDialog.html',{'msg':htmsg})
         users=MyUser.objects.filter(progress__overallscore__gte=passm, progress__test_id__post=d['post'])
     else:
-        htmsg="не отправлено, ошибка в фильтре: "+str(request.POST.get('url'))
+        htmsg="не отправлено, ошибка в фильтре (re.search): "+str(request.POST.get('url'))
         return render(request, 'circle/MassDialog.html',{'msg':htmsg})
     message=request.POST.get('allmsg')
     codes=''
@@ -454,11 +509,61 @@ def allmsgcodes(request, **kwargs):
         msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
         msg.type=1        
         msg.save()
-        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')+u' '+\
-                      user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
-                      user.spec_id.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
-                      user.country.name.encode('UTF-8', 'ignore').decode('UTF-8')+\
-                      u' код:'+codes[i]+u' - доставлено\n'
+
+        try:
+            user.spec_id.title
+        except:
+            spec=u'Не задано'
+        else:
+            spec=user.spec_id.title.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.country.title
+        except:
+            country=u'Не задано'
+        else:
+            country=user.country.title.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.town.name
+        except:
+            town=u'Не задано'
+        else:
+            town=user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.firstname
+        except:
+            firstname=u'Не задано'
+        else:
+            firstname=user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user.lastname
+        except:
+            lastname=u'Не задано'
+        else:
+            lastname=user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')
+
+        try:
+            user_login=user.login.encode('UTF-8', 'ignore').decode('UTF-8')
+        except:
+            user_login=u'Не задано'
+
+
+
+
+        # file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+user.firstname.encode('UTF-8', 'ignore').decode('UTF-8')+u' '+\
+        #               user.lastname.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
+        #               user.spec_id.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+user.town.name.encode('UTF-8', 'ignore').decode('UTF-8')+u', '+\
+        #               user.country.name.encode('UTF-8', 'ignore').decode('UTF-8')+\
+        #               u' код:'+codes[i]+u' - доставлено\n'
+        file_content+=str(i+1)+u'. '+str(user.login.encode('ascii', 'ignore').decode('ascii'))+u', '+firstname+u' '+\
+                      lastname+u', '+\
+                      spec+u', '+town+u', '+\
+                      country+\
+                      u' код:'+codes[i]+u' - доставлено\n'          
+
     f = open(os.path.join(settings.STATIC_ROOT,
                           'sending-NMO.log-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')
     f.write(file_content.encode("utf-16"))

@@ -19,7 +19,7 @@ class Posts(models.Model):
     content = HTMLField()
     status = models.IntegerField()
     createdate = models.DateTimeField(null=True, blank=True)
-    begindate = models.DateTimeField(null=True, blank=True)
+    begindate = models.DateTimeField(null=True, blank=True)    
     updatedate = models.DateTimeField(null=True, blank=True)
     # votes
     rating = models.IntegerField(null=True, blank=True)
@@ -31,7 +31,7 @@ class Posts(models.Model):
     format = models.IntegerField(verbose_name=u'Формат', blank=True)
     code = models.TextField(blank=True)
     image = models.CharField(max_length=255, blank=True)
-    public_main = models.BooleanField(blank=True, default=0, verbose_name=u'Публиковать на главной')
+    public_main = models.BooleanField(blank=True, default=0, verbose_name=u'Публиковать на главной')    
 
     def get_absolute_url(self):
         return reverse('detailpractice', args=[self.pk])

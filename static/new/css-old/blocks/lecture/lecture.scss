@@ -1,0 +1,21 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.lecture__slider {
+  @media screen and (min-width: 992px) {
+    width: 100vw;
+
+    .slider-item {
+      max-width: 570px;
+    }
+  }
+}
+
+.lecture__btn {
+  margin-left: auto;
+  margin-top: 50px;
+  @media screen and (max-width: 768px) {
+    margin-top: 30px;
+    margin-right: auto;
+  }
+}

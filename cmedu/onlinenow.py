@@ -2,7 +2,8 @@ from django.core.cache import cache
 from django.conf import settings
  
 from account.models import MyUser
- 
+from django.utils.deprecation import MiddlewareMixin
+
 ONLINE_THRESHOLD = getattr(settings, 'ONLINE_THRESHOLD', 60 * 15)
 ONLINE_MAX = getattr(settings, 'ONLINE_MAX', 50)
  
@@ -10,7 +11,7 @@ def get_online_now(self):
     return MyUser.objects.filter(id__in=self.online_now_ids or [])
  
  
-class OnlineNowMiddleware(object):
+class OnlineNowMiddleware(MiddlewareMixin):
     """
     Maintains a list of users who have interacted with the website recently.
     Their user IDs are available as ``online_now_ids`` on the request object,
@@ -28,7 +29,7 @@ class OnlineNowMiddleware(object):
         online_now_ids = [int(k.replace('online-', '')) for k in fresh]
         
         # If the user is authenticated, add their id to the list
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             uid = request.user.id
             # If their uid is already in the list, we want to bump it
             # to the top, so we remove the earlier entry.

@@ -1,6 +1,22 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block title_page %}{{ object.title }}{% endblock %}
+{% load staticfiles %}
 {% block content %}
-Страница, которую вы пытаетесь открыть недоступна.<br />
-Ошибка 403. Нет прав доступа.<br /><br />
-<a href="/">На главную страницу</a>
+<main class="content">
+
+  <div class=" p-y-60">
+    <div class="container">
+      <h1 class="text-center m-b-20">404</h1>
+      <div class="title-2 text-center m-b-20">Что-то пошло не так...</div>
+      <div class="title-p text-center">
+        <p>Страница, которую вы пытаетесь открыть недоступна.<br />
+Ошибка 403. Нет прав доступа.<br /><br /></p>
+      </div>
+      <div class=" flex align-items-center justify-content-center">
+        <a href="/" class="btn btn-primary m-t-auto">Перейти на главную</a>
+      </div>
+    </div>
+  </div>
+
+</main>
 {% endblock %}

@@ -1,0 +1,30 @@
+.fancybox-toolbar .fancybox-button {
+  background: rgba(var(--clr-main-red), var(--clr-main-green), var(--clr-main-blue), 0.6);
+}
+
+.fancybox-navigation .fancybox-button {
+  background-color: rgba(var(--clr-main-red), var(--clr-main-green), var(--clr-main-blue), 0.6);
+}
+
+.fancybox-thumbs__list a:before {
+  border: 3px solid var(--clr-main);
+}
+
+.fancybox-custom .fancybox-thumbs {
+  top: auto;
+  width: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 95px;
+  padding: 10px 10px 0 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.fancybox-custom .fancybox-inner {
+  right: 0;
+  bottom: 95px;
+  overflow: visible;
+}

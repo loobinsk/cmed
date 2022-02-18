@@ -28,6 +28,9 @@
     {% if page.email_field %}
     <label>E-mail<span class="popRequired"><sup>*</sup><input type="email" name="email" /></label> 
         {% endif %}
+         {% if page.phone_field %}
+    <label>Телефон<span class="popRequired"><sup>*</sup><input type="text" name="phone" /></label> 
+        {% endif %}
         <label>Специальность<span class="popRequired"><sup>*</sup><input type="text" name="speciality"/></label> 
             <label>Город<span class="popRequired"><sup>*</sup><input type="text" name="city" /></label> 
                 <input type="hidden" value="{{ page.id }}" name="page" />
@@ -62,6 +65,16 @@
                 {% else %}
                 data['email'] = '';
                 {% endif %}
+
+                {% if page.phone_field %}
+                if(!data['phone']) {
+                    alert('Введите Телефон');
+                    return;
+                }
+                {% else %}
+                data['phone'] = '';
+                {% endif %}
+
                 if(!data['city']) {
                     alert('Введите город');
                     return;

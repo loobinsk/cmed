@@ -1,0 +1,36 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.video-page {
+  .video {
+    @media screen and (min-width: 992px) {
+      margin-top: -300px;
+    }
+  }
+
+  .video__slider {
+    @media screen and (min-width: 992px) {
+      width: 100vw;
+
+      .video__item {
+        max-width: 570px;
+      }
+    }
+  }
+
+  .card-video {
+    .card-video__img {
+      @media screen and (min-width: 992px) {
+        height: 350px;
+      }
+    }
+  }
+
+  .card__article {
+    .card__article-type {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  }
+}

@@ -1,33 +1,46 @@
-{% extends 'account/base_register.html' %}
-{% load static %}
-{% block center-column %}
+{% extends "base.html" %}
+{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
+{% block js_page %}
+{% endblock %}
+{% block after_header %}
+
+{% endblock %}
+
+
+{% block content %}
+
+	<!-- {% for banner in banners1 %}
+		{% url "banner_click" banner_id=banner.id key=group1.slug as banner_url1 %}
+		<div style="display: flex; width: 100%; justify-content: center; border-top: 1px solid; border-bottom: 1px solid; margin: 30px 0;" >
+			<a href="{{banner_url1}}">
+				<img src="{{banner.img.url}}">
+			</a>
+		</div>
+	{% endfor %} -->
     <!-- Центральная колонка -->
-    <div class="content-block-center">
-        {% if not sent %}
-        <form class="register-form style01" action="{% url "forgot" %}" method="post">
-            {% csrf_token %}
-            <div class="register-holder">
-                <label for="text-field01">Для восстановления пароля введите адрес электронной почты:</label>
-                <input class="text01" required="" id="text-field01" name="email" type="text" value="">
-            </div>
-            <div class="row">
-                {{ error|safe }}
-            </div>
-            <div class="bottom">
-                <div class="bottom-frame">
-                    <div class="holder">
-                        <div class="next-holder">
-                            <a href="#" class="btn-next"
-                               onclick="$(this).closest('form').submit();return false;">Восстановить</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        {% else %}
-            <div class="row">
+
+     {% if not sent %}
+                           <form action="{% url "forgot" %}" class="registration__block" method="post">
+				{% csrf_token %}
+                            <div class="contact-page__row">
+
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input   id="text-field01" name="email" type="text" value="" class="form-control">
+                                </div>
+                                 <div class="title-5 registration__password-title" > Для восстановления пароля введите адрес электронной почты</div>
+                                <div class="title-5 registration__password-title" style="color: red"> {{ error |safe }}</div>
+                            </div>
+                            <button type="submit" class="btn-default btn contact-page__btn" onclick="$(this).closest('form').submit();return false;">Восстановить</button>
+                        </form>
+ {% else %}
+           <div class="title-5 registration__password-title" >
                 На вашу почту было отправлено сообщение со ссылкой для восстановления пароля.
             </div>
         {% endif %}
-    </div>
+{% endblock %}
+
+{% block before_footer %}
 {% endblock %}

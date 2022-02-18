@@ -57,7 +57,7 @@ class VideosList(ListView):
         context = super(VideosList, self).get_context_data(**kwargs)
         user = self.request.user
 
-        if not user.is_anonymous():
+        if not user.is_anonymous:
             from account.models import EventAccess
 
             EventAccess.update("videos", user)
@@ -77,17 +77,18 @@ class DetailView(DetailView):
         user = self.request.user
         video = Videos.objects.get(id=self.kwargs['pk'])  
 
-        if not user.is_anonymous():
+        if not user.is_anonymous:
             VideoStatistics.objects.create(video=video, user=user)
         
         statistics = Statistics.objects.filter(material_id=self.kwargs['pk'], service_id=10)
-        if statistics:
-            statistics[0].viewings = statistics[0].viewings + 1
-            statistics[0].save()
-            context['viewings'] = statistics[0].viewings
-        else:
-            Statistics.objects.create(material_id=self.kwargs['pk'], service_id=10, viewings=1)
-            context['viewings'] = 1
+        if 'text' in self.request.META['HTTP_ACCEPT']:
+            if statistics:
+                statistics[0].viewings = statistics[0].viewings + 1
+                statistics[0].save()
+                context['viewings'] = statistics[0].viewings
+            else:
+                Statistics.objects.create(material_id=self.kwargs['pk'], service_id=10, viewings=1)
+                context['viewings'] = 1
         Visited.record(self.get_object())
         return context
 
@@ -99,7 +100,7 @@ def addvideo(request):
         type = request.POST.get('data[type]', False)
         title = request.POST.get('data[title]', False)
         description = request.POST.get('data[description]', False)
-        public_main = request.POST.get('data[public_main]', False)
+        public_main = bool(request.POST.get('data[public_main]', False))
         if spec_id == '0':
             error += u'<p>Вы не выбрали специальность</p>'
         if type == '0':
@@ -170,3 +171,4 @@ def addvideo(request):
             return HttpResponse(json.JSONEncoder().encode({'message': error, 'result': False}))
     else:
         return HttpResponse(json.JSONEncoder().encode({'message': 'error POST query!', 'result': False}))
+

@@ -5,14 +5,13 @@ def send_email(request, to, tpl, subject, **kwargs):
     """Шорткат для отправки писем"""
     from django.core.mail import EmailMessage
     from django.template.loader import render_to_string
-    from django.contrib.sites.models import Site
     import cmedu.settings as settings
 
     if not isinstance(to, list) or not isinstance(to, tuple):
         to = [to]
 
-    current_site = Site.objects.get(id=1)
-    params = dict(host=current_site.domain)
+    current_site = "www.vrachivmeste.ru"
+    params = dict(host=current_site)
     params.update(kwargs)
 
     email = EmailMessage(
@@ -81,3 +80,4 @@ def dictfetchall(cursor):
         dict(zip([col[0] for col in desc], row))
         for row in cursor.fetchall()
     ]
+

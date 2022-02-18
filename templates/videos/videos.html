@@ -2,7 +2,9 @@
 {% block title_page %}Видео лекции для врачей и медицинские конференции в видеозаписи, а также медицинские ролики, репортажи, интервью{% endblock %}
 {% block title %}Видео лекции для врачей и медицинские конференции в видеозаписи, а также медицинские ролики, репортажи, интервью{% endblock %}{% load staticfiles %}
 {% block js_page %}
-    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+        <script type="text/javascript" src="{% static 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' %}"></script>
+<script type="text/javascript" src="{% static 'filebrowser/js/TinyMCEAdmin.js' %}"></script>
 {% endblock %}
 {% block top_block %}
     <div class="content-block-top-block-1-window-filter" id="window-filter">
@@ -174,9 +176,12 @@
             </div>
         </div>{% endif %}{% endblock %}
 {% block content %}
+     <div id="lenta">
     {% for object in object_list %}
         {% include 'videos/one_videos2.html' %}
     {% endfor %}
+    </div>
+    <button id="next10" class="btn-default btn m-t-50 m-auto ">Показать еще</button>
     <script>
     function SendComment(result_id, form_id, url) {
         if($(this).data('locked') == 1){
@@ -219,34 +224,40 @@
         });
     }
 
-    //var thisPageNum = 2;
-    var thisWork = 1;
-    //var filtr = '';
-    function getNextP() {
+ </script>
 
-        if (thisWork == 1) {
-            thisWork = 0;
-            //$("#upBlock").css('display','block');
-            //if (filtr!=''){filtr = filtr + "&page="+thisPageNum;}else{filtr = "?page="+thisPageNum;}
-            if(!spec_id) {
-                $("#specs_form ul li a.active").each(function() {
-                    spec_id = $(this).attr('rel');
-                });
-            }
+<script>
+	var thisWork = 1;
+    thisPageNum = 2;
+	$('#next10').click(function (){ showLoader(true);
+		if (thisWork == 1) {
+			thisWork = 0;
             $.ajax({
                 type: 'get',
                 url: "/videos/",
                 data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(), 'search': $('input[name="search"]').val()},
-                success: function (data) {
-                    //$("#upBlock").css('display','none');
-                    //$(".content-block-center").html($(".content-block-center").html()+" "+data);
-                    $(data).appendTo(".content-block-center");
-                    thisPageNum = thisPageNum + 1;
-                    thisWork = 1;
-                }
-            });
-        }
-    }
+				success: function (data) {
+					//var page = $(data).find('input[name="page"]').val();
+					//if (page) {
+						showLoader(false); $(data).appendTo("#lenta");
+						thisPageNum+=1;
+						thisWork = 1;
+						$('.content-block-center-item-content img').each(function (index) {
+						});
+						$('.content-block-center-item-content hr').each(function (index) {
+							this.style.width = "100%";
+						});
+					//}
+				},
+				error: function() {
+
+				}
+			});
+		}
+	});
+    </script>
+
+<script>
 
     //$(document).ready(function(){
 
@@ -284,7 +295,7 @@
         dict['spec_id'] = $('select[name="spec_id"]').val();
         dict['title'] = $('input[name="title"]').val();
         dict['public_main'] = $('input[name="public_main"]').prop("checked");
-        dict['description'] = tinyMCE.get('description').getContent().replace('\n', '');
+        dict['description'] = tinyMCE.activeEditor.getContent().replace('\n', '');
         var errortext = "";
         if (dict['type'] == '0') {
             errortext = errortext + "Выберите тип видеоматериала\n";
@@ -367,7 +378,7 @@
             } else {
 
                 $.ajax({
-                    url: '{% url "lenta.views.fileupload" %}',
+                    url: '{% url "fileupload" %}',
                     type: 'POST',
                     xhr: function () {
                         var myXhr = $.ajaxSettings.xhr();
@@ -447,7 +458,7 @@
 
     });
     function deletephoto(photo, el) {
-        $.post('{% url "lenta.views.filedelete" %}', { file: photo }, function (data) {
+        $.post('{% url "filedelete" %}', { file: photo }, function (data) {
             if (data == 'OK') {
                 parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
                 parent.remove();
@@ -476,7 +487,7 @@
     }
 
     function deletevideo(path, el) {
-        $.post('{% url "lenta.views.videodelete" %}', { video: path }, function (data) {
+        $.post('{% url "videodelete" %}', { video: path }, function (data) {
             if (data == 'OK') {
                 parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
                 parent.remove();
@@ -502,3 +513,4 @@
     </div>
     {{ block.super }}
 {% endblock %}
+

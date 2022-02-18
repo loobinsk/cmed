@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from groups_posts.views import PostsList
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', PostsList.as_view(), name='practice'),
-)
+]

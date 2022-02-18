@@ -1,0 +1,220 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.footer {
+  z-index: 1000;
+  position: relative;
+  background-color: $clr-dark;
+  color: $text-clr-footer;
+  font-size: $font-size - 2px;
+  overflow: hidden;
+
+  .footer__item {
+    text-align: center;
+    color: $text-clr-footer;
+    font-size: $font-size - 2px;
+  }
+}
+
+.contact-info {
+  padding: 100px 0 40px;
+}
+
+.contact-info__card {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 20px;
+  }
+
+  .contact-info__position {
+    color: $color-base;
+    margin-bottom: 5px;
+  }
+
+  .contact-info__connection {
+    display: flex;
+    margin-bottom: 19px;
+  }
+
+  .contact-info__name {
+    color: #fff;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .contact-info__link {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    .title-5 {
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: 5px;
+      &:hover,
+      &.active {
+        color: $color-base;
+      }
+    }
+  }
+
+  .contact-info__svg {
+    background: #474747;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 24px;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    .svg__wrapper {
+      width: 14px;
+      height: 14px;
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.contact {
+  padding: 40px 0 25px;
+  border-top: 1px solid #2d2d2d;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.contact__ava {
+  width: 170px;
+  height: 51px;
+  display: block;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.contact__card {
+  .contact__card-title {
+    color: #fff;
+    margin-bottom: 25px;
+    @media screen and (max-width: 991px) {
+      margin-top: 20px;
+    }
+  }
+  .contact__lish {
+    margin: 0 0 15px 0;
+    padding: 0;
+    .title-4 {
+      display: block;
+      margin-bottom: 20px;
+      color: #fff;
+      font-weight: 400;
+      &:hover,
+      &.active {
+        color: $color-base;
+      }
+    }
+  }
+}
+
+.contact__socials {
+  margin-top: 140px;
+  display: flex;
+  .svg__wrapper {
+    display: block;
+    width: 23px;
+    height: 23px;
+    margin-right: 35px;
+
+    svg {
+      fill: #999b9f;
+    }
+
+    &:hover,
+    &.active {
+      svg {
+        fill: $color-base;
+      }
+    }
+  }
+}
+
+.footer__bottom {
+  padding: 30px 0;
+  .footer__main {
+    display: flex;
+    justify-content: center;
+
+    .title-4 {
+      color: #fff;
+    }
+  }
+
+  .footer__bottom-link {
+    text-decoration: underline !important;
+  }
+}
+
+.connection {
+  margin-top: 30px;
+
+  @media screen and (max-width: 1199px) {
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .contact-info {
+    padding: 0 0 30px;
+  }
+  .contact-info__name {
+    color: $text;
+
+    @media screen and (min-width: 1199px) {
+      margin-bottom: 36px;
+    }
+  }
+  .contact-info__link {
+    .title-5 {
+      color: $text;
+    }
+  }
+  .contact-info__svg {
+    background: #f8f8f8;
+    .svg__wrapper {
+      svg {
+        fill: $text;
+      }
+    }
+  }
+
+  .contact-info__card {
+    @media screen and (min-width: 1200px) {
+      flex-direction: row;
+      align-items: center;
+      .contact-info__connection {
+        margin-right: 30px;
+      }
+    }
+    @media screen and (max-width: 1199px) {
+      max-width: 50%;
+      flex: 0 0 50%;
+      margin-bottom: 20px;
+    }
+    @media screen and (max-width: 767px) {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+    .contact-info__card__info {
+      flex: 0 0 40%;
+      @media screen and (max-width: 1199px) {
+        max-width: 100%;
+        flex: 0 0 100%;
+      }
+    }
+  }
+}

@@ -13,15 +13,19 @@
 							</div>
 							{% if user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invite' %}
 							<div class="links">
-								<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отозвать <br>приглашение</a>
+								<a class="delete-group" style="cursor:pointer;" onclick="removefrommycircle({'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отозвать <br>приглашение</a>
+							</div>
+							{% elif user|isUserIntoMyCircle:u == 1 %}
+							<div class="links">
+								<a class="del-user" style="cursor:pointer;color:#777777;" onclick="removefrommycircle({'friend':'{{c.id}}', 'ID':'invite_{{c.id}}'});">Удалить из круга</a>
 							</div>
 							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_send_invite' %}
 							<div class="links">
-								<a class="btn-add" style="cursor:pointer;" onclick="Dajaxice.circle.inviteintomycircle(Dajax.process, {'avatar':'{% get_avatar_preview_sizexy u.id 77 77 %}', 'parent':{{user.id}}, 'friend':{{u.id}} })">Добавить в свой <br>круг общения</a>
+								<a class="btn-add" style="cursor:pointer;" onclick="inviteintomycircle( {'avatar':'{% get_avatar_preview_sizexy u.id 77 77 %}', 'parent':{{user.id}}, 'friend':{{u.id}}});">Добавить в свой <br>круг общения</a>
 							</div>
 							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invited' %}
 							<div class="links">
-								<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Удалить из круга</a>
+								<a class="delete-group" style="cursor:pointer;" onclick="removefrommycircle({'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отказаться</a>
 							</div>
 							{% endif %}
 						</div>	

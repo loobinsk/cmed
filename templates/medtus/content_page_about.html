@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
+{% block js_page %}
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+{% block after_header %}
+{% include 'medtus/header_about.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+	<!-- {% for banner in banners1 %}
+		{% url "banner_click" banner_id=banner.id key=group1.slug as banner_url1 %}
+		<div style="display: flex; width: 100%; justify-content: center; border-top: 1px solid; border-bottom: 1px solid; margin: 30px 0;" >
+			<a href="{{banner_url1}}">
+				<img src="{{banner.img.url}}">
+			</a>
+		</div>
+	{% endfor %} -->
+
+     {{ page.content|safe }}
+
+    <div class="connection">
+                            <h2 class="title-1">Для связи с нами</h2>
+                            <div class=" contact-info">
+
+                                <div class="contact-info__card">
+                                    <div class="contact-info__card__info">
+                                        <div class="title-s-min contact-info__position">Генеральный директор</div>
+                                        <div class="title-3 contact-info__name">Андрей Рябов </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#phone"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="tel:+7(985)1979838" class="title-5">+7 985 197 98 38</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#mail"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="mailto:aryabov2004@list.ru" class="title-5">aryabov2004@list.ru</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-info__card">
+                                    <div class="contact-info__card__info">
+                                        <div class="title-s-min contact-info__position">Коммерческий директор </div>
+                                        <div class="title-3 contact-info__name">Михаил Рябов </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#phone"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="tel:+7(985)1979838" class="title-5">+7 985 197 98 38</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#mail"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="mailto:ryabovm_08@mail.ru" class="title-5">ryabovm_08@mail.ru</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-info__card">
+                                    <div class="contact-info__card__info">
+                                        <div class="title-s-min contact-info__position">Менеджер по работе с клиентами</div>
+                                        <div class="title-3 contact-info__name">Александра Ежова</div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#phone"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="tel:+7(916)0706913" class="title-5">+7 916 070 69 13</a>
+                                            <a href="tel:8(495)6990464" class="title-5">8 495 699 04 64</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#mail"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="mailto:aryabov2004@list.ru" class="title-5">aryabov2004@list.ru</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-info__card">
+                                    <div class="contact-info__card__info">
+                                        <div class="title-s-min contact-info__position">Редактор портала "Врачи вместе"</div>
+                                        <div class="title-3 contact-info__name">Ермилова Виктория</div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#phone"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="tel:8(495)6506150" class="title-5">8 495 650 61 50</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info__connection">
+                                        <div class="contact-info__svg">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#mail"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="contact-info__link">
+                                            <a href="mailto:v.ermilova@calistomedia.ru " class="title-5">v.ermilova@calistomedia.ru </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+    <script>
+     $("#feedback_form_phone").on('submit', function(e) {
+        e.preventDefault();
+        var fields = $(this).serializeArray();
+        var data = {};
+        for(var k in fields) {
+            data[fields[k]['name']] = fields[k]['value']
+        }
+        data['topic']="Запрос обратной связи с сайта"
+        data['text']='С сайта пришел запрос обратной связи, пожалуйста перезвоните';
+        data['name']='-';
+        data['position']='-';
+        if(!data['contact']) {
+            alert('Введите Ваши контактные данные: телефон или email');
+            return;
+        }
+       feedback(data);
+    document.getElementById("feedback_form_phone").reset();
+    });
+    </script>
+{% endblock %}
+
+{% block before_footer %}
+{% endblock %}

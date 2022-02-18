@@ -1,105 +1,94 @@
-{% load account_tags %}{% load staticfiles %}
-<div class="content-block-center-item">
-    <!-- Автор и тема поста -->
-    <div class="content-block-center-item-head">
-{#        <div class="content-block-center-item-head-photo-bg">#}
-{#            {% if object.user_id.id %}#}
-{#                <a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">#}
-{#                    <div class="content-block-center-item-head-photo"#}
-{#                         style="background-image: url({% get_avatar_preview_sizexy_hax object.user_id.avatar.name 67 67 %}), url({{ object.user_id.avatar }})"></div>#}
-{#                </a>#}
-{#            {% endif %}#}
-{#        </div>#}
-{#        <div class="content-block-center-item-head-autor">#}
-{#            <span>#}
-{#                <strong>#}
-{#                    {% if object.user_id.id %}#}
-{#                        <a href="{% url 'lichnie2' object.user_id.id %}" target="_parent"#}
-{#                           title="На страницу автора">{{ object.user_id.lastname }}<br/>#}
-{#                            {{ object.user_id.firstname }} {{ object.user_id.surname }}#}
-{#                        </a>#}
-{#                    {% endif %}#}
-{#                </strong><br/>#}
-{#            </span>#}
-{#        </div>#}
-        <div class="content-block-center-item-head-theme"><span>
-        {% if circle and group %}
-            <a href='{% url 'detailgroup' pk=group.id %}'>{{ group.title }}</a>
+{% load account_tags posts_filters %}{% load staticfiles %}
+
+
+                    <div class="personal-area__message">
+                                <div class="personal-area__message-header">
+                                {% if object.user_id.id %}
+                                    <div class="personal-area__message-avatar" style="background-image: url({% get_avatar_preview_sizexy object.user_id.id 67 67 %}), url({{ object.user_id.avatar }});"></div>
+                                    <div class="personal-area__message-header-name">
+                                        <div class="title-4 font-weight-bold">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</div>
+                                        <div class="title-5">{{ object.spec_id.name }}</div>
+                                    </div>
+                                     {% endif %}
+
+                                    {% if circle and group %}
+             <div class="title-4 font-weight-bold"><a
+                    href='{% url 'detailgroup' pk=group.id %}'>{{ group.title }}</a></div>
         {% else %}
-            {{ object.format_string }}
+             <div class="title-4 font-weight-bold">
+                {% if is_group_user %}
+                    {% if post_group_names %}
+                        <a href="{% url 'detailgroup' post_group_urls|get_item:object.id %}">
+                            {{ post_group_names|get_item:object.id }}
+                        </a>
+                    {% else %}
+                        {{ object.group.title }}
+                    {% endif %}
+                {% else %}
+                    {{ object.format_string }}
+                {% endif %}</div>
         {% endif %}
-      </span></div>
-    </div>
-    <div class="content-block-center-item-content">
-        <!-- Заголовки и текст поста -->
-        {% comment %}<div class="content-block-center-item-content-date">{% if object.createdate %}{{ object.createdate }}{% else %}{% endif %}</div>{% endcomment %}
-        <h1><a href="{% url 'detailevent' object.id %}" target="_blank"
-               style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a></h1>
-    <span class="info">
-      {{ object.country_id }}, {{ object.town_id }}, <br>
-      {{ object.spec_id.name }} <br>
-      {{ object.start|date:'d.m.Y' }} — {{ object.end|date:'d.m.Y' }} <br>
-        {% if object.starttime %}Время: {{ object.starttime|date:'H:i' }}{% endif %}
-    <br>
-    </span>
 
+                                </div>
+                                <div class="personal-area__message-main">
+                                    <div class="personal-area__main-info">
 
-        <div class="content-block-center-item-content-redmore">
-            <div class="content-block-center-item-content-redmore-link">
-                <a href="{% url 'detailevent' object.id %}" target="_blank" title="Читать полностью">читать
-                    полностью</a> |
-            </div>
-            <div class="content-block-center-item-content-redmore-readers">
-                {% if object.statistics %}{{ object.statistics.viewings }}{% else %}0{% endif %}</div>
+                                        <div class="personal-area__data title-4"><span>{{ object.begindate|default:object.createdate }}</span></div>
 
-            {% if user.is_staff %}
-                <div class="content-block-center-item-content-redmore-adminedit">
-                    <a href="{% url "admin:events_events_change" object.id %}">ред.</a>
-                </div>
+                                        <div class="personal-area__icon title-4">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#view"></use>
+                                                </svg>
+                                            </div>
+                                            <span>        {% if object.statistics %}
+                    {{ object.statistics.viewings }}
+                {% else %}
+                    0
+                {% endif %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="title-2 ">
+                                        {% if id == '3' %}
+            <a href="{{ object.content|find:"/translation/.*?/" }}" target="_blank"
+                                   style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a>
+        {% else %}
+            <a href="{% url 'detailevent' object.id %}" target="_blank"
+                                   style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a>
+        {% endif %}</div>
+                                    <div class="title-5 m-y-15">        {% if user.is_authenticated %}
+            {% if object.anons %}
+                {{ object.anons|truncatewords_html:50|safe|linebreaks }}
+            {% else %}
+                {{ object.content|truncatewords_html:50|safe|linebreaks }}
             {% endif %}
-        </div>{% if object.photos|length or object.videos|length %}
-        <!-- Медиа -->
-        <div class="content-block-center-item-content-media">{% if object.photos|length %}
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("a[rel=tag{{object.id}}]").fancybox({
-                        'transitionIn': 'none',
-                        'transitionOut': 'none',
-                        'titlePosition': 'over',
-                        'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
-                            return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-                        }
-                    });
-                });
-            </script>{% endif %}{% for photo in object.photos %}{% if forloop.first %}
-            <div class="content-block-center-item-content-media-single-photo">
-                <a href="{% get_image_url photo.picture %}" rel="tag{{ object.id }}">
-                    <img src="{% get_image_url photo.picture %}" style='max-width:100%' alt="{{ object.title }}">
-                </a>
-            </div>{% else %}{% if forloop.counter = 2 %}
-                <div class="content-block-center-item-content-media-more-photo-head">
-                    <span>Дополнительные фото:</span>
-                </div>
-                <div class="content-block-center-item-content-media-more-photo">{% endif %}
-            <a rel="tag{{ object.id }}" href="{{ photo.picture }}">
-                <div class="content-block-center-item-content-media-more-photo-item"
-                     style="background-image:url({{ photo.thumb }})"></div>
-            </a>{% if forloop.last %}
-                </div>{% endif %}
-        {% endif %}{% endfor %}{% if object.videos|length %}{% for video in object.videos %}
-            <div class="content-block-center-item-content-media-more-photo-head">
-                <span style="font-size: 12px;">Посмотреть видео:</span>
-            </div>
-            <div class="content-block-center-item-content-media-video">
-                <div class="content-block-center-item-content-media-video-move">
-                    <a href="{% url 'detailevent' object.id %}" target="_parent" title="">
-                        <img src="{{ video.preview }}" width="190" height="140" alt="">
-                    </a>
-                </div>
-            </div>{% endfor %}{% endif %}
-        </div>
-    {% endif %}
-        {% include "includes/read_all.html" %}
-{#        {% include "includes/likes_comments.html" with viewname='detailevent' %}#}
-    </div>
-    </div>
+        {% else %}
+            {% if object.anons %}
+                {{ object.anons|truncatewords_html:15|striptags|linebreaks }}
+            {% else %}
+                {{ object.content|truncatewords_html:15|striptags|linebreaks }}
+            {% endif %}
+        {% endif %}</div>
+
+                                </div>
+                                <div class="personal-area__message-footer">
+                                      {% if id == '3' %}
+                <a href="{{ object.content|find:"/translation/.*?/" }}" target="_blank" class="link-mini" title="Читать полностью">Читать
+                    полностью</a>
+                      {% else %}
+                                     <a href="{% url 'detailpractice' object.id %}" target="_blank" class="link-mini" title="Читать полностью">Читать
+                    полностью</a>
+                {% endif %}
+
+               {% if request.user == object.user_id and object.createdate|deletion_time_left %}
+                    <a href="#" class="delete_post" data-url="{% url 'rmpost' %}"
+                          data-post="{{ object.id }}" data-type="{{ object.type }}" class="link-mini">Удалить</a>
+            {% endif %}
+            {% if user.is_staff %}
+                    <a href="{% url "admin:posts_posts_change" object.id %}" class="link-mini">Редактировать</a>
+            {% endif %}
+
+
+                                </div>
+                            </div>
+

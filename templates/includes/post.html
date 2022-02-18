@@ -1,85 +1,107 @@
-{% load account_tags %}{% load staticfiles %}
-			<!-- Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 Пост-2 -->
-			<div class="content-block-center-item">
-				<!-- Автор и тема поста -->
-				<div class="content-block-center-item-head">
-					<div class="content-block-center-item-head-photo-bg">
-					{% if object.user_id %}<a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">
-					<div class="content-block-center-item-head-photo" style="background-image:url({% get_avatar_fname object.user_id.id %});"></div>
-					</a>{% endif %}
-					</div>
-					<div class="content-block-center-item-head-autor">
-					<span>{% if object.user_id %}
-					<strong><a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">{{ object.user_id.lastname }}<br />
-					{{ object.user_id.firstname }} {{ object.user_id.surname }}</a></strong><br />
-					{{ object.spec_id.name }}{% endif %}
-					</span>
-					</div>
-					<div class="content-block-center-item-head-theme" style="padding-right:40px;"><span>{{ object.format_string }}</span></div>
-				</div>
-				<div class="content-block-center-item-content">
-					<!-- Заголовки и текст поста -->
-					<div class="content-block-center-item-content-date">{{ object.createdate }}</div>
-					<h1 style="width:330px"><a href="{% url 'detailpractice' object.id %}" target="_blank" style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.title }}</a></h1>
-					<p>{% if user.is_authenticated %}{% if object.anons %}{{ object.anons|truncatewords_html:50|safe }}{% else %}{{ object.content|truncatewords_html:50|safe }}{% endif %}{% else %}{% if object.anons %}{{ object.anons|truncatewords_html:15|safe }}{% else %}{{ object.content|truncatewords_html:15|safe }}{% endif %}{% endif %}</p>
-					<div class="content-block-center-item-content-redmore">
-						<div class="content-block-center-item-content-redmore-link">
-						<a href="{% url 'detailpractice' object.id %}" target="_blank" title="Читать полностью">читать полностью</a> |
-						</div>
-						<div class="content-block-center-item-content-redmore-readers">{% if object.statistics %}{{ object.statistics.viewings }}{% else %}0{% endif %}</div>
+{% load account_tags posts_filters %}{% load staticfiles %}
 
 
+      {% url 'detailpractice' object.id as the_url %}
+
+                    <div class="card__article">
+
+                              <!-- Медиа -->
+                        {% if object.photos|length or object.videos|length %}
+
+                {% for photo in object.photos %}
+                    {% if forloop.first %}
+                                <a href="{{ the_url }}" class="card__article-img" style="background-image: url({{ photo.picture }});"></a>
+                    {% endif %}
+                {% endfor %}
+
+                     {% endif %}
+
+                        <div class="card__article-main">
+                            <div class="card__article-header">
+                                <a href="" class="card__article-type title-s-min">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#video"></use>
+                                        </svg>
+                                    </div>
+                                    <span>{{ object.format_string }}</span>
+                                </a>
+
+        {% if object.begindate == None %}
+           <div class="card__article-data title-4"><span>{{ object.createdate }}</span></div>
+        {% else %}
+           <div class="card__article-data title-4"><span>{{ object.begindate }}</span></div>
+        {% endif %}
+
+                                <div class="card__article-icon title-4">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#view"></use>
+                                        </svg>
+                                    </div>
+                                    <span>
+               {% if object.statistics %}
+                    {{ object.statistics.viewings }}
+                {% else %}
+                    0
+                {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- тема поста -->
+                        <a href="{{ the_url }}" class="title-2 m-b-15">{{ object.title }}</a>
+
+                     <!-- текст поста -->
+                        <div class="title-4">
+            {% if user.is_authenticated %}
+                {% if object.content %}
+                    {{ object.content|truncatewords_html:50|safe|linebreaks }}
+                {% endif %}
+            {% else %}
+                {% if object.content %}
+                    {{ object.content|truncatewords_html:15|safe|linebreaks }}
+                {% endif %}
+            {% endif %}
+             <a href="{{ the_url }}" target="_blank" title="Читать полностью">читать полностью</a></br>
+
+               {% if user.is_staff %}
+                    <a href="{% url "admin:posts_posts_change" object.id %}">ред.</a>
+            {% endif %}
+            {% if user.pk == object.user_id.pk or user.is_staff %}
+                    <a href="{% url "user_delete_post" pk=object.id %}">удалить</a>
+            {% endif %}
+                        </div>
+
+
+
+                         {% if id != '3' and object.user_id.id %}
+                        <a href="{% url 'lichnie2' object.user_id.id %}" class="card-author">
+
+                            <div class="card-author__circle bg-img-cover" style="background-image: url(/media/{{ object.user_id.avatar }});"></div>
+
+                            <div class="title-5 font-weight">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</div>
+                                {% endif %}
+                        </a>
+ </div>
+            {% comment %}
+
+
+         {% if request.user == object.user_id and object.createdate|deletion_time_left %}
+                <div class="content-block-center-item-content-redmore-adminedit">
+                    <a href="#" class="delete_post" data-url="{% url 'rmpost' %}"
+                          data-post="{{ object.id }}" data-type="{{ object.type }}">Удалить</a>
+                </div>
+            {% endif %}
             {% if user.is_staff %}
                 <div class="content-block-center-item-content-redmore-adminedit">
                     <a href="{% url "admin:posts_posts_change" object.id %}">ред.</a>
                 </div>
             {% endif %}
-            {% if user.pk == object.user_id.pk or user.is_staff %}
-                <div class="content-block-center-item-content-redmore-userdelete">
-                    <a href="{% url "user_delete_post" pk=object.id %}">удалить</a>
-                </div>
-            {% endif %}
-					</div>{% if object.photos|length or object.videos|length %}
-					<!-- Медиа -->
-		<div class="content-block-center-item-content-media">{% if object.photos|length %}
-                    	<script type="text/javascript">
-							$(document).ready(function() {
-								$("a[rel=tag{{object.id}}]").fancybox({
-									'transitionIn'		: 'none',
-									'transitionOut'		: 'none',
-									'titlePosition' 	: 'over',
-									'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
-										return '<span id="fancybox-title-over">Фото ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-									}
-								});
-							});
-						</script>{% endif %}{% for photo in object.photos %}{% if forloop.first %}
-						<div class="content-block-center-item-content-media-single-photo">
-							<a href="{{ photo.picture }}" rel="tag{{object.id}}">
-                            	<img src="{% get_preview_calculate photo.picture %}" style="max-width:100%" alt="">
-                            </a>
-						</div>{% else %}{% if forloop.counter == 2 %}
-                        <div class="content-block-center-item-content-media-more-photo-head">
-                            <span>Дополнительные фото:</span>
-                        </div>
-                        <div class="content-block-center-item-content-media-more-photo">{% endif %}
-                        	<a rel="tag{{object.id}}" href="{{ photo.picture }}">
-                        		<div class="content-block-center-item-content-media-more-photo-item" style="background-image:url({{ photo.thumb }})"></div>
-                            </a>{% if forloop.last %}
-                        </div>{% endif %}
-						{% endif %}{% endfor %}{% if object.videos|length %}{% for video in object.videos %}
-                        <div class="content-block-center-item-content-media-more-photo-head">
-                            <span style="font-size: 12px;">Посмотреть видео:</span>
-                        </div>
-                        <div class="content-block-center-item-content-media-video">
-                        	<div class="content-block-center-item-content-media-video-move">
-                            	<a href="{% url 'detailpractice' object.id %}" target="_parent" title="">
-                                    <img src="{% get_preview_sizexy video.preview 190 140 %}" width="190" height="140" alt="">
-                                </a>
-                            </div>
-                        </div>{% endfor %}{% endif %}
-					</div>
-					{% endif %}
-{% include "includes/read_all.html" %}					
-{% include "includes/likes_comments.html" with viewname="detailpractice" %}
-			</div>
+        </div>
+        {% include "includes/read_all2.html" with type='18' %}
+        {% include "includes/likes_comments2.html" with viewname='detailpractice' %}
+
+                    </div>
+
+ {% endcomment %}

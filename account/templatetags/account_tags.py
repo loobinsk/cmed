@@ -290,7 +290,7 @@ def Unreaded(account_id):
     if countmsgs == 0:
         return ''
     else:
-        return "<span>%s</span>" % countmsgs
+        return "%s" % countmsgs
 
 @register.simple_tag
 def UnreadedNmo(account_id):
@@ -305,7 +305,13 @@ def UnreadedNmo(account_id):
     if countmsgs == 0:
         return ''
     else:
-        return "<span>%s</span>" % countmsgs
+        return "%s" % countmsgs
+
+
+@register.simple_tag
+def define(val=None):
+  return val
+
 
 @register.filter
 def allmsgs_index(List, i):
@@ -537,7 +543,7 @@ def online():
         if on[0].translation:
             from django.core.urlresolvers import reverse
             url = reverse('detailtranslation', kwargs={'pk': on[0].translation.pk})
-            return u'<div class="left-block-content-links-item-count" style="top: 2px;right: -7px;"><a href="{url}"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></a></div>'.format(
+            return u'<div class="left-block-content-links-item-count" style="top: 2px;right: -7px;"><a href="/online"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></a></div>'.format(
                 url=url)
         else:
             return u'<div class="left-block-content-links-item-count" style="top: 2px;right: -7px;"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></div>'
@@ -551,7 +557,7 @@ def online2():
         if on[0].translation:
             from django.core.urlresolvers import reverse
             url = reverse('detailtranslation', kwargs={'pk': on[0].translation.pk})
-            return u'<div id="center-block-online"><a href="{url}" ><div class="online-arrows"><img src="/static/images/strelki.png"/></div>' \
+            return u'<div id="center-block-online"><a href="/online" ><div class="online-arrows"><img src="/static/images/strelki.png"/></div>' \
                    u'<div class="online-arrows"><span>Внимание! Идет прямой эфир!</span></div><div class="online-arrows"><img src="/static/images/strelki2.png"/></div></a></div>'.format(url=url)
         else:
             return u'<div id="center-block-online"><div class="online-arrows"><img src="/static/images/strelki.png"/></div><a href="" >' \
@@ -561,22 +567,28 @@ def online2():
 
 @register.simple_tag
 def online3(trans_id):
-    on = Settings.objects.all()[:1]
-    if on.exists() and on[0].online:
-        if on[0].translation and on[0].translation==trans_id:
-            from django.core.urlresolvers import reverse
-            url = reverse('detailtranslation', kwargs={'pk': on[0].translation.pk})
-            return u'<div class="left-block-content-links-item-count" style="top: 2px;right: -7px;"><a href="{url}"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></a></div>'.format(
-                url=url)
-    else:
-        return u''
+    on = Settings.objects.all()
+    try:
+	    for i in range(len(on)):
+		if on.exists() and on[i].online:
+		    if on[i].translation and int(on[i].translation.id)==int(trans_id):
+		        from django.core.urlresolvers import reverse
+		        url = reverse('detailtranslation', kwargs={'pk': on[i].translation.pk})
+		        return u'<div class="left-block-content-links-item-count" style="top: 12px;left: 2px;"><a href="/online"><span style="background-color:#e1523d;font-size: 13px;">Прямой эфир!</span></a></div>'.format(
+		            url=url)
+	    return u''
+    except Exception as e:
+    	return u''	    
 
 @register.simple_tag(takes_context=True)
 def count_new_events(context, model, service_id=None):
     count = 0
-    request = context['request']
+    try:
+        request = context['request']
+    except:
+        return ''
 
-    if request.user.is_anonymous():
+    if request.user.is_anonymous or not request.user.is_authenticated:
         return ''
 
     key = unicode(model)
@@ -619,15 +631,16 @@ def count_new_events(context, model, service_id=None):
 
     qnt = count.count()
     if qnt:
-        return '<div class="left-block-content-links-item-count"><span>{0}</span></div>'.format(qnt)
+       # return '<div class="left-block-content-links-item-count"><span>{0}</span></div>'.format(qnt)
+        return qnt
     else:
         return ''
 
 
 @register.simple_tag
 def nonactivated(user_id):
-    nonactivated = GroupUsers.objects.filter(user_id=user_id, activated=0).exclude(
-        group_id__user_id__id=user_id).count()
+    nonactivated = GroupUsers.objects.filter(user_id=0, activated=0).exclude(
+        group_id__user_id__id=0).count()
     if nonactivated:
         return '<div class="left-block-content-links-item-count"><span>' + str(nonactivated) + '</span></div>'
     else:
@@ -726,7 +739,7 @@ def last_access(context):
     request = context['request']
     from django.utils import timezone
     now = timezone.localtime(timezone.now())
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         request.user.lastaccess = now
         request.user.save()
 

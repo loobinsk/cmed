@@ -1,13 +1,13 @@
 {% load account_tags %}{% load staticfiles %}
 	{% if object_list|length %}
 		{% for object in object_list %}
-			{% if object.template = 'posts' %}
+			{% if object.template == 'posts' %}
 				{% include 'posts/one_post.html' %}
 			{% endif %}
-			{% if object.template = 'videos' %}
+			{% if object.template == 'videos' %}
 				{% include 'videos/one_videos.html' %}
 			{% endif %}
-			{% if object.template = 'events' %}
+			{% if object.template == 'events' %}
 				{% include 'events/one_events.html' %}
 			{% endif %}
 		{% endfor %}

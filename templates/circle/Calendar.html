@@ -1,0 +1,1380 @@
+<!DOCTYPE html>{% load staticfiles account_tags posts_filters banner datepicker %}
+
+{# compress #}
+
+<html lang="ru">
+
+<head>
+
+  <!-- Meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" id="sibling">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- Favicon -->
+  <!-- <link rel="icon" type="images/ico" href="{% static 'new/images/icons/favicon.ico' %}"> -->
+
+  <!-- Title -->
+  <title>{% block title_page %}Врачи вместе{% endblock %}</title>
+
+
+
+      {#{% compress css %}#}
+  <link href="{% static 'css/basic.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/jquery.fancybox-1.3.4.css' %}" rel="stylesheet" type="text/css"/>
+
+
+  {% block style_page %}{% endblock %}
+  {#{% endcompress %}#}
+  {#{% compress js %}#}
+ <script src="{% static 'new/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+
+ {% comment %}  <script type="text/javascript" src="{% static 'tiny_mce/tiny_mce.js' %}"></script> {% endcomment %}
+    <script type="text/javascript" src="{% static 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' %}"></script>
+<script type="text/javascript" src="{% static 'filebrowser/js/TinyMCEAdmin.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/jquery.preload-images.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.fancybox-1.3.4.pack.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/autoresize.jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js' %}" charset="utf-8"></script>
+  <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.jcf.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/jquery.openclose.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.elastic.source.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/windows.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/preload-images.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/description_textareas.js' %}"></script>
+  <script type="text/javascript" src="{% static "banners/js/slider.js" %}"></script>
+  <script type="text/javascript" src="{% static "banners/js/log.js" %}"></script>
+
+  <script src="https://yastatic.net/share2/share.js" async></script>
+
+
+
+
+  <!-- CSS -->
+  <link type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link type="text/css" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="{% static 'new/vendor/slick/slick.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'new/vendor/slick/slick-theme.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'new/vendor/fancybox/jquery.fancybox.min.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'new/vendor/select2/css/select2.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'new/css/main/helper-classes.min.css' %}">
+
+
+<link type="text/css" rel="stylesheet" href="{% static 'new/css/helper-classes.min.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'new/css/main-new.css' %}">
+
+
+  <!-- Javascript -->
+
+
+    <script src="{% static 'new/vendor/slick/slick.min.js' %}" defer></script>
+  <script src="{% static 'new/vendor/mask/jquery.mask.min.js' %}"defer></script>
+  <script src="{% static 'new/vendor/select2/js/select2.min.js' %}"defer></script>
+  <script src="{% static 'new/vendor/fancybox/jquery.fancybox.min.js' %}"defer></script>
+    <script src="https://malsup.github.io/jquery.form.js"></script>
+      <script src="{% static 'new/js/main.js' %}" defer></script>
+    <script src="{% static 'new/js/main_2.js' %}" defer></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        dateFormat: "dd/mm/yy"
+      }).val();
+      $("#datepicker2").datepicker({
+        dateFormat: "dd/mm/yy"
+      }).val();
+      $("#datepicker3").datepicker({
+        dateFormat: "dd/mm/yy"
+      }).val();
+      $("#datepicker4").datepicker({
+        dateFormat: "dd/mm/yy"
+      }).val();
+      $("#datepicker5").datepicker({
+        dateFormat: "dd/mm/yy"
+      }).val()
+    });
+  </script>
+
+
+</head>
+
+ <!-- All svg icons -->
+ <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+
+     <!-- menu -->
+     <symbol id="menu" viewbox="0 0 25 18" preserveAspectRatio="xMidYMid">
+         <path d="M0 0.72973C0 0.326711 0.335786 0 0.75 0H24.25C24.6642 0 25 0.326711 25 0.72973C25 1.13275 24.6642 1.45946 24.25 1.45946H0.749999C0.335786 1.45946 0 1.13275 0 0.72973Z" />
+         <path d="M0 9C0 8.59698 0.335786 8.27027 0.75 8.27027H24.25C24.6642 8.27027 25 8.59698 25 9C25 9.40302 24.6642 9.72973 24.25 9.72973H0.749999C0.335786 9.72973 0 9.40302 0 9Z" />
+         <path d="M0 17.2703C0 16.8673 0.335786 16.5405 0.75 16.5405H24.25C24.6642 16.5405 25 16.8673 25 17.2703C25 17.6733 24.6642 18 24.25 18H0.749999C0.335786 18 0 17.6733 0 17.2703Z" />
+     </symbol>
+     <!-- close -->
+     <symbol id="close" viewbox="0 0 29 29" preserveAspectRatio="xMidYMid">
+         <rect x="0.283691" y="26.8701" width="38" height="2" transform="rotate(-45 0.283691 26.8701)" />
+         <rect width="38" height="2" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 28.2842 26.8701)" />
+     </symbol>
+     <!-- search -->
+     <symbol id="search" viewbox="0 0 16 17" preserveAspectRatio="xMinYMid">
+         <path d="M6.5 12C9.53757 12 12 9.53757 12 6.5C12 3.46243 9.53757 1 6.5 1C3.46243 1 1 3.46243 1 6.5C1 9.53757 3.46243 12 6.5 12Z" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+         <path d="M10 11L15 16" stroke="#35312C" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+
+     </symbol>
+     <!--pagination-->
+     <symbol id="arrow-left" viewbox="0 0 17 10" preserveAspectRatio="xMidYMid">
+         <path d="M16.3137 5.39871L1.31372 5.39871V4.39871L16.3137 4.39871V5.39871Z" />
+         <path d="M0 4.94858L4.94851 6.86646e-05L5.65562 0.707175L0.707107 5.65568L0 4.94858Z" />
+         <path d="M4.95016 9.89868L0 4.94858L0.707165 4.24147L5.65727 9.19157L4.95016 9.89868Z" />
+     </symbol>
+     <symbol id="arrow-right" viewbox="0 0 17 10" preserveAspectRatio="xMidYMid">
+         <path d="M0 4.49997H15V5.49997H0L0 4.49997Z" />
+         <path d="M16.3137 4.9501L11.3652 9.89861L10.6581 9.19151L15.6066 4.243L16.3137 4.9501Z" />
+         <path d="M11.3636 0L16.3137 4.9501L15.6066 5.65721L10.6564 0.707107L11.3636 0Z" />
+     </symbol>
+     <!--link-more-->
+     <symbol id="link-more" viewbox="0 0 28 12" preserveAspectRatio="xMidYMid">
+         <rect width="8.07971" height="1.00996" transform="matrix(0.714015 -0.700131 0.714015 0.700131 21.1953 10.6064)" />
+         <rect width="8.07971" height="1.00996" transform="matrix(-0.714015 -0.700131 0.714015 -0.700131 26.9644 6.36377)" />
+         <rect x="0.849854" y="5.15674" width="25.4958" height="1" />
+     </symbol>
+
+     <!--user-->
+     <symbol id="user" viewbox="0 0 21 24" preserveAspectRatio="xMidYMid">
+         <circle cx="10.5" cy="5.5" r="4.5" stroke="" stroke-width="2" />
+         <path d="M5 14H16C18.2091 14 20 15.7909 20 18V21C20 22.1046 19.1046 23 18 23H3C1.89543 23 1 22.1046 1 21V18C1 15.7909 2.79086 14 5 14Z" stroke="" stroke-width="2" />
+
+     </symbol>
+
+     <!--pencil-->
+     <symbol id="pencil" viewbox="0 0 22 22" preserveAspectRatio="xMidYMid">
+         <path opacity="0.4" d="M12.4537 20.3807H20.3519" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4076 1.87392C12.3204 0.710932 13.7955 0.77162 14.9597 1.68443L16.6813 3.03444C17.8455 3.94724 18.2579 5.3629 17.3451 6.52837L7.07885 19.626C6.73577 20.0644 6.21187 20.3233 5.65452 20.3295L1.6949 20.3802L0.798195 16.5222C0.671864 15.9809 0.798195 15.4112 1.14127 14.9715L11.4076 1.87392Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path opacity="0.4" d="M9.48495 4.3269L15.4225 8.98135" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+     </symbol>
+
+     <symbol id="view" viewbox="0 0 22 14" preserveAspectRatio="xMidYMid">
+         <path d="M21 7.11989L18.4 9.99989C17.4627 11.0311 16.3203 11.855 15.0459 12.4188C13.7716 12.9826 12.3935 13.2738 11 13.2738C9.60651 13.2738 8.2284 12.9826 6.95406 12.4188C5.67971 11.855 4.53727 11.0311 3.6 9.99989L1 7.11989L3.32 4.33989C4.2585 3.21448 5.43287 2.30908 6.76001 1.68776C8.08715 1.06644 9.53462 0.744385 11 0.744385C12.4654 0.744385 13.9129 1.06644 15.24 1.68776C16.5671 2.30908 17.7415 3.21448 18.68 4.33989L21 7.11989Z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+         <path d="M11.0901 9.25989C12.526 9.25989 13.6901 8.1406 13.6901 6.75989C13.6901 5.37918 12.526 4.25989 11.0901 4.25989C9.65414 4.25989 8.49008 5.37918 8.49008 6.75989C8.49008 8.1406 9.65414 9.25989 11.0901 9.25989Z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="bevel" />
+     </symbol>
+
+
+     <symbol id="ether" viewbox="0 0 24 18" preserveAspectRatio="xMidYMid">
+         <circle cx="12" cy="9" r="3" fill="" />
+         <path d="M7.10102 4C5.80447 5.27052 5 7.04131 5 9C5 10.9587 5.80447 12.7295 7.10102 14M16.899 4C18.1955 5.27052 19 7.04131 19 9C19 10.9587 18.1955 12.7295 16.899 14" stroke-width="2" />
+         <path d="M4.72398 1C2.44033 2.95452 1 5.81415 1 9C1 12.1858 2.44033 15.0455 4.72398 17M19.276 1C21.5597 2.95452 23 5.81415 23 9C23 12.1858 21.5597 15.0455 19.276 17" stroke-width="2" />
+     </symbol>
+
+     <symbol id="video" viewbox="0 0 8 10" preserveAspectRatio="xMidYMid">
+         <path d="M7.5 4.13397C8.16667 4.51887 8.16667 5.48113 7.5 5.86603L1.5 9.33013C0.833334 9.71503 -4.47338e-07 9.2339 -4.13689e-07 8.4641L-1.10848e-07 1.5359C-7.71986e-08 0.766098 0.833333 0.284973 1.5 0.669873L7.5 4.13397Z" />
+     </symbol>
+     <symbol id="like" viewbox="0 0 20 20" preserveAspectRatio="xMidYMid">
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.69 7.19006H10.69L9.5 3.48006C9.31303 2.92014 8.95448 2.43332 8.47521 2.08868C7.99595 1.74403 7.42031 1.55908 6.83 1.56006H6.31C5.56474 1.56006 4.85001 1.85612 4.32303 2.38309C3.79605 2.91007 3.5 3.6248 3.5 4.37006V15.6301C3.5 15.9999 3.57301 16.3661 3.71485 16.7077C3.85669 17.0493 4.06457 17.3595 4.32656 17.6206C4.58856 17.8816 4.89951 18.0884 5.24159 18.229C5.58367 18.3697 5.95014 18.4414 6.32 18.4401H13.2C13.8094 18.443 14.4029 18.2463 14.89 17.8801L17.38 16.0001C17.7291 15.7382 18.0122 15.3984 18.2066 15.0078C18.4011 14.6171 18.5016 14.1864 18.5 13.7501V10.0001C18.5 9.2548 18.2039 8.54007 17.677 8.01309C17.15 7.48612 16.4353 7.19006 15.69 7.19006V7.19006Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path d="M1.34961 7.58008V17.0201" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel" />
+
+     </symbol>
+     <!--social-->
+     <symbol id="inst" viewbox="0 0 23 23" preserveAspectRatio="xMidYMid">
+         <path d="M22.9309 6.75864C22.8749 5.53452 22.6805 4.69855 22.3962 3.96716C22.1075 3.19981 21.6548 2.50475 21.0698 1.93024C20.4954 1.3452 19.8002 0.892296 19.0328 0.603462C18.3013 0.319366 17.4655 0.125114 16.2414 0.0694885C15.015 0.0133362 14.6231 0 11.5 0C8.37688 0 7.98504 0.0133362 6.75864 0.0691376C5.53452 0.125114 4.69872 0.319542 3.96716 0.603813C3.19981 0.892471 2.50475 1.3452 1.93024 1.93024C1.3452 2.50457 0.892296 3.19963 0.603462 3.96699C0.319366 4.69855 0.125114 5.53452 0.0694885 6.75846C0.0133362 7.98504 0 8.3767 0 11.4998C0 14.6231 0.0133362 15.015 0.0694885 16.2414C0.12529 17.4653 0.319717 18.3013 0.603989 19.0328C0.892647 19.8 1.34538 20.4953 1.93041 21.0696C2.50475 21.6546 3.19998 22.1074 3.96734 22.396C4.69872 22.6805 5.53469 22.8747 6.75881 22.9307C7.98539 22.9867 8.37705 22.9998 11.5002 22.9998C14.6233 22.9998 15.0151 22.9867 16.2415 22.9307C17.4657 22.8747 18.3015 22.6805 19.033 22.396C20.5777 21.7987 21.7989 20.5776 22.3962 19.0328C22.6806 18.3013 22.8749 17.4653 22.9309 16.2414C22.9867 15.0148 23 14.6231 23 11.5C23 8.3767 22.9867 7.98504 22.9309 6.75864ZM20.8608 16.1471C20.8097 17.2684 20.6223 17.8773 20.4649 18.2825C20.078 19.2855 19.2853 20.0781 18.2823 20.4651C17.8772 20.6225 17.2682 20.8099 16.147 20.8609C14.9346 20.9164 14.5708 20.928 11.5 20.928C8.42899 20.928 8.06541 20.9164 6.85287 20.8609C5.73175 20.8099 5.12285 20.6225 4.7175 20.4651C4.21809 20.2806 3.76624 19.9867 3.39529 19.6047C3.01328 19.2338 2.71935 18.7821 2.53493 18.2825C2.37753 17.8773 2.19012 17.2684 2.13905 16.1471C2.08378 14.9346 2.07202 14.5708 2.07202 11.5002C2.07202 8.42935 2.08378 8.06576 2.13905 6.85304C2.19029 5.73175 2.37753 5.12285 2.53493 4.71767C2.71935 4.21809 3.01345 3.76624 3.39529 3.39529C3.76624 3.01328 4.21809 2.71935 4.71767 2.5351C5.12285 2.37753 5.73175 2.19029 6.85304 2.13905C8.06558 2.08378 8.42934 2.07202 11.5 2.07202H11.4998C14.5705 2.07202 14.9342 2.08378 16.147 2.13923C17.2682 2.19029 17.877 2.3777 18.2823 2.5351C18.7817 2.71953 19.2336 3.01345 19.6045 3.39529C19.9865 3.76624 20.2805 4.21809 20.4647 4.71767C20.6223 5.12285 20.8097 5.73175 20.8608 6.85304C20.916 8.06558 20.9278 8.42935 20.9278 11.5C20.9278 14.5708 20.9162 14.9344 20.8608 16.1471Z" />
+         <path d="M11.4998 5.59424C8.23844 5.59424 5.59454 8.23831 5.59454 11.4997C5.59454 14.7611 8.23844 17.405 11.4998 17.405C14.7614 17.405 17.4053 14.7611 17.4053 11.4997C17.4053 8.23831 14.7614 5.59424 11.4998 5.59424ZM11.4998 15.333C9.3829 15.3328 7.66656 13.6167 7.66674 11.4995C7.66674 9.38259 9.3829 7.66626 11.5 7.66626C13.6171 7.66644 15.3333 9.38259 15.3333 11.4995C15.3333 13.6167 13.617 15.333 11.4998 15.333Z" />
+         <path d="M19.0187 5.36108C19.0187 6.12317 18.4008 6.74102 17.6387 6.74102C16.8765 6.74102 16.2586 6.12317 16.2586 5.36108C16.2586 4.59881 16.8765 3.98096 17.6387 3.98096C18.4008 3.98096 19.0187 4.59881 19.0187 5.36108Z" />
+     </symbol>
+     <symbol id="fb" viewbox="0 0 11 21" preserveAspectRatio="xMidYMid">
+         <path d="M7.07864 21V11.4216H10.2924L10.7746 7.68764H7.07864V5.30404C7.07864 4.22331 7.37752 3.4868 8.92905 3.4868L10.9047 3.48599V0.146191C10.563 0.101793 9.39023 0 8.02523 0C5.17491 0 3.22352 1.73981 3.22352 4.93423V7.68764H0V11.4216H3.22352V21H7.07864Z" />
+
+     </symbol>
+     <symbol id="phone" viewbox="0 0 14 13" preserveAspectRatio="xMidYMid">
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7452 10.7725C13.4556 11.5382 12.0531 12.2779 11.4197 12.3301C10.7862 12.3823 10.7862 12.8261 7.28433 11.5121C3.78242 10.1982 1.5745 6.76979 1.40257 6.55225C1.23064 6.32601 0 4.76844 0 3.14995C0 1.53147 0.886788 0.73963 1.2035 0.408972C1.52021 0.0783138 1.89121 0 2.12648 0C2.3527 0 2.58797 0.0261046 2.78705 0.0261046C2.98612 0.0261046 3.27569 -0.0870153 3.56525 0.574301C3.85481 1.23562 4.54253 2.8541 4.62396 3.01073C4.71445 3.17606 4.76875 3.36749 4.65111 3.58503C4.53348 3.80257 4.47918 3.94179 4.30725 4.13323C4.13533 4.32466 3.9453 4.5596 3.79147 4.70753C3.61954 4.87286 3.43857 5.04689 3.63764 5.37755C3.83671 5.7082 4.52443 6.78719 5.556 7.65735C6.86808 8.77114 7.98109 9.1192 8.32495 9.28453C8.6688 9.44986 8.86788 9.42376 9.06695 9.20622C9.26603 8.98868 9.92659 8.24905 10.1619 7.91839C10.3881 7.58774 10.6234 7.64865 10.9401 7.75306C11.2568 7.86618 12.9489 8.65802 13.2928 8.82335C13.6366 8.98868 13.8628 9.067 13.9533 9.20622C14.0348 9.34545 14.0348 9.99806 13.7452 10.7725Z" />
+     </symbol>
+     <symbol id="mail" viewbox="0 0 14 15" preserveAspectRatio="xMidYMid">
+         <path d="M10.2513 14.2242C9.00893 14.8061 7.93183 15 6.46145 15C3.02381 15 0 12.4354 0 8.21133C0 3.81475 3.06491 0 7.74575 0C11.3906 0 14 2.60801 14 6.22852C14 9.375 12.3019 11.3578 10.0652 11.3578C9.0917 11.3578 8.38789 10.8404 8.2843 9.69814H8.24291C7.60105 10.7974 6.66921 11.3578 5.57129 11.3578C4.22506 11.3578 3.25184 10.3233 3.25184 8.55586C3.25184 5.92676 5.11579 3.53437 8.09793 3.53437C9.00921 3.53437 10.0444 3.77168 10.5624 4.07314L9.94132 8.06045C9.73441 9.33164 9.87911 9.91377 10.459 9.93516C11.3495 9.95684 12.4677 8.77119 12.4677 6.29297C12.4677 3.49131 10.7282 1.31426 7.518 1.31426C4.34977 1.31426 1.57426 3.90059 1.57426 8.0168C1.57426 11.6159 3.79011 13.6635 6.87613 13.6635C7.9324 13.6635 9.05088 13.4265 9.87883 12.9738L10.2513 14.2242ZM8.40816 5.32324C8.24235 5.28018 8.03515 5.23711 7.76602 5.23711C6.39952 5.23711 5.32214 6.63809 5.32214 8.29746C5.32214 9.11631 5.67432 9.63369 6.35757 9.63369C7.12387 9.63369 7.93155 8.62061 8.11792 7.3708L8.40816 5.32324Z" />
+     </symbol>
+
+     <symbol id="calendar" viewbox="0 0 20 22" preserveAspectRatio="xMidYMid">
+         <path opacity="0.4" d="M1.09277 8.40426H18.9167" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M4.80762 12.3097C4.80762 11.8955 5.1434 11.5597 5.55762 11.5597H5.56688C5.98109 11.5597 6.31688 11.8955 6.31688 12.3097C6.31688 12.7239 5.98109 13.0597 5.56688 13.0597H5.55762C5.1434 13.0597 4.80762 12.7239 4.80762 12.3097ZM10.0043 11.5597C9.59013 11.5597 9.25434 11.8955 9.25434 12.3097C9.25434 12.7239 9.59013 13.0597 10.0043 13.0597H10.0136C10.4278 13.0597 10.7636 12.7239 10.7636 12.3097C10.7636 11.8955 10.4278 11.5597 10.0136 11.5597H10.0043ZM14.4418 11.5597C14.0276 11.5597 13.6918 11.8955 13.6918 12.3097C13.6918 12.7239 14.0276 13.0597 14.4418 13.0597H14.4511C14.8653 13.0597 15.2011 12.7239 15.2011 12.3097C15.2011 11.8955 14.8653 11.5597 14.4511 11.5597H14.4418ZM14.4418 15.4462C14.0276 15.4462 13.6918 15.782 13.6918 16.1962C13.6918 16.6104 14.0276 16.9462 14.4418 16.9462H14.4511C14.8653 16.9462 15.2011 16.6104 15.2011 16.1962C15.2011 15.782 14.8653 15.4462 14.4511 15.4462H14.4418ZM9.25434 16.1962C9.25434 15.782 9.59013 15.4462 10.0043 15.4462H10.0136C10.4278 15.4462 10.7636 15.782 10.7636 16.1962C10.7636 16.6104 10.4278 16.9462 10.0136 16.9462H10.0043C9.59013 16.9462 9.25434 16.6104 9.25434 16.1962ZM5.55762 15.4462C5.1434 15.4462 4.80762 15.782 4.80762 16.1962C4.80762 16.6104 5.1434 16.9462 5.55762 16.9462H5.56688C5.98109 16.9462 6.31688 16.6104 6.31688 16.1962C6.31688 15.782 5.98109 15.4462 5.56688 15.4462H5.55762Z" />
+         <path d="M14.0433 1V4.29078" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path d="M5.96515 1V4.29078" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2383 2.57919H5.77096C2.83427 2.57919 1 4.21513 1 7.22222V16.2719C1 19.3262 2.83427 21 5.77096 21H14.229C17.175 21 19 19.3546 19 16.3475V7.22222C19.0092 4.21513 17.1842 2.57919 14.2383 2.57919Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+     </symbol>
+
+     <symbol id="dowload" viewbox="0 0 32 29" preserveAspectRatio="xMidYMid">
+         <path d="M16.1816 19.6542L16.1816 1.59265" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+         <path d="M20.5566 15.2626L16.1826 19.6546L11.8086 15.2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+         <path opacity="0.4" d="M23.1311 8.69202H24.5306C27.5831 8.69202 30.0566 11.1655 30.0566 14.2195L30.0566 21.5455C30.0566 24.5905 27.5891 27.058 24.5441 27.058L7.83414 27.058C4.78164 27.058 2.30664 24.583 2.30664 21.5305L2.30664 14.203C2.30664 11.1595 4.77564 8.69202 7.81914 8.69202H9.23214" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+     </symbol>
+
+     <symbol id="review" viewbox="0 0 19 19" preserveAspectRatio="xMidYMid">
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.08993 15.8965C5.57327 15.8965 6.0291 16.0798 6.5116 16.274C9.46743 17.6406 12.9633 17.019 15.2408 14.7423C18.2458 11.7357 18.2458 6.84482 15.2408 3.83982C13.7858 2.38482 11.8508 1.58398 9.79077 1.58398C7.72993 1.58398 5.7941 2.38565 4.33993 3.84065C2.0616 6.11732 1.4416 9.61315 2.79577 12.5407C2.99077 13.0231 3.1791 13.4932 3.1791 13.9815C3.1791 14.469 3.0116 14.9598 2.8641 15.3931C2.74243 15.7498 2.55827 16.2882 2.6766 16.4065C2.79243 16.5265 3.3341 16.3373 3.6916 16.2148C4.12077 16.0681 4.60743 15.8998 5.08993 15.8965V15.8965ZM9.77 18.2456C8.49667 18.2456 7.215 17.9765 6.01584 17.4215C5.6625 17.2798 5.33167 17.1465 5.09417 17.1465C4.82084 17.1481 4.45334 17.2748 4.09834 17.3973C3.37 17.6473 2.46334 17.959 1.7925 17.2906C1.12417 16.6215 1.4325 15.7173 1.68083 14.9898C1.80333 14.6315 1.92917 14.2615 1.92917 13.9815C1.92917 13.7515 1.81833 13.4581 1.64833 13.0356C0.0875015 9.66482 0.809168 5.60232 3.45667 2.95648C5.14667 1.26565 7.39584 0.333984 9.79 0.333984C12.1842 0.333984 14.4342 1.26482 16.1242 2.95565C19.6175 6.44898 19.6175 12.1323 16.1242 15.6256C14.4117 17.339 12.1058 18.2456 9.77 18.2456V18.2456Z" />
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0801 10.4696C12.6201 10.4696 12.2434 10.0971 12.2434 9.63623C12.2434 9.1754 12.6126 8.8029 13.0726 8.8029H13.0801C13.5401 8.8029 13.9134 9.1754 13.9134 9.63623C13.9134 10.0971 13.5401 10.4696 13.0801 10.4696" />
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.73924 10.4696C9.27924 10.4696 8.90258 10.0971 8.90258 9.63623C8.90258 9.1754 9.27091 8.8029 9.73174 8.8029H9.73924C10.1992 8.8029 10.5726 9.1754 10.5726 9.63623C10.5726 10.0971 10.1992 10.4696 9.73924 10.4696" />
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.39834 10.4696C5.93834 10.4696 5.56167 10.0971 5.56167 9.63623C5.56167 9.1754 5.93084 8.8029 6.39084 8.8029H6.39834C6.85834 8.8029 7.23167 9.1754 7.23167 9.63623C7.23167 10.0971 6.85834 10.4696 6.39834 10.4696" />
+
+     </symbol>
+ </svg>
+
+<body class="home">
+  <div class="wrapper">
+
+  <!--header-->
+
+    <header class="header">
+
+      <div class="header__top">
+        <div class="container">
+          <div class="header__main">
+            <div class="header__left">
+              <!-- logo -->
+              <div class="header__logo-block">
+                <a href="/" class="header__logo">
+                  <img src="{% static 'new/images/logo.png' %}" alt="">
+                </a>
+                <div class="header__logo-text"><span>Социальная сеть для врачей</span><br> <span>Медицинский образовательный сайт</span></div>
+              </div>
+              <!-- /logo -->
+              <button class="header__navbar-btn btn hidden-xl-up">
+                <span class=" svg__wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#menu"></use>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <!-- Search -->
+            <div class="search flex-grow">
+              <form action="">
+                <input type="text" name="search"  value="{{ search|default:'' }}"class="form__input" placeholder="Поиск" required="">
+                <button class="search__btn btn">
+                  <span class="svg__wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <use xlink:href="#search"></use>
+                    </svg>
+                  </span>
+                </button>
+              </form>
+            </div>
+
+            <div class="header__right">
+              <div class="search-main hidden-xl-up">
+                <button class="search__btn btn">
+                  <span class=" svg__wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <use xlink:href="#search"></use>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <a href="" class="header__link header__link-write js-open-modal" data-modal="1">
+                <div class="svg__wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#pencil"></use>
+                  </svg>
+                </div>
+                <span>Напишите нам</span>
+              </a>
+
+        {% if request.user.is_authenticated %}
+              <div class="header__block-enter hidden-lg-down">
+                <div class="header__block-ava">
+                 <a href="{% url 'lichnie2' %}">  <div class="header__ava" style="background-image: url({% if request.user.avatar %}{{request.user.avatar.url}}{% endif %});"></div> </a>
+                 <a href="{% url 'lichnie2' %}">
+                      <div class="title-4">{{ request.user.lastname }} {{ request.user.firstname | first}}.{{ request.user.surname | first }}.</div>
+                 </a>
+                </div>
+                <div class="header__block-links">
+                  <a href="{% url 'invite' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/user-more.svg' %});"></div>
+                  </a>
+                  <a href="{% url 'alldialogs' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/call.svg' %});"></div>
+                    <span class="header__block-link__amount"><span>{% Unreaded user.id %}</span></span>
+                  </a>
+                  <a href="{% url 'Interesting' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/like.svg' %});"></div>
+                  </a>
+
+                  <a href="{% url 'logout' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/enter.svg' %});"></div>
+                  </a>
+
+
+                </div>
+              </div>
+
+          {% else %}
+          <a href="" class="header__link js-open-modal" data-modal="4">
+                <div class="svg__wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#user"></use>
+                  </svg>
+                </div>
+                <span>Личный кабинет</span>
+              </a>
+          {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header__bottom">
+        <div class="container">
+
+          <!-- navbar -->
+          <nav class="header__navbar">
+            <button class="header__navbar-btn btn">
+              <span class=" svg__wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                  <use xlink:href="#close"></use>
+                </svg>
+              </span>
+            </button>
+            <ul class="header__ul ">
+                 {% if request.user.is_authenticated %}
+              <div class="header__block-enter hidden-lg-up">
+               <a href="{% url 'lichnie2' %}">  <div class="header__block-ava">
+                  <div class="header__ava" style="background-image: url({% if request.user.avatar %}{{request.user.avatar.url}}{% endif %});"></div>
+                  <div class="title-4">{{ request.user.lastname }} {{ request.user.firstname | first}}.{{ request.user.surname | first }}.</div>
+                </div> </a>
+                <div class="header__block-links">
+                  <a href="{% url 'invite' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/user-more.svg' %});"></div>
+                  </a>
+                  <a href="{% url 'alldialogs' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/call.svg' %});"></div>
+                    <span class="header__block-link__amount"><span>{% Unreaded user.id %}</span></span>
+                  </a>
+                  <a href="{% url 'Interesting' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/like.svg' %});"></div>
+{#                    <span class="header__block-link__amount"><span>10</span></span>#}
+                  </a>
+
+                  <a href="{% url 'logout' %}" class="header__block-link">
+                    <div class="svg__wrapper" style="background-image: url({% static 'new/images/icon/enter.svg' %});"></div>
+                  </a>
+
+
+                </div>
+              </div>
+                 {% endif %}
+               <li>
+                <a href="/">Главная лента</a>
+              </li>
+              <li class="header__notification">
+                  <a href="/circle/calendar" >Календарь мероприятий</a>
+              </li>
+              <li class="header__drop">
+                <a href="/" class="header__drop-link-main">Новости</a>
+                <!--nav level2-->
+                <ul class="header__dropdown">
+                  <li>
+                    <a href="/articles" class="header__dropdown-link">Статьи</a>
+                  </li>
+                  <li>
+                    <a href="/magazines">Книги и журналы</a>
+                  </li>
+                  <li>
+                    <a href="/vacancies">Резюме</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="{% url 'nmo' %}">НМО</a>
+              </li>
+              <li>
+                <a href="/about">О нас</a>
+              </li>
+              <li>
+                <a href="/contacts">Контакты</a>
+              </li>
+
+            {% online as is_online  %}
+            {% if is_online  %}
+              <li class="header__link-bright ">
+                <a href="/online"> <!-- class="popup-ether js-open-modal" data-modal="2"> -->
+                  <div class="svg__wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <use xlink:href="#ether"></use>
+                    </svg>
+                  </div>
+                  <span> Прямой эфир</span>
+                </a>
+              </li>
+            {% endif %}
+              <li class="header__link-bright header__link-bright-mini">
+                <a href="/videos">
+                  <div class="svg__wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <use xlink:href="#video"></use>
+                    </svg>
+                  </div>
+                  <span> Видеоматериалы</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+
+
+    </header>
+
+    <!-- /header -->
+{% block after_header %}{% endblock %}
+
+      <!--content-->
+<main class="content">
+
+
+
+
+
+{% block filter_content %}{% endblock %}
+<!-- Центральная колонка -->
+
+
+
+    <section class="timetable p-b">
+
+            <div class="container">
+               <h1 class="h1">Календарь мероприятий</h1>
+
+                <div class="timetable__select">
+                    <select class="select2" name="spec_id" id="specs">
+                        <option selected value="1">Все специализации</option>
+                    {% for speciality in specialities_list %}
+                    <option value="{{ speciality.id }}">{{ speciality.name }}</option>
+                    {% endfor %}
+                    </select>
+                   {% comment %} <select class="select2" name="timetable_2" id="timetable_2">
+                        <option selected value="1">Вид материала</option>
+                        <option value="2">Вид материала2</option>
+                    </select>{% endcomment %}
+                    <div class="calendar__input">
+
+                         {% datepicker %}
+                                  </div>
+                </div>
+	{% if user.is_authenticated and user.is_staff %}
+		<!-- Создание поста -->
+		<div class="content-block-center-write-contaner">
+			<div class="content-block-center-write" title="Написать в ленту">
+				<span>Написать в ленту {{typetype}}</span>
+			</div>
+			{% include "includes/add_online.html" %}
+		</div>
+	{% endif %}
+            {% now "Y-m-d" as todays_date %}
+	    {% now "H-i" as todays_hour %}
+
+            {% for object in conf_list %}
+                <div class="title-3 timetable__mounth">{{ object.createdate|date:'F' }}</div>
+
+                <div class="card-timetable">
+                    <div class="card-timetable__left">
+
+                      {% comment %}  <div class="card-timetable__data title">{{object.createdate }}</div> {% endcomment %}
+                        <ul class="card-timetable__links">
+                            <li><a href="" class="card-timetable__link link-solid"></a></li>
+                        </ul>
+
+                    </div>
+                    <div class="card-timetable__right">
+                        <div class="card-timetable__right-header">
+                            <div class="card-timetable__data title">{{object.begindate }}</div>
+
+                            <div class="card-timetable__markers">
+                           {% if is_online and todays_date == object.begindate|date:"Y-m-d" and todays_hour > object.begindate|date:"H-i" and todays_hour < object.updatedate|date:"H-i" %}
+                                <a href="/online" class="card-timetable__marker  card-timetable__ether">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#ether"></use>
+                                        </svg>
+                                    </div>
+                                    <span> Прямой эфир</span>
+                                </a>
+                                {% endif %}
+{#                                <a href="" class="card-timetable__marker card-timetable__program">НМО</a>#}
+                                <a href="" class="card-timetable__marker card-timetable__type title-s-min">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#video"></use>
+                                        </svg>
+                                    </div>
+                                    <span>Конференция</span>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="{{ object.content|find:"/translation/.*?/" }}" class="title-2 m-b-15">{{ object.title }}</a>
+                        {#   <a href="{% url 'detailpractice' object.id %}" class="title-2 m-b-15">{{ object.title }}</a> #}
+                        <div class="title-4"></div>
+                        <div class="card-timetable__footer">
+                            <a href="" class="card-author">
+                                <div class="card-author__circle bg-img-cover" style="background-image: url(/media/{{ object.user_id.avatar }});"></div>
+                                <div class="title-5 font-weight">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</div>
+                            </a>
+                                        {% if user.is_staff %}
+                    <a href="{% url "admin:posts_posts_change" object.id %}" class="link-mini">Редактировать</a>
+            {% endif %}
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{object.createdate }}&details={{ object.title }}%20https://vrachivmeste.ru&location=vrvm.ru&text={{ object.title }}" target="_blank">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#calendar"></use>
+                                    </svg>
+                                </div>
+                                <span>Добавить в календарь</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {% comment %}
+                <button class="btn-default btn timetable__btn">Показать еще</button>
+                {% endcomment %}
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	function SendComment(result_id,form_id,url) {
+		if($(this).data('locked') == 1){
+			return false;
+		}
+		var form = $(this);
+		var text = jQuery("#"+form_id).children(".form-filed-3").val();
+		if (text.trim() == '') {
+			alert('Комментарий не может быть пустым');
+		}else{
+			$(this).data('locked', 1);
+			jQuery.ajax({
+			url:     url, //Адрес подгружаемой страницы
+			type:     "POST", //Тип запроса
+			dataType: "html", //Тип данных
+			data: jQuery("#"+form_id).serialize(),
+			success: function(response) { //Если все нормально
+				form.data('locked', 0);
+				document.getElementById(result_id).innerHTML = response;
+			},
+			error: function(response) { //Если ошибка
+				form.data('locked', 0);
+				document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
+			}
+		});
+		}
+	}
+
+	function SendLike(id, service_id, id_result) {
+		jQuery.ajax({
+			url:     'https://vrachivmeste.ru/likes/',
+			type:     'get',
+			data: {'id':id, 'service_id':service_id, 'user_id':{{ user.id }} },
+			success: function(response) {
+				document.getElementById(id_result).innerHTML = response;
+			},
+			error: function(response) {
+				alert("Ошибка");
+			}
+		});
+	}
+    </script>
+
+
+<script>
+	var thisWork = 1;
+    thisPageNum = 2;
+	$('#next10').click(function (){ showLoader(true);
+         showLoader(true);
+		if (thisWork == 1) {
+			thisWork = 0;
+			jQuery.ajax({
+				type: 'get',
+				url: "{{ path }}",
+				data: {
+					'page': thisPageNum,
+					//'spec_id': spec_id,
+					//'format': format.join(),
+					'search': $('input[name="search"]').val()
+				},
+				success: function (data) {
+					//var page = $(data).find('input[name="page"]').val();
+					//if (page) {
+						showLoader(false);  $(data).appendTo("#lenta");
+						thisPageNum+=1;
+						thisWork = 1;
+						$('.content-block-center-item-content img').each(function (index) {
+						});
+						$('.content-block-center-item-content hr').each(function (index) {
+							this.style.width = "100%";
+						});
+					//}
+				},
+				error: function() {
+
+				}
+			});
+		}
+	});
+    </script>
+
+
+
+
+
+
+<script>
+	var scrH = $(window).height();
+	var scrHP = $(".content-block-center").height();
+
+
+
+	$('#addpost').click(function(){
+		var dict = {};
+		var photo = {};
+		var video = {};
+		dict['photo'] = photo;
+		dict['video'] = video;
+		jQuery.each($('.content-block-center-write-form-block-2-left-photo-list'), function( i ) {
+			child = $(this).children()[0];
+			photo[ i ] = $(child).attr('file');
+		});
+		jQuery.each($('.content-block-center-write-form-block-2-left-video-list'), function( i ) {
+			child = $(this).children()[0];
+			video[ i ] = $(child).attr('file');
+		});
+		dict['type'] = $('#post-filed-1 option:selected').attr('type_id');
+		dict['service'] = $('#post-filed-1 option:selected').attr('service');
+		dict['spec_id'] = $('select[name="spec_id"]').val();
+		dict['title'] = $('input[name="title"]').val();
+		dict['begindate'] = $('input[name="begindate"]').val();
+		{% if user.is_staff %}
+		dict['description'] = tinyMCE.activeEditor.getContent().replace('\n', '');
+		{% else %}dict['description'] = $('#description1').val();
+		{% endif %}
+		var errortext = "";
+		if (dict['type'] == '0'){ errortext = errortext + "Выберите тип материала\n";}
+		if (dict['spec_id'] == '0'){ errortext = errortext + "Выберите специальность\n";}
+		if (dict['title'] == '' || dict['title'] == 'Введите заголовок' ){ errortext = errortext + "Введите заголовок\n";}
+		if (dict['description'].replace(/<p>(Введите текст|&nbsp;| )*<\/p>/g, '').trim() == ''){ errortext = errortext + "Введите описание\n";}
+		if (errortext == ""){
+			showLoader(true);
+			jQuery.ajax({
+				url:     '/posts/add/',
+				type:     "POST",
+				dataType: "html",
+			data: {csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(), data: dict},//'csrfmiddlewaretoken=' + jQuery('input[name="csrfmiddlewaretoken"]').val() + '&data=' + JSON.stringify(dict),
+			success: function(response) {
+				alert("Материал добавлен");
+				showLoader(false);
+				location.reload()
+			},
+			error: function(response) {
+				showLoader(false);
+				alert("Ошибка при отправке формы");
+			}
+		});
+
+		}else{
+			alert('Вы допустили ошибки:\n\r' + errortext);
+		}
+	});
+
+	$(document).ready(function(){
+
+		var image_index = 1;
+		function progressHandlingFunction(e){
+			if(e.lengthComputable){
+				$('.bar').css('width', (e.loaded/e.total)*100);
+			}
+		}
+
+
+
+
+
+
+
+		$('#upload-file').click(function(){
+			$("#file").trigger('click');
+		});
+		$('#file').bind('change', function(){
+			$('div.content-block-center-write-form-block-2-left-photolink').fadeOut();
+			var data = new FormData();
+			var error = '';
+			jQuery.each($('#file')[0].files, function(i, file) {
+				if(file.name.length < 1) {
+					error = error + ' Файл имеет неправильный размер! ';
+				}
+				if(file.size > 10000000) {
+					error = error + ' File ' + file.name + ' is to big.';
+				}
+				data.append('file', file );
+			});
+
+			if (error != '') { alert(error);} else {
+				$.ajax({
+					url: '{% url "fileupload" %}',
+					type: 'POST',
+					xhr: function() {
+						var myXhr = $.ajaxSettings.xhr();
+						if(myXhr.upload){
+							myXhr.upload.addEventListener('progress',progressHandlingFunction, false);
+						}
+						return myXhr;
+					},
+					data: data,
+					cache: false,
+					contentType: false,
+					processData: false,
+
+					beforeSend: function() {
+						$('\
+							<div class="content-block-center-write-form-block-2-left-photo-list-download">\
+							<div class="progress">\
+							<div class="bar"></div>\
+							</div>\
+							</div>').appendTo('.content-block-center-write-form-block-2-left-photo-container');
+						var percentVal = '0%';
+						$('.bar').css('width', percentVal);
+					},
+					success: function(data){
+						var percentVal = '100%';
+						$('.bar').css('width', percentVal);
+					},
+					error: errorHandler = function() { alert('Ошибка загрузки файлов')
+					$('#info').html('Ошибка загрузки файлов');
+				},
+				complete: function(xhr) {
+					responseText = JSON.parse(xhr.responseText);
+					if (!responseText.result) {
+						alert('Ошибка загрузки файлов');
+					} else {
+						$('.content-block-center-write-form-block-2-left-photo-container').append(
+							'<div class="content-block-center-write-form-block-2-left-photo-list">\
+							<div file="' + responseText.file + '" class="content-block-center-write-form-block-2-left-photo-list-prev" style="background-image:url(' + responseText.url + ')"></div>\
+							<span>Фото №' + (image_index++) + '</span>\
+							<div class="content-block-center-write-form-block-2-left-photo-list-del" title="Удалить фото" onclick="deletephoto(\'' + responseText.url + '\', this);"></div>\
+							</div>');
+						$('.content-block-center-write-form-block-2-left-photo-list-download').remove();
+					}
+				}
+			});
+			}
+		})
+	});
+
+	function deletephoto( photo, el ) {
+		$.post( '{% url "filedelete" %}', { file: photo }, function( data ) {
+			if(data.result) {
+				parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
+				parent.remove();
+			}
+		},"json");
+	}
+
+	function addvideo() {
+		if( $('input[name="links-video"]').val() ){
+			$.post( '{% url "videoupload" %}', { video: $('input[name="links-video"]').val() }, function( data ) {
+				html =
+				'<div class="content-block-center-write-form-block-2-left-video-list">\
+				<div file="'+data.file+'" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url('+data.furl+')"></div>\
+				<div class="content-block-center-write-form-block-2-left-video-list-gradient"></div>\
+				<span>'+data.title+'</span>\
+				<div class="content-block-center-write-form-block-2-left-video-list-del" title="Удалить видео" onclick="deletevideo(\''+data.path+'\', this);"></div>\
+				</div>';
+				if('result' in data && data['result']) {
+					$(html).appendTo('.content-block-center-write-form-block-2-left-video-container');
+					$('.content-block-center-write-form-block-2-left-videolink').css('display', 'none');
+				} else {
+					alert("Ошибка! Неправильная ссылка на видео!");
+				}
+			}, "json");
+		}
+	}
+
+	function deletevideo( path, el ) {
+		$.post( '{% url "videodelete" %}', { video: path }, function( data ) {
+			if(data == 'OK') {
+				parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
+				parent.remove();
+			}
+		});
+	}
+
+</script>
+
+
+
+
+
+{% block before_footer %}{% endblock %}
+
+</main>
+<!--/content-->
+
+</div>
+<!--/wrapper-->
+
+<div id="footer" class="footer">
+
+    <div class="contact-info">
+        <div class="container">
+            <div class="my-row">
+                <div class="my-col-12 my-col-md-6 my-col-lg-3">
+                    <div class="contact-info__card">
+                        <div class="contact-info__card__info">
+                            <div class="title-s-min contact-info__position">Генеральный директор</div>
+                            <div class="title-3 contact-info__name">Андрей Рябов </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#phone"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+				<a href="tel:+7(963)6137887" class="title-5">+7 (963) 613-78-87</a>
+                            </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#mail"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="mailto:aryabov2004@list.ru" class="title-5">aryabov2004@list.ru</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-col-12 my-col-md-6 my-col-lg-3">
+                    <div class="contact-info__card">
+                        <div class="contact-info__card__info">
+                            <div class="title-s-min contact-info__position">Коммерческий директор </div>
+                            <div class="title-3 contact-info__name">Михаил Рябов </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#phone"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="tel:+7(985)1979838" class="title-5">+7 985 197 98 38</a>
+                            </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#mail"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="mailto:ryabovm_08@mail.ru" class="title-5">ryabovm_08@mail.ru</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-col-12 my-col-md-6 my-col-lg-3">
+                    <div class="contact-info__card">
+                        <div class="contact-info__card__info">
+                            <div class="title-s-min contact-info__position">Менеджер по работе с клиентами</div>
+                            <div class="title-3 contact-info__name">Александра Хлебникова</div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#phone"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="tel:+7(916)0706913" class="title-5">+7 916 070 69 13</a>
+                                <a href="tel:8(495)6990464" class="title-5">8 495 699 04 64</a>
+                            </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#mail"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="mailto:a.kh@calistomedia.ru" class="title-5">a.kh@calistomedia.ru</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-col-12 my-col-md-6 my-col-lg-3">
+                    <div class="contact-info__card">
+                        <div class="contact-info__card__info">
+                            <div class="title-s-min contact-info__position">Редактор портала "Врачи вместе"</div>
+                            <div class="title-3 contact-info__name">Ермилова Виктория</div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#phone"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="tel:8(495)6506150" class="title-5">8 495 650 61 50</a>
+                            </div>
+                        </div>
+                        <div class="contact-info__connection">
+                            <div class="contact-info__svg">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#mail"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact-info__link">
+                                <a href="mailto:v.ermilova@calistomedia.ru " class="title-5">v.ermilova@calistomedia.ru </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <div class="container">
+            <div class="my-row">
+                <div class="my-col-6 my-col-lg-3">
+                    <div class="contact__card">
+                        <a class="contact__ava">
+                            <img src="{% static 'new/images/logo.png' %}" alt="">
+                        </a>
+                        <div class="contact__socials">
+                            <a href=https://www.facebook.com/vrachivmeste.ru" target="_blank" class="svg__wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#fb"></use>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/vrachivmeste/" target="_blank" class="svg__wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#inst"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-col-6 my-col-lg-3">
+                    <div class="contact__card">
+                        <div class="title-3  contact__card-title">Информация</div>
+                        <ul class="contact__lish">
+                            <li><a class="title-4" href="/">Главная лента</a></li>
+                            <li><a class="title-4" href="/circle/calendar">Календарь мероприятий</a></li>
+                            <li><a class="title-4" href="/about">О нас</a></li>
+                            <li><a class="title-4" href="{% url 'lecturers' %}">Лекторы</a></li>
+			    <li><a class="title-4" href="/partners">Партнеры</a></li>
+                            <li><a class="title-4" href="/groups">Группы</a></li>
+                            <li><a class="title-4" href="/contacts">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="my-col-6 my-col-lg-3">
+                    <div class="contact__card">
+                        <div class="title-3  contact__card-title">Новости</div>
+                        <ul class="contact__lish">
+                            <li><a class="title-4" href="/magazines">Книги и журналы</a></li>
+                            <li><a class="title-4" href="/articles">Статьи</a></li>
+                            <li><a class="title-4" href="/vacancies">Резюме</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="my-col-6 my-col-lg-3">
+                    <div class="contact__card">
+                        <div class="title-3  contact__card-title">Материалы</div>
+                        <ul class="contact__lish">
+                            <li><a class="title-4" href="/videos">Видеоматериалы</a></li>
+                            <li><a class="title-4" href="/consultations">Онлайн-лекциий</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer__bottom">
+        <div class="container ">
+            <div class="footer__main">
+                <div class="title-4">© 2021 Все права защищены. </div>
+
+                <a href="/account/agreement" target="_blank" class="footer__bottom-link title-4">
+                    Пользовательское соглашение</a> и <a href="https://vrachivmeste.ru/media/politika_konfidencialnosti_vrachi_vmeste.pdf" class="footer__bottom-link title-4" target="blank">политика конфиденциальности.</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="popup-fade modal popup popup-main contact-page " id='popup-fade-write' data-modal="1">
+
+        <div type="button" class="btn  popup-close js-modal-close"></div>
+
+        <div class="title-1">Напишите нам:</div>
+        <form action="" method="post" id="feedback_form">
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Выберите тему:</div>
+                </div>
+                <div class="contact-page__right">
+                    <select name="topic" class="select2" id="m-1">
+                        <option value="Пожелания">Пожелания</option>
+                        <option value="Отзыв">Отзыв</option>
+                        <option value="Хочу сотрудничать">Хочу сотрудничать</option>
+                        <option value="Техническая проблема на сайте">Техническая проблема на сайте</option>
+                        <option value="Найдена ошибка на сайте">Найдена ошибка на сайте</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+            </div>
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Ваше имя:</div>
+                </div>
+                <div class="contact-page__right">
+                    <input name="name" class="form-control" type="text" value="{% spaceless %}
+                           {% if user.is_authenticated %}
+                         {{ user.lastname }} {{ user.firstname }} {{ user.surname }}
+                         {% endif %}{% endspaceless %}">
+                </div>
+            </div>
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Ваша должность:</div>
+                </div>
+                <div class="contact-page__right">
+                    <input class="form-control" type="text" name="position" value="{% spaceless %}
+                           {% if user.is_authenticated %}
+                         {{ user.job }}
+                         {% endif %}{% endspaceless %}">
+                </div>
+            </div>
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Email/телефон:</div>
+                </div>
+                <div class="contact-page__right">
+                    <input name="contact" class="form-control" type="text">
+                </div>
+            </div>
+            <textarea name="text" class="form-control" placeholder="Текст сообщения"></textarea>
+            <div class="custom-checkbox">
+                <input class="form-group" type="checkbox" name="fg" value="" id="check_m1" required >
+                <label class="box-label" for="check_m1">
+                    Согласен с регламентом - <a href="/account/agreement" target="blank">пользовательским соглашением</a><br/>
+                </label>
+            </div>
+            <div class="custom-checkbox">
+                <input class="form-group" type="checkbox" name="fg" value="" id="check_m2" required >
+                <label class="box-label" for="check_m2">
+                    Я согласен на обработку персональных данных в соответствии с <a href="https://vrachivmeste.ru/media/politika_konfidencialnosti_vrachi_vmeste.pdf" target="blank">политикой конфиденциальности</a>
+                </label>
+            </div>
+            <button class="btn-default btn m-auto">Отправить сообщение</button>
+        </form>
+    </div>
+    <div class="popup-fade modal" id="popup-ether" data-modal="2">
+        <div class="popup modal-ether">
+            <div type="button"  class="btn btn-close popup-close js-modal-close"></div>
+            <div class="title-2 text-center">Сейчас прямых эфиров нет.</div>
+            <div class="title-2 text-center">Перейти в <a href="">календарь мероприятий</a></div>
+            <div class="modal__img"></div>
+        </div>
+    </div>
+    <div class="popup-fade modal" id="popap-banner" data-modal="3">
+        <div class="popup modal-banner" style="background-image: url({% static 'new/images/card/banner/modal.jpg);">
+            <button class="btn  popup-close"></button>
+        </div>
+    </div>
+
+    <div class="popup-fade modal popup popup-main contact-page " id='popup-enter' data-modal="4">
+
+        <div type="button"  class="btn popup-close js-modal-close"></div>
+        <div class="my-row">
+            <div class="my-col-12 my-col-md-6">
+                <div class="title-1">Авторизация</div>
+            </div>
+            <div class="my-col-12 my-col-md-6">
+                <a href="{% url 'register1' %}" class="title-1 popup__title-reg">Регистрация</a>
+            </div>
+        </div>
+
+        <form action="{% url "login" %}" method="post">
+        {% csrf_token %}
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Ваш email:</div>
+                </div>
+                <div class="contact-page__right">
+                    <input class="form-control" name="login" value="" type="email">
+                </div>
+            </div>
+            <div class="contact-page__row">
+                <div class="contact-page__left">
+                    <div class="title-4">Ваша пароль:</div>
+                </div>
+                <div class="contact-page__right">
+                    <input class="form-control" type="password" name="password" value="" >
+                </div>
+            </div>
+            <div class="popup-check">
+                <div class="custom-checkbox m-b-10">
+                    <input class="form-group" type="checkbox" name="remember-me" value="" id="remember_me">
+                    <label class="box-label" for="remember_me">Запомнить меня</label>
+                </div>
+                <a href="{% url 'forgot' %}" class="link-mini  m-b-10">Восстановить пароль?</a>
+            </div>
+            <button class="btn-default btn m-auto popup-btn">Войти</button>
+        </form>
+    </div>
+
+    <!-- Подложка под модальным окном -->
+    <div class="overlay js-overlay-modal"></div>
+</div>
+
+<link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link type="text/css" rel="stylesheet" href="/resources/demos/style.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+
+</html>
+
+
+<script>
+	$('#specs').change(function (){
+        showLoader(true);
+        window.open("/circle/calendar/?spec_id="+$('select[name="spec_id"]').val(),"_self")
+	});
+</script>
+
+<script>
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+function setCookie(name) {
+  var now = new Date();
+  var time = now.getTime();
+  time += 1 * 3600 * 1000;
+  now.setTime(time);
+  var value = true;
+  document.cookie = name + '=' + value + '; expires=' + now.toUTCString() + '; path=/';
+}
+
+function showPopup(){
+	$("#spb").fancybox();
+    $("#spb").trigger('click');
+}
+  $(document).ready(function() {
+
+
+
+    if(!readCookie('popupIsShownOneHour')){
+      setTimeout(function(){
+    	 showPopup();
+   	  }, 3000);
+      setCookie('popupIsShownOneHour');
+    }
+  });
+
+
+
+
+
+  function openMNav() {
+    x=document.getElementById("menu_nav");
+    x.style.visibility = "visible";
+    x.style.height = "160px";
+    y=document.getElementById("arrow_menu");
+    y.style.visibility = "hidden";
+    y.style.height='0';
+
+  }
+
+  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+  function closeMNav() {
+    x=document.getElementById("menu_nav");
+    x.style.visibility = "hidden";
+    x.style.height = "0";
+
+    y=document.getElementById("arrow_menu");
+    y.style.visibility = "visible";
+    y.style.height='30px';
+  }
+
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-20221533-1', 'auto');
+  ga('create', 'UA-20221533-2', 'auto');
+  ga('create', 'UA-20221533-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function () {
+      try {
+        w.yaCounter30770953 = new Ya.Metrika({
+          id: 30770953,
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+          trackHash: true,
+          ecommerce: "dataLayer"
+        });
+      } catch (e) {
+      }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+    s = d.createElement("script"),
+    f = function () {
+      n.parentNode.insertBefore(s, n);
+    };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else {
+      f();
+    }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>
+  <div><img src="https://mc.yandex.ru/watch/30770953" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+  (function(){ var widget_id = 'apKh6rWwGT';var d=document;var w=window;function l(){
+  var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+  <!-- {/literal} END JIVOSITE CODE -->
+  </html>
+

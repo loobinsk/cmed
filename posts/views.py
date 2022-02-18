@@ -28,7 +28,21 @@ from comments.models import Comments
 from medtus.models import Visited
 from fileshandle.views import OneFileUpload
 from django.db.models import Q
-from django.db.models.loading import get_model
+from django.apps import apps
+from datetime import datetime, timedelta
+import random
+
+
+from banners.models import Banner
+from banners.models import BannerGroup
+from banners.models import URL
+
+
+# For render tag
+from django.template import Template
+from random import shuffle
+from random import choice
+import logging
 
 
 
@@ -64,9 +78,8 @@ def Partners(request, id=104):
     partners = get_object_or_404(Posts, pk=id)
     return render(request, 'posts/partners.html', {'partners': partners})
 
-
 def Main(request):
-    paginate_by = 5
+    paginate_by = 10
     search = ''
     if 'search' in request.GET:
         search = request.GET['search'].strip()
@@ -79,6 +92,10 @@ def Main(request):
     object_list = []
     post_format = request.GET.get('format')
     spec_id = request.GET.get('spec_id')
+
+    q = Q(status=0)
+    queryconf = Posts.objects.filter(Q(begindate__gte = datetime.now().date())).order_by('createdate')
+    queryconf = queryconf.filter(type__in='3')[:8]
     if search != u'Что ищем?' and search != '':
         q = (Q(content__icontains=search) | Q(title__icontains=search))
         query = Posts.objects.filter(q).order_by('-createdate')
@@ -86,6 +103,8 @@ def Main(request):
             post_format = TYPE_LIST[request.path][0]
 
         query = query.filter(type__in=post_format.split(','))
+        query = query.filter(begindate__lte = datetime.now())
+        
 
 
         if spec_id:
@@ -105,7 +124,7 @@ def Main(request):
             post_format = TYPE_LIST[request.path][0]
 
         query = query.filter(type__in=post_format.split(','))
-
+        query = query.filter(Q(begindate__lte = datetime.now()) | Q(begindate__isnull=True))
 
         if spec_id:
             query = query.filter(spec_id__id__in=spec_id.split(','))
@@ -157,18 +176,66 @@ def Main(request):
                 object_list.append({'object': o, 'template': 'photos'})
 
     # trying to sort result by createdate
-    object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
+    try:
+        object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
+    except:
+        pass
     p = Paginator(object_list, paginate_by)
     
 
-    context = RequestContext(request, {
-        'object_list': p.page(page),
-    })
+
+    queryvid = Videos.objects.filter(show_medtus=1, status=1).order_by('-id')[:8]
+    context = RequestContext(request)
+    context['object_list'] = p.page(page)
+    context['videos_list'] = queryvid
+    context['conf_list'] = queryconf
+    context['request'] = request
+
+
+
+     # Начало баннеры
+    try:
+        page_url = context['request'].path_info
+        
+        group = BannerGroup.objects.get(slug='right_side')
+        context['my'] = False
+        good_urls = []
+
+        for url in URL.objects.filter(public=True):
+            
+            if url.regex:
+                url_re = re.compile(url.url)
+                
+                if url_re.findall(page_url):
+
+                    good_urls.append(url)                  
+            elif page_url == url.url:
+                good_urls.append(url)
+
+        banners_all = Banner.objects.filter(public=True, group=group, urls__in=good_urls)
+
+        banners = [banner for banner in banners_all if banner.often == 10]
+
+        banners_ids = [x for y in [[banner.id] * banner.often for banner in banners_all if banner.often < 10] for x in y]
+        if(banners_ids):
+            shuffle(banners_ids);
+            banner_id = choice(banners_ids)
+            banners.append([el for el in banners_all if el.id == banner_id][0])
+    except:
+        banners = False
+        group = False
+    if (banners and group):
+        context['banners1'] = banners
+        context['group1'] = group
+        # Конец баннеры
+
+
+        
     if request.is_ajax():
-        template = loader.get_template('posts/main_ajax.html')
+        template = 'posts/main_ajax.html'
         context['page'] = page
     else:
-        template = loader.get_template('posts/main.html')
+        template = 'posts/main.html'
         title = TYPE_LIST[request.path][1]
         context['specialities_list'] = Specialities.objects.all().order_by('name')
         context['title'] = title
@@ -177,124 +244,108 @@ def Main(request):
         context['search'] = search
         context['the_path'] = request.path
         context['isfilter'] = TYPE_LIST[request.path][3]
-    return HttpResponse(template.render(context))
-
+    return render(request,template,context.flatten())
 
 def Opinion(request):
     paginate_by = 5
-    page = 100
     search = ''
     if 'search' in request.GET:
         search = request.GET['search'].strip()
+
     if request.GET.get('page'):
         page = int(request.GET.get('page'))
-    end = page * paginate_by
-    start = end - paginate_by
-
-    if request.GET.get('date'):
-        date = int(request.GET.get('date'))
     else:
-        date = timezone.now()
+        page = 1
 
-    count = 0
     object_list = []
-    while True:
-        q = Q(status=0)
-        if search != u'Что ищем?' and search != '':
-            q = q & (Q(content__icontains=search) | Q(title__icontains=search))
+    post_format = request.GET.get('format')
+    spec_id = request.GET.get('spec_id')
+    if search != u'Что ищем?' and search != '':
+        q = (Q(content__icontains=search) | Q(title__icontains=search))
         query = Posts.objects.filter(q).order_by('-createdate')
-       # query = query.filter(user_id__is_staff=0)
-        post_format = request.GET.get('format')
         if not post_format:
             post_format = TYPE_LIST[request.path][0]
-        
+
         query = query.filter(type__in=post_format.split(','))
-        spec_id = request.GET.get('spec_id')
+
+
         if spec_id:
             query = query.filter(spec_id__id__in=spec_id.split(','))
+
+        if TYPE_LIST[request.path][2] != '0':
+            postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
+            query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
+        
+        for o in query:
+            object_list.append({'object': o, 'template': 'posts'})
+    else:
+        q = Q(status=0)
+        query = Posts.objects.filter(q).order_by('-createdate')
+        if not post_format:
+            post_format = TYPE_LIST[request.path][0]
+
+        query = query.filter(type__in=post_format.split(','))
+
+
+        if spec_id:
+            query = query.filter(spec_id__id__in=spec_id.split(','))
+
         if TYPE_LIST[request.path][2] != '0':
             postslinks = PostLinks.objects.filter(service_id=TYPE_LIST[request.path][2])
             query = query.filter(id__in=list(set([f.post_id for f in postslinks])))
 
-        if page > 1:
-            start = datetime.datetime.now() - datetime.timedelta(days=page)
-            end = datetime.datetime.now() - datetime.timedelta(days=page - 1)
-        else:
-            start = datetime.datetime.now() - datetime.timedelta(days=page)
-            end = datetime.datetime.now() + datetime.timedelta(days=page)
 
-        sql = "DATE(`Posts`.`createdate`)>=DATE('" + str(start) + "')"
-        sql = sql + " AND DATE(`Posts`.`createdate`)<DATE('" + str(end) + "')"
-        query = query.extra(where=[sql])
         for o in query:
             object_list.append({'object': o, 'template': 'posts'})
+        # adding group posts to list
+        # group_posts = Posts.objects.filter(public_main=True)
+
+        # for o in group_posts:
+        #     object_list.append({'object': o, 'template': 'posts'})
 
         # если формат не задан или формат 99 (видео формат), то показываем видео в списке
         if not post_format or '99' in post_format.split(','):
-            # print 'ADDING Videos TO OBJECT LIST'
-            q = Q(show_medtus=1, status=1, public_main=1)
+            q = Q(show_medtus=1, status=1, public_main=True)
             if search != u'Что ищем?' and search != '':
                 q = q & (Q(title__icontains=search) | Q(description__icontains=search))
             query = Videos.objects.filter(q).order_by('-createdate')
-           # query = query.filter(user_id__is_staff=0)
             if spec_id:
                 query = query.filter(spec_id__id__in=spec_id.split(','))
-            sql = "DATE(`Videos`.`createdate`)>=DATE('" + str(start) + "')"
-            sql = sql + " AND DATE(`Videos`.`createdate`)<DATE('" + str(end) + "')"
-            query = query.extra(where=[sql])
             for o in query:
                 object_list.append({'object': o, 'template': 'videos'})
 
         # если формат не задан или формат 88 (Мероприятия формат), то показываем Мероприятия в списке
         if not post_format or '88' in post_format.split(','):
-            # print 'ADDING EVENTS TO OBJECT LIST'
-            q = Q(public_main=1)
+            q = Q(public_main=True)
             if search != u'Что ищем?' and search != '':
                 q = q & (Q(content__icontains=search) | Q(title__icontains=search))
             query = Events.objects.filter(q).order_by('-createdate')
-            query = query.filter(user_id__is_staff=0)
             if spec_id:
                 query = query.filter(spec_id__id__in=spec_id.split(','))
-            if page > 1:
-                start = datetime.datetime.now() + datetime.timedelta(days=page - 1)
-                end = datetime.datetime.now() + datetime.timedelta(days=page)
-            else:
-                start = datetime.datetime.now() - datetime.timedelta(days=1)
-                end = datetime.datetime.now() + datetime.timedelta(days=1)
-            sql = "DATE(`MEvents`.`start`)>DATE('" + str(start) + "')"
-            sql = sql + " AND DATE(`MEvents`.`start`)<=DATE('" + str(end) + "')"
-            query = query.extra(where=[sql])
             for o in query:
                 object_list.append({'object': o, 'template': 'events'})
 
         # если формат не задан, то показываем галерею в списке
         if not request.GET.get('format', None) and not spec_id:
-            # print 'ADDING Gallery TO OBJECT LIST'
-            q = Q(status=1, public_main=1)
+            q = Q(status=1, public_main=True)
             if search != u'Что ищем?' and search != '':
                 q = q & (Q(title__icontains=search) | Q(description__icontains=search))
             query = PGalleries.objects.filter(q).order_by('-createdate')
-            query = query.filter(user__is_staff=0)
             if spec_id:
                 query = query.filter(spec_id__id__in=spec_id.split(','))
-            sql = "DATE(`PGalleries`.`createdate`)>=DATE('" + str(start) + "')"
-            sql = sql + " AND DATE(`PGalleries`.`createdate`)<DATE('" + str(end) + "')"
-            query = query.extra(where=[sql])
-           # print query
             for o in query:
                 object_list.append({'object': o, 'template': 'photos'})
 
-        # trying to sort result by createdate
-        object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
-        count += 1
-        page += 1
-        if len(object_list) >= paginate_by or count >= 50:
-            break
+    # trying to sort result by createdate
+    object_list.sort(key=lambda x: x['object'].createdate, reverse=True)
+    p = Paginator(object_list, paginate_by)
+    
 
-    context = RequestContext(request, {
-        'object_list': object_list,
-    })
-    if request.is_ajax() and request.user.is_authenticated():
+    context = {
+        'object_list': p.page(page),
+        "request":request,
+    }
+    if request.is_ajax():
         template = loader.get_template('posts/main_ajax.html')
         context['page'] = page
     else:
@@ -307,7 +358,6 @@ def Opinion(request):
         context['search'] = search
         context['the_path'] = request.path
         context['isfilter'] = TYPE_LIST[request.path][3]
-        context['opinion'] = True
     return HttpResponse(template.render(context))
 
 
@@ -325,15 +375,24 @@ class PostsList(ListView):
         if 'search' in self.request.GET:
             self.search = self.request.GET['search']
         if self.search != u'Что ищем?' and self.search != '':
-            query = Q(content__icontains=self.search) | Q(title__icontains=self.search)
+            query = Posts.objects.filter(Q(content__icontains=self.search) | Q(title__icontains=self.search))
+            #query = Q(content__icontains=self.search) | Q(title__icontains=self.search)
         else:
             # query = Posts.objects.filter(Q(status=0)).order_by('-createdate')            
             if TYPE_LIST[self.request.path][0] == '3':
                query = Posts.objects.filter(Q(status=0)).order_by('createdate')
             else:
                query = Posts.objects.filter(Q(status=0)).order_by('-createdate')
-        
 
+        # Календарь       
+        if TYPE_LIST[self.request.path][0] == '3' and 'date' in self.request.GET:
+            try:
+                start_date = datetime.strptime(self.request.GET['date'] + " 00:00:00", "%Y-%m-%d %H:%M:%S")
+                end_date = datetime.strptime(self.request.GET['date'] + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+                query = Posts.objects.filter(begindate__gte = start_date, begindate__lte = end_date).order_by('createdate')
+            except (ValueError, TypeError):
+                raise Http404
+                        
 
 
         if self.request.is_ajax():
@@ -366,7 +425,7 @@ class PostsList(ListView):
         title = TYPE_LIST[self.request.path][1]
         page_id = TYPE_LIST[self.request.path][0]
 
-        if not self.request.user.is_anonymous():
+        if not self.request.user.is_anonymous:
             from account.models import EventAccess
             EventAccess.update("posts" + page_id, self.request.user)
 
@@ -375,6 +434,11 @@ class PostsList(ListView):
 
         if self.request.GET.get('archive') == '':
             context['title'] = context['title'] + u'. Архив'
+
+        if TYPE_LIST[self.request.path][0] == '3' and 'date' in self.request.GET:
+            context['date_param'] = self.request.GET['date']
+        else:
+            context['date_param'] = ''
 
         context['path'] = self.request.path
         context['search'] = self.search
@@ -389,6 +453,8 @@ class PostsList(ListView):
         context['archive_url'] = self.request.path + '?archive=true'
         if page_id in ('3',) and self.request.GET.get('archive') == None:
             context['show_archive'] = True
+        if page_id in ('8',) and self.request.GET.get('archive') == None:
+            context['show_archive'] = True  
 
         return context
 
@@ -396,6 +462,7 @@ class PostsList(ListView):
 class DetailViewPost(generic.DetailView):
     model = Posts
     template_name = 'posts/detailpost.html'
+    
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -407,13 +474,20 @@ class DetailViewPost(generic.DetailView):
             context['groups'] = Group.objects.filter(pk__in=groups_id)
 
         statistics = Statistics.objects.filter(material_id=self.kwargs['pk'], service_id=18)
-        if statistics:
-            statistics[0].viewings = statistics[0].viewings + 1
-            statistics[0].save()
-            context['viewings'] = statistics[0].viewings
-        else:
-            Statistics.objects.create(material_id=self.kwargs['pk'], service_id=18, viewings=1)
-            context['viewings'] = 1
+
+        if 'text' in self.request.META['HTTP_ACCEPT']:
+            if statistics:
+                statistics[0].viewings = statistics[0].viewings + 1
+                statistics[0].save()
+                context['viewings'] = statistics[0].viewings
+            else:
+                Statistics.objects.create(material_id=self.kwargs['pk'], service_id=18, viewings=1)
+                context['viewings'] = 1
+        
+        # logger = logging.getLogger(__name__)
+        # logger.error('Load bof')
+        # logger.error(context['viewings'])
+        # logger.error('Load eof')
         Visited.record(self.get_object())
         return context
 
@@ -438,7 +512,7 @@ class DeletePost(generic.DeleteView):
 
 
 def like(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise PermissionDenied
     user_id = str(request.user.id)
     try:
@@ -479,7 +553,16 @@ def addpost(request):
         type = request.POST['data[type]']
         title = request.POST['data[title]']
         description = request.POST['data[description]']
+        
+        try:
+            begindate = request.POST['data[begindate]']
+        except:
+            begindate = ''
 
+        if (begindate == ''):
+            begindate = timezone.now()
+        else:
+            begindate = datetime.strptime(begindate, "%Y-%m-%d %H:%M:%S")
         if (spec_id == '0'):
             error = error + u'<p>Вы не выбрали специальность</p>'
         if (type == '0'):
@@ -492,12 +575,12 @@ def addpost(request):
             if (not request.user.is_staff):
                 description = "<br/>".join(description.split("\n"))
             m = Posts.objects.create(user_id=MyUser(id=request.user.id), spec_id=Specialities(id=spec_id), title=title,
-                                     content=description, type=type, service_id=Posts.SERVICE_ID,
-                                     createdate=timezone.now(), status=0, comment_cnt=0)
+                                     content=description, type=type,
+                                     createdate=timezone.now(), status=0, comment_cnt=0, begindate = begindate)
 
-            if type == u'11':
-                service_id = PostLinks.objects.create(service_id=14, type=type, post_id=m.id,
-                                                      object_id=8)
+            # if type == u'11':
+            #     service_id = PostLinks.objects.create(service_id=14, type=type, post_id=m.id,
+            #                                           object_id=8)
             media = dict()
             media['photo'] = {}
             media['video'] = {}
@@ -570,11 +653,11 @@ def rmpost(request):
     post_id = request.POST.get('post_id')
     post_type = request.POST.get('type')
     if post_type == 'photo':
-        model_type = get_model('photos', 'PGalleries')
+        model_type = apps.get_model('photos', 'PGalleries')
     elif post_type == 'video':
-        model_type = get_model('videos', 'Videos')
+        model_type = apps.get_model('videos', 'Videos')
     else:
-        model_type = get_model('posts', 'Posts')
+        model_type = apps.get_model('posts', 'Posts')
     post = get_object_or_404(model_type, pk=post_id)
     time_left = (timezone.now() - post.createdate).seconds < getattr(settings, 'POST_DELETION_TIME', 30) * 60
 

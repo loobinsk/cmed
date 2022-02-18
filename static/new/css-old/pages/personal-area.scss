@@ -1,0 +1,464 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.personal-area__info {
+  margin-bottom: 35px;
+}
+
+.personal-area__message {
+  border: 1px solid #cdcdcd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+  .link-mini {
+    font-size: 14px;
+  }
+}
+
+.personal-area__message-header {
+  padding: 25px;
+  border-bottom: 1px solid #cdcdcd;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .card-author {
+    flex-grow: 1;
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .title-4 {
+      margin-top: 10px;
+    }
+  }
+}
+
+.personal-area__message-avatar {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-right: 15px;
+}
+.personal-area__message-header-name {
+  flex-grow: 1;
+  margin: 10px 0;
+}
+
+.personal-area__main-info {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.personal-area__message-main {
+  padding: 20px;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.personal-area__icon {
+  margin-left: 25px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  .svg__wrapper {
+    width: 20px;
+    height: 13px;
+    margin-right: 8px;
+    svg {
+      stroke: $text;
+      fill: transparent;
+    }
+  }
+  @media screen and (max-width: 574px) {
+    display: none;
+  }
+}
+
+.personal-area__mark {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  .personal-area__circle {
+    background-color: $color-base;
+    border-radius: 50%;
+    overflow: hidden;
+    min-width: 47px;
+    min-height: 47px;
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: $font-size + 7px;
+    line-height: 48px;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.personal-area__message-footer {
+  display: flex;
+  padding: 20px;
+
+  .link-mini {
+    margin-right: 20px;
+  }
+}
+
+.personal-area__block {
+  background: #fcfcfc;
+  border-radius: 20px;
+  padding: 25px 35px;
+
+  @media screen and (max-width: 767px) {
+    padding: 25px 15px;
+  }
+}
+
+.personal-area__header {
+  display: flex;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.personal-area__info-big {
+  height: 100%;
+  margin-bottom: 20px;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  .title-2 {
+    max-width: 214px;
+  }
+}
+.personal-area__avatar {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 196px;
+  width: 196px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0 20px 20px 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.personal-area__link {
+  border: 1px solid transparent;
+  border-radius: 20px;
+  position: relative;
+  padding: 9px 45px 9px 25px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s linear;
+  @media screen and (max-width: 767px) {
+    padding: 9px 25px 9px 15px;
+  }
+  &.active,
+  &:hover {
+    border-color: #cdcdcd;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    background-image: url(/images/icon/arrow-right.svg);
+    width: 11px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 19px;
+    top: 11px;
+    @media screen and (max-width: 767px) {
+      right: 9px;
+    }
+  }
+  .svg__wrapper {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    svg {
+      fill: transparent;
+      stroke: $text;
+    }
+  }
+
+  .title-3 {
+    flex-grow: 1;
+  }
+
+  .personal-area__amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 5px 0 4px;
+    background: $color-base;
+    border-radius: 50%;
+    color: #000;
+    font-weight: 400;
+    font-size: 10px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: 20px;
+    min-width: 19px;
+  }
+}
+
+.personal-area__dialog {
+  border: 1px solid #cdcdcd;
+  border-radius: 10px;
+  padding: 25px 23px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.personal-area__search {
+  .title-1 {
+    span {
+      font-weight: 400;
+      font-size: 20px;
+      color: $text;
+    }
+  }
+  border-top: 1px solid #6d6d6d;
+  margin-top: 35px;
+  padding-top: 35px;
+}
+
+.personal-area__feed {
+  border-top: 1px solid #6d6d6d;
+  margin-top: 35px;
+  padding-top: 35px;
+}
+
+.persondal-ares__row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .persondal-ares__col {
+    max-width: 33.333%;
+    flex: 0 0 33.333%;
+
+    &:last-child {
+      max-width: 66.667%;
+      flex: 0 0 66.667%;
+    }
+
+    .select2-container {
+      .select2-selection {
+        height: 60px;
+        border: 1px solid #e3e7e7;
+        .select2-selection__rendered {
+          padding-left: 30px;
+          padding-right: 30px;
+        }
+        .select2-selection__arrow {
+          width: 30px;
+          &::before {
+            right: 20px;
+          }
+        }
+      }
+    }
+
+    .calendar__input {
+      height: 60px;
+      border: 1px solid #e3e7e7;
+      padding-left: 30px;
+      padding-right: 30px;
+      &::after {
+        right: 17px;
+      }
+    }
+    .calendar {
+      padding: 0;
+      border: 0;
+      width: 100%;
+    }
+  }
+}
+
+.personal-area__mes-right {
+  display: flex;
+  align-items: center;
+
+  a {
+    color: $text;
+  }
+  .title-4 {
+    color: $text;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    a {
+      margin-top: 5px;
+    }
+    .title-5 {
+      margin: 5px 0;
+      a {
+        display: block;
+      }
+    }
+  }
+}
+
+.personal-area__review {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title-4 {
+    max-width: 600px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding-left: 62px;
+    line-height: 26px;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+
+    align-items: flex-start;
+    .title-4 {
+      padding: 0;
+    }
+  }
+}
+
+.personal-area__review-right {
+  a {
+    text-align: end;
+    color: $text;
+    display: block;
+    margin-right: 0 !important;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    @media screen and (max-width: 767px) {
+      text-align: start;
+      margin-top: 7px;
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+.personal-area__message-footer_interest {
+  flex-direction: column;
+
+  .personal-area__main-info {
+    padding-left: 62px;
+    @media screen and (max-width: 767px) {
+      padding: 0;
+    }
+  }
+}
+
+.persinal-area__review_avatar {
+  display: flex;
+  align-items: center;
+}
+
+.personal-area__icon-review {
+  .svg__wrapper {
+    width: 17px;
+    height: 18px;
+  }
+}
+
+.personal-area__chat {
+  border: 1px solid #cdcdcd;
+
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.personal-area__chat-answer {
+  border: 1px solid #cdcdcd;
+
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-height: 190px;
+}
+
+.personal-area__chat-right {
+  margin-left: 25px;
+}
+
+.personal-area__chat-text p {
+  font-size: 14px;
+  line-height: 135%;
+  color: #000000;
+}
+
+.personal-area__chat-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  .btn {
+    padding: 13px 40px;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.personal-area__more-dialog {
+  @media screen and (max-width: 768px) {
+    margin-top: 15px;
+  }
+
+  padding-top: 15px;
+  margin-top: 20px;
+  position: relative;
+  display: none;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 100vw;
+    height: 1px;
+    background-color: #cdcdcd;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+.personal-area__photo-block {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  .link-mini {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+  }
+}

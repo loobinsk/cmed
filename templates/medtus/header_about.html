@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+        <section class="intro" style="background-image: url({% static '/new/images/bg/about.jpg' %});">
+            <div class="container">
+                <div class="my-row justify-content-between">
+                    <div class="my-col-12 my-col-lg-6">
+                        <h1 class="h1">О нас</h1>
+                    </div>
+                    <div class="my-col-12 my-col-lg-6">
+                        <div class="about__form">
+                           <form action="" id="feedback_form_phone">
+                               {% csrf_token %}
+                                <div class="about__form-title title">У вас возникли вопросы</div>
+                                <div class="title-2">Оставьте свои контакты и мы свяжемся с вами</div>
+                                <div class="about__form-input">
+                                    <input type="text" name="contact" id="phone" class="form-control" placeholder="Ваш телефон" required="">
+                                    <button class="btn about__form-btn"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

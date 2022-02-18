@@ -104,7 +104,7 @@ class EventsList(ListView):
         context['towns_list'] = Towns.objects.filter(country_id=1).order_by('name')
         context['search'] = self.search
 
-        if not self.request.user.is_anonymous():
+        if not self.request.user.is_anonymous:
             from account.models import EventAccess
             EventAccess.update("events", self.request.user)
 
@@ -123,14 +123,15 @@ class DetailViewEvent(generic.DetailView):
         # context['request'] = self.kwargs['pk']
         # Add in the publisher
         statistics = Statistics.objects.filter(material_id=self.kwargs['pk'], service_id=6)
-        if statistics:
-            statistics[0].viewings = statistics[0].viewings + 1
-            statistics[0].save()
-            context['viewings'] = statistics[0].viewings
-            # context['likes'] = (statistics[0].likes).split(' ').count
-        else:
-            Statistics.objects.create(material_id=self.kwargs['pk'], service_id=6, viewings=1)
-            context['viewings'] = 1
+        if 'text' in self.request.META['HTTP_ACCEPT']:
+            if statistics:
+                statistics[0].viewings = statistics[0].viewings + 1
+                statistics[0].save()
+                context['viewings'] = statistics[0].viewings
+                # context['likes'] = (statistics[0].likes).split(' ').count
+            else:
+                Statistics.objects.create(material_id=self.kwargs['pk'], service_id=6, viewings=1)
+                context['viewings'] = 1
         Visited.record(self.get_object())
 
         return context

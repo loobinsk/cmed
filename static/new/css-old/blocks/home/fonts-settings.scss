@@ -1,0 +1,218 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+%headers {
+  margin-top: 0;
+  overflow: hidden;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  line-height: $lineHeight;
+  color: $text;
+  font-family: $font-family;
+  b,
+  span {
+    color: $color-base;
+  }
+}
+
+h1,
+.h1 {
+  @extend %headers;
+  margin-bottom: 15px;
+  font-size: $font-size * 2;
+
+  @include media(">=md") {
+    font-size: $font-size * 3;
+  }
+  @include media(">=lg") {
+    font-size: $font-size * 3 + 11px;
+  }
+}
+
+h2,
+.h2 {
+  @extend %headers;
+  margin-bottom: 40px;
+  font-size: $font-size + 7;
+  @include media(">=md") {
+    font-size: $font-size * 2;
+  }
+  @include media(">=lg") {
+    font-size: $font-size * 2 + 6px;
+  }
+}
+
+h3,
+.h3 {
+  @extend %headers;
+  margin-bottom: 23px;
+  font-size: $font-size + 5px;
+  font-weight: 700;
+  line-height: 133%;
+  @include media(">=md") {
+    font-size: $font-size + 7px;
+  }
+  @include media(">=lg") {
+    font-size: $font-size * 2 + 4px;
+  }
+}
+
+%title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: $lineHeight;
+  font-weight: 300;
+  color: $text;
+  font-family: $font-family;
+  transition: color 0.2s linear;
+}
+
+.title {
+  @extend %title;
+}
+
+.title-1 {
+  @extend %title;
+  font-size: $font-size + 7;
+  font-weight: 700;
+  margin-bottom: 20px;
+
+  @include media(">=md") {
+    font-size: $font-size * 2;
+    margin-bottom: 40px;
+  }
+  @include media(">=lg") {
+    font-size: $font-size * 2 + 6px;
+  }
+}
+
+.title-2 {
+  @extend %title;
+  font-weight: 500;
+  font-size: $font-size + 4px;
+  @include media(">=lg") {
+    font-size: $font-size + 11px;
+  }
+}
+
+.title-3 {
+  @extend %title;
+  font-weight: 500;
+
+  font-size: $font-size + 3px;
+}
+
+.title-4 {
+  @extend %title;
+  line-height: 120%;
+  font-size: $font-size;
+}
+
+.title-5 {
+  @extend %title;
+  font-size: $font-size - 1px;
+}
+
+.title-s-min {
+  @extend %title;
+  font-size: $font-s-min;
+}
+
+.n-title {
+  font-size: 20px;
+}
+
+.title-p {
+  @extend %title;
+  font-size: $font-size;
+  line-height: 26px;
+
+  a {
+    font-weight: 700;
+    color: $text;
+  }
+
+  p,
+  ul {
+    margin-bottom: 30px;
+  }
+}
+
+.title-p-min {
+  @extend %title;
+  font-size: $font-size;
+  line-height: 26px;
+
+  a {
+    font-weight: 700;
+    color: $text;
+  }
+
+  p,
+  ul {
+    margin-bottom: 15px;
+  }
+}
+
+.font-weight-min {
+  font-weight: 300 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.font-weight-medium {
+  font-weight: 500 !important;
+}
+
+.font-weight-semibold {
+  font-weight: 600 !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-extra-bold {
+  font-weight: 800 !important;
+}
+
+.font-weight-black {
+  font-weight: 900 !important;
+}
+
+.text-clr {
+  color: $text !important;
+}
+
+.text-clr-white {
+  color: $text-white !important;
+}
+
+.text-clr-alt {
+  color: $text-secondary !important;
+}
+
+.text-base {
+  color: $color-base !important;
+}
+.text-secondary {
+  color: $text-secondary !important;
+}
+
+.svg-main-alt {
+  fill: $color-second !important;
+}
+
+.svg-main {
+  fill: $color-base !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.font-f2 {
+  font-family: $font-family2 !important;
+}

@@ -1,0 +1,26 @@
+@media screen and (min-width: 992px) {
+  .video-page .video {
+    margin-top: -300px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .video-page .video__slider {
+    width: 100vw;
+  }
+  .video-page .video__slider .video__item {
+    max-width: 570px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .video-page .card-video .card-video__img {
+    height: 350px;
+  }
+}
+
+.video-page .card__article .card__article-type {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}

@@ -1,0 +1,72 @@
+{% load tz staticfiles account_tags datepicker %}
+<section class="main-slider">   <div class="slick-slider">
+
+
+{% for object in conf_list %}
+{% if forloop.counter <  4 %}
+            <div class="slider-item main-slider__item">
+                <div class="main-slider__card" style="background-image: url({% static '/new/images/main-slider/1.jpg' %}); ">
+                    <div class="container">
+                        <div class="my-row">
+                            <div class="my-col-12 my-col-lg-6 p-lg-l-0">
+                                <div class="main-slider__left-block">
+                                    <h1 class="h1">Социальная сеть для врачей</h1>
+
+                                    <div class="main-slider__items">
+                                        <div class="main-slider__amount">
+                                            <div class="main-slider__amout-svg">
+                                                <div class="main-slider__amout-img" style="background-image: url({% static '/new/images/icon/ms1.svg' %});"></div>
+                                            </div>
+                                            <div class="main-slider__amount-main">
+                                                <div class="title-2 main-slider__amount-number">{% get_all_users_fake %}</div>
+                                                <div class="main-slider__text title">Врачей</div>
+                                            </div>
+                                        </div>
+                                        <div class="main-slider__amount">
+                                            <div class="main-slider__amout-svg">
+                                                <div class="main-slider__amout-img" style="background-image: url({% static '/new/images/icon/ms2.svg' %});"></div>
+                                            </div>
+                                            <div class="main-slider__amount-main">
+                                                <div class="title-2 main-slider__amount-number">{% count_materials %}</div>
+                                                <div class="main-slider__text title">материалов</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-col-12 my-col-lg-6 p-lg-r-0">
+                                <a href="{% url 'detailpractice' object.id %}" class="card-lecture">
+                                    <div class="card-lecture-title title">{{ object.title }}</div>
+                                   <!-- <div class="title-2">Кардиологические аспекты не сосудистых заболеваний нервной системы</div>-->
+                                    <div class="card-lecture__calendar">
+                                        <div class="card-lecture__calendar-data">
+                                            <div class="card-lecture__calendar-number title">{{ object.createdate.day }}</div>
+                                            <div class="card-lecture__calendar-month title">{{ object.createdate|date:"F" }} {{ object.createdate.year }}</div>
+                                        </div>
+                                        <div class="card-lecture__calendar-info">
+                                            <div class="card-lecture__calendar-name">
+                                                <div class="card-lecture__calendar-img">
+                                                    <img src="{% static 'new/images/icon/calendar-name.svg' %}" alt="">
+                                                </div>
+                                                <div class="title-s-min">Онлайн-трансляция</div>
+                                            </div>
+                                            <div class="card-lecture__time">
+                                                <div class="card-lecture__calendar__time title">{{ object.begindate |localtime | time}} - {{ object.updatedate |localtime | time }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                                       <a href="/circle/calendar" >      <div class="btn btn-default main-slider__calendar-btn">  Календарь мероприятий
+
+                                </div>     </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+    {% endif %}
+         {% endfor %}
+
+    </div>
+    </section>

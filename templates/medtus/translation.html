@@ -1,38 +1,176 @@
 {% extends "base.html" %}
-{% block right_column %}{% endblock %}
 {% block top_block %}{% endblock %}
 {#{% block top_block_3 %}{% endblock %}#}
-{% block content_block_style %}style="width: 785px;"{% endblock %}
+{% block content_block_style %}{% endblock %}
 {% block page_div_style %}style="background-image:none;"{% endblock %}
 
 {% block center_column %}
-     <div class="translation" style="margin-left: 40px;">
-        {% if object.data_open %}
-             <input type="hidden" id="object_id" value="{{ object.id }}"/>
-        {{ object.data_open|safe }}
-          {% else %}
-             {% if not user.is_authenticated %}
-           <br /><br /><br/>
-        <span class="title">Для просмотра онлайн трансляции войдите на сайт, используя Ваш логин и пароль. </span>
 
-     <p class="inform-panel"><a style="float:left; margin-top:10px;" class="btn" href="/account/login/">Войти</a></p>
-     <br /><br />
-       <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
+    {% if object.data_open %}
+    <input type="hidden" id="object_id" value="{{ object.id }}"/>
+    {{ object.data_open|safe }}
+    {% else %}
+    {% if not user.is_authenticated %}
+    <br /><br /><br/>
+    <span class="title">Для просмотра онлайн трансляции войдите на сайт, используя Ваш логин и пароль. </span>
 
-     <p class="inform-panel"><a style="float:left;  margin-top:10px;"  class="btn" href="/account/register1/">Регистрация</a></p>
-                {% endif %}
-     {% endif %}
-            {% if user.is_authenticated %}
-                 <br>
-        {{ object.data|safe }}
-       
-                {% endif %}
+    <p class="inform-panel"><a style="float:left; margin-top:10px;" class="btn" href="/account/login/">Войти</a></p>
+    <br /><br />
+    <span class="title">Если вы не регистрировались ранее на сайте, пройдите регистрацию.</span>
 
-    </div>
+    <p class="inform-panel"><a style="float:left;  margin-top:10px;"  class="btn" href="/account/register1/">Регистрация</a></p>
+    {% endif %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    <br>
+    {{ object.data|safe }}
 
-    <script>
+    {% endif %}
+
+
+
+
+
+{% if user.is_authenticated %}
+{% load tz %}
+
+
+<div class="popup-fade popup  modal-check" id="popap-confirmation" data-modal="">
+            <div class="title-2 text-center">Подтвердите свое присутствие.</div>
+            <button class="btn btn-default m-t-30 m-md-t-40" id="translation-confirm" data-translation-id="657">Подтверждаю</button>
+        </div>
+
+
+
+<script>
+    function getCheckPopupState(arrDateTimeObjects){
+        
+
+        arrDateTimeObjects.forEach(function(item, i, arr) {
+            var currentdate = new Date(Date.now());
+
+            if((currentdate.getFullYear() == item.getFullYear()) && (currentdate.getMonth() == item.getMonth()) && (currentdate.getDate() == item.getDate())){
+                if((currentdate.getHours() == item.getHours()) && (currentdate.getMinutes() == item.getMinutes())){
+                    console.log("equal");
+                    arrDateTimeObjects.splice(i, 1);
+                    exitFromFullscreen();
+                    showCheckPopup();
+                    setTimeout(function(){
+                        hidePopup();
+                    }, 180000);
+                    return true;
+                }
+            }
+        });
+        // console.log('loop end');
+
+        return false;
+    }
+
+    function showCheckPopup(){        
+        $('.overlay').addClass('active');
+        $('#popap-confirmation').addClass('modal-ether active');
+    }
+
+    function hidePopup(){
+        $('.overlay').removeClass('active');
+        $('#popap-confirmation').removeClass('modal-ether active');
+    }
+
+
+    function iOS() {
+      return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  }
+
+  function exitFromFullscreen() {
+    var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+    (document.msFullscreenElement && document.msFullscreenElement !== null);        
+
+    if (isInFullScreen) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            alert('webkit');
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+
+    }
+
+    if(iOS()){
+        alert('Нажмите закрыть, после чего Вам будет показано окно для подтверждения присутствия.');
+    }
+
+}
+
+
+
+$(document).ready(function() {
+ 
+ {% localtime off %}
+    var arrDateTimeObjects = [];
+    {% for item in object.translationmodal_set.all %}
+        var item_datetime = new Date('{{ item.datetime|date:"Y/m/d H:i:s" }}');
+        item_datetime.setMinutes(item_datetime.getMinutes() - item_datetime.getTimezoneOffset());
+        arrDateTimeObjects.push(item_datetime);        
+        // console.log('{{ item.datetime|date:"Y/m/d H:i:s" }}');
+    {% endfor %}
+ {% endlocaltime %}
+
+ // console.log(arrDateTimeObjects);
+
+ $('.block-popup span').click(function(){
+    hidePopup();
+ });
+
+ {% if user.is_authenticated and object.is_accredited %}
+
+ var popupTimerId = setInterval(function () {
+                       getCheckPopupState(arrDateTimeObjects)
+                   }, 1000);
+
+ {% endif %}
+
+ $(document).on('click', '#translation-confirm', function(){
+    var translation_id = $(this).data('translation-id');                
+    $.ajax({
+        url: '/enlargecounter',
+        type: 'post',
+        data: {
+            translation: translation_id
+        },
+        success: function (data) {
+            hidePopup();
+            // console.log(data);
+        }
+    });            
+  });
+
+
+});
+</script>
+{% endif %}
+
+<script>
         //Increment the time counter every 30 sec.
         var idleInterval = setInterval(timerIncrement, 30000);
+        $(document).ready(function() {
+            $(document).find(".content-block-right").css('opacity', '0').css('visibility', 'hidden');
+        });
     </script>
 
-{% endblock %}
+    {% endblock %}

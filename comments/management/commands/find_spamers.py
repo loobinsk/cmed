@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.sites.models import Site
 from django.db.models import Count
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
@@ -18,7 +17,7 @@ class Command(BaseCommand):
     help = u'Составляет отчеты об одинаковых личных сообщениях и комментариях'
 
     def from_private(self, set):
-        domain = Site.objects.get(id=1).domain
+        domain = "www.vrachivmeste.ru"
         output = StringIO.StringIO()
         writer = csv.DictWriter(output, fieldnames=['id', 'link', 'cnt', 'message'])
         writer.writeheader()
@@ -28,7 +27,7 @@ class Command(BaseCommand):
             records = Record.objects.all()
         records = records.values('auth_id', 'value').annotate(cnt=Count('id')).filter(cnt__gt=1).order_by('-cnt')
         for r in records:
-            url = 'http://' + domain + reverse('admin:account_myuser_change', args=(r['auth_id'],))
+            url = 'https://' + domain + reverse('admin:account_myuser_change', args=(r['auth_id'],))
             writer.writerow({'id': r['auth_id'], 'message': r['value'].encode('utf-8'), 'cnt': r['cnt'], 'link': url})
         if records:
             return output.getvalue()
@@ -36,7 +35,7 @@ class Command(BaseCommand):
             return ''
 
     def from_comments(self, set):
-        domain = Site.objects.get(id=1).domain
+        domain = "www.vrachivmeste.ru"
         output = StringIO.StringIO()
         writer = csv.DictWriter(output, fieldnames=['id', 'link', 'cnt', 'message'])
         writer.writeheader()
@@ -46,7 +45,7 @@ class Command(BaseCommand):
             records = Comments.objects.all()
         records = records.values('user_id', 'content').annotate(cnt=Count('id')).filter(cnt__gt=1).order_by('-cnt')
         for r in records:
-            url = 'http://' + domain + reverse('admin:account_myuser_change', args=(r['user_id'],))
+            url = 'https://' + domain + reverse('admin:account_myuser_change', args=(r['user_id'],))
             writer.writerow({'id': r['user_id'], 'message': r['content'].encode('utf-8'), 'cnt': r['cnt'], 'link': url})
         if records:
             return output.getvalue()

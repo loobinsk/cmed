@@ -1,0 +1,65 @@
+.about__form {
+  background: #fcfcfc;
+  border-radius: 20px;
+  padding: 70px 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .about__form {
+    padding: 25px;
+  }
+}
+
+.about__form .about__form-title {
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.175em;
+  margin-bottom: 11px;
+}
+
+.about__form .form-control {
+  background: #fcfcfc;
+  border: 1px solid #cdcdcd;
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 26px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #292929;
+  padding: 26px 40px 26px 26px;
+  width: 100%;
+  min-height: 78px;
+}
+
+@media screen and (max-width: 768px) {
+  .about__form .form-control {
+    padding: 10px 25px;
+    min-height: 30px;
+  }
+}
+
+.about__form .about__form-input {
+  position: relative;
+  margin-top: 25px;
+}
+
+.about__form .about__form-btn {
+  width: 14px;
+  height: 29px;
+  background-image: url("/images/icon/arrow-right.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  right: 25px;
+  min-height: 14px;
+  top: 45%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about__form .about__form-btn {
+    right: 15px;
+  }
+}

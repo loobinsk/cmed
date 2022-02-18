@@ -1,0 +1,23 @@
+{% load account_tags posts_filters %}
+{% load staticfiles %}
+<div class="content-block-center-item">
+    <div class="content-block-center-item-head"></div>
+    <div class="content-block-center-item-content" style="width:800px;">
+        <!-- Заголовки и текст поста -->
+        {% if object.translation.begindate %}
+            <div class="content-block-center-item-content-date">{{ object.translation.begindate }}</div>
+        {% endif %}  
+        <h1>
+            <a href="{% url 'detailtranslation' object.translation.id %}" target="_blank" style="color: rgb(0, 164, 153);text-decoration: none;">{{ object.translation.title }}</a>
+        </h1>        
+        {% if object.translation.data_open %}
+        {{ object.translation.data_open|truncatewords_html:50|safe }}        
+        {% endif %}             
+        
+        <div class="content-block-center-item-content-redmore">
+            <div class="content-block-center-item-content-redmore-link">
+               <a href="{% url 'detailtranslation' object.translation.id %}" target="_blank" title="Читать полностью">читать полностью</a>
+           </div>            
+       </div>
+   </div>
+   </div>

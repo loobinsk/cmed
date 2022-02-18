@@ -2,7 +2,9 @@
 {% block title_page %}Фотогалерея:{% endblock %}
 {% block title %}Фотогалерея:{% endblock %}{% load staticfiles %}
 {% block js_page %}
-    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+        <script type="text/javascript" src="{% static 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' %}"></script>
+<script type="text/javascript" src="{% static 'filebrowser/js/TinyMCEAdmin.js' %}"></script>
 {% endblock %}
 {% block content %}{% if user.is_staff %}<!-- Создание поста -->
 <div class="content-block-center-write-contaner">
@@ -113,7 +115,7 @@
         formData.append("file", file.files[0]);
 
         $.ajax({
-            url: "{% url 'photos.views.fileupload' sizex='180' sizey='180' %}",
+            url: "{% url 'fileupload' sizex='180' sizey='180' %}",
             data: formData,
             processData: false,
             contentType: false,
@@ -220,7 +222,7 @@ $('#addpost').click(function () {
     dict['spec_id'] = $('select[name="spec_id"]').val();
     dict['title'] = $('input[name="title"]').val();
     dict['public_main'] = $('input[name="public_main"]').prop("checked");
-    dict['description'] = tinyMCE.get('description').getContent().replace('\n', '');
+    dict['description'] = tinyMCE.activeEditor.getContent().replace('\n', '');
     var errortext = "";
     if (dict['type'] == '0') {
         errortext = errortext + "Выберите тип видеоматериала\n";
@@ -291,7 +293,7 @@ $(document).ready(function () {
             alert(error);
         } else {
             $.ajax({
-                url: '{% url "lenta.views.fileupload" %}',
+                url: '{% url "fileupload" %}',
                 type: 'POST',
                 xhr: function () {
                     var myXhr = $.ajaxSettings.xhr();
@@ -342,7 +344,7 @@ $(document).ready(function () {
 });
 
 function deletephoto(photo, el) {
-    $.post('{% url "lenta.views.filedelete" %}', { file: photo }, function (data) {
+    $.post('{% url "filedelete" %}', { file: photo }, function (data) {
         if (data.result) {
             parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
             parent.remove();
@@ -353,7 +355,7 @@ function deletephoto(photo, el) {
 
 function addvideo() {
     if ($('input[name="links-video"]').val()) {
-        $.post('{% url "lenta.views.videoupload" %}', { video: $('input[name="links-video"]').val() }, function (data) {
+        $.post('{% url "videoupload" %}', { video: $('input[name="links-video"]').val() }, function (data) {
             html =
                     '<div class="content-block-center-write-form-block-2-left-video-list">\
                             <div file="' + data.file + '" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url(' + data.furl + ')"></div>\
@@ -372,7 +374,7 @@ function addvideo() {
 }
 
 function deletevideo(path, el) {
-    $.post('{% url "lenta.views.videodelete" %}', { video: path }, function (data) {
+    $.post('{% url "videodelete" %}', { video: path }, function (data) {
         if (data == 'OK') {
             parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
             parent.remove();

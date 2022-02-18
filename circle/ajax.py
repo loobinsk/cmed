@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-from dajax.core import Dajax
-from dajaxice.decorators import dajaxice_register
 from account.models import MyUser
 from circle.models import Circle, Dialog, Record
 from django.core.urlresolvers import reverse
 import sys
 from django.db.models import Q
+from django.http import HttpResponse
 
-@dajaxice_register
-def confirmmycircle(request, parentid):
-    dajax = Dajax()
+
+def confirmmycircle(request):
+    result='None'
+    parentid=request.GET.get('parentid')
     try:
         C = Circle.objects.get(Q(friend=request.user) & Q(parent_id=parentid))
         C.activated = True
@@ -18,18 +18,19 @@ def confirmmycircle(request, parentid):
         selector_confirm = '#confirmbutton_%s' % parentid
         selector_new = "#groups-area-new"
         selector_old = "#groups-area-old"
-        dajax.alert(u'Пользователь добавлен в ваш круг!')
-        dajax.remove(selector_confirm)
-        dajax.script(u'$("%s").appendTo("%s");' % (selector_id, selector_old))
-        dajax.script(u'$("%s > .links > .delete-group").html("Удалить из круга");' % selector_id)
+        result=u'Пользователь добавлен в ваш круг!'
+        #dajax.remove(selector_confirm)
+        #dajax.script(u'$("%s").appendTo("%s");' % (selector_id, selector_old))
+        #dajax.script(u'$("%s > .links > .delete-group").html("Удалить из круга");' % selector_id)
     except:
-        dajax.alert(u'Unhandling error - %s' % sys.exc_info()[0])
-    return dajax.json()
+        result=u'Unhandling error - %s' % sys.exc_info()[0]
+    return HttpResponse(result)
 
-@dajaxice_register
-def removedialog(request, dialogid):
-    dajax = Dajax()
-    dajax.remove('#dialog_%s' % dialogid)
+
+def removedialog(request):
+    result='None'
+    dialogid=request.GET.get('dialogid')
+    #dajax.remove('#dialog_%s' % dialogid)
     D = Dialog.objects.get(id__exact=dialogid)
     if(D.authA == request.user.id):
         D.auth_b_deleted = 1
@@ -38,24 +39,26 @@ def removedialog(request, dialogid):
     D.save()
     # R = Record.objects.filter(dialog=D).delete()
     # D.delete();
-    return dajax.json()
+    return HttpResponse(result)
 
-@dajaxice_register
-def removefrommycircle(request, friend, ID):
+
+def removefrommycircle(request):
+    friend=request.GET.get('friend')
     Parent = MyUser.objects.get(id=request.user.id)
     Friend = MyUser.objects.get(id=friend)
     Circle.objects.filter((Q(parent_id=Parent.id) & Q(friend_id=Friend.id)) | Q(friend_id=Parent.id) & Q(parent_id=Friend.id)).delete()
-    dajax = Dajax()
-    dajax.remove('#%s' % ID)
-    dajax.alert(u'Готово!')
-    return dajax.json()
 
-@dajaxice_register
-def inviteintomycircle(request, avatar, parent, friend):
-    dajax = Dajax()
+    result=u'Готово!'
+    return HttpResponse(result)
+
+
+def inviteintomycircle(request):
+    avatar=request.GET.get('avatar')
+    parent=request.GET.get('parent')
+    friend=request.GET.get('friend')
     if parent == friend:
-        dajax.alert(u'Невозможно добавить в круг самого себя!!!')
-        return dajax.json()
+        result=u'Невозможно добавить в круг самого себя!!!'
+        return HttpResponse(result)
     Parent = MyUser.objects.get(id=parent)
     Friend = MyUser.objects.get(id=friend)
     html = u'<div class="holder" id="invite_%s">\
@@ -82,8 +85,8 @@ def inviteintomycircle(request, avatar, parent, friend):
         C.friend = Friend
         C.save()
         out = html % (friend, avatar, Friend.avatar, reverse('lichnie2', kwargs={'userid':friend}), Friend.lastname, Friend.firstname, Friend.surname, Friend.spec_id, reverse('dialog', kwargs={'authBid':friend}), friend, friend)
-        dajax.alert(u'Приглашение в ваш круг отправлено!')
+        result=u'Приглашение в ваш круг отправлено!'
     else:
-        dajax.alert(u'Возможно, пользователь уже в вашем круге?!!')
+        result=u'Возможно, пользователь уже в вашем круге?!!'
     #dajax.prepend('.groups-area', 'innerHTML', u'%s' % out)
-    return dajax.json()
+    return HttpResponse(result)

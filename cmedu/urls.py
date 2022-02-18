@@ -1,29 +1,35 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import patterns, include, url
-from dajaxice.core import dajaxice_autodiscover
+from django.conf.urls import include, url
+#from dajaxice.core import dajaxice_autodiscover
 from django.views.generic import TemplateView
-
-dajaxice_autodiscover()
+from filebrowser.sites import site
 
 from django.contrib import admin
 admin.autodiscover()
 from partners.views import PartnersListView
 from photos.views import PGalleriesListView, PGalleriesDetailView
 from django.views.generic.base import RedirectView
-from medtus.views import medtus403, medtus404, medtus500, static_page
-
+from medtus.views import medtus403, medtus404, medtus500
+from posts.views import Main, Opinion,like
+from photos.views import fileupload, addphoto
+from rss.rssp import rssfeed
+from account.views import admin_statistic
+from comments.views import newcomment, rmcomment
+from medtus.views import contacts, education, static_page, online, enlargeCounter
+from django.contrib.auth.decorators import login_required
+from circle import views as circle_views
 handler403 = medtus403
 handler404 = medtus404
 handler500 = medtus500
 
 
-urlpatterns = patterns('',
-    url(r'^$', 'posts.views.Main', name='mainpage'),
-    url(r'^opinion/$', 'posts.views.Opinion', name='opinion'),
+urlpatterns = [
+    url(r'^$', Main, name='mainpage'),
+    url(r'^opinion/$', Opinion, name='opinion'),
     url(r'^lecturers/', include('lecturers.urls')),
     url(r'^videos/', include('videos.urls')),
-    url(r'^rss/','rss.rssp.rssfeed'),
+    url(r'^rss/', rssfeed),
     url(r'^newsrss/', include('rss.urls')),
     url(r'^events/', include('events.urls')),
     url(r'^consultations/', include('posts.urls')),
@@ -38,11 +44,12 @@ urlpatterns = patterns('',
     url(r'^groups_posts/', include('groups_posts.urls')),
     url(r'^partners/$', PartnersListView.as_view(), name='partners_list'),
     url(r'^records/',    include('records.urls')),
-    url(r'^comments/$', 'comments.views.newcomment'),
-    url(r'^comments/rm/$', 'comments.views.rmcomment', name='rmcomment'),
-    url(r'^likes/', 'posts.views.like'),
-    url(r'^dajaxice/',   include('dajaxice.urls')),
-    url(r'^admin/statistic/$', 'account.views.admin_statistic'),
+    url(r'^comments/$', newcomment),
+    url(r'^comments/rm/$', rmcomment, name='rmcomment'),
+    url(r'^likes/', like),
+    url('admin/filebrowser/', site.urls),
+    url('grappelli/', include('grappelli.urls')),
+    url(r'^admin/statistic/$', admin_statistic),
     url(r'^admin/',      include(admin.site.urls)),
     url(r'^account/',    include('account.urls')),
     url(r'^lenta/',      include('lenta.urls')),
@@ -50,12 +57,13 @@ urlpatterns = patterns('',
     url(r'^circle/',     include('circle.urls')),
     url(r'^photo/$',      PGalleriesListView.as_view(), name='galleries_list'),
     url(r'^photo/(?P<pk>\d+)/$', PGalleriesDetailView.as_view(), name='galleries_detail'),
-    url(r'^photo/fileupload/(?P<sizex>\d+)/(?P<sizey>\d+)$', 'photos.views.fileupload',  name='photos.fileupload'),
-    url(r'^photo/add/$',      'photos.views.addphoto',  name='photos.addphoto'),
+    url(r'^photo/fileupload/(?P<sizex>\d+)/(?P<sizey>\d+)$', fileupload,  name='photos.fileupload'),
+    url(r'^photo/add/$',  addphoto,  name='photos.addphoto'),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
+    #url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
     url(r'^banners/', include('banners.urls')),
     url(r'^translation/', include('medtus.urls')),
+    url(r'^medtus/', include('medtus.urls')),
 
     #tests
     url(r'^quiz/', include('quiz.urls')),
@@ -79,11 +87,17 @@ urlpatterns = patterns('',
     # url(r'^trs4/$', 'medtus.views.trs4', name='trs4'),
     # url(r'^trs5/$', 'medtus.views.trs5', name='trs5'),
     # url(r'^mediakit/$', 'medtus.views.mediakit', name='mediakit'),
-    url(r'^about/$', 'medtus.views.education', name='education'),
+    url(r'^about/$', education, name='education'),
+     url(r'^contacts/$', contacts, name='contacts'),
+    url(r'^enlargecounter$', login_required(enlargeCounter), name='enlargeCounter'),
+    url(r'^online/$', online, name='online'),
+    #url(r'^nmo/$', RedirectView.as_view(url='/circle/dialog/nmo', permanent=False), name='nmo'),
+    url(r'^nmo/$', login_required(circle_views.NmoDialogView.as_view()), name='nmo'),
+    url(r'^contacts/$', contacts, name='contacts'),
+    url(r'^(?P<page_alias>.+?)/$', static_page),
 
-    url(r'^(?P<page_alias>.+?)/$', 'medtus.views.static_page'),
 
 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

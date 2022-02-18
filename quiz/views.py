@@ -144,7 +144,7 @@ class QuizTake(FormView):
         if self.quiz.draft and not request.user.has_perm('quiz.change_quiz'):
             raise PermissionDenied
 
-        self.logged_in_user = self.request.user.is_authenticated()
+        self.logged_in_user = self.request.user.is_authenticated
 
         if self.logged_in_user:
             self.sitting = Sitting.objects.user_sitting(request.user,
@@ -157,7 +157,7 @@ class QuizTake(FormView):
 
         return super(QuizTake, self).dispatch(request, *args, **kwargs)
 
-    def get_form(self, form_class):
+    def get_form(self, *args, **kwargs):
         if self.logged_in_user:
             self.question = self.sitting.get_first_question()
             self.progress = self.sitting.progress()
@@ -167,9 +167,10 @@ class QuizTake(FormView):
 
         if self.question.__class__ is Essay_Question:
             form_class = EssayForm
+        else:
+            form_class = self.form_class
 
         return form_class(**self.get_form_kwargs())
-
     def get_form_kwargs(self):
         kwargs = super(QuizTake, self).get_form_kwargs()
 

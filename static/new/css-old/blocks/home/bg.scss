@@ -1,0 +1,48 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.bg-color-base {
+  background-color: $color-base !important;
+}
+
+.bg-color-second {
+  background-color: $color-second !important;
+}
+
+.bg-clr {
+  background-color: $clr !important;
+}
+
+.bg-clr-light {
+  background-color: $clr-light !important;
+}
+
+.bg-clr-dark {
+  background-color: $clr-dark !important;
+}
+
+.bg-clr-transparent {
+  background-color: transparent !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-clr-dark,
+.bg-color-base {
+  .title,
+  .title-1,
+  .title-2,
+  .title-3,
+  .title-4,
+  .title-5,
+  .title-6,
+  .title-7,
+  .title-8,
+  .title-p,
+  .n-title,
+  span {
+    color: #fff !important;
+  }
+}

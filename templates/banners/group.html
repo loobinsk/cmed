@@ -3,11 +3,22 @@
 <style>
   .b-banner {
     display: block;
-    padding: 0;
+    padding: 0 0 0 20px;
     margin: 10px 0;
   }
 
-  .b-banner-{{ group.slug }} {
+  .content-block-right .b-banner{
+    padding: 0px;
+  }
+
+  .b-banner-group{
+    text-align: center;
+  }
+
+
+</style>
+
+<!--   .b-banner-{{ group.slug }} {
     width: {{ group.width }}px;
 {#    height: {{ group.height }}px;#}
   }
@@ -15,16 +26,29 @@
   .b-banner-{{ group.slug }} img {
     width: {{ group.width }}px;
 {#    height: {{ group.height }}px;#}
-  }
-</style>
+  } -->
 
-<div class="b-banner-group">
-
-
-  {% for banner in banners %}   
-      {% if user.is_authenticated or not banner.onlyauth %}
-          {% banner_one banner.id %}         
-      {% endif %}
-  {% endfor %}
-</div>
-
+{% if group.slug == "popup" %}
+<a id="spb" class="gallery" href='#single_popup_banner'>
+		      <img src='{{ banner.img.url }}' alt='{{ banner.alt }}' title='{{ banner.title }}'>
+		</a>
+	    <div id="single_popup_banner">
+    {% for banner in banners|slice:":3" %}
+    	<!-- banner_id new -->
+    	
+        {% if user.is_authenticated or not banner.onlyauth %}
+		
+		    {% banner_one banner.id %}
+	            
+        {% endif %}
+    {% endfor %}
+    </div>    
+{% else %}
+  <div class="b-banner-group">
+    {% for banner in banners %}   
+        {% if user.is_authenticated or not banner.onlyauth %}
+            {% banner_one banner.id %}         
+        {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

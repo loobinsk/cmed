@@ -13,7 +13,7 @@
 					<strong><a href="{% url 'lichnie2' object.user_id.id %}" target="_parent" title="На страницу автора">{{ object.user_id.lastname }}<br />
 					{{ object.user_id.firstname }} {{ object.user_id.surname }}</a></strong><br />
 					{{ object.spec_id.name }}{% endif %}
-					</span>
+					</span>А
 					</div>
 					<div class="content-block-center-item-head-theme" style="padding-right:40px; background-image:url({% static 'images/icons-preparats/2.png' %})"><span>{{ object.format_string }}</span></div>
 				</div>
@@ -46,7 +46,7 @@
 							<a href="{{ photo.picture }}" rel="tag{{object.id}}">
                             	<img src="{% get_preview_sizexy photo.picture 223 300 %}" width="223" height="300" alt="">
                             </a>
-						</div>{% else %}{% if forloop.counter = 2 %}
+						</div>{% else %}{% if forloop.counter == 2 %}
                         <div class="content-block-center-item-content-media-more-photo-head">
                             <span>Дополнительные фото:</span>
                         </div>
@@ -68,6 +68,6 @@
                         </div>{% endfor %}{% endif %}
 					</div>
 					{% endif %}
-{% include "includes/read_all.html" %}					
+{% include "includes/read_all.html" %}
 {% include "includes/likes_comments.html" with viewname="detailpractice" %}
 			</div>

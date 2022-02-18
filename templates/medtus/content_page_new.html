@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
+{% block js_page %}
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+{% block after_header %}
+{% include 'medtus/header_about.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+	<!-- {% for banner in banners1 %}
+		{% url "banner_click" banner_id=banner.id key=group1.slug as banner_url1 %}
+		<div style="display: flex; width: 100%; justify-content: center; border-top: 1px solid; border-bottom: 1px solid; margin: 30px 0;" >
+			<a href="{{banner_url1}}">
+				<img src="{{banner.img.url}}">
+			</a>
+		</div>
+	{% endfor %} -->
+
+     {{ page.content|safe }}
+{% endblock %}
+
+{% block before_footer %}
+{% endblock %}

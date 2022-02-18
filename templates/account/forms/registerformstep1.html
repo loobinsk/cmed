@@ -1,40 +1,67 @@
-<div class="title-holder">
-	<h3>Приветствуем Вас на странице с регистрацией в социальной сети Врачи Вместе!</h3>
-</div>
-<form class="register-form style01" action="{% url "account.views.register1" %}" method="post">
-	<input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}' />
-	<div class="register-holder">
-		<label for="text-field01">Введите адрес электронной почты:</label>
-		<input  class="text01" id="text-field01" type="text" name="email" value="" >
-		<div class="row">
-			<label for="password-field">Ваш пароль:</label>
-			<div class="row-holder">
-				<div class="password-holder pass-eye-js">
-					<input id="password-field" type="password" name="password" value="" >
-					<a class="eye" href="#">eye</a>
-				</div>
-				<span class="info">Пароль должен содержать не менее 6 символов<br>(символы латинского алфавита и цифры)</span>
-			</div>
-		</div>
-		<div class="row">
-			<label for="password-field01">Повторите пароль:</label>
-			<div class="row-holder">
-				<div class="password-holder pass-eye-js">
-					<input id="password-field01" type="password" name="confirm" value="" >
-					<a class="eye" href="#">eye</a>
-				</div>
-				{{ error_placeholder|safe }}
-			</div>
-		</div>
-	</div>
-	<div class="bottom">
+<h1 class="h1">Регистрация нового пользователя</h1>
+                        <div class="title-5 font-weight-bold">Приветствуем Вас на странице с регистрацией в социальной сети Врачи Вместе!</div>
 
-        <label><input type="checkbox" name="agreed" value="1"/> <a href="/account/agreement">Согласен с регламентом - пользовательским соглашением ( в соответствии с законом о персональных данных №152-ФЗ)</a></label>
+                        <form action="{% url "register1" %}" class="registration__block" method="post">
+                            <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}' />
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Введите email:</div>
+                                </div>
+                                <div class="contact-page__right">
+                                    <input  id="text-field01" type="text" name="email" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Ваш пароль:</div>
+                                </div>
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input id="password-field" type="password" name="password" value="" class="form-control ">
+                                </div>
+                                <div class="title-5 registration__password-title">Пароль должен содержать не менее 8 символов (большие и маленькие буквы и цифры)</div>
+                            </div>
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Повторите пароль:</div>
+                                </div>
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input id="password-field01" class="form-control" type="password" name="confirm" value="">
 
-		<div class="next-holder">
-			<a href="#" class="btn-next" onclick="$(this).closest('form').submit();return false;">Сохранить и продолжить</a>
-		</div>
-		<span class="inform">Возникли вопросы при регистрации?</span>
-		<span>Задайте их нам по e-mail: <a href="mailto:vrvm.redaktor@gmail.com">vrvm.redaktor@gmail.com </a> <br>Мы обязательно поможем!</span>
-	</div>
-</form>
+
+                                </div>
+                                <div class="title-5 registration__password-title" style="color: red"> {{ error_placeholder|safe }}</div>
+
+                            </div>
+
+                            <div class="contact-page__row">
+                                <div class="contact-page__right">
+                                    <div class="custom-checkbox">
+                                         <input  class="form-group" type="checkbox" name="agreed" value="1" id="check_1"/>
+                                        <label class="box-label" for="check_1">
+Согласен с регламентом - <a href="/account/agreement">пользовательским соглашением </a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-page__row">
+                                <div class="contact-page__right">
+                                    <div class="custom-checkbox">
+                                        <input class="form-group" class="box-label"  type="checkbox" name="pd_agreed" value="1" id="check_2"/>
+                                        <label class="box-label" for="check_2">
+Я согласен на обработку персональных данных в соответствии с
+                                            <a href="/media/politika_konfidencialnosti_vrachi_vmeste.pdf">политикой конфиденциальности</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn-default btn contact-page__btn" onclick="$(this).closest('form').submit();return false;">Сохранить и продолжить</button>
+                        </form>
+
+                        <div class="registration__question">
+                            <div class="title-3 m-b-15">Возникли вопросы при регистрации?</div>
+                            <div class="title-5">Задайте их нам по e-mail</div>
+                            <a href="mailto:vrvm.redaktor@gmail.com" class="title-5 font-weight-bold">vrvm.redaktor@gmail.com </a>
+                            <div class="title-5">Мы обязательно поможем!</div>
+                        </div>
+

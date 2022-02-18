@@ -74,6 +74,7 @@ class Banner(models.Model):
     flash = models.BooleanField(verbose_name=_('Is Flash?'), default=False)
     onlyauth = models.BooleanField(verbose_name=_('OnlyForAuth'), default=False)
     public = models.BooleanField(verbose_name=_('Public'), default=True)
+    is_payed = models.BooleanField(verbose_name=_('Is payed'), default=False)
     created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
@@ -95,7 +96,7 @@ class Banner(models.Model):
             'page': request.META.get('HTTP_REFERER'),
         }
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             log['user'] = request.user
         return Log.objects.create(**log)
 
@@ -139,7 +140,7 @@ class Log(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='users',
                              verbose_name=_('User'))
     datetime = models.DateTimeField(verbose_name=_('Clicked At'), auto_now_add=True)
-    ip = models.IPAddressField(verbose_name=_('IP'), null=True, blank=True)
+    ip = models.GenericIPAddressField(verbose_name=_('IP'), null=True, blank=True)
     user_agent = models.CharField(verbose_name=_('User Agent'), max_length=1024, null=True, blank=True)
     page = models.URLField(verbose_name=_('Page'), null=True, blank=True)
     key = models.CharField(verbose_name=_('User Agent'), max_length=32, null=True, blank=True)

@@ -7,7 +7,7 @@ from banners.models import URL
 
 
 # For render tag
-from django.template import Context
+from django.template import RequestContext
 from django.template import Template
 from random import shuffle
 from random import choice
@@ -39,15 +39,15 @@ def banner_group(context, group, tpl='banners/group.html'):
         
 
 
-        banners_all = Banner.objects.filter(public=True, group=group, urls__in=good_urls)
-
+        banners_all = Banner.objects.filter(public=True, group=group, urls__in=good_urls).order_by('sort')
         banners = [banner for banner in banners_all if banner.often == 10]
-
         banners_ids = [x for y in [[banner.id] * banner.often for banner in banners_all if banner.often < 10] for x in y]
         if(banners_ids):
             shuffle(banners_ids);
             banner_id = choice(banners_ids)
             banners.append([el for el in banners_all if el.id == banner_id][0])
+        if(group.slug == "popup"):
+        	shuffle(banners)    
     except:
         banners = False
         group = False
@@ -56,7 +56,7 @@ def banner_group(context, group, tpl='banners/group.html'):
         context['group'] = group
 
     t = template.loader.get_template(tpl)
-    return t.render(template.Context(context))
+    return t.render(context.flatten())
 
 
 @register.simple_tag(takes_context=True)
@@ -79,7 +79,7 @@ def banner_one(context, banner_id, tpl='banners/banner.html'):
     context['banner'] = banner
 
     t = template.loader.get_template(tpl)
-    return t.render(template.Context(context))
+    return t.render(context.flatten())
 
 
 # block render
@@ -87,7 +87,7 @@ def banner_one(context, banner_id, tpl='banners/banner.html'):
 def render(context, content):
     try:
         tpl = Template(content)
-        content = Context(context)
-        return tpl.render(content)
+        content = RequestContext(context)
+        return tpl.render(content.flatten())
     except:
         return 'Render Error'

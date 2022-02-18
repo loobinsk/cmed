@@ -1,0 +1,50 @@
+{% load tz staticfiles %}
+<section class="lecture p-y bg-clr">
+        <div class="container">
+            <h2 class="title-1"> Онлайн лекции </h2>
+            <div class="lecture__slider">
+                <div class="slick-slider">
+
+                    {% for object in conf_list %}
+                    <div class="slider-item lecture__item">
+                        <!--card-lecture убирается card-lecture-title добавляется svg-->
+                        <a href="{% url 'detailpractice' object.id %}" class="card-lecture">
+                            <div class="title-2">{{ object.title }}</div>
+                            <div class="card-lecture__calendar">
+                                <div class="card-lecture__calendar-data">
+                                    <div class="card-lecture__calendar-number title">{{ object.createdate.day }}</div>
+                                    <div class="card-lecture__calendar-month title">{{ object.createdate|date:"F" }} {{ object.createdate.year }}</div>
+                                </div>
+                                <div class="card-lecture__calendar-info">
+                                    <div class="card-lecture__calendar-name">
+                                        <div class="card-lecture__calendar-img">
+                                            <img src="{% static 'new/images/icon/calendar-name.svg' %}" alt="">
+                                        </div>
+                                        <div class="title-s-min">Онлайн-трансляция</div>
+                                    </div>
+                                    <div class="card-lecture__time">
+                                        <div class="card-lecture__calendar__time title">{{ object.begindate |localtime | time}} - {{ object.updatedate |localtime | time }}</div>
+                                        <div class="card-lecture__icon title-4">
+                                            <div class="svg__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="#view"></use>
+                                                </svg>
+                                            </div>
+                                            <span>{% if object.statistics %}
+                    {{ object.statistics.viewings }}
+                {% else %}
+                    0
+                {% endif %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+{% endfor %}
+
+                </div>
+            </div>
+            <a href="/consultations" class="btn btn-default lecture__btn slick__right-element">Все лекции</a>
+        </div>
+    </section>

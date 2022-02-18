@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -18,7 +18,7 @@ from photos.models import PGalleries
 from posts.models import Posts
 from videos.models import Videos
 from records.models import Records
-from medtus.models import Like
+from medtus.models import Like, ContentPage, Translation
 
 import re
 
@@ -201,8 +201,7 @@ class NmoDialogsView(generic.ListView):
         except EmptyPage:
             dialogs = paginator.page(paginator.num_pages)
 
-        context['page_obj'] = dialogs
-
+        context['page_obj'] = dialogs      
 
         msg=''
         try:
@@ -240,19 +239,84 @@ class AdminDialogView(generic.ListView):
 class NmoDialogView(generic.ListView):
     template_name = 'circle/NmoDialog.html'
     model = Record
-    context_object_name = 'all_msgs'
-
-    def get_queryset(self, **kwargs):
+    #context_object_name = 'all_msgs'
+    
+    
+    def get_context_data(self, **kwargs):
+        from django.core.paginator import EmptyPage, PageNotAnInteger
+        
+        context = super(generic.ListView, self).get_context_data(**kwargs)
+        context['page']  = ContentPage.objects.get(id=16)
         msg=''
         try:
             msg=AllMsg.objects.get(user=self.request.user, type=1)
         except:
             pass
+        q = Q(status=0)
+        queryconf = Posts.objects.filter(Q(begindate__gte = datetime.now().date())).order_by('createdate')
+        queryconf = queryconf.filter(type__in='3')[:2]
+        context['conf_list'] = queryconf;
         if msg != '':
             msg.unreaded=0
             msg.save()
-            return msg
-        return ''
+        if msg != '':
+            context['all_msgs'] = msg
+        else:
+            context['all_msgs'] = ""
+        return context
+    #def get_queryset(self, **kwargs):
+    #    msg=''
+    #    try:
+    #        msg=AllMsg.objects.get(user=self.request.user, type=1)
+    #    except:
+    #        pass
+    #    if msg != '':
+    #        msg.unreaded=0
+    #        msg.save()
+    #        return msg
+    #    return ''
+
+
+class CalendarView(generic.ListView):
+    template_name = 'circle/Calendar.html'
+    model = Record
+    #context_object_name = 'all_msgs'
+
+
+    def get_context_data(self, **kwargs):
+        from django.core.paginator import EmptyPage, PageNotAnInteger
+
+        context = super(generic.ListView, self).get_context_data(**kwargs)
+        context['page']  = ContentPage.objects.get(id=16)
+        msg=''
+        try:
+            msg=AllMsg.objects.get(user=self.request.user, type=1)
+        except:
+            pass
+        q = Q(status=0)
+        queryconf = Posts.objects.filter(Q(begindate__gte = datetime.now().date())).order_by('createdate')
+        queryconf = queryconf.filter(type__in='3')
+        # Календарь
+        if 'date' in self.request.GET:
+            try:
+                start_date = datetime.strptime(self.request.GET['date'] + " 00:00:00", "%Y-%m-%d %H:%M:%S")
+                end_date = datetime.strptime(self.request.GET['date'] + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+                queryconf = Posts.objects.filter(begindate__gte = start_date, begindate__lte = end_date).order_by('createdate')
+            except (ValueError, TypeError):
+                raise Http404
+        spec_id = self.request.GET.get('spec_id')
+        if spec_id:
+            queryconf = queryconf.filter(spec_id__id__in=spec_id.split(','))
+        context['conf_list'] = queryconf;
+        context['specialities_list'] = Specialities.objects.all().order_by('name')
+        if msg != '':
+            msg.unreaded=0
+            msg.save()
+        if msg != '':
+            context['all_msgs'] = msg
+        else:
+            context['all_msgs'] = ""
+        return context
 
 
 class DialogView(generic.ListView):
@@ -303,7 +367,7 @@ class DialogView(generic.ListView):
         authB = MyUser.objects.get(id=self.kwargs['authBid'])
         context['authBid'] = self.kwargs['authBid']
         context['authB'] = authB
-        context['online_now'] = self.in_online(authB, self.request)
+        #context['online_now'] = self.in_online(authB, self.request)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -324,7 +388,7 @@ class DialogView(generic.ListView):
         R.moderated = False
         R.save()
         return render(request, self.template_name,
-                      {'authBid': authB.id, 'authB': authB, 'online_now': self.in_online(authB, self.request),
+                      {'authBid': authB.id, 'authB': authB, #'online_now': self.in_online(authB, self.request),
                        'dialogrecords': self.getrecords(authA, authB)})
 
 

@@ -5,6 +5,7 @@ from banners.models import URL
 from banners.models import BannerGroup
 from banners.models import Banner
 from banners.models import Log
+from account.mixins import CSVTruncateAdmin
 
 
 class URLAdmin(admin.ModelAdmin):
@@ -20,14 +21,28 @@ admin.site.register(URL, URLAdmin)
 class BannerAdminInline(admin.StackedInline):
     model = Banner
     extra = 1
-    fields = ['public', 'title', 'url', 'img', 'often']
+    fields = ['public', 'title', 'url', 'img', 'often', 'sort']
 
 
-class BannerAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'url', 'sort', 'views', 'clicks', 'public', 'onlyauth', 'created_at', 'updated_at')
+class BannerAdmin(CSVTruncateAdmin):
+    list_display = ('banner_name', 'url', 'sort', 'views', 'clicks', 'public', 'often', 'onlyauth', 'created_at', 'updated_at')
+    # list_display = ('url', 'sort', 'views', 'clicks', 'public', 'onlyauth', 'created_at', 'updated_at')
     search_fields = ('title', 'url', 'sort', 'views', 'clicks', 'public', 'created_at', 'updated_at')
     list_filter = ['public']
     list_editable = ['sort', 'onlyauth', 'public']
+    
+    def banner_name(self, obj):
+        return obj.title or obj.alt
+    
+    def views(self, obj):
+        return Log.objects.filter(banner=obj.pk, type=1).count()
+
+    def clicks(self, obj):
+        return Log.objects.filter(banner=obj.pk, type=2).count()
+
+    banner_name.short_description = 'banner_name'    
+    views.short_description = 'views'
+    clicks.short_description = 'clicks'
 
 
 admin.site.register(Banner, BannerAdmin)

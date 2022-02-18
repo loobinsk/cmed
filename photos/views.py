@@ -32,7 +32,7 @@ class PGalleriesListView(ListView):
 
     def get_context_data(self, **kwargs):
 
-        if not self.request.user.is_anonymous():
+        if not self.request.user.is_anonymous:
             from account.models import EventAccess
             EventAccess.update("pgalleries", self.request.user)
 

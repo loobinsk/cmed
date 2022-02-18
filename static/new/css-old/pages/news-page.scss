@@ -1,0 +1,10 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.news-page {
+  .card__article-img {
+    &::before {
+      display: none;
+    }
+  }
+}

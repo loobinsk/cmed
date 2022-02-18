@@ -2,11 +2,11 @@ import os
 import urllib
 
 from django.contrib import admin
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django.conf import settings
 
 from medtus.models import MaterialVideo, PrivateContentPageUsers, MaterialPhoto, Translation, Feedback, Specialities, Towns, ContentPage, \
-    TranslationVisit
+    TranslationVisit, TranslationViewer, TranslationModal
 from cuter.cuter import resize_and_crop
 from lenta.views import do_URL
 from account.mixins import CSVTruncateAdmin
@@ -85,8 +85,21 @@ class VideoAdmin(admin.ModelAdmin):
         obj.save()
 
 
-class TranslationAdmin(MCEFilebrowserAdmin):
+class TranslationModalAdminInline(admin.StackedInline):
+    model = TranslationModal
+    extra = 1
+    fields = ['datetime']
+
+class TranslationAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'link', 'active')
+    inlines = [TranslationModalAdminInline]
+
+class TranslationModalAdmin(admin.ModelAdmin):
+    list_display = ('translation', 'datetime')
+
+class TranslationViewerAdmin(CSVTruncateAdmin):
+    list_display = ('id', 'post', 'user', 'checks_counter')
+    list_filter = ('post', 'checks_counter')
 
 
 class FeedbackAdmin(admin.ModelAdmin):
@@ -102,13 +115,14 @@ from django import forms
 class CabModelForm( forms.ModelForm ):
     words = forms.CharField( widget=forms.Textarea )
     class Meta:
-        model = Specialities 
+        model = Specialities
+        fields = '__all__'
 
-class SpecAdmin(MCEFilebrowserAdmin):
+class SpecAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'title')
     form = CabModelForm
 
-class TownAdmin(MCEFilebrowserAdmin):
+class TownAdmin(admin.ModelAdmin):
     list_display = ('id', 'country_id', 'region', 'name')
     search_fields = ('name', )
 
@@ -119,16 +133,16 @@ class TownAdmin(MCEFilebrowserAdmin):
 
 
 
-class ContentPageAdmin(MCEFilebrowserAdmin):
+class ContentPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'page_alias')
     # def has_add_permission(self, request):
     #     return not ContentPage.objects.exists()
 
 class PrivateContentPageUsersAdmin(CSVTruncateAdmin, admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'speciality', 'city', 'page', 'dt_create')
+    list_display = ('full_name', 'email', 'phone', 'speciality', 'city', 'page', 'dt_create')
     list_filter = ('page',)
     list_per_page = 100
-    csv_record_limit = 100000
+    csv_record_limit = 200000
 
 class TranslationVisitAdmin(admin.ModelAdmin):
     list_display = ('dt_create', 'dt_update', 'post', 'user')
@@ -138,9 +152,11 @@ class TranslationVisitAdmin(admin.ModelAdmin):
 admin.site.register(MaterialVideo, VideoAdmin)
 admin.site.register(MaterialPhoto, PhotoAdmin)
 admin.site.register(Translation, TranslationAdmin)
+admin.site.register(TranslationModal, TranslationModalAdmin)
 admin.site.register(Specialities, SpecAdmin)
 admin.site.register(Towns, TownAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ContentPage, ContentPageAdmin)
 admin.site.register(PrivateContentPageUsers, PrivateContentPageUsersAdmin)
 admin.site.register(TranslationVisit, TranslationVisitAdmin)
+admin.site.register(TranslationViewer, TranslationViewerAdmin)

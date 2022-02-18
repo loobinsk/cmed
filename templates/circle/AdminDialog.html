@@ -3,21 +3,21 @@
 {% load static %}
 {% load account_tags %}
 {% block js_page %}
-	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
 {% endblock %}
 {% block title %}Диалоги{% endblock %}
 {% block top_block %}
-	<div class="content-block-top-block-1-window-filter" id="window-filter">
-		<div class="content-block-top-block-1-window-filter-content"></div>  
-		<div class="content-block-top-block-1-window-filter-bottom">
-			<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
-		</div>
+    <div class="content-block-top-block-1-window-filter" id="window-filter">
+	<div class="content-block-top-block-1-window-filter-content"></div>  
+	<div class="content-block-top-block-1-window-filter-bottom">
+	    <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
 	</div>
+    </div>
 {% endblock %}
 {% block content %}
           <script>
@@ -32,27 +32,27 @@
 
     </script>
 <!-- Центральная колонка -->
-			<div class="groups-area">
-				<div class="holder">
-					<div class="content-block-center-item-head-photo-bg">
-						<a target="_parent" href="">
-						<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/mt.png' %})"></div>
-						</a>
-					</div>
-					<div class="description">
-						<h3>Администрация</h3>
-					</div>
-				</div>
-				<div class="dialogs-area">
+	    <div class="groups-area">
+		<div class="holder">
+		    <div class="content-block-center-item-head-photo-bg">
+			<a target="_parent" href="">
+			<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/mt.png' %})"></div>
+			</a>
+		    </div>
+		    <div class="description">
+			<h3>Администрация</h3>
+		    </div>
+		</div>
+		<div >
 
 
-        {% for msg in all_msgs.msgs|allmsgs_cut %}
+        {% for msg in all_msgs.msgs|allmsgs_cut reversed %}
 
                     <div id="admindialog" class="admindialogtext">
 
                      {{ msg | safe | linebreaks }}
                         <div class="admindialogdate">
-           <em class="date"> {{ all_msgs.datetime | allmsgsdate_cut | allmsgs_index:forloop.counter0 |timezone:"Europe/Moscow"}}</em>
+           <em class="date"> {{ all_msgs.datetime | allmsgsdate_cut | allmsgs_index:forloop.counter0 | timezone:"Europe/Moscow"}}</em>
 
                         </div>
 
@@ -61,8 +61,8 @@
         {% endfor %}
 
 
-				</div>
-			</div>
+		</div>
+	    </div>
 
 
 {% endblock %}

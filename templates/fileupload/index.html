@@ -13,7 +13,7 @@ form { display: block; margin: 20px auto; background: #eee; border-radius: 10px;
 <body>
     <h1>File Upload Progress Demo #1</h1>
 	<code>&lt;input type="file" name="myfile"></code>
-	<form action="{% url "fileupload.views.home" %}" method="post" enctype="multipart/form-data">
+	<form action="{% url "home" %}" method="post" enctype="multipart/form-data">
         <input type="file" name="file"><br>
         <input type="submit" value="Upload File to Server">
     </form>

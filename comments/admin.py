@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
 
 from comments.models import Comments
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django import forms
 from account.models import MyUser
 from account.mixins import StaffPermissionMixin
@@ -23,7 +23,7 @@ class CommentsForm(forms.ModelForm):
             self.fields['user_id'].queryset = MyUser.objects.filter(pk=self.initial['user_id'])
 
 
-class CommentsAdmin(StaffPermissionMixin, MCEFilebrowserAdmin):
+class CommentsAdmin(StaffPermissionMixin, admin.ModelAdmin):
     # list_display = ('id', 'title', 'content', 'createdate')
     list_display = ('id', 'link', 'content', 'createdate',
                     'user_id', 'user_lname', 'user_fname',

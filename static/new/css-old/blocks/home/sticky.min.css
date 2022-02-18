@@ -1,0 +1,1 @@
+.sticky{width:525px}@media (max-width: 1199px){.sticky{width:450px}}@media (max-width: 991px){.sticky{width:340px}}@media (max-width: 767px){.sticky{width:100%}}@media (max-width: 767px){.sticky{position:static !important}}#endpoint{position:absolute;bottom:0;left:0}

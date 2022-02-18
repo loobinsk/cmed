@@ -78,7 +78,7 @@ class TestProgress(admin.SimpleListFilter):
 class TimerAdmin(CSVTruncateAdmin):
     list_display = ('id', 'user_id', 'user', 'post_title', 'timer',
                     'user_lname', 'user_fname', 'user_surname', 'user_town',
-                    'user_country', 'user_spec_id', 'user_graduate', 'time_join', 'time_leave', 'finish_time', 'test_score')
+                    'user_country', 'user_spec_id', 'user_graduate', 'time_join', 'time_leave', 'finish_time', 'test_score', 'user_organization')
     search_fields = ('user__firstname', 'user__lastname', 'user__surname', 'user__email', 'post__title')
     raw_id_fields = ('user',)
     list_filter = (('post',custom_titled_filter('Трансляция:')), TestProgress,)
@@ -137,6 +137,12 @@ class TimerAdmin(CSVTruncateAdmin):
             return obj.user.graduate
         else:
             return ""
+
+    def user_organization(self, obj):
+        if hasattr(obj.user, 'organization'):
+            return obj.user.organization
+        else:
+            return ""        
 
     def user_id(self, obj):
         return obj.user.id
@@ -204,6 +210,7 @@ class MyAdminPasswordChangeForm(AdminPasswordChangeForm):
         return password2
 
 
+# class MyUserAdmin(UserAdmin):
 class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
     form = MyUserAdminForm
     change_password_form = MyAdminPasswordChangeForm
@@ -214,7 +221,7 @@ class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
                      'town__name', 'spec_id__name', 'graduate__name', 'country__name')
     list_per_page = 100
 
-    csv_record_limit = 100000
+    csv_record_limit = 200000
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -233,7 +240,7 @@ class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password')}
+            'fields': ('login', 'email', 'password1', 'password2')}
          ),
     )
     ordering = ('id',)
@@ -255,6 +262,7 @@ class MyUserAdmin(CSVTruncateAdmin, UserAdmin):
 
 
 class AllMsgAdmin(admin.ModelAdmin):
+    list_display = ('id', 'msgs', 'datetime', 'unreaded')
     list_filter = ('id', 'msgs', 'datetime', 'unreaded')
 admin.site.register(AllMsg, AllMsgAdmin)
 

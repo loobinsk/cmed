@@ -2,10 +2,9 @@
 {% block title_page %}{{ title|striptags }}{% endblock %}
 {% block title %}{{ title|safe }}{% endblock %}
 {% block js_page %}
-    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
-    <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+        <script type="text/javascript" src="{% static 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' %}"></script>
+<script type="text/javascript" src="{% static 'filebrowser/js/TinyMCEAdmin.js' %}"></script>
 {% endblock %}
 {{ type_is }}
 {% block filter_content %}{% if user.is_authenticated %}{% if user.is_staff %}
@@ -219,6 +218,7 @@
     </a>
     {% endif %}
     {% endcomment %}
+     <div id="lenta">
     {% if object_list|length %}        
         {% for object in object_list %}
             {% include "posts/one_post2.html" %}
@@ -227,12 +227,13 @@
         <div class="content-block-center-item">
             <div class="content-block-center-item-head">
             </div>
-            <div class="content-block-center-item-content">
+            <div class="content-block-center-item-content" style="width:800px;">
                 <p>По заданным критериям нет материалов!</p>
             </div>
         </div>
     {% endif %}
-
+     </div>
+<button id="next10" class="btn-default btn m-t-50 m-auto ">Показать еще</button>
     <script>
 {% comment %}
 
@@ -279,38 +280,45 @@
             }
         });
     }
+    </script>
 
-    var thisWork = 1;
-    function getNextP() {
+<script>
+	var thisWork = 1;
+    thisPageNum = 2;
+	$('#next10').click(function (){ showLoader(true);
+		if (thisWork == 1) {
+			thisWork = 0;
+			jQuery.ajax({
+				type: 'get',
+				url: "{{ path }}",
+				data: {
+					'page': thisPageNum,
+					//'spec_id': spec_id,
+					//'format': format.join(),
+					'search': $('input[name="search"]').val()
+				},
+				success: function (data) {
+					//var page = $(data).find('input[name="page"]').val();
+					//if (page) {
+						showLoader(false);  $(data).appendTo("#lenta");
+						thisPageNum+=1;
+						thisWork = 1;
+						$('.content-block-center-item-content img').each(function (index) {
+						});
+						$('.content-block-center-item-content hr').each(function (index) {
+							this.style.width = "100%";
+						});
+					//}
+				},
+				error: function() {
 
-        if (thisWork == 1) {
-            thisWork = 0;
+				}
+			});
+		}
+	});
+    </script>
 
-            var queryData = {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join(), 'search': $('input[name="search"]').val()};
-            {% if not show_archive %}
-                queryData['archive'] = '';
-            {% endif %}
-
-            $.ajax({
-                type: 'get',
-                url: "{{ path }}",
-                data: queryData,
-                success: function (data) {
-                    $(data).appendTo(".content-block-center");
-                    thisPageNum = thisPageNum + 1;
-                    thisWork = 1;
-{% comment %}                    $('.content-block-center-item-content img').each(function (index) {
-                        this.style.width = "100%";
-                        this.style.height = "100%";
-                    }){% endcomment %}
-                    $('.content-block-center-item-content hr').each(function (index) {
-                        this.style.width = "100%";
-                    })
-                }
-            });
-        }
-    }
-
+<script>
     var scrH = $(window).height();
     var scrHP = $(".content-block-center").height();
 
@@ -344,7 +352,7 @@
         dict['spec_id'] = $('select[name="spec_id"]').val();
         dict['title'] = $('input[name="title"]').val();
         {% if user.is_staff %}
-            dict['description'] = tinyMCE.get('description').getContent().replace('\n', '');
+            dict['description'] = tinyMCE.activeEditor.getContent().replace('\n', '');
             {% else %}dict['description'] = $('#description1').val();
         {% endif %}
         var errortext = "";
@@ -421,7 +429,7 @@
             } else {
 
                 $.ajax({
-                    url: '{% url "lenta.views.fileupload" %}',
+                    url: '{% url "fileupload" %}',
                     type: 'POST',
                     xhr: function () {
                         var myXhr = $.ajaxSettings.xhr();
@@ -475,7 +483,7 @@
     });
 
     function deletephoto(photo, el) {
-        $.post('{% url "lenta.views.filedelete" %}', { file: photo }, function (data) {
+        $.post('{% url "filedelete" %}', { file: photo }, function (data) {
             if (data.result) {
                 parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
                 parent.remove();
@@ -485,7 +493,7 @@
 
     function addvideo() {
         if ($('input[name="links-video"]').val()) {
-            $.post('{% url "lenta.views.videoupload" %}', { video: $('input[name="links-video"]').val() }, function (data) {
+            $.post('{% url "videoupload" %}', { video: $('input[name="links-video"]').val() }, function (data) {
                 html =
                         '<div class="content-block-center-write-form-block-2-left-video-list">\
                                 <div file="' + data.file + '" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url(' + data.furl + ')"></div>\
@@ -504,7 +512,7 @@
     }
 
     function deletevideo(path, el) {
-        $.post('{% url "lenta.views.videodelete" %}', { video: path }, function (data) {
+        $.post('{% url "videodelete" %}', { video: path }, function (data) {
             if (data == 'OK') {
                 parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
                 parent.remove();
@@ -515,3 +523,4 @@
     </script>
 
 {% endblock %}
+

@@ -60,7 +60,7 @@ class RssList(ListView):
         context = super(RssList, self).get_context_data(**kwargs)
         user = self.request.user
 
-        if not user.is_anonymous():
+        if not user.is_anonymous:
             from account.models import EventAccess
             EventAccess.update("rss", user)
         context['search'] = self.search

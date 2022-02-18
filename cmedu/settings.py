@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 import os
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
@@ -26,26 +24,27 @@ SECRET_KEY = '@=6=2e@!f-vj&o*@u97#tgm0q$(ftxu(85=n*2-6vygardy%-y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1', 'vrvm.ru', 'vrachivmeste.ru', 'www.vrachivmeste.ru', '87.242.77.90']
+ALLOWED_HOSTS = ['localhost','127.0.0.1', 'www.vrvm.ru', 'vrvm.ru', 'vrachivmeste.ru', 'www.vrachivmeste.ru','45.80.69.219']
 
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django.contrib.sites',
     'django_extensions',
     'tinymce',
     'sorl.thumbnail',
-    'mce_filebrowser',
     'settings',
-    'dajax',
-    'dajaxice',
+    'simplejson',
     'library',
     'account',
     'lenta',
@@ -65,10 +64,9 @@ INSTALLED_APPS = (
     'partners',
     'photos',
     'banners',
-    'south',
     'rss',
     'lecturers',
-    'quiz',
+    'quiz'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -85,7 +83,7 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,21 +91,21 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cmedu.onlinenow.OnlineNowMiddleware',
-)
+]
 
 ROOT_URLCONF = 'cmedu.urls'
 
 WSGI_APPLICATION = 'cmedu.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.6'USER': 'medtusdj_user',
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medtusdj_db_migrate',
+        'NAME': 'medtusdj',
         'USER': 'medtusdj_user',
-        'PASSWORD': '71qno0GqH3',
+        'PASSWORD': 'Papa$$w0w0rd',
         'HOST': 'localhost',
         'OPTIONS': {
             'init_command': "SET foreign_key_checks = 0;",
@@ -131,9 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-# STATICFILES_FINDERS = [
+#STATICFILES_FINDERS = [
+ #   'dajaxice.finders.DajaxiceFinder',
 #     'compressor.finders.CompressorFinder',
 # ]
+
 
 STATIC_URL = '/static/'
 
@@ -147,6 +147,9 @@ MEDIA_URL = '/media/'
 PUBLIC_HTML_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name'
 STATIC_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/static'
 
+FILEBROWSER_DIRECTORY = ''
+DIRECTORY = ''
+
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
@@ -156,9 +159,6 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
-TEMPLATE_DIRS = (
-    TEMPLATE_PATH,
-)
 
 AUTH_USER_MODEL = 'account.MyUser'
 
@@ -178,10 +178,10 @@ EMAIL_HOST_USER = 'vrvm.ru@gmail.com'
 EMAIL_HOST_PASSWORD = 'KAG2e{bTp?'
 
 
-COORD_EMAIL = 'vrvm.koordinator@gmail.com'
-EMAIL_PORT = 25
-EMAIL_HOST = '127.0.0.1'
-ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
+#COORD_EMAIL = 'vrvm.koordinator@gmail.com'
+#EMAIL_PORT = 25
+#EMAIL_HOST = '127.0.0.1'
+#ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
 
 
 AVATAR_SIZE = 200, 200
@@ -213,10 +213,32 @@ TINYMCE_DEFAULT_CONFIG = {
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
 
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
-    'cmedu.context_processors.request',
-)
+#TEMPLATE_CONTEXT_PROCESSORS += (
+#    'django.core.context_processors.request',
+#    'cmedu.context_processors.request',
+#)
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(PROJECT_PATH, 'templates')
+                 ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+                "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                #"account.context_processors.account",
+                "cmedu.context_processors.request",
+                "django.template.context_processors.request"
+            ],
+        },
+    },
+]
 
 LOGGING = {
     'version': 1,
@@ -253,9 +275,6 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 7,
             'formatter': 'main_formatter',
-        },
-        'null': {
-            "class": 'django.utils.log.NullHandler',
         }
     },
     'loggers': {
@@ -263,12 +282,6 @@ LOGGING = {
             'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
             'propagate': True,
-        },
-        'django': {
-            'handlers': ['null', ],
-        },
-        'py.warnings': {
-            'handlers': ['null', ],
         },
         '': {
             'handlers': ['console', 'production_file', 'debug_file'],

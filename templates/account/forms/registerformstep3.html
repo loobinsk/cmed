@@ -1,8 +1,9 @@
-<div class="title-holder">
-    <h3>Для окончания регистрации ответьте, пожалуйста, на вопросы теста:</h3>
-</div>
-<form class="info-form style01" action="{% url "account.views.register3" %}" method="post">
+<h1 class="h1">Регистрация нового пользователя</h1>
+<div class="title-5 font-weight-bold">Для окончания регистрации ответьте, пожалуйста, на вопросы теста:</div>
+
+<form action="{% url "register3" %}" method="post" id="question_submit" class="registration__block">
     <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}'/>
+
 
     {% for file in questions %}
         {% with "account/forms/questionsstep3/"|add:file|add:".html" as template %}
@@ -12,11 +13,19 @@
 
     <div class="bottom style02">
         {{ error|safe }}
-        <div class="next-holder">
-            <a href="#" class="btn-next" onclick="$(this).css('pointer-events', 'none'); $(this).closest('form').submit(); return false;">Cохранить ответы и
-                продолжить</a>
-        </div>
-        <span class="inform">Возникли вопросы при регистрации?</span>
-        <span>Задайте их нам по e-mail: <a href="#">vrvm.redaktor@gmail.com</a> <br>Мы обязательно поможем!</span>
-    </div>
+
+            <!-- <button class="btn-default btn contact-page__btn"  onclick="$(this).closest('form').submit(); return false;">Сохранить и продолжить</button> -->
+             <div  class="header__link js-open-modal btn-default btn contact-page__btn" data-modal="22">Сохранить и продолжить</div>
+
+
+
 </form>
+
+                        <div class="registration__question">
+                            <div class="title-3 m-b-15">Возникли вопросы при регистрации?</div>
+                            <div class="title-5">Задайте их нам по e-mail</div>
+                            <a href="mailto:vrvm.redaktor@gmail.com" class="title-5 font-weight-bold">vrvm.redaktor@gmail.com </a>
+                            <div class="title-5">Мы обязательно поможем!</div>
+                        </div>
+                    </div>
+

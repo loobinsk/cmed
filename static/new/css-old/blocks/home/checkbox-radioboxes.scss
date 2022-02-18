@@ -1,0 +1,139 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+@mixin vh() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.box-label {
+  display: block;
+  cursor: pointer;
+  line-height: 1.33333;
+  font-size: $font-size - 1px;
+  font-weight: 400;
+  color: #6d6d6d;
+  margin-bottom: 15px;
+}
+
+.custom-checkbox {
+  input[type="checkbox"],
+  input[type="radio"] {
+    @include vh();
+    + label {
+      position: relative;
+      padding: 0 0 0 2em;
+      margin-bottom: 15px;
+      user-select: none;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.2em;
+        height: 1.2em;
+        border: 1px solid $clr;
+        border-radius: 1px;
+        background: #fff;
+        text-align: center;
+        transition: all 0.2s linear;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        transform: scale(0);
+        transition: all 0.2s linear;
+      }
+      &:hover,
+      &:focus {
+        &:before {
+          border-color: $clr;
+        }
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    + label {
+      &:after {
+        background-color: $clr;
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0.46em;
+        top: 0.2em;
+        width: 0.39em;
+        height: 0.63em;
+        opacity: 0;
+        border-bottom: 2px solid $text;
+        border-right: 2px solid $text;
+        transform: rotate(45deg);
+        transition: all 0.2s linear;
+      }
+      &::before {
+        border-radius: 1px;
+        border: 1px solid $clr;
+        background-color: $clr;
+      }
+    }
+    &:checked {
+      + label {
+        &:before {
+          border-color: $clr;
+          background-color: $clr;
+          content: "";
+        }
+
+        &:after {
+          content: "";
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  input[type="radio"] {
+    + label {
+      &:before,
+      &:after {
+        border-radius: 50%;
+      }
+      &::before {
+        border-color: #cdcdcd;
+      }
+      &:after {
+        left: 0.1em;
+        top: 0.1em;
+        width: 1.2em;
+        height: 1.2em;
+      }
+    }
+    &:checked {
+      + label {
+        &:before {
+          border-color: transparent;
+          animation: border scale 300ms ease-in;
+        }
+        &:after {
+          background: $color-base;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}
+
+.radio-card .box-label {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 26px;
+
+  color: #000000;
+  margin-bottom: 5px !important;
+}

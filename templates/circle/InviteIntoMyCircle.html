@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load account_tags %}
-{% block js_page %}
-	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
-{% endblock %}
+
 {% block title %}Мой круг общения{% endblock %}
 {% block top_block %}
 <div class="quick_urls" style="top: 140px; position: absolute; padding: 5px;">
@@ -26,6 +19,7 @@
 {% endblock %}
 {% block content %}
 <!-- Центральная колонка -->
+    <h1 class="title-1">Все врачи</h1>
 			<div class="groups-area">
 				{% for c in circle %}
 					<div class="holder" id="invite_{{c.id}}">
@@ -48,56 +42,72 @@
 				<div class="btn-holder">
 					<a href="{% url 'mycircle' %}" class="btn">Посмотреть весь мой круг</a>
 				</div>
-				<form class="info-form" action="{% url 'invite' %}" method="post" id="filterinvite">
-				{% csrf_token %}
-					<span class="title">Найти коллегу</span>
-					<div class="columns">
-						<div class="column">
-							<div class="form-unit">
-								<input type="text" placeholder="Фамилия" name="lastname" value="{{session.lastname}}" >
-							</div>
-							<div class="form-unit valid">
-								<input type="text" placeholder="Имя" name="firstname" value="{{session.firstname}}" >
-							</div>
-							<div class="form-unit">
-								<input type="text" placeholder="Отчество" name="surname" value="{{session.surname}}" >
-							</div>
-							<div class="form-unit">
-								<input type="text" placeholder="День рождения" name="birthday" value="{{session.birthday}}" >
-							</div>
-						</div>
-						<div class="column">
-							<div class="form-unit valid">
-								<input type="text" placeholder="Страна" name="country" value="{{session.country}}" >
-							</div>
-							<div class="form-unit">
-								<input type="text" placeholder="Город" name="town" value="{{session.town}}" >
-							</div>
-							<div class="form-unit">
-								<input type="text" placeholder="Место учебы" name="school" value="{{session.school}}" >
-							</div>
-							<div class="form-unit valid">
 
-                                <select style="width:100%;color: #999;font-style: italic;font-size:12px;height: 22px;" name="job">
+
+                <div class="personal-area__info">
+                            <div class="title-1">Найти коллегу</div>
+                            <form action="{% url 'invite' %}" method="post" id="filterinvite" >
+                            {% csrf_token %}
+                                <div class="persondal-ares__row">
+                                    <div class="persondal-ares__col">
+                                        <div class="persondal-ares__input">
+                                      <input type="text" placeholder="Фамилия" name="lastname" value="{{session.lastname}}" >
+                                            </div>
+                                    </div>
+                                    <div class="persondal-ares__col">
+                                        <div class="persondal-ares__input">
+                                       <input type="text" placeholder="Имя" name="firstname" value="{{session.firstname}}" >
+                                             </div>
+                                    </div>
+                                    <div class="persondal-ares__col">
+                                         <div class="persondal-ares__input">
+                               <input type="text" placeholder="Отчество" name="surname" value="{{session.surname}}" >
+                                             </div>
+                                    </div>
+                                    <div class="persondal-ares__col">
+                                        <div class="persondal-ares__input">
+                                  <input type="text" placeholder="Страна" name="country" value="{{session.country}}" >
+                                    </div>
+
+                                    </div>
+                                    <div class="persondal-ares__col">
+                                        <div class="persondal-ares__input">
+                                   <input type="text"  placeholder="Город" name="town" value="{{session.town}}" >
+                                            </div>
+                                    </div>
+
+                                    <div class="persondal-ares__col">
+                                        <div class="persondal-ares__input">
+                               <input type="text" placeholder="Место учебы" name="school" value="{{session.school}}" >
+                                            </div>
+                                    </div>
+                                    <div class="persondal-ares__col">
+                                        <div class="calendar__input">
+                                            <input class="calendar" name="birthday" type="text" id="datepicker" placeholder="Выбрать по дате">
+                                        </div>
+                                    </div>
+                                    <div class="persondal-ares__col">
+
+                                          <select class="select2" name="job" id="persar_7">
                                 <option value="">
                                     {% for x in ""|ljust:"15" %}&nbsp;{% endfor %}
                                     Все специальности</option>
                                     {% for spec in specs %}
                                         <option value="{{ spec.id }}" {% if session.job == spec.id %} selected="selected"{% endif %}>{{ spec.title }}</option>
                                     {% endfor %}
-                                    
+
                                     </select>
-								{% comment %}<input type="text" placeholder="Специальность" name="job" value="{{session.job}}" >{% endcomment %}
-							</div>
-						</div>
-					</div>
-					<div class="submit-frame">
-						<input type="submit" value="Выполнить поиск" >
-						<span>изменении параметры, снова выполните поиск</span>
-					</div>
+
+                                    </div>
+                                </div>
+                                <button class="btn btn-default m-l-auto m-t-15">Выполнить поиск</button>
+
+
+
 					<div class="content-block-center-head">
 						<span>По вашему запросу было найдено:</span>
 					</div>
+                            <div id="search_circle">
 					{% for u in lookingfor %}
 						{% if u != user %}
 						<div class="holder">
@@ -112,47 +122,74 @@
 									<a href="{% url 'dialog' u.id %}" class="link-write">написать личное сообщение</a>
 								</div>
 							</div>
-						
+
 
 							{% if user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invite' %}
-							<div class="links">
-								<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отозвать <br>приглашение</a>
+							<div class="links" >
+								<a class="delete-group" style="cursor:pointer;" onclick="removefrommycircle({'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отозвать <br>приглашение</a>
 							</div>
 							{% elif user|isUserIntoMyCircle:u == 1 %}
 							<div class="links">
-								<a class="del-user" style="cursor:pointer;color:#777777;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{c.id}}', 'ID':'invite_{{c.id}}'})">Удалить из круга</a>
+								<a class="del-user" style="cursor:pointer;color:#777777;" onclick="removefrommycircle({'friend':'{{c.id}}', 'ID':'invite_{{c.id}}'});">Удалить из круга</a>
 							</div>
 							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_send_invite' %}
 							<div class="links">
-								<a class="btn-add" style="cursor:pointer;" onclick="Dajaxice.circle.inviteintomycircle(Dajax.process, {'avatar':'{% get_avatar_preview_sizexy u.id 77 77 %}', 'parent':{{user.id}}, 'friend':{{u.id}} })">Добавить в свой <br>круг общения</a>
+								<a class="btn-add"  style="cursor:pointer;" onclick="inviteintomycircle( {'avatar':'{% get_avatar_preview_sizexy u.id 77 77 %}', 'parent':{{user.id}}, 'friend':{{u.id}}});">Добавить в свой <br>круг общения</a>
 							</div>
 							{% elif user|get_send_invite_refuse_invite_refuse_invited:u == 'tpl_refuse_invited' %}
 							<div class="links">
-								<a class="delete-group" style="cursor:pointer;" onclick="Dajaxice.circle.removefrommycircle(Dajax.process, {'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отказаться</a>
+								<a class="delete-group"  style="cursor:pointer;" onclick="removefrommycircle({'friend':'{{u.id}}', 'ID':'invite_{{u.id}}'})">Отказаться</a>
 							</div>
 							{% endif %}
 						</div>
 						{% endif %}
-					{% endfor %}
-					{% if lookingfor|length %}		
-					<div class="content-block-center-item-dots style01"></div>
+					{% endfor %}</div>
+					{% if lookingfor|length %}
+
 					{% endif %}
-				</form>
-			</div>	
+                            </form>
+
+
+                        </div>
+<button onclick="next10();" class="btn-default btn m-t-50 m-auto ">Показать еще</button>
+			</div>
+
+
+
+<script>
+	function removefrommycircle(senddata){
+             $.get('/circle/removefrommycircle/', senddata, function(data){
+                    //alert(data);
+                    location.reload();
+							});
+
+	};
+
+	function inviteintomycircle(senddata){
+             $.get('/circle/inviteintomycircle/',
+                     senddata,
+                     function(data){
+                    //$('.circle_link').text("Отозвать <br>приглашение");
+                    alert(data);
+			});
+	};
+    </script>
+
 <script>
 var thisWork = 1;
-function getNextP(){
+var thisPageNum = 1;
+function next10(){
 
 	if(thisWork == 1){
 		thisWork = 0;
-		var dat = jQuery("#filterinvite").serialize() + '&page=' + thisPageNum;
+		var dat = $("#filterinvite").serialize() + '&page=' + thisPageNum;
 		$.ajax({
 			url: "{% url 'invite' %}",
 			type:     "GET",
 			dataType: "html",
 			data: dat,
 			success: function(data){
-				$(".content-block-center-item-dots.style01").before(data);
+                $(data).appendTo("#search_circle");
 				thisPageNum = thisPageNum + 1;
 				thisWork = 1;
 			}
@@ -163,18 +200,5 @@ function getNextP(){
 	}
 }
 
-var scrH = $(window).height();
-var scrHP = $(".content-block-center").height();
-
-$(window).scroll(function(){
-	var scro = $(this).scrollTop();
-	var scrHP = $(".content-block-center").height();
-	var scrH2 = 0;
-	scrH2 = scrH + scro;
-	var leftH = scrHP - scrH2;
-	if(leftH < 300){
-		getNextP();
-	}
-});
-</script>
+ </script>
 {% endblock %}

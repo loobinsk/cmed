@@ -1,0 +1,23 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+.sticky {
+  width: 525px;
+  @include media("<xl") {
+    width: 450px;
+  }
+  @include media("<lg") {
+    width: 340px;
+  }
+  @include media("<md") {
+    width: 100%;
+  }
+  @include media("<md") {
+    position: static !important;
+  }
+}
+
+#endpoint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

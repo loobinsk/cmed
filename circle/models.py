@@ -46,10 +46,14 @@ class Record(models.Model):
     createdate = models.DateTimeField(auto_now_add=True)
     viewed = models.DateTimeField(blank=True)
     moderated = models.BooleanField(False)
+    count = 1
 
     def calcviewed(self):
         d = self.viewed
-        return d.year > 2000
+	if (d.year > 2000):
+            return 1
+	else:
+	    return 0
 
     isviewed = property(calcviewed)
 

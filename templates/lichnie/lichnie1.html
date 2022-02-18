@@ -5,39 +5,50 @@
 {% block top_block %}<div class="content-block-top-block-1-window-filter" id="window-filter">
 			<div class="content-block-top-block-1-window-filter-content">
 
-			</div>  
+			</div>
 			<div class="content-block-top-block-1-window-filter-bottom">
 				<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
 			</div>
 		</div>{% endblock %}
 {% block content %}
-    <script src="https://malsup.github.io/jquery.form.js"></script>
-	<form class="info-form" enctype="multipart/form-data">
-		<input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}' />
-		<div class="section">
-			<div class="alignleft">
+
+<!--content-->
+
+ <h1 class="h1">Личный кабинет</h1>
+
+                        <form action="{% url "register2" %}" method="post" enctype="multipart/form-data" id="reg_form_info" class="registration__block">
+                        {% csrf_token %}
+                            <div class="registration__item">
+                                <div class="title-3 m-b-30">Редактирование личной информации:</div>
+                                <div class="registration__ava-block" >
+
 				<style>
 					#upload-file-container {
-					   background: url({% get_avatar_preview_sizexy user.id 118 118 %}) no-repeat;
+					   background: url({% if user.avatar %}{{user.avatar.url}}{% endif %}) no-repeat;
 					   cursor: pointer;
-					   width: 118px;
-					   height:117px;
+                        border-radius: 20px;
+                        overflow: hidden;
+                        height: 196px;
+                        width: 196px;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: center;
 					}
 					#upload-file-container input {
 					   filter: alpha(opacity=0);
 					   opacity: 0;
 					}
-					.bar { 
-						background-color: #E1523D; 
-						width:0%; 
-						height:10px; 
-						border-radius: 3px; 
+					.bar {
+						background-color: #E1523D;
+						width:0%;
+						height:10px;
+						border-radius: 3px;
 					}
 				</style>
 				<script>
 					var trigger = true;
 					$(document).ready(function() {
-						$('#upload-file-container').wrap('<form id="avatar-upload" action="{% url "account.views.avatarupload" sizex='118' sizey='118' %}" method="post" enctype="multipart/form-data"></form>');
+						$('#upload-file-container').wrap('<form id="avatar-upload" action="{% url "avatarupload" sizex='196' sizey='196' %}" method="post" enctype="multipart/form-data"></form>');
 						$('#upload-file-container').click(function(){
 							if( trigger ) {
 								trigger = false;
@@ -60,373 +71,474 @@
 						},
 						complete: function(xhr) {
 							responseText = JSON.parse(xhr.responseText)
-							$('#upload-file-container').css('background', 'url('+responseText.url+') no-repeat');
-							$('.left-block-content-profile-item-left-photo').css('background', 'url('+responseText.url+') no-repeat');
+							$('.header__ava').css('background', 'url('+responseText.url+') no-repeat');
+							$('.registation__ava').css('background', 'url('+responseText.url+') no-repeat');
 							$('.bar').css('width', 0);
 						}
 					});
 					});
 
 				</script>
+
+                                    <div class="my-col-12 my-col-lg-4">
 				<div id="upload-file-container" onclick="trigger=true;">
 					<input id="id_picture" type="file" name="file" onchange="$(this).closest('form').submit();">
 				</div>
 				<a class="link" style="cursor: pointer;" onclick="trigger = true; $('#upload-file-container').trigger('click');">Изменить фото</a>
 				<div class="bar"></div>
-			</div>	
-			<div class="section-holder">
-				<div class="row">
-					<div class="form-unit valid required">
-						<input type="text" value="{{ user.lastname }}" name="lastname" >
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-unit valid required">
-						<input type="text" value="{{ user.firstname }}" name="firstname" >
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-unit valid required">
-						<input type="text" value="{{ user.surname }}" name="surname" >
-					</div>
-				</div>
-				<div class="panel">
-					<div class="form-holder">
-						<span class="label">Ваш пол: <font style="color:red;">*</font></span>
-						<div class="radio-field">
-							м <input class="male-field" name="sex" type="radio" {% if user.sex == "male" %} checked {% endif %} value="male">
-							ж <input class="female-field" name="sex" type="radio" {% if user.sex == "female" %} checked {% endif %} value="female">
-						</div>
-					</div>
-					<label style="  margin-left: 20px;margin-right: 10px;">Дата рождения: <font style="color:red;">*</font></label>
-					<div class="date-field">
-						<input type="text" class="mask-bd" name="birthday" value="{{ birthday|date:'dmY' }}">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="content-block-center-head">
-			<span>Специализация</span>
-		</div>
-		<div class="section">
-			<div class="row">
-				<div class="required">
-					<label for="text-field01">Основная специальность:</label>
-				</div>
-				<select name="spec_id" autocomplete="off">
-					<option value="0">Выберите специальность</option>
-					{% for s in spec_list %}
-						<option value="{{ s.id }}" {% if s.name == user.spec_id.name %} selected="selected" {% endif %}>{{ s.name }}</option>
-					{% endfor %}	
-				</select>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="text-field02">Cтаж:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" id="text-field02" name="experience" value="{{ user.experience|IfNone }}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="text-field03">Дополнительная <br>специальность:</label>
-				</div>
-				<select name="addspeciality" autocomplete="off">
-					<option value="0">Выберите специальность</option>
-					{% for al in addspeciality_list %}
+                                </div>
+
+                                    <div class="registration__ava-block-input">
+                                        <div class="contact-page__row">
+                                            <div class="contact-page__left">
+                                                <div class="title-4">Фамилия</div>
+                                            </div>
+                                            <div class="contact-page__right">
+                                                <input class="form-control" type="text" value="{{ user.lastname }}" name="lastname" class="required">
+                                            </div>
+                                        </div>
+                                        <div class="contact-page__row">
+                                            <div class="contact-page__left">
+                                                <div class="title-4">Имя</div>
+                                            </div>
+                                            <div class="contact-page__right">
+                                                <input class="form-control" type="text" value="{{ user.firstname }}" name="firstname" class="required" >
+                                            </div>
+                                        </div>
+                                        <div class="contact-page__row">
+                                            <div class="contact-page__left">
+                                                <div class="title-4">Отчество</div>
+                                            </div>
+                                            <div class="contact-page__right">
+                                                <input class="form-control" type="text" value="{{ user.surname }}" name="surname" class="required">
+                                            </div>
+                                        </div>
+                                        <div class="registation__ava-block-flex">
+                                            <div class="contact-page__row">
+                                                <div class="contact-page__left">
+                                                    <div class="title-4">Ваш пол:</div>
+                                                </div>
+                                                <div class="contact-page__right">
+                                                    <div class="custom-checkbox checkbox-sex ">
+                                                        <input type="radio" name="sex" value="male" {% if user.sex == "male" %} checked {% endif %} id="regM">
+                                                        <label class="box-label" for="regM">
+                                                            M
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-checkbox checkbox-sex ">
+                                                        <input type="radio" name="sex" value="female" {% if user.sex == "female" %} checked {% endif %} id="regW">
+                                                        <label class="box-label" for="regW">
+                                                            Ж
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="contact-page__row">
+                                                <div class="contact-page__left">
+                                                    <div class="title-4">Дата рождения:</div>
+                                                </div>
+                                                <div class="contact-page__right">
+                                                    <div class="calendar__input calendar__min">
+                                                        <input class="calendar form-control" type="text" id="datepicker" name="birthday" value="{{ birthday|date:'d/m/Y' }}">
+                                                     </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Специализация:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Основная специальность:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="spec_id" id="r-1">
+                                        <option selected value="">Выберите специальность</option>
+                                            {% for s in spec_list %}
+									<option value="{{ s.id }}" {% if s.name == user.spec_id.name %} selected="selected" {% endif %}>{{ s.name }}</option>
+								{% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Cтаж:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" type="text" name="experience" value="{{ user.experience }}">
+                                    </div>
+                                </div>
+
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Дополнительная специальность:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="addspeciality" >
+                                        <option selected value="0">Выберите специальность</option>
+ 						{% for al in addspeciality_list %}
 						<option value="{{ al.id }}" {% if al.name == user.addspeciality.name %} selected {% endif %}>{{ al.name }}</option>
-					{% endfor %}	
-				</select>
-			</div>
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="text-field04">Cтаж:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" id="text-field04" name="addexperience" value="{{ user.addexperience|IfNone }}">
-				</div>
-			</div>
-			<!--<div class="link-add link-add-js"><a href="#">Добавить специальность</a></div>-->
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Учёная степень</span>
-			</div>
-			<div class="row">
-				<select name="graduate" autocomplete="off">
-					<option value="0">Выберите степень</option>
-					{% for g in graduate_list %}
-						<option value="{{ g.pk }}" {% if g.pk == user.graduate %} selected {% endif %}>{{ g.name }}</option>
 					{% endfor %}
-				</select>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="text-field05">Тема диссертации:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" id="text-field05" name="dissertation" value="{{ user.dissertation }}">
-				</div>
-			</div>
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Звание</span>
-			</div>
-			<div class="row">
-				<select name="title" autocomplete="off">
-					<option value="0">Выберите звание</option>
-					{% for t in title_list %}
-						<option value="{{ t.name }}" {% if t.name == user.title %} selected {% endif %}>{{ t.name }}</option>
-					{% endfor %}	
-				</select>
-			</div>
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="text-field06">...или напишите <br>своё звание:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" id="text-field06" name="addtitle" value="{{ user.addtitle|IfNone }}">
-				</div>
-			</div>
-			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё звание</a></div>-->
-		</div>
-		<div class="content-block-center-head">
-			<span>Категория</span>
-		</div>
-		<div class="section">
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="text-field07">Ваша категория:</label>
-				</div>
-				<div class="form-unit">
-					<!--<input type="text" id="text-field07" name="category" value="{{ user.category|IfNone }}">-->
-					<select class="sel01 required" name="category" autocomplete="off">
-						{% for c in category_list %}
-							<option value="{{ c.id }}" {% if user.category.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
-						{% endfor %}
-					</select>
-				</div>
-			</div>
-			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё категорию</a></div>-->
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Достижения и награды</span>
-			</div>
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="text-field08">Ваши достижения <br>и награды:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" name="awords[]" value="">
-				</div>	
-			</div>
-			<div class="link-add link-add-js"><a href="#">Добавить ещё</a></div>
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="text-field08">Ваши достижения <br>и награды:</label>
-				</div>
-				<div class="form-unit">
-					<input type="text" name="awords[]" value="{{ aword }}">
-				</div>
-			</div>
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Работа</span>
-			</div>
-			<div class="link-add-template">
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field09">Название организации:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field09" name="organization" value="{{ user.organization|normalize }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field10">Должность:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field10" name="job" value="{{ user.job|normalize }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field11">Сайт организации:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field11" name="site" value="{{ user.site|normalize }}">
-					</div>
-				</div>
-			</div>
-		<!--<div class="link-add link-add-js"><a href="#">Добавить ещё одно место работы</a></div>-->
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Образование</span>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="text-field12">Учебное заведение:</label>
-				</div>
-				<input type="text" id="text-field11_" name="school" value="{{ user.school }}">
-			</div>
-			<div class="link-add-template">
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field12">Год выпуска:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field12" name="graduate_year" value="{{ user.graduate_year|IfNone }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field13">Факультет:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field13" name="faculty" value="{{ user.faculty|IfNone }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="label-holder">
-						<label for="text-field14">Кафедра:</label>
-					</div>
-					<div class="form-unit">
-						<input type="text" id="text-field14" name="cathedra" value="{{ user.cathedra|IfNone }}">
-					</div>
-				</div>
-			</div>
-			<!--<div class="link-add link-add-js"><a href="#">Добавить еще одно учебное заведение</a></div>-->
-		</div>
-		<div class="section">
-			<div class="content-block-center-head">
-				<span>Контактная информация</span>
-			</div>
-			<div class="row" id="country">
-				<select class="sel01 required" name="country" onchange="Dajaxice.account.updatecombo(Dajax.process, {'option':this.value})" autocomplete="off">
-					<option value="0">Выберите страну</option>
-					{% for c in country_list %}
-						<option value="{{ c.id }}" {% if user.country.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="row" id="town">
-				<select class="sel required" name="town" autocomplete="off">
-					<option value="0">Выберите город</option>
-					{% for t in town_list %}
-						<option value="{{ t.id }}" {% if user.town.id == t.id %} selected="selected" {% endif %}>{{ t.name }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="tel-field">Контактный телефон:</label>
-				</div>
-				<div class="text-holder">
-					<input type="text" id="tel-field" name="phone_number" value="{{ user.phone_number }}">
-					<input id="check-field"  type="checkbox" name="phone_visible" {% if user.phone_visible == "no_visible" %} checked {% endif %}>
-					<label for="check-field">Не отображать на сайте</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="email-field">E-mail на который <br>зарегистрирован профиль <br>в сети «Врачи Вместе»:</label>
-				</div>
-				<div class="text-holder">
-					<input type="text" id="email-field" name="email" value="{{ user.email }}" readonly="readonly">
-					<input id="check-field01"  type="checkbox" name="email_visible" {% if user.email_visible == "no_visible" %} checked {% endif %}>
-					<label for="check-field01">Не отображать на сайте</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="label-holder">
-					<label for="skype-field">ICQ/Sqype:</label>
-				</div>
-				<div class="text-holder">
-					<input type="text" id="skype-field" name='ICQ_Skype' value="{{ user.ICQ_Skype }}">
-				</div>
-			</div>
-			<div class="row link-add-template">
-				<div class="label-holder">
-					<label for="site-field">Мой сайт / профиль <br> в социальной сети:</label>
-				</div>
-				<div class="text-holder">
-					<input type="text" id="site-field" name="social" value="{{ user.social|IfNone }}">
-				</div>
-			</div>
-			<!--<div class="link-add link-add-js"><a href="#">Добавить ещё ссылку на профиль/сайт</a></div>-->
-		</div>
-		<div class="submit-holder">
-			<input type="submit" value="Cохранить изменения данных профиля" onclick="return save_profile_data();">
-		</div>
-		<div class="content-block-center-head">
-			<span>Изменение пароля</span>
-		</div>
-		<script>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Cтаж:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" type="text" name="addexperience" value="{{ user.addexperience|IfNone }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Ученая степень:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Выберите ученую степень:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2"  name="graduate" id="r-2">
+                                            <option selected value="0">Выберите ученую степень</option>
+                                            {% for g in graduate_list %}
+                                                <option value="{{ g.pk }}" {% if g.pk == user.graduate %} selected {% endif %}>{{ g.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Тема диссертации:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field05" name="dissertation" value="{{ user.dissertation }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Звание:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Выберите звание:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="title"  id="r-3">
+                                            <option selected value="0">Выберите звание</option>
+                                        {% for t in title_list %}
+                                            <option value="{{ t.name }}" {% if t.name == user.title %} selected {% endif %}>{{ t.name }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">или напишите свое звание:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field06" name="addtitle" value="{{ user.addtitle }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Звание:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Категория:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="category" id="r-4">
+                                            <option selected value="0">Ваша категория:</option>
+                                        {% for c in category_list %}
+                                            <option value="{{ c.id }}" {% if user.category.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Достижения и награды:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Ваши достижения и награды:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field08" name="awords" value="{{ aword }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Работа:</div>
+
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Название организации:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field09" name="organization" value="{{ user.organization }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Должность:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field10" name="job" value="{{ user.job }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Сайт организации:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="text-field11" name="site" value="{{ user.site }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Образование:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Выберите ВУЗ:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="school">
+                                            <option selected value="0">Выберите ВУЗ</option>
+                                    {% for s in school_list %}
+                                        <option value="{{ user.s.name }}" {% if school == s.name %} selected {% endif %}>{{ s.name }}</option>
+                                    {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Добавьте свой ВУЗ:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" name="no_found_school" value="{{ user.no_found_school }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Год выпуска:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" name="graduate_year" value="{{ user.graduate_year }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Факультет:</div>
+                                    </div>
+                                   <div class="contact-page__right">
+                                        <input class="form-control" name="faculty" value="{{ user.faculty|IfNone }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Кафедра:</div>
+                                    </div>
+                                   <div class="contact-page__right">
+                                        <input class="form-control" name="cathedra" value="{{ user.cathedra }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="registration__item registration__item-text-right contact-page ">
+                                <div class="title-3 m-b-30">Контактная информация:</div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Выберите страну</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="country" id="country_change" >
+                                            <option selected value="">Выберите страну</option>
+							{% for c in country_list %}
+								<option value="{{ c.id }}" {% if user.country.id == c.id %} selected="selected" {% endif %}>{{ c }}</option>
+							{% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Выберите город</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="town" id="town_change">
+                                            <option selected value="1" >Выберите город</option>
+                                    {% for t in town_list %}
+                                       <option value="{{ t.id }}" {% if user.town.id == t.id %} selected="selected" {% endif %}>{{ t.name }}</option>
+                                    {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Контактный телефон:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="tel-field" name="phone_number" value="{{ user.phone_number }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__right">
+                                        <div class="custom-checkbox">
+                                            <input class="form-group" type="checkbox" name="phone_visible" {% if user.phone_visible == "no_visible" %} checked {% endif %} value="" id="check_2">
+                                            <label class="box-label" for="check_2">
+                                                Не отображать на сайте
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">E-mail:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="tel-field" name="phone_number" value="{{ user.email }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__right">
+                                        <div class="custom-checkbox">
+                                            <input class="form-group" type="checkbox" name="phone_visible"  {% if user.email_visible == "no_visible" %} checked {% endif %} value="" id="check_2">
+                                            <label class="box-label" for="check_2">
+                                                Не отображать на сайте
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Instagram/Skype:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="skype-field"  name='ICQ_Skype' value="{{ user.ICQ_Skype }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Мой сайт / профиль в соц.сети:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <input class="form-control" id="site-field" name="social" value="{{ user.social }}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <button class="btn-default btn contact-page__btn">Cохранить изменения данных профиля</button>
+                        </br></br></br>
+
+
+
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Ваш пароль:</div>
+                                </div>
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input name='oldpassword' class="form-control " type="text">
+                                    <button class="form-control__eye btn"></button>
+                                </div>
+                                <div class="title-5 registration__password-title">Если Вы забыли свой пароль, воспользуйтесь процедурой <a href="{% url 'forgot' %}">восстановления пароля</a></div>
+                            </div>
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Новый пароль:</div>
+                                </div>
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input name='password' class="form-control " type="text">
+                                    <button class="form-control__eye btn"></button>
+                                </div>
+                                <div class="title-5 registration__password-title">Пароль должен содержать не менее 8 символов (символы латинского алфавита и цифры)</div>
+                            </div>
+                            <div class="contact-page__row">
+                                <div class="contact-page__left">
+                                    <div class="title-4">Повторите пароль*:</div>
+                                </div>
+                                <div class="contact-page__right registration__right form-control__password">
+                                    <input name='confirmpassword' class="form-control" type="text">
+                                    <button class="form-control__eye show btn"></button>
+                                </div>
+                                <div id="pass_change" class="title-5 registration__password-title" style="color: red"></div>
+                            </div>
+
+
+                             <div onclick="SaveNewPassword();" class="btn-default btn contact-page__btn">Сохранить новый пароль</div>
+
+
+                        <div class="registration__question">
+                            <div class="title-3 m-b-15">Возникли вопросы при регистрации?</div>
+                            <div class="title-5">Задайте их нам по e-mail</div>
+                            <a href="mailto:vrvm.redaktor@gmail.com" class="title-5 font-weight-bold">vrvm.redaktor@gmail.com </a>
+                            <div class="title-5">Мы обязательно поможем!</div>
+                        </div>
+
+     </form>
+    		<script>
+
 			function SaveNewPassword() {
-				Dajaxice.lichnie.ajaxrequest(Dajax.process, {
-					'oldpassword':		$("input[name='oldpassword']").val(),
+
+                $.post('/lichnie/changepass/', {
+                    'oldpassword':		$("input[name='oldpassword']").val(),
 					'password':			$("input[name='password']").val(),
-					'confirmpassword':	$("input[name='confirmpassword']").val()
-				});
+					'confirmpassword':	$("input[name='confirmpassword']").val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }, function(data){
+                {
+                    //alert(data);
+                    $("#pass_change").empty();
+                    $("#pass_change").append(data);
+
+				}
+			});
+
 			}
+
 			function ViewMessage(message) {
 
 				$('span#spanmessage').text(message);
 				$('.popup').css('display', 'block');
 			}
 		</script>
-		<div class="columns">
-			<div class="column">
-				<div class="old-password password-holder pass-eye-js">
-					<input type="password" name="oldpassword" placeholder="Введите старый пароль">
-					<a href="#" class="eye">eye</a>
-				</div>
-				<div class="new-password password-holder pass-eye-js">
-					<input type="text" placeholder="Введите новый пароль" name="password">
-					<a href="#" class="eye open">eye</a>
-				</div>
-				<div class="new-password password-holder pass-eye-js">
-					<input type="text" placeholder="Введите новый пароль" name="confirmpassword">
-					<a href="#" class="eye open">eye</a>
-				</div>
-				<div class="link-frame">
-					<a style="cursor: pointer;" onclick="SaveNewPassword();" class="link btn-link">Сохранить новый пароль</a>
-				</div>
-			</div>
-			<div class="column">
-				<span class="info">Если Вы забыли свой пароль, воспользуйтесь <a href="{% url 'forgot' %}">процедурой восстановления пароля</a></span>
-			</div>
-		</div>
-		<div class="submit-holder popup-holder">
-			<div class="popup">
-				<div class="popup-frame">
-					<span id="spanmessage">{{ message }}</span>
-					<a href="#" class="close">Close</a>
-				</div>
-			</div>
-		</div>
-	</form>
-	<script>
+
+
+
+<script>
+
+	$('#country_change').change(function (){
+             $.get('/account/register2/', {country: $('#country_change').find(":selected").val()}, function(data){
+                {   $("#town_change").empty();
+                    $(data).appendTo("#town_change");
+				}
+			});
+
+	});
+    </script>
+
+    	<script>
 		$(document).ready( function() {
-			$(".info-form").submit( function() {
-				$.post( "{% url 'lichnie.views.saveprofile' %}", $(this).serialize(), function( data ) {
+			$("#reg_form_info").submit( function() {
+				$.post( "{% url 'saveprofile' %}", $(this).serialize(), function( data ) {
 					if( data.result ) {
 						window.location = "{% url 'lichnie2' %}";
 					} else {
 						alert( data.message );
-					}	
+					}
 				}, "json")
 				.fail(function(request) {
 					alert( "error" );
 				});
 				return false;
-			});		
+			});
 		});
 	</script>
 {% endblock %}
+

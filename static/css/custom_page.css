@@ -1,0 +1,17 @@
+body,td,th {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+body {
+    background-color: #fcfcfc;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	/*background-image: url(../images/basic/bg-1.png);*/
+	background-position: top;
+	background-repeat: no-repeat;
+	min-width:1024px;
+	-webkit-text-size-adjust:100%;
+	-ms-text-size-adjust: none;
+}

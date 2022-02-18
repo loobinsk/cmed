@@ -1,0 +1,20 @@
+@media screen and (min-width: 992px) {
+  .lecture__slider {
+    width: 100vw;
+  }
+  .lecture__slider .slider-item {
+    max-width: 570px;
+  }
+}
+
+.lecture__btn {
+  margin-left: auto;
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .lecture__btn {
+    margin-top: 30px;
+    margin-right: auto;
+  }
+}

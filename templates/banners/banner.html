@@ -32,10 +32,27 @@
   </div>
 
 {% else %}
-  <a href='{{ banner_url }}' id='banner_{{ banner.id }}' class='b-banner b-banner-{{ group.slug }}'>
-    <img src='{{ banner.img.url }}' alt='{{ banner.alt }}' title='{{ banner.title }}'>
-  </a>
+  {% if group.slug == 'popup' %}
+    <!-- popup -->
+      <div>
+      <a href="{{ banner_url }}">
+        <img src='{{ banner.img.url }}' alt='{{ banner.alt }}' title='{{ banner.title }}'>
+      </a>
+    </div>
+    
+  {% else %}
+    <!-- not popup -->
+    <a href='{{ banner_url }}' id='banner_{{ banner.id }}' class='b-banner b-banner-{{ group.slug }}'>
+      <img src='{{ banner.img.url }}' alt='{{ banner.alt }}' title='{{ banner.title }}'>
+    </a>
+  {% endif %}
+     
 {% endif %}
+
+ 
+ 
+
+
 
 <script type="text/javascript">
     $(document).ready(function(){

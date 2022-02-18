@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django_extensions.admin import ForeignKeyAutocompleteAdmin
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 
 from comments.admin import CommentsAdminLink
 from rss.models import Filters, Feeds, Posts
@@ -41,7 +41,7 @@ class RssAdminForm(forms.ModelForm):
 
 
 
-class RssAdmin(StaffPermissionMixin, ForeignKeyAutocompleteAdmin, MCEFilebrowserAdmin, CommentsAdminLink):
+class RssAdmin(StaffPermissionMixin, ForeignKeyAutocompleteAdmin, CommentsAdminLink):
     list_display = ('title', 'show', 'id', 'comments_link', 'format')
     search_fields = ('format',)
     form = RssAdminForm

@@ -6,6 +6,7 @@ from lecturers.models import Lecturer
 from django.db.models import Q
 
 
+
 class LecturersList(ListView):
     paginate_by = '5'
     search = ''
@@ -23,10 +24,10 @@ class LecturersList(ListView):
             self.template_name = 'lecturers/lecturers_ajax.html'
         else:
             self.template_name = 'lecturers/lecturers.html'
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             query = Lecturer.objects.filter(query).order_by('surname')
         else:
-            query = Lecturer.objects.none()
+            query = Lecturer.objects.none()	
         return query
 
     def get_context_data(self, **kwargs):
@@ -42,7 +43,7 @@ class LecturersList(ListView):
         context['search'] = self.search
         context['lecturers_letters'] = Lecturer.objects.all().extra(select={'letter': 'LEFT(surname, 1)'})\
             .order_by('letter').values_list('letter', flat=True).distinct()
-        return context
+	return context
 
 
 class DetailViewLecturer(DetailView):

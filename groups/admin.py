@@ -3,9 +3,9 @@ from django.contrib import admin
 from groups.models import Group
 import os
 from django.conf import settings
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 
-class GroupAdmin(MCEFilebrowserAdmin):
+class GroupAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'description', 'members_count', 'posts_count', 'createdate')
 
     def members_count(self, obj):

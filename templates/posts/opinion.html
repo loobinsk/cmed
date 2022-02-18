@@ -2,10 +2,9 @@
 {% block title_page %}{{ title }}{% endblock %}
 {% block title %}{{ title }}{% endblock %}{% load staticfiles %}
 {% block js_page %}
-  <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
-  <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
-  <script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
-  <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+        <script type="text/javascript" src="{% static 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' %}"></script>
+<script type="text/javascript" src="{% static 'filebrowser/js/TinyMCEAdmin.js' %}"></script>
 {% endblock %}
 {% block filter_content %}{% if user.is_authenticated %}<!-- Создание поста -->
 <div class="content-block-center-write-contaner">
@@ -17,16 +16,16 @@
 {% block content %}
   {% if user.is_authenticated %}
     {% for object in object_list %}
-      {% if object.template = 'posts' %}
+      {% if object.template == 'posts' %}
         {% include 'posts/one_post.html' %}
       {% endif %}
-      {% if object.template = 'videos' %}
+      {% if object.template == 'videos' %}
         {% include 'videos/one_videos.html' %}
       {% endif %}
-      {% if object.template = 'photos' %}
+      {% if object.template == 'photos' %}
         {% include 'photos/one_photos.html' with object=object.object %}
       {% endif %}
-      {% if object.template = 'events' %}
+      {% if object.template == 'events' %}
         {% include 'events/one_events.html' %}
       {% endif %}
     {% endfor %}
@@ -102,7 +101,7 @@
           type: 'get',
           url: "{{ path }}",
           data: {
-            'page': thisPageNum,
+            'page': parseInt(thisPageNum) + 1,
             'spec_id': spec_id,
             'format': format.join(),
             'search': $('input[name="search"]').val()
@@ -160,7 +159,7 @@
       dict['spec_id'] = $('select[name="spec_id"]').val();
       dict['title'] = $('input[name="title"]').val();
       {% if user.is_staff %}
-        dict['description'] = tinyMCE.get('description').getContent().replace('\n', '');
+        dict['description'] = tinyMCE.activeEditor.getContent().replace('\n', '');
         {% else %}dict['description'] = $('#description1').val();
       {% endif %}
       var errortext = "";
@@ -230,7 +229,7 @@
           alert(error);
         } else {
           $.ajax({
-            url: '{% url "lenta.views.fileupload" %}',
+            url: '{% url "fileupload" %}',
             type: 'POST',
             xhr: function () {
               var myXhr = $.ajaxSettings.xhr();
@@ -282,7 +281,7 @@
     });
 
     function deletephoto(photo, el) {
-      $.post('{% url "lenta.views.filedelete" %}', {file: photo}, function (data) {
+      $.post('{% url "filedelete" %}', {file: photo}, function (data) {
         if (data.result) {
           parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
           parent.remove();
@@ -292,7 +291,7 @@
 
     function addvideo() {
       if ($('input[name="links-video"]').val()) {
-        $.post('{% url "lenta.views.videoupload" %}', {video: $('input[name="links-video"]').val()}, function (data) {
+        $.post('{% url "videoupload" %}', {video: $('input[name="links-video"]').val()}, function (data) {
           html =
               '<div class="content-block-center-write-form-block-2-left-video-list">\
                <div file="' + data.file + '" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url(' + data.furl + ')"></div>\
@@ -311,7 +310,7 @@
     }
 
     function deletevideo(path, el) {
-      $.post('{% url "lenta.views.videodelete" %}', {video: path}, function (data) {
+      $.post('{% url "videodelete" %}', {video: path}, function (data) {
         if (data == 'OK') {
           parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
           parent.remove();

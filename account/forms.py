@@ -30,7 +30,7 @@ class RegisterStep3Form(forms.ModelForm):
         'question1': '2',
         'question2': '3',
         'question3': '2',
-        'question4': '5',
+        'question4': '2',
         'question5': '2',
         'question6': '5',
         'question7': '4',
@@ -44,7 +44,7 @@ class RegisterStep3Form(forms.ModelForm):
     }
     error = ''
 
-    questions_count = 3
+    questions_count = 1
 
     def render(self, request):
         csrf_token_value = get_token(request)
@@ -81,7 +81,7 @@ class RegisterStep2Form(forms.ModelForm):
     mandatory_fields = {'surname': u'Поле Имя не заполнено', 'firstname': u'Поле Отчество не заполнено',
                         'lastname': u'Поле Фамилия не заполнено',
                         'spec_id': u'Поле Основная специальность не заполнено', 'country': u'Поле Страна не заполнено',
-                        'town': u'Поле Город не заполнено'}
+                        'town': u'Поле Город не заполнено', 'organization': u'Поле организация не заполнено'}
     allfields = {'surname': '', 'firstname': '', 'lastname': '', 'avatar': '', 'sex': '', 'birthday': '', 'spec_id': '',
                  'experience': '', 'addspeciality': '', 'addexperience': '', 'graduate': '', 'dissertation': '',
                  'title': '', 'addtitle': '', 'category': '', 'awords': '', 'organization': '', 'job': '', 'site': '',
@@ -207,7 +207,7 @@ class RegisterStep2Form(forms.ModelForm):
 class RegisterStep1Form(forms.ModelForm):
     username = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
-    agreed = forms.CheckboxInput()
+    agreed = forms.CheckboxInput()    
     error = ''
 
     def render(self, request):
@@ -217,9 +217,9 @@ class RegisterStep1Form(forms.ModelForm):
 
     def pass_valid(self, password):
         import re
-        p = re.compile(ur'^[a-z\d]{6,}$', re.UNICODE | re.IGNORECASE)
-        if not re.search(p, password):
-            self.error = u'<span class="inform-error">Пароль должен содержать не менее 6 символов<br>(символы латинского алфавита и цифры)</span>'
+        #p = re.compile()
+        if re.search(ur'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$', password) is None:
+            self.error = u'<span class="inform-error">Пароль должен содержать не менее 8 символов<br>(большие и маленькие буквы и цифры)</span>'+password
             return False
 
         return True
@@ -250,6 +250,10 @@ class RegisterStep1Form(forms.ModelForm):
             self.error = u'<span class="inform-error">Необходимо согласие с правилами сайта!!!</span>'
             return False
 
+        if not self.data.get('pd_agreed', False):
+            self.error = u'<span class="inform-error">Необходимо согласие на обработку персональных данных!!!</span>'
+            return False
+
         request.session['email'] = self.data['email']
         request.session['password'] = self.data['password']
         request.session['confirm'] = self.data['confirm']
@@ -258,3 +262,4 @@ class RegisterStep1Form(forms.ModelForm):
     class Meta:
         model = User
         fields = []
+

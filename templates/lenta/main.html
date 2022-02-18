@@ -25,7 +25,7 @@
 						{{ user.surname }}</p>
 						{{ user.spec_id }}
 						<div class="left-block-content-profile-item-right-exit">
-							<a href="{% url "account.views.user_logout" %}" target="_parent" title="Выход">выход</a>
+							<a href="{% url "user_logout" %}" target="_parent" title="Выход">выход</a>
 						</div>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="left-block-content-profile-links">
 					<div class="left-block-content-profile-links-item">
 						<ul>
-							<li><a href="{% url 'lichnie.views.lichnie1' %}" target="_parent" title="Моя страница">Моя страница</a></li>
+							<li><a href="{% url 'lichnie1' %}" target="_parent" title="Моя страница">Моя страница</a></li>
 							<li><a href="#" target="_parent" title="Врачи на Врачи Вместе">Врачи на "Врачи Вместе"</a></li>
 							<li class="active">
 								<a href="#" target="_parent" title="Личные сообщения">
@@ -297,7 +297,7 @@
                             	<script>
 									function addvideo() {
 										if( $('input[name="links-video"]').val() ){
-											$.post( '{% url "lenta.views.videoupload" %}', { video: $('input[name="links-video"]').val() }, function( data ) {
+											$.post( '{% url "videoupload" %}', { video: $('input[name="links-video"]').val() }, function( data ) {
 												html =
 												'<div class="content-block-center-write-form-block-2-left-video-list">\
 													<div file="'+data.file+'" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url('+data.furl+')"></div>\
@@ -315,7 +315,7 @@
 										}
 									}
 									function deletevideo( path, el ) {
-										$.post( '{% url "lenta.views.videodelete" %}', { video: path }, function( data ) {
+										$.post( '{% url "videodelete" %}', { video: path }, function( data ) {
 											if(data == 'OK') {
 												parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
 												parent.remove();
@@ -348,7 +348,7 @@
 												border-radius: 3px;
 											}
 										</style>
-										<form id="upload-file-container" action="{% url "lenta.views.fileupload" %}" method="post" enctype="multipart/form-data" onclick="trigger=true;">
+										<form id="upload-file-container" action="{% url "fileupload" %}" method="post" enctype="multipart/form-data" onclick="trigger=true;">
 											<span title="Добавить фото">Добавить фото</span>
 											<input id="id_picture" type="file" name="file" onchange="$(this).closest('form').submit();">
 										</form>
@@ -394,7 +394,7 @@
 												}
 											});
 											function deletephoto( photo, el ) {
-												$.post( '{% url "lenta.views.filedelete" %}', { file: photo }, function( data ) {
+												$.post( '{% url "filedelete" %}', { file: photo }, function( data ) {
 													if(data == 'OK') {
 													    parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
 													    parent.remove();
@@ -458,7 +458,7 @@
 								dict['spec'] = $('select[name="post-filed-2"]').val();
 								dict['content'] = $('textarea[name="post-filed-4"]').val();
 								dict['title'] = $('input[name="post-filed-3"]').val();
-								$.post( '{% url "lenta.views.savepost" %}', { data: JSON.stringify(dict) }, function( response ) {
+								$.post( '{% url "savepost" %}', { data: JSON.stringify(dict) }, function( response ) {
 									alert( response );
 								});
 							}

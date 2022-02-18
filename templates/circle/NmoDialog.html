@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 {% load tz %}
 {% load static %}
-{% load account_tags %}
+{% load account_tags posts_filters %}
 {% block js_page %}
-	<script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
 {% endblock %}
 {% block title %}Диалоги{% endblock %}
 {% block top_block %}
-	<div class="content-block-top-block-1-window-filter" id="window-filter">
-		<div class="content-block-top-block-1-window-filter-content"></div>  
-		<div class="content-block-top-block-1-window-filter-bottom">
-			<input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
-		</div>
+    <div class="content-block-top-block-1-window-filter" id="window-filter">
+	<div class="content-block-top-block-1-window-filter-content"></div>
+	<div class="content-block-top-block-1-window-filter-bottom">
+	    <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7" />
 	</div>
+    </div>
+{% endblock %}
+{% block after_header %}
+{% include 'circle/header_nmo.html' %}
 {% endblock %}
 {% block content %}
           <script>
@@ -34,18 +37,21 @@
 
     </script>
 <!-- Центральная колонка -->
-			<div class="groups-area">
-				<div class="holder">
-					<div class="content-block-center-item-head-photo-bg">
-						<a target="_parent" href="">
-						<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/mt.png' %})"></div>
-						</a>
-					</div>
-					<div class="description">
-						<h3>Администрация</h3>
-					</div>
-				</div>
-				<div class="dialogs-area">
+  <div id="content">
+    {{ page.content|safe }}
+</div>
+	    <div class="groups-area">
+		<div class="holder">
+		    <div class="content-block-center-item-head-photo-bg">
+			<a target="_parent" href="">
+			<div class="content-block-center-item-head-photo" style="background-image:url({% static 'images/mt.png' %})"></div>
+			</a>
+		    </div>
+		    <div class="description">
+			<h3>Администрация</h3>
+		    </div>
+		</div>
+		<div class="dialogs-area">
 
         {% if all_msgs != '' %}
         {% for msg in all_msgs.msgs|allmsgs_cut %}
@@ -63,8 +69,69 @@
         {% endfor %}
         {% endif %}
 
-				</div>
-			</div>
+		</div>
+	    </div>
 
+
+    <section class="timetable p-b">
+
+            <div class="container">
+                <h3 class="h3">Расписание вебинаров:</h3>
+
+            {% for object in conf_list %}
+                <div class="title-3 timetable__mounth">{{ object.createdate|date:'F' }}</div>
+
+                <div class="card-timetable">
+                    <div class="card-timetable__left">
+
+                      {% comment %}  <div class="card-timetable__data title">{{object.createdate }}</div> {% endcomment %}
+                        <ul class="card-timetable__links">
+                            <li><a href="" class="card-timetable__link link-solid"></a></li>
+                        </ul>
+
+                    </div>
+                    <div class="card-timetable__right">
+                        <div class="card-timetable__right-header">
+                            <div class="card-timetable__data title">{{object.begindate }}</div>
+                            <div class="card-timetable__markers">
+{#                                <a href="" class="card-timetable__marker card-timetable__program">НМО</a>#}
+                                <a href="" class="card-timetable__marker card-timetable__type title-s-min">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#video"></use>
+                                        </svg>
+                                    </div>
+                                    <span>Конференция</span>
+                                </a>
+                            </div>
+                        </div>
+{#                        <a href="{{ object.data|find:"/translation/.*?/" }}" class="title-2 m-b-15">{{ object.title }}</a>#}
+                        <a href="{% url 'detailpractice' object.id %}" class="title-2 m-b-15">{{ object.title }}</a>
+                        <div class="title-4"></div>
+                        <div class="card-timetable__footer">
+                            <a href="" class="card-author">
+                                <div class="card-author__circle bg-img-cover" style="background-image: url(/media/{{ object.user_id.avatar }});"></div>
+                                <div class="title-5 font-weight">{{ object.user_id.lastname }} {{ object.user_id.firstname }} {{ object.user_id.surname }}</div>
+                            </a>
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{object.createdate }}&details={{ object.title }}%20https://vrachivmeste.ru&location=vrvm.ru&text={{ object.title }}" target="_blank">
+                                <div class="svg__wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#calendar"></use>
+                                    </svg>
+                                </div>
+                                <span>Добавить в календарь</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {% comment %}
+                <button class="btn-default btn timetable__btn">Показать еще</button>
+                {% endcomment %}
+            </div>
+        </section>
 
 {% endblock %}

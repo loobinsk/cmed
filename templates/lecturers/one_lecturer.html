@@ -1,36 +1,28 @@
 {% load account_tags %}{% load staticfiles %}
-<div class="content-block-center-item one-lecturer">
-  <div class="content-block-center-item-head">
-    {% ifchanged object.surname|slice:':1' %}
+
+{% comment %}
+        {% ifchanged object.surname|slice:':1' %}
       {% if not forloop.first or not hide_first_letter %}
         <div class="content-block-center-item-nohead-autor lecturer-list-letter">
           <h2>{{ object.surname|slice:':1' }}</h2>
         </div>
       {% endif %}
     {% endifchanged %}
-    <div class="content-block-center-item-head-theme lecturer-list-fio"><span>
-        {{ object.fio_short }}
-    </span></div>
-  </div>
-  <div class="content-block-center-item-content lecturer-description">
-    <div class="lecturer-photo-container">
-      <img src="{{ object.image.url }}" alt="{{ object.fio }}" class="lecturer-photo">
-    </div>
+{% endcomment %}
+                      <div class="lecturers__cards">
 
-    <strong class="lecturer-list-fio-full">{{ object.fio }}</strong>
-    {{ object.content|truncatewords_html:15|safe|linebreaks }}
-
-    <div class="content-block-center-item-content-redmore lecturer-list-links">
-      <div class="content-block-center-item-content-redmore-link">
-        <a href="{% url 'detaillecturer' object.id %}">Читать далее</a>
-      </div>
-
-      {% if user.is_staff %}
-        <div class="content-block-center-item-content-redmore-adminedit">
-          <a href="{% url 'admin:lecturers_lecturer_change' object.id %}">ред.</a>
-          <a href="{% url 'admin:lecturers_lecturer_delete' object.id %}">удалить</a>
-        </div>
+                            <div class="card-lecturers">
+                                <div class="card-lecturers__img" style="background-image: url({{ object.image.url }});"></div>
+                                <div class="card-lecturers__main">
+                                    <div class="title-2">{{ object.fio }}</div>
+                                   <!-- <div class="title card-lecturers__subtitle">{{ object.fio }}</div> -->
+                                    <div class="title card-lecturers__text">{{ object.content|truncatewords_html:15|safe|linebreaks }}</div>
+                                    <a href="{% url 'detaillecturer' object.id %}" class="link link-mini">Читать далее</a>
+                                     {% if user.is_staff %}
+          <a href="{% url 'admin:lecturers_lecturer_change' object.id %}" class="link link-mini">ред.</a>
+          <a href="{% url 'admin:lecturers_lecturer_delete' object.id %}" class="link link-mini">удалить</a>
       {% endif %}
-    </div>
-  </div>
-</div>
+                                </div>
+
+                            </div>
+           </div>

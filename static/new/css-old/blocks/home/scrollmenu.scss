@@ -1,0 +1,87 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.scrollmenu {
+  @media screen and (max-width: 767px) {
+    overflow: auto;
+    white-space: nowrap;
+    min-height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    margin: 0 -15px -10px;
+    flex-wrap: nowrap !important;
+    // scrollbar-width: none;
+
+    scrollbar-base-color: $color-base;
+    scrollbar-3dlight-color: $color-base;
+    scrollbar-highlight-color: $color-base;
+    scrollbar-track-color: $color-base;
+    scrollbar-arrow-color: $color-second;
+    scrollbar-shadow-color: $color-base;
+    // scrollbar-dark-shadow-color: transparent;
+    ::-webkit-scrollbar {
+      width: 0 !important; /* ширина для вертикального скролла */
+      height: 0 !important; /* высота для горизонтального скролла */
+      background-color: transparent !important;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: transparent !important;
+      border-radius: 0 !important;
+      box-shadow: 0 transparent !important;
+      width: 0px !important;
+    }
+
+    @include media(">sm") {
+      & :first-child {
+        a {
+          padding-left: 0;
+        }
+      }
+    }
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+// /* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+  width: 6px !important; /* ширина для вертикального скролла */
+  height: 2px; /* высота для горизонтального скролла */
+  //   background-color: transparent;
+}
+
+// /* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  //   background-color: transparent !important;
+  border-radius: 100px !important;
+  box-shadow: 0 transparent !important;
+  width: 6px !important;
+}
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: transparent !important;
+// }
+
+/* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+  background-color: transparent !important;
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+  background: transparent !important;
+  background-color: transparent !important;
+}

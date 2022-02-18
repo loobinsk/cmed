@@ -3,7 +3,7 @@ from xmlrpclib import escape
 
 from django.contrib import admin
 from django import forms
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django.utils.safestring import mark_safe
 
 from posts.models import Posts
@@ -11,7 +11,6 @@ from account.models import MyUser
 from account.mixins import StaffPermissionMixin
 from medtus.models import MaterialPhoto, MaterialVideo, Statistics
 from comments.admin import CommentsAdminLink
-
 
 ALL_TYPES = (
     ('1', 'Новость'),
@@ -138,7 +137,7 @@ class CommentsWidget(forms.Widget):
 
             t = loader.get_template('posts/admin/comments_table.html')
             comments = [x[0] for x in self.object.treeComments()]
-            c = Context({'comments': comments})
+            c = dict({'comments': comments})
             return t.render(c)
 
 
@@ -198,7 +197,7 @@ class PostTypeListFilter(admin.SimpleListFilter):
             return queryset.filter(type=self.value())
 
 
-class PostsAdmin(StaffPermissionMixin, MCEFilebrowserAdmin, CommentsAdminLink):
+class PostsAdmin(StaffPermissionMixin, admin.ModelAdmin, CommentsAdminLink):
     list_display = ('id', 'comments_link', 'user_id', 'title', 'status', 'createdate', 'type_of_post')
     search_fields = ('id', 'title', 'status', 'anons', 'content')
     list_filter = (PostTypeListFilter,)

@@ -6,8 +6,7 @@ from django.contrib.admin.options import IncorrectLookupParameters
 from django.core.exceptions import PermissionDenied
 from django.template.response import SimpleTemplateResponse
 from django.utils.translation import ugettext as _
-from django.http import HttpResponseRedirect
-
+from django.http import HttpResponseRedirect, HttpResponse
 
 class CSVTruncateAdmin(admin.ModelAdmin):
     """
@@ -29,6 +28,7 @@ class CSVTruncateAdmin(admin.ModelAdmin):
         'user_graduate': 'user__graduate',
         'user_town': 'user__town',
         'user_country': 'user__country',
+        'user_organization': 'user__organization',
         'post_title': 'post__title',
         'timer': 'time'
     }
@@ -82,12 +82,13 @@ class CSVTruncateAdmin(admin.ModelAdmin):
     def truncate(self, request, qs=None):
         qs.delete()
 
+
     def export_list(self, request, objects):
         import csv
         from django.http import HttpResponse
         from django.template.defaultfilters import slugify
 
-        response = HttpResponse(mimetype='text/csv')
+        response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=%s.csv' \
                                           % slugify(self.model.__name__)
         headers = list(self.list_display) + list(self.get_extra_csv_fields(request))
@@ -109,13 +110,13 @@ class CSVTruncateAdmin(admin.ModelAdmin):
             else:
                 field_data = name.split('__')
                 if len(field_data) > 1:
-                    for_model = self.model._meta.get_field_by_name(field_data[0])
-                    field = for_model[0].rel.to._meta.get_field_by_name(field_data[1])
+                    for_model = self.model._meta.get_field(field_data[0])
+                    field = for_model.rel.to._meta.get_field(field_data[1])
                 else:
-                    field = self.model._meta.get_field_by_name(field_data[0])
+                    field = self.model._meta.get_field(field_data[0])
 
-                if field and field[0].verbose_name:
-                    header_data[keyName] = field[0].verbose_name
+                if field and field.verbose_name:
+                    header_data[keyName] = field.verbose_name
                 else:
                     header_data[keyName] = name
 

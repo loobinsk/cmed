@@ -1,0 +1,118 @@
+.lectureres__btn {
+  margin: 30px auto;
+}
+
+.lecturers__alphabet {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -10px;
+}
+
+@media screen and (max-width: 767px) {
+  .lecturers__alphabet {
+    margin-right: 0;
+  }
+}
+
+.lecturers__alphabet .select2:first-child + span .select2-selection {
+  border-left: 1px solid #e3e7e7;
+  margin-bottom: 15px;
+}
+
+.lecturers__alphabet .select2-container {
+  max-width: 618px;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1199px) {
+  .lecturers__alphabet .select2-container {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .lecturers__alphabet .select2-container {
+    margin-right: 0;
+  }
+}
+
+.lecturers__alphabet .select2-container .select2-selection {
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid #cdcdcd;
+}
+
+.lecturers__alphabet .select2-container .select2-selection .select2-selection__rendered {
+  padding: 12px 45px 12px 18px;
+}
+
+.lecturers__alphabet .select2-container .select2-selection .select2-selection__arrow {
+  height: 44px;
+  width: 40px;
+}
+
+.lecturers__alphabet .select2-container .select2-selection .select2-selection__arrow::before {
+  height: 12px;
+  right: 15px;
+}
+
+.lecturers__letters {
+  width: 55px;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+@media screen and (max-width: 1199px) {
+  .lecturers__letters {
+    width: 44px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .lecturers__letters {
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .lecturers__letters {
+    display: none;
+  }
+}
+
+.lecturers__letters:active, .lecturers__letters:hover, .lecturers__letters.active {
+  border: 1px solid #4adcdc;
+}
+
+.lecturers__letters.lecturers__letters_all {
+  text-transform: none;
+  width: 114px;
+}
+
+@media screen and (min-width: 768px) {
+  .select-alphabet .select2-container {
+    display: none;
+  }
+}

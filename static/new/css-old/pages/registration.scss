@@ -1,0 +1,189 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.registration__block {
+  margin-top: 35px;
+
+  .registration__right {
+    @media screen and (min-width: 992px) {
+      max-width: 270px;
+      flex: 0 0 100%;
+      margin-left: 0;
+    }
+  }
+  .contact-page__btn {
+    margin: 30px auto 0;
+  }
+}
+
+.form-control__password {
+  position: relative;
+
+  input {
+    padding-right: 40px;
+  }
+}
+
+.form-control__eye {
+  position: absolute;
+  z-index: 100;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  min-height: auto;
+  background-color: transparent;
+  background-image: url(/../images/icon/eye.svg);
+  background-position: center;
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  &.show {
+    background-image: url(/../images/icon/eye-close.svg);
+  }
+}
+
+.registration__password-title {
+  color: #6d6d6d;
+  max-width: 325px;
+  margin-left: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 135%;
+
+  @media screen and (max-width: 991px) {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+.registration__question {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration__test {
+  display: flex;
+  margin-bottom: 35px;
+}
+
+.registration__test-number {
+  font-family: $font-family2;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 220px;
+  line-height: 1;
+  text-align: right;
+
+  color: #f8f8f8;
+
+  @media screen and (max-width: 767px) {
+    font-size: 86px;
+  }
+}
+
+.registration__note {
+  margin-bottom: 20px;
+  span {
+    color: $color-base;
+  }
+}
+
+.registation__ava {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  margin-right: 20px;
+  @media screen and (max-width: 1199px) {
+    margin: 0 0 20px 0;
+  }
+}
+
+.registration__ava-block {
+  display: flex;
+  @media screen and (max-width: 1199px) {
+    flex-direction: column;
+  }
+}
+
+.registation__ava-block-flex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  @media screen and (max-width: 1199px) {
+    flex-direction: column;
+  }
+  @media screen and (min-width: 1200px) {
+    .contact-page__left {
+      flex: 0 0 30%;
+      max-width: 30%;
+    }
+    .contact-page__right {
+      flex: 0 0 70%;
+      max-width: 70%;
+    }
+  }
+  .checkbox-sex {
+    input[type="radio"] {
+      + label {
+        margin-bottom: 0;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1;
+        color: $text;
+        padding: 0 0 0 1.2em;
+        margin-top: 13px;
+
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+      &:checked {
+        + label {
+          color: $color-base;
+        }
+      }
+    }
+  }
+}
+
+.registration__ava-block-input {
+  flex-grow: 1;
+
+  .contact-page__row {
+    flex-grow: 1;
+    .contact-page__right {
+      display: flex;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .registration__item-text-right {
+    .contact-page__row {
+      .contact-page__left {
+        max-width: 30%;
+        flex: 0 0 30%;
+
+        .title-4 {
+          text-align: end;
+          width: 100%;
+          padding-right: 15px;
+        }
+      }
+      .contact-page__right {
+        flex: 0 0 70%;
+        flex: 0 0 70%;
+      }
+    }
+  }
+}

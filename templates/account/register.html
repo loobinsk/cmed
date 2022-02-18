@@ -1,53 +1,29 @@
-{% extends 'account/base_register.html' %}
-{% load static %}
-{% block title %}Rango{% endblock %}
-{% block additional_head %}
-    {% if step == 4 %}
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var google_conversion_id = 947946600;
-            var google_conversion_language = "en";
-            var google_conversion_format = "3";
-            var google_conversion_color = "ffffff";
-            var google_conversion_label = "DimrCITAnl4Q6IiCxAM";
-            var google_remarketing_only = false;
-            /* ]]> */
-        </script>
-        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-        <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/947946600/?label=DimrCITAnl4Q6IiCxAM&amp;guid=ON&amp;script=0"/>
-        </div>
-        </noscript>
-    {% else %}
-        <!-- step is not 4 ( {{ step }} ) -->
-    {% endif %}
+{% extends "base.html" %}
+{% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
+{% block js_page %}
 {% endblock %}
-{% block steps-holder %}
-				<div class="steps-holder">
-					<div class="step {{ step1_active }}">
-						<span>1</span>
-						<em>Шаг</em>
-					</div>
-					<div class="step {{ step2_active }}">
-						<span>2</span>
-						<em>Шаг</em>
-					</div>
-					<div class="step {{ step3_active }}">
-						<span>3</span>
-						<em>Шаг</em>
-					</div>
-					<div class="step step04 {{ step4_active }}">
-						<span>4</span>
-						<em>Завершение регистрации</em>
-					</div>
-				</div>
-{% endblock %}				
-{% block center-column %}
-<!-- Центральная колонка -->
-		<div class="content-block-center">
-			{{ register_form | safe }}
+{% block after_header %}
+
+{% endblock %}
+
+
+{% block content %}
+
+	<!-- {% for banner in banners1 %}
+		{% url "banner_click" banner_id=banner.id key=group1.slug as banner_url1 %}
+		<div style="display: flex; width: 100%; justify-content: center; border-top: 1px solid; border-bottom: 1px solid; margin: 30px 0;" >
+			<a href="{{banner_url1}}">
+				<img src="{{banner.img.url}}">
+			</a>
 		</div>
+	{% endfor %} -->
+
+{{ register_form | safe }}
+
 {% endblock %}
 
-
+{% block before_footer %}
+{% endblock %}

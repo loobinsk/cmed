@@ -298,7 +298,7 @@
                 } else {
 
                     $.ajax({
-                        url: '{% url "lenta.views.fileupload" %}',
+                        url: '{% url "fileupload" %}',
                         type: 'POST',
                         xhr: function () {
                             var myXhr = $.ajaxSettings.xhr();
@@ -351,7 +351,7 @@
         });
 
         function deletephoto(photo, el) {
-            $.post('{% url "lenta.views.filedelete" %}', {file: photo}, function (data) {
+            $.post('{% url "filedelete" %}', {file: photo}, function (data) {
                 if (data.result) {
                     parent = $(el).parent('.content-block-center-write-form-block-2-left-photo-list');
                     parent.remove();
@@ -361,7 +361,7 @@
 
         function addvideo() {
             if ($('input[name="links-video"]').val()) {
-                $.post('{% url "lenta.views.videoupload" %}', {video: $('input[name="links-video"]').val()}, function (data) {
+                $.post('{% url "videoupload" %}', {video: $('input[name="links-video"]').val()}, function (data) {
                     html =
                             '<div class="content-block-center-write-form-block-2-left-video-list">\
                                       <div file="' + data.file + '" class="content-block-center-write-form-block-2-left-video-list-prev" style="background-image:url(' + data.furl + ')"></div>\
@@ -380,7 +380,7 @@
         }
 
         function deletevideo(path, el) {
-            $.post('{% url "lenta.views.videodelete" %}', {video: path}, function (data) {
+            $.post('{% url "videodelete" %}', {video: path}, function (data) {
                 if (data == 'OK') {
                     parent = $(el).parent('.content-block-center-write-form-block-2-left-video-list');
                     parent.remove();

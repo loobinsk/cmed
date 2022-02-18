@@ -1,0 +1,64 @@
+{% load account_tags staticfiles %}
+
+        <section class="intro" style="background-image: url({% static '/new/images/bg/personal.jpg' %});">
+            <div class="container">
+                <div class="my-row justify-content-between">
+                    <div class="my-col-12 my-col-xl-6">
+                        <div class="personal-area__block">
+                            <div class="personal-area__header">
+                                <div class="personal-area__avatar" style="background-image: url({% if User.avatar %}{{User.avatar.url}}{% endif %});"></div>
+                                <div class="personal-area__info-big">
+                                    <h2 class="title-2 m-b-10">{{ User.lastname }} {{ User.firstname }} {{ User.surname }}</h2>
+                                {% if User.spec_id|IsData %}
+                                    <div class="title m-b-25">{{ User.spec_id }}</div>
+                                {% endif %}
+                                     {% if is_owner %}
+                                    <a href="{% url 'lichnie1' %}" class="link-solid">Редактировать личную информацию</a>
+                                {% else %}
+                                          {% if user|isUserIntoMyCircle:User.id == 1 %}
+                              <span>* В моем круге</span>
+                                  {% endif %}{% endif %}
+                                </div>
+                            </div>
+                         {% if is_owner %}
+                            <div class="personal-area__main">
+                                <a href="{% url 'lichnie2' %}" class="personal-area__link active">
+                                    <div class="svg__wrapper" style="background-image: url({% static '/new/images/icon/userpa.svg' %});"> </div>
+                                    <span class="title-3">Моя страница</span>
+                                </a>
+                                <a href="{% url 'invite' %}" class="personal-area__link ">
+                                    <div class="svg__wrapper" style="background-image: url({% static '/new/images/icon/user-more.svg' %});"></div>
+                                    <span class="title-3">Все врачи</span>
+                                </a>
+                                <a href="{% url 'alldialogs' %}" class="personal-area__link ">
+                                    <div class="svg__wrapper" style="background-image: url({% static '/new/images/icon/call.svg' %});"></div>
+                                    <span class="title-3">Личные сообщения</span>
+                                    <span class="personal-area__amount">{% Unreaded User.id %}</span>
+                                </a>
+                                <a href="{% url 'Interesting' %}" class="personal-area__link">
+                                    <div class="svg__wrapper" style="background-image: url({% static '/new/images/icon/like.svg' %});"> </div>
+                                    <span class="title-3">Интересное</span>
+
+                                </a>
+                            </div>
+                          {% else %}
+                              <div class="personal-area__main">
+                                <a href="{% url 'mycircle' User.id %}" class="personal-area__link ">
+                                    <span class="title-3">Круг общения</span>
+                                </a>
+                                <a href="{% url 'dialog' User.id %}" class="personal-area__link ">
+                                    <span class="title-3">Написать личное сообщение</span>
+
+                                </a>
+                                  {% if user|isUserIntoMyCircle:User.id == 0 %}
+                                <a href="" class="personal-area__link"  onclick="inviteintomycircle({'avatar':'{% get_avatar_preview_sizexy User.id 77 77 %}', 'parent':{{ user.id }}, 'friend':{{ User.id }} })">
+                                    <span class="title-3">Пригласить в мой круг</span>
+                                </a> {% endif %}
+                            </div>
+                         {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

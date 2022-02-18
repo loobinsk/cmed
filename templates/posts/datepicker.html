@@ -1,0 +1,70 @@
+<style type="text/css">
+
+.dc_event a:after {
+  content: '';
+  visibility: visible;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 15px solid red;
+  border-right: 15px solid transparent;
+}
+.dc_event.ui-datepicker-today a:after,.wd_dateCalendar .dc_event.ui-datepicker-current-day a:after {border-top: 15px solid #fff}
+.dc_event a {
+    background-image :none;
+    position:relative
+}
+
+
+</style>
+<script type="text/javascript">
+  $( document ).ready(function() {   
+   
+   
+   var events = [];
+   var highlight = false;
+
+   {% for event in events %}
+    var title = '{{event.title}}'
+    var date =  '{{event.begindate}}'
+    events.push({
+            title: title, 
+            date:  date
+    });
+   {% endfor %}
+
+   // console.log(events);
+   $("#datepickerCalendarHeader").datepicker({
+    dateFormat: 'yy-mm-dd',
+    firstDay: 1,
+    monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    monthNamesShort : ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+    onSelect: function (selectedDate) {
+      location.href = "/consultations?date=" + selectedDate;
+    },
+    beforeShowDay: function(date) {
+      highlight = false;
+      events.forEach(function(item, i, events) {
+        
+        var newDate = new Date(item.date);
+        if(date.setHours(0,0,0,0) == newDate.setHours(0,0,0,0)){
+          // console.log('yes');
+          highlight = item.title;
+        }
+      });
+      
+      if (highlight) {        
+        return [true, "dc_event", highlight];
+      } else {
+        highlight = false;
+        return [true, '', 'Нет событий'];
+      }
+    }               
+  });
+ }); 
+</script>
+<input type="text" id="datepickerCalendarHeader" placeholder="Выбрать по дате" readonly>

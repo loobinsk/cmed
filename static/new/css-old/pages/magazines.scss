@@ -1,0 +1,22 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.magazines {
+  .main-slider {
+    .slick-list {
+      @media screen and (min-width: 992px) {
+        overflow: visible;
+      }
+    }
+  }
+  .magazines__main-sliser-col {
+    @media screen and (min-width: 992px) {
+      margin-bottom: -100px;
+      position: relative;
+      z-index: 10;
+    }
+  }
+  .main-slider__items {
+    margin-top: 65px;
+  }
+}

@@ -1,0 +1,94 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.lectureres__btn {
+  margin: 30px auto;
+}
+.lecturers__alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -10px;
+  @media screen and (max-width: 767px) {
+    margin-right: 0;
+  }
+  .select2:first-child + span .select2-selection {
+    border-left: 1px solid #e3e7e7;
+    margin-bottom: 15px;
+  }
+  .select2-container {
+    max-width: 618px;
+    margin-left: auto;
+    margin-right: 10px;
+    @media screen and (max-width: 1199px) {
+      margin-left: 0;
+      max-width: 100%;
+    }
+    @media screen and (max-width: 767px) {
+      margin-right: 0;
+    }
+    .select2-selection {
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid #cdcdcd;
+      .select2-selection__rendered {
+        padding: 12px 45px 12px 18px;
+      }
+      .select2-selection__arrow {
+        height: 44px;
+        width: 40px;
+
+        &::before {
+          height: 12px;
+          right: 15px;
+        }
+      }
+    }
+  }
+}
+
+.lecturers__letters {
+  width: 55px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-right: 6px;
+  margin-bottom: 6px;
+
+  @media screen and (max-width: 1199px) {
+    width: 44px;
+  }
+  @media screen and (max-width: 991px) {
+    width: 50px;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
+  &:active,
+  &:hover,
+  &.active {
+    border: 1px solid $color-base;
+  }
+
+  &.lecturers__letters_all {
+    text-transform: none;
+    width: 114px;
+  }
+}
+
+.select-alphabet {
+  .select2-container {
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+}

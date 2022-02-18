@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
+from lenta import views
  
- 
-urlpatterns = patterns('',
-    # url(r'^$',             'lenta.views.mainpage',    name='lenta'),
-    url(r'^fileupload/$',  'lenta.views.fileupload',  name='fileupload'),
-    url(r'^filedelete/$',  'lenta.views.filedelete',  name='filedelete'),
-    url(r'^videoupload/$', 'lenta.views.videoupload', name='videoupload'),
-    url(r'^videodelete/$', 'lenta.views.videodelete', name='videodelete'),
-    url(r'^savepost/$',    'lenta.views.savepost',    name='savepost'),
-)
+urlpatterns = [
+    # url(r'^$',             views.mainpage,    name='lenta'),
+    url(r'^fileupload/$',  views.fileupload,  name='fileupload'),
+    url(r'^filedelete/$',  views.filedelete,  name='filedelete'),
+    url(r'^videoupload/$', views.videoupload, name='videoupload'),
+    url(r'^videodelete/$', views.videodelete, name='videodelete'),
+    url(r'^savepost/$',    views.savepost,    name='savepost'),
+]

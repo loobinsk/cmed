@@ -1,0 +1,436 @@
+.conference__banner {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 70.25%;
+}
+
+.conference__tips {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 28px;
+}
+
+.conference__tips p {
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.conference__tips h5 {
+  font-size: 15px;
+  color: #000000;
+  line-height: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.webinar p {
+  font-size: 15px;
+  line-height: 24px;
+  color: #000000;
+  margin-bottom: 8px;
+  font-weight: 300;
+}
+
+.webinar .conference__tips {
+  margin-bottom: 25px;
+}
+
+.conference__svg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.conference__svg .conference__icon {
+  margin-right: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.conference__svg .conference__icon .svg__wrapper {
+  width: 17px;
+  height: 17px;
+  margin-right: 8px;
+}
+
+.conference__svg .conference__icon .svg__wrapper svg {
+  fill: transparent;
+  stroke: #292929;
+}
+
+.conference__svg .conference__icon.active .svg__wrapper {
+  width: 17px;
+  height: 17px;
+  margin-right: 8px;
+}
+
+.conference__svg .conference__icon.active .svg__wrapper svg {
+  fill: transparent;
+  stroke: #4adcdc;
+}
+
+.webinar__alarm {
+  position: fixed;
+  bottom: 150px;
+  right: 30%;
+  border-radius: 25px;
+  background-color: #4adcdc;
+  padding: 10px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 1001;
+}
+
+.webinar__alarm .svg__wrapper {
+  width: 22px;
+  height: 16px;
+}
+
+.webinar__alarm .svg__wrapper svg {
+  fill: transparent;
+  stroke: #fff;
+}
+
+.webinar__alarm span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 34px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 12px;
+  color: #ffffff;
+}
+
+.webinar__alarm .btn {
+  background-image: url("/images/icon/close-btn.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  min-height: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .webinar__alarm {
+    padding: 10px;
+    width: 100%;
+    right: 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.conference__timer {
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  padding: 18px 36px 18px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .conference__timer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.conference__timer .conference__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .conference__timer .conference__right {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.conference__timer .conference__right .conference__counter-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media screen and (min-width: 767px) {
+  .conference__timer .conference__right .title-5 {
+    max-width: 75px;
+  }
+}
+
+.conference__timer .conference__right .conference__counter {
+  font-size: 65px;
+  font-family: "BebasNeue", sans-serif;
+  color: #292929;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 1;
+  min-height: 85px;
+  position: relative;
+}
+
+.conference__timer .conference__right .conference__counter span {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 4px;
+}
+
+.conference__timer .conference__right .conference__counter + .conference__counter {
+  padding-left: 15px;
+}
+
+.conference__timer .conference__right .conference__counter + .conference__counter::before {
+  content: ":";
+  display: inline-block;
+  color: #292929;
+  font-size: 65px;
+  font-family: "BebasNeue", sans-serif;
+  position: absolute;
+  left: 0;
+}
+
+.conference__timer .conference__right .conference__counter:last-child {
+  color: #4adcdc;
+}
+
+.conference__timer .conference__right-title {
+  line-height: 26px;
+}
+
+.conferense__comments {
+  margin-top: 20px;
+}
+
+.conferense__comment-main {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  padding: 13px 30px 18px 20px;
+  background-color: #fff;
+  position: relative;
+}
+
+.conferense__comment-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .conferense__comment-header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.conferense__comment-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.conferense__comment-ava {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-right: 10px;
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .conferense__comment-ava {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.conferense__comment-name {
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.conferense__comment-theme {
+  color: #6d6d6d;
+}
+
+.conferense__comment-data {
+  color: #6d6d6d;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 767px) {
+  .conferense__comment-data {
+    margin-top: 10px;
+  }
+}
+
+.conferense__comment-text {
+  margin-top: 14px;
+  margin-bottom: -15px;
+  margin-left: 58px;
+}
+
+.conferense__comment-text p {
+  font-weight: 400;
+}
+
+@media screen and (max-width: 991px) {
+  .conferense__comment-text {
+    margin-left: 0;
+  }
+}
+
+.conferense__comment__footer {
+  border: 1px solid #cdcdcd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 19px 30px 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  margin-top: -10px;
+  background-color: #fff;
+}
+
+.conferense__comment__footer .link-solid {
+  padding: 0;
+  min-height: auto;
+  text-transform: none;
+}
+
+.conferense__comment-write {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-top: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 15px 25px 9px 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .conferense__comment-write {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+}
+
+.conferense__comment-write .form-control {
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 135%;
+  color: #000000;
+  margin-bottom: 0;
+  padding: 0;
+  min-height: 20px;
+  height: auto;
+  border-radius: 0;
+}
+
+.conferense__comment-write-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.conferense__comment-smile {
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/icon/smile.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  min-height: auto;
+  padding: 0;
+}
+
+.conferense__comment-sent {
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/icon/sent.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  min-height: auto;
+  padding: 0;
+  margin-bottom: 15px;
+}

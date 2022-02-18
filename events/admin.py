@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django import forms
 from django_extensions.admin import ForeignKeyAutocompleteAdmin
-from mce_filebrowser.admin import MCEFilebrowserAdmin
+#from mce_filebrowser.admin import MCEFilebrowserAdmin
 from events.models import Events
 from comments.admin import CommentsAdminLink
 from medtus.models import Statistics
@@ -40,7 +40,7 @@ class EventAdminForm(forms.ModelForm):
             self.fields['viewings'].initial = stat.viewings
 
 
-class EventsAdmin(StaffPermissionMixin, ForeignKeyAutocompleteAdmin, MCEFilebrowserAdmin, CommentsAdminLink):
+class EventsAdmin(StaffPermissionMixin, ForeignKeyAutocompleteAdmin, CommentsAdminLink):
     list_display = ('id', 'comments_link','title', 'content', 'type_id')
     search_fields = ('id', 'title', 'content')
     raw_id_fields = ('user_id',)

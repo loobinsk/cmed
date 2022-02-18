@@ -1,0 +1,345 @@
+@import "../blocks/vars/vars.scss";
+@import "../main/include-media";
+
+.conference__banner {
+  width: 100%;
+  border-radius: $radius-base;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding-bottom: 70.25%;
+}
+
+.conference__tips {
+  background: #f8f8f8;
+  border-radius: $radius-base;
+  padding: 15px;
+  margin-top: 28px;
+
+  p {
+    font-size: 14px;
+    line-height: 18px;
+    color: #000000;
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+
+  h5 {
+    font-size: 15px;
+    color: #000000;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
+
+.webinar {
+  p {
+    font-size: 15px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+
+  .conference__tips {
+    margin-bottom: 25px;
+  }
+}
+
+.conference__svg {
+  display: flex;
+
+  .conference__icon {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    .svg__wrapper {
+      width: 17px;
+      height: 17px;
+      margin-right: 8px;
+      svg {
+        fill: transparent;
+        stroke: $text;
+      }
+    }
+
+    &.active {
+      .svg__wrapper {
+        width: 17px;
+        height: 17px;
+        margin-right: 8px;
+        svg {
+          fill: transparent;
+          stroke: $color-base;
+        }
+      }
+    }
+  }
+}
+
+.webinar__alarm {
+  position: fixed;
+  bottom: 150px;
+  right: 30%;
+  border-radius: 25px;
+  background-color: $color-base;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+  .svg__wrapper {
+    width: 22px;
+    height: 16px;
+    svg {
+      fill: transparent;
+      stroke: #fff;
+    }
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 12px;
+
+    color: #ffffff;
+  }
+
+  .btn {
+    background-image: url("/images/icon/close-btn.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    min-height: 0;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    width: 100%;
+    right: 0;
+
+    justify-content: center;
+  }
+}
+
+.conference__timer {
+  border-radius: $radius-base;
+  background-color: #f8f8f8;
+  padding: 18px 36px 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+
+  .conference__right {
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+    .conference__counter-block {
+      display: flex;
+    }
+
+    .title-5 {
+      @media screen and (min-width: 767px) {
+        max-width: 75px;
+      }
+    }
+
+    .conference__counter {
+      font-size: 65px;
+      font-family: $font-family2;
+      color: $text;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      min-height: 85px;
+      position: relative;
+      span {
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 4px;
+      }
+
+      & + .conference__counter {
+        padding-left: 15px;
+        &::before {
+          content: ":";
+          display: inline-block;
+          color: $text;
+          font-size: 65px;
+          font-family: $font-family2;
+          position: absolute;
+          left: 0;
+        }
+      }
+
+      &:last-child {
+        color: $color-base;
+      }
+    }
+  }
+
+  .conference__right-title {
+    line-height: 26px;
+  }
+}
+.conferense__comments {
+  margin-top: 20px;
+}
+.conferense__comment-main {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  padding: 13px 30px 18px 20px;
+  background-color: #fff;
+  position: relative;
+}
+
+.conferense__comment-header {
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.conferense__comment-left {
+  display: flex;
+  align-items: center;
+}
+.conferense__comment-ava {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  display: block;
+
+  @media screen and (max-width: 767px) {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.conferense__comment-name {
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.conferense__comment-theme {
+  color: #6d6d6d;
+}
+
+.conferense__comment-data {
+  color: #6d6d6d;
+  font-weight: 400;
+  @media screen and (max-width: 767px) {
+    margin-top: 10px;
+  }
+}
+
+.conferense__comment-text {
+  margin-top: 14px;
+  margin-bottom: -15px;
+  margin-left: 58px;
+  p {
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 991px) {
+    margin-left: 0;
+  }
+}
+
+.conferense__comment__footer {
+  border: 1px solid #cdcdcd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 19px 30px 11px;
+  display: flex;
+  justify-content: end;
+  margin-top: -10px;
+  background-color: #fff;
+
+  .link-solid {
+    padding: 0;
+    min-height: auto;
+    text-transform: none;
+  }
+}
+
+.conferense__comment-write {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+  padding: 15px 25px 9px 15px;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-control {
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 135%;
+    color: #000000;
+    margin-bottom: 0;
+    padding: 0;
+    min-height: 20px;
+    height: auto;
+    border-radius: 0;
+  }
+}
+
+.conferense__comment-write-btn {
+  display: flex;
+  align-items: center;
+}
+
+.conferense__comment-smile {
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/icon/smile.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  min-height: auto;
+  padding: 0;
+}
+
+.conferense__comment-sent {
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/icon/sent.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  min-height: auto;
+  padding: 0;
+  margin-bottom: 15px;
+}

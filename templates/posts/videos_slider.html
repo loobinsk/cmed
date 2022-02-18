@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+    <section class="video p-y">            <div class="container">
+            <h2 class="title-1">Видеоматериалы</h2>
+            <div class="video__slider">
+                <div class="slick-slider" id="videos_slider" >
+
+                    {% for object in videos_list %}
+
+
+                    <div class="slider-item video__item">
+                        <a href="{% url 'detailvideos' object.id %}" class="card-video">
+                            <div class="card-video__img" style="background-image: url({{ object.image }});">
+                                <div class="card-video__type title-s-min">
+                                    <div class="svg__wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="#video"></use>
+                                        </svg>
+                                    </div>
+                                    <span>вебинар</span>
+                                </div>
+                            </div>
+                            <div class="card-video__main">
+                                <div class="card-video__main-top">
+                                    <div class="card__video-data title-5"><span>{{ object.createdate }}</span></div>
+                                    <div class="card__video-icon title-5">
+                                        <div class="svg__wrapper">
+                                            <svg xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#view"></use>
+                                            </svg>
+                                        </div>
+                                        <span>{% if object.statistics %}
+                    {{ object.statistics.viewings }}
+                {% else %}
+                    0
+                {% endif %}</span>
+                                    </div>
+                                </div>
+                                <div class="title-3">{{ object.title }}</div>
+                            </div>
+                        </a>
+                    </div>
+
+{% endfor %}
+                        </div>
+            </div>
+            <a href="/videos" class="btn btn-default video__btn slick__right-element">Все материалы</a>
+        </div></section>
+
+
+
+

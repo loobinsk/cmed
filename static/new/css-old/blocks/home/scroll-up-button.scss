@@ -1,0 +1,91 @@
+@import "../../main/include-media";
+@import "../vars/vars.scss";
+
+.scroll-btn-block {
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+#back-to-top {
+  position: absolute;
+  right: 20px;
+  bottom: 51px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border: 1px solid $color-second;
+  border-radius: 50%;
+  background-color: $color-second;
+  background-image: url("/images/icons/phone.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 35px 35px;
+  //   box-shadow: 0px 6px 20px $clr-grey-light;
+  transition: opacity 0.2s linear, background 0.2s linear;
+
+  @include media("<xxl") {
+    right: 15px;
+  }
+  @include media("<md") {
+    width: 60px;
+    height: 60px;
+    background-size: 25px 25px;
+  }
+  @include media("<sm") {
+    right: 10px;
+  }
+
+  &:hover {
+    background-color: $color-base;
+    border-color: $color-base;
+    cursor: pointer;
+  }
+
+  .small-icon:after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 300px;
+    margin-left: 60px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) -1.67%,
+      rgba(255, 255, 255, 0.31) 100%
+    );
+    position: absolute;
+    left: -40px;
+    top: -150px;
+    z-index: 1;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-animation-name: slideme;
+    animation-name: slideme;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-delay: 0.05s;
+    animation-delay: 0.05s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+
+  @-webkit-keyframes slideme {
+    0% {
+      left: -30px;
+      margin-left: 0px;
+    }
+    30% {
+      left: 110%;
+      margin-left: 80px;
+    }
+    100% {
+      left: 110%;
+      margin-left: 80px;
+    }
+  }
+}

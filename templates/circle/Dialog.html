@@ -18,6 +18,9 @@
 		</div>
 	</div>
 {% endblock %}
+{% block after_header %}
+{% include 'circle/header_circle.html' %}
+{% endblock %}
 {% block content %}
 <!-- Центральная колонка -->
 			<div class="groups-area">
@@ -32,7 +35,7 @@
 						<span class="info01">{{online_now}}</span>
 					</div>
 				</div>
-				<div class="dialogs-area">
+				<div class="dialogs-area" style="width: 100%">
 					{% for d in dialogrecords %}
 					<div class="row {% if forloop.last %}style01{% endif %}">
 						{% if d.auth.id == user.id %}
@@ -59,10 +62,10 @@
 						{% endif %}
 					</div>
 					{% endfor %}
-					<form class="dialogs-form" action="{% url 'dialog' authBid %}" method="post">
+					<form class="dialogs-form" action="{% url 'dialog' authBid %}" method="post" >
 						{% csrf_token %}
-						<textarea  cols="30" rows="10" name="text" autofocus></textarea>
-						<input type="submit" value="отправить" >
+						<textarea  cols="30" rows="10" name="text" autofocus></textarea></br>
+						<input type="submit" value="отправить" style="float: left">
 						<input name="authBid" type="hidden" value="{{authBid}}">
 					</form>
 				</div>

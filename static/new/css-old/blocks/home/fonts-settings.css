@@ -1,0 +1,241 @@
+h1,
+.h1, h2,
+.h2, h3,
+.h3 {
+  margin-top: 0;
+  overflow: hidden;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  line-height: 125%;
+  color: #292929;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 b, .h1 b, h2 b, .h2 b, h3 b, .h3 b,
+h1 span,
+.h1 span,
+h2 span,
+.h2 span,
+h3 span,
+.h3 span {
+  color: #4adcdc;
+}
+
+h1,
+.h1 {
+  margin-bottom: 15px;
+  font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  h1,
+  .h1 {
+    font-size: 45px;
+  }
+}
+
+@media (min-width: 992px) {
+  h1,
+  .h1 {
+    font-size: 56px;
+  }
+}
+
+h2,
+.h2 {
+  margin-bottom: 40px;
+  font-size: 22px;
+}
+
+@media (min-width: 768px) {
+  h2,
+  .h2 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+  h2,
+  .h2 {
+    font-size: 36px;
+  }
+}
+
+h3,
+.h3 {
+  margin-bottom: 23px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 133%;
+}
+
+@media (min-width: 768px) {
+  h3,
+  .h3 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 992px) {
+  h3,
+  .h3 {
+    font-size: 34px;
+  }
+}
+
+.title, .title-1, .title-2, .title-3, .title-4, .title-5, .title-s-min, .title-p, .title-p-min {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 125%;
+  font-weight: 300;
+  color: #292929;
+  font-family: "Roboto", sans-serif;
+  -webkit-transition: color 0.2s linear;
+  transition: color 0.2s linear;
+}
+
+.title-1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .title-1 {
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  .title-1 {
+    font-size: 36px;
+  }
+}
+
+.title-2 {
+  font-weight: 500;
+  font-size: 19px;
+}
+
+@media (min-width: 992px) {
+  .title-2 {
+    font-size: 26px;
+  }
+}
+
+.title-3 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.title-4 {
+  line-height: 120%;
+  font-size: 15px;
+}
+
+.title-5 {
+  font-size: 14px;
+}
+
+.title-s-min {
+  font-size: 12px;
+}
+
+.n-title {
+  font-size: 20px;
+}
+
+.title-p {
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.title-p a {
+  font-weight: 700;
+  color: #292929;
+}
+
+.title-p p,
+.title-p ul {
+  margin-bottom: 30px;
+}
+
+.title-p-min {
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.title-p-min a {
+  font-weight: 700;
+  color: #292929;
+}
+
+.title-p-min p,
+.title-p-min ul {
+  margin-bottom: 15px;
+}
+
+.font-weight-min {
+  font-weight: 300 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.font-weight-medium {
+  font-weight: 500 !important;
+}
+
+.font-weight-semibold {
+  font-weight: 600 !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-extra-bold {
+  font-weight: 800 !important;
+}
+
+.font-weight-black {
+  font-weight: 900 !important;
+}
+
+.text-clr {
+  color: #292929 !important;
+}
+
+.text-clr-white {
+  color: #fff !important;
+}
+
+.text-clr-alt {
+  color: #6d6d6d !important;
+}
+
+.text-base {
+  color: #4adcdc !important;
+}
+
+.text-secondary {
+  color: #6d6d6d !important;
+}
+
+.svg-main-alt {
+  fill: #f7f7f7 !important;
+}
+
+.svg-main {
+  fill: #4adcdc !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.font-f2 {
+  font-family: "BebasNeue", sans-serif !important;
+}

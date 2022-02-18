@@ -67,7 +67,7 @@ def handle_uploaded_file(f, path):
 
 @csrf_exempt
 def fileupload(request, sizex=0, sizey=0):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponse(json.JSONEncoder().encode({'success': False}))
     return HttpResponse(FileUploadTo(request, ['temporary', 'post', request.user.login], int(sizex), int(sizey)))
 
@@ -101,16 +101,17 @@ def videoupload(request):
             except:
                 address = request.POST['video']
             URL = "http://img.youtube.com/vi/{0}/0.jpg".format(address)
-            INFO_URL = "http://youtube.com/get_video_info?video_id={0}".format(address)
-            try:
+            #INFO_URL = "http://youtube.com/get_video_info?video_id={0}".format(address)
+            INFO_URL = "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={0}&format=json".format(address)
+            try:                
                 resource = urllib.urlopen(INFO_URL)
-                content = resource.read()
-                content = '{ ' + content.replace("=", " : ").replace('&', ' , ') + ' }'
-                content = json.loads(content.replace(" ", "\""))
-                title = urllib.unquote('"{0}"'.format(content.get('title', ''))).decode('utf8')
+                content = resource.read()             
+                # content = '{ ' + content.replace("=", " : ").replace('&', ' , ') + ' }'
+                content = json.loads(content)               
+                title = content.get('title', '')                
             except:
                 return HttpResponse(
-                    json.JSONEncoder().encode({'message': 'can not get video info 2 %s' % address, 'result': False}))
+                    json.JSONEncoder().encode({'message': 'can not get video info 2 %s' % INFO_URL, 'result': False}))
             path = os.path.join(
                 os.path.join(os.path.join(os.path.join(settings.MEDIA_ROOT, 'temporary'), 'post'), request.user.login),
                 'video')

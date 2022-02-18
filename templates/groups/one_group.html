@@ -1,32 +1,30 @@
 {% load staticfiles %}{% load account_tags %}
-<div class="holder" id='group{{ object.group_id.id }}'>
-	<div class="content-block-center-item-head-photo-bg">
-		<a target="_parent" href="#">
-			<div class="content-block-center-item-head-photo" style="background-image:url({% if object.group_id.image %}{{ object.group_id.image }}{% else %}{% get_preview_sizexy 'group_images/'|add:object.group_id.image 71 71 %}{% endif %})"></div>
-		</a>
-	</div>
-	<div class="description">
-		<h3><a target="_blank" href="{% url 'detailgroup' object.group_id.id %}">{{ object.group_id.title }}</a></h3>
-		<span class="info">открытая группа</span>
-		<p><em>{{ object.group_id.description|truncatewords_html:10|safe|linebreaks }}</em></p>
-		<div class="info-panel">
-			<span>Участников: {{ object.group_id.count_users }}</span>
-			<span>Публикаций: {{ object.group_id.count_posts }}</span>
-		</div>
-    {% if object.group_id.user_id %}
-		<span class="inform">Создатель группы: <a href="{% url 'lichnie2' object.group_id.user_id.id %}">{{ object.group_id.user_id.lastname }} {{ object.group_id.user_id.firstname }} {{ object.group_id.user_id.surname }}</a>
-        {% endif %}
-    {% if invite and object.invite %}
-      Вас приглашает: <a href="{% url 'lichnie2' object.invite.id %}">{{ object.invite.lastname }} {{ object.invite.firstname }} {{ object.invite.surname }}</a>
-    {% endif %}
-    </span>
-	</div>
-	<div class="links">
-		{% if object.activated == False %}
-			<a class="add-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/activated/');">Вступить <br> в группу</a>
-			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin/');">Отказаться</a>
+        <div class="card-group" id='group{{ object.group_id.id }}'>
+            <div class="card-group__left">
+                <div class="card-group__img" style="background-image:url({% if object.group_id.image %}{{ object.group_id.image }}{% else %}{% get_preview_sizexy 'group_images/'|add:object.group_id.image 71 71 %}{% endif %})"></div>
+        {% if object.activated == False %}
+			<a class="link link-mini" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/activated');">Вступить <br> в группу</a>
+			<a class="link link-mini" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');">Отказаться</a>
 		{% else %}
-			<a class="delete-group" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin/');" style="color:#777777;">Выйти из группы</a>
+			<a class="link link-mini" href="javascript:void(0)" onClick="JoinAGroup('{{ object.group_id.id }}', '/groups/unjoin');" style="color:#777777;">Выйти из группы</a>
 		{% endif %}
-	</div>
-</div>
+            </div>
+            <div class="card-group__main">
+                <div class="card-group__main-top">
+                    <div class="title-2"><a target="_blank" href="{% url 'detailgroup' object.group_id.id %}">{{ object.group_id.title }}</a></div>
+                    <div class="title card-group__subtitle">открытая группа</div>
+                    <div class="title card-group__text">{{ object.group_id.description|truncatewords_html:10|safe|linebreaks }}</div>
+                </div>
+                <div class="card-group__about">
+                    <div class="title-5">Участников: <span>{{ object.group_id.count_users }}</span></div>
+                    <div class="title-5">Публикаций: <span>{{ object.group_id.count_posts }}</span></div>
+                    {% if object.group_id.user_id %}
+                    <div class="title-5">Создатель группы:  <a href="{% url 'lichnie2' object.group_id.user_id.id %}">{{ object.group_id.user_id.lastname }} {{ object.group_id.user_id.firstname }} {{ object.group_id.user_id.surname }}</a></div>
+                       {% endif %}
+                {% if invite and object.invite %}
+                  Вас приглашает: <a href="{% url 'lichnie2' object.invite.id %}">{{ object.invite.lastname }} {{ object.invite.firstname }} {{ object.invite.surname }}</a>
+                {% endif %}
+
+                </div>
+            </div>
+        </div>

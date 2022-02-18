@@ -71,7 +71,7 @@ class PostsList(ListView):
         else:
             self.template_name = 'posts/posts.html'
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             self.groups = self.request.user.get_groups()
         else:
             self.groups = dict((g.pk, g) for g in Group.objects.all())
@@ -84,7 +84,7 @@ class PostsList(ListView):
         # Call the base implementation first to get a context
         context = super(PostsList, self).get_context_data(**kwargs)
 
-        if not self.request.user.is_anonymous():
+        if not self.request.user.is_anonymous:
             from account.models import EventAccess
             EventAccess.update("postlinks", self.request.user)
 

@@ -1,0 +1,24 @@
+@import "../../main/include-media";
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  @include media("<sm") {
+    padding: 0 10px;
+    max-width: 100%;
+  }
+  @include media(">=sm") {
+    max-width: 540px + 30px;
+  }
+  @include media(">=md") {
+    max-width: 720px + 30px;
+  }
+  @include media(">=lg") {
+    max-width: 960px + 30px;
+  }
+  @include media(">=xl") {
+    max-width: 1140px + 30px;
+  }
+}

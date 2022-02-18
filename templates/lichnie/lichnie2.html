@@ -1,506 +1,118 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends "base.html" %}
 {% load account_tags %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
 {% block js_page %}
-  <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
-{% block title %}Моя страница{% endblock %}
-{% block top_block %}
-  <div class="content-block-top-block-1-window-filter" id="window-filter">
-  <div class="content-block-top-block-1-window-filter-content">
-  </div>
-  <div class="content-block-top-block-1-window-filter-bottom">
-    <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
-  </div>
-  </div>{% endblock %}
+{% block after_header %}
+{% include 'lichnie/header_lichnie.html' %}
+{% endblock %}
+
+
 {% block content %}
-    <script src="https://malsup.github.io/jquery.form.js"></script>
-  <!-- Центральная колонка! -->
-  <div class="info-area">
-  <div class="holder">
-  <div class="block popup-holder">
-    <style>
-      .avatar-preview {
-        background-image: url({% get_avatar_preview_sizexy User.id 150 150 %}){% if User.avatar %}, url({{User.avatar}}){% endif %};
-        cursor: pointer;
-        /*width: 150px;*/
-        display: inline-block;
-        width: 100%;
-        height: 180px;
-        -moz-background-size:180px auto;
-        background-size:180px auto;
-{#        background-size: 180px auto;#}
-        background-repeat: no-repeat;
-      }
 
-      #upload-file-container {
-        cursor: pointer;
-      }
 
-      #upload-file-container input {
-        filter: alpha(opacity=0);
-        opacity: 0;
-      }
 
-      #id_picture {
-        height: 0;
-        width: 0;
-        position: absolute;
-        top: 0;
-      }
+                        <div class="personal-area__info">
+                            <h1 class="title-1">Личные данные</h1>
+                            <div class="title-p-min">
+                                {% if User.birthday|IsData %}
+                                <p><b>Дата рождения:</b> {{ User.birthday|date:"d M Y" }}</p>
+                                {% endif %}
+                            {% if User.sex|IsData %}
+                                <p><b>Пол:</b> {% if User.sex == 'male' %}мужской{% elif User.sex == 'female' %}
+            женский{% endif %}</p>
+                            {% endif %}
+                            {% if User.spec_id|IsData %}
+                                <p><b>Основная специальность:</b> {{ User.spec_id }}</p>
+                            {% endif %}
+                            {% if User.addspeciality|IsData %}
+                                <p><b>Дополнительная специальность:</b> {{ User.addspeciality }} Стаж: {{ User.addexperience }} лет</p>
+                             {% endif %}
+                            {% if User.graduate|IsData %}
+                                <p><b>Учёная степень:</b> {{ User.graduate }}</p>
+                                  {% endif %}
+                            {% if User.dissertation|IsData %}
+                                <p><b>Тема диссертации:</b> {{ User.dissertation }}</p>
+                             {% endif %}
 
-      .bar {
-        background-color: #E1523D;
-        width: 0%;
-        height: 10px;
-        border-radius: 3px;
-      }
-    </style>
-    <script>
-      var trigger = true;
-      $(document).ready(function () {
-        {% if is_owner %}
-          $('#upload-file-container').wrap('<form id="avatar-upload" action="{% url "account.views.avatarupload" sizex='180' sizey='180' %}" method="post" enctype="multipart/form-data"></form>');
-          $('#upload-file-container2').wrap('<form id="avatar-upload2" action="{% url "lichnie.views.fileupload" sizex='53' sizey='53' %}" method="post" enctype="multipart/form-data"></form>');
-          $('#upload-file-container').click(function () {
-            if (trigger) {
-              trigger = false;
-              $("#id_picture").trigger('click');
-            }
-          });
-        {% endif %}
+                                {% if User.organization|normalize|IsData %}
+                               <p><b> Место работы:</b> {{ User.organization|normalize }}
+                              {% endif %}
+                              {% if User.job|normalize|IsData %}
+                                {{ User.job|normalize }}
+                              {% endif %}</p>
 
-      $('#avatar-upload').ajaxForm({
-        beforeSend: function () {
-          var percentVal = '10%';
-          $('.bar').css('width', percentVal);
-        },
-        uploadProgress: function (event, position, total, percentComplete) {
-          var percentVal = percentComplete + '%';
-          $('.bar').css('width', percentVal);
-        },
-        success: function () {
-          var percentVal = '100%';
-          $('.bar').css('width', percentVal);
-        },
-        complete: function (xhr) {
-          responseText = JSON.parse(xhr.responseText);
-          $('.avatar-preview').css('background', 'url(' + responseText.url + ') no-repeat');
-          $('.avatar-preview').prop('href', '{% get_media_prefix %}' + responseText.file);
-          $('.left-block-content-profile-item-left-photo').css('background', 'url(' + responseText.url + ') no-repeat');
-          $('.bar').css('width', 0);
-        }
-      });
-      $('#avatar-upload2').ajaxForm({
-        beforeSend: function () {
-          var percentVal = '10%';
-          $('.bar2').css('width', percentVal);
-        },
-        uploadProgress: function (event, position, total, percentComplete) {
-          var percentVal = percentComplete + '%';
-          $('.bar2').css('width', percentVal);
-        },
-        success: function () {
-          var percentVal = '100%';
-          $('.bar2').css('width', percentVal);
-        },
-        complete: function (xhr) {
-          responseText = JSON.parse(xhr.responseText);
-          if ($('.first_line').length < 2) {
-            to = '#firstline_photos';
-          }
-          else {
-            to = '#nextline_photos';
-            $('.info-area .block-photos .opener').css('visibility', 'visible');
-            $('.info-area .block-photos .opener span').text('...еще ' + responseText.howmany);
-          }
-          $("<a href='#' class='first_line' style='padding-left: 2px;'><img width='53' height='53' alt='image description' src='" + responseText.url + "'></a>").appendTo(to);
-          $('.bar2').css('width', 0);
-        }
-      });
-      });
+                              {% if User.school|IsData %}
+                                 <p><b>Образование:</b> {{ User.school }}{% if User.graduate_year|IsData %} ‘{{ User.graduate_year }}{% endif %}
+                              {% endif %}</p>
+                              {% if User.faculty|IsData %}
+                                 <p><b>Факультет:</b> {{ User.faculty }}</p>
+                              {% endif %}
+                              {% if User.cathedra|IsData %}
+                                <p><b> Кафедра:</b> {{ User.cathedra }}</p>
+                              {% endif %}
 
+
+                            </div>
+                                  {% if is_owner %}
+                            <a href="{% url 'lichnie1' %}" class="link-mini">Редактировать личные данные</a>
+                        {% endif %}
+                        </div>
+                        <div class="personal-area__info">
+                            <div class="title-1">Контакты</div>
+                            <div class="title-p-min">
+                             {% if User.phone_number and User.phone_visible != 'no_visible' %}
+                                  <br/>
+                                  <p><b>Телефон: </b>{{ User.phone_number }}</p>
+                                {% endif %}
+                            {% if User.email|IsData and User.email_visible != 'no_visible' %}
+                                <p><b>Email:</b> <a href="mailto:{{ User.email }}">{{ User.email }}</a></p>
+                            {% endif %}
+
+                               {% if User.site|normalize|IsData %}
+                                <p><b>Сайт:</b>
+                                  {% if User.site|normalize|slice:":4" == 'http' %}
+                                  <a href="{{ User.site|normalize }}">{{ User.site|normalize }}</a>
+                                  {%  else %}
+                                <a href="http://{{ User.site|normalize }}">{{ User.site|normalize }}</a>
+                              {% endif %}
+                              {% endif %}
+                                <p><b>Адрес:</b> {% if User.country %}{{ User.country }},{% endif %}
+								{% if User.town %}{{ User.town }}{% endif %}</p>
+
+                            {% if User.ICQ_Skype|IsData %}
+                  <p><b>ICQ:</b> {{ User.ICQ_Skype }}</p>
+                            {% endif %}
+
+                            </div>
+                         {% if is_owner %}
+                            <a href="{% url 'lichnie1' %}" class="link-mini">Редактировать контакты</a>
+                        {% endif %}
+                        </div>
+
+                        <div class="personal-area__feed">
+                            <div class="title-1">Лента сообщений</div>
+                      {% for object in object_list %}
+                        {% include 'posts/one_post2.html' %}
+                      {% endfor %}
+
+
+                </div>
+<script>
+	function inviteintomycircle(senddata){
+             $.get('/circle/inviteintomycircle/',
+                     senddata,
+                     function(data){
+                    //$('.circle_link').text("Отозвать <br>приглашение");
+                    alert(data);
+			});
+	};
     </script>
-      <a href='{% if User.avatar %}{{User.avatar.url}}{% endif %}' class='avatar-preview first_line' rel="gallery1">
-    </a>
+{% endblock %}
 
-    {% if is_owner %}
-      <div id="upload-file-container" onclick="trigger=true;">
-        <input id="id_picture" type="file" name="file" onchange="$(this).closest('form').submit();">
-      </div>
-      <a class="link" style="cursor: pointer;" onclick="trigger = true; $('#upload-file-container').trigger('click');">Изменить
-        фото</a>
-      <div class="bar"></div>
-
-    {% else %}
-      <ul class="info">
-        {% if user|isUserIntoMyCircle:User.id == 1 %}
-          <li style="color:green;">* В моем круге</li>
-        {% endif %}
-        <li><a href="{% url 'mycircle' User.id %}">Круг общения </a></li>
-        <li class="active"><a href="{% url 'dialog' User.id %}">Написать личное сообщение </a></li>
-        {% if user|isUserIntoMyCircle:User.id == 0 %}
-          <li><a style="cursor:pointer;"
-                 onclick="Dajaxice.circle.inviteintomycircle(Dajax.process, {'avatar':'{% get_avatar_preview_sizexy User.id 77 77 %}', 'parent':{{ user.id }}, 'friend':{{ User.id }} })">Пригласить
-            в мой круг </a></li>
-        {% endif %}
-        <li>
-          <a class="open" href="#">Пригласить в группу</a>
-
-          <div class="box popup">
-            <form id="inviteform" action="#">
-              <span class="title">Выберите группы из списка:</span>
-
-              <div class="content-block-top-block-1-window-filter-content-right-list-all" id="filter-scroll">
-                {% for group in Groups %}
-                  <div class="row">
-                    <input type="checkbox" name="{{ group.id }}">
-
-                    <div class="photo"><a href="#">
-                      <div class="photo-bg"></div>
-                      <img src="{% get_preview_sizexy group.image 50 50 %}" width="50" height="50"
-                           alt="image description"></a></div>
-                    <div class="description">
-                      <span class="heading">Группа <br>«{{ group.title }}»</span>
-                      <em>{{ group.description|slice:":10" }}</em>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-              <div class="bottom-holder">
-                <input class="close" type="submit" value="Отправить приглашение"
-                       onclick="Dajaxice.lichnie.InviteIntoGroup(Dajax.process, {'userid':{{ User.id }}, 'groupids':getcheckboxes() })">
-              </div>
-            </form>
-          </div>
-        </li>
-      </ul>
-    {% endif %}
-  </div>
-  <script>
-    function getcheckboxes() {
-      var list = "";
-      $('#inviteform').find('input[type=checkbox]:checked').each(function () {
-        list += ('&' + $(this).attr('name'));
-      });
-      return list;
-    }
-    ;
-  </script>
-  <div class="block-photos">
-    {% if firstline_images|length %}
-      <span class="title">
-							{% if is_owner %}
-                Ваши фото:
-              {% else %}
-                фотографии {{ User.firstname }} {{ User.surname }}
-              {% endif %}
-						</span>
-    {% endif %}
-    <div class="toggle-block slide">
-      <div class="photos" id="firstline_photos">
-        <style>
-          #upload-file-container2 {
-            background: url({% static 'images/img03.png' %}) no-repeat;
-            cursor: pointer;
-            width: 53px;
-            height: 53px;
-          }
-
-          #upload-file-container2 input {
-            filter: alpha(opacity=0);
-            opacity: 0;
-          }
-
-          .bar2 {
-            background-color: #E1523D;
-            width: 0%;
-            height: 10px;
-            border-radius: 3px;
-          }
-
-          #id_picture2 {
-            width: 53px;
-            height: 53px;
-          }
-
-          #avatar-upload2 {
-            width: 53px;
-            height: 53px;
-            float: left;
-            padding-right: 3px;
-          }
-
-          .first_line {
-            padding-top: 3px;
-          }
-
-          .photos img:first-child {
-            margin-bottom: 3px;
-        </style>
-        {% if is_owner %}
-          <div id="upload-file-container2">
-            <input id="id_picture2" type="file" name="file" onchange="$(this).closest('form').submit();">
-          </div>
-        {% endif %}
-        {% for image in firstline_images %}
-          <a href='{{ image.data|get_item:"image" }}' class='first_line' rel="gallery1"
-             id="user_image_{{ image.id }}">
-             {% if is_owner %}
-                <span class="del-image" rel="{{ image.id }}"></span>
-             {% endif %}
-            <img width='53' height='53' alt='image description' src="{{ image.data|get_item:'thumb' }}">
-          </a>
-        {% endfor %}
-      </div>
-      <div class="slide">
-        <div class="photos" id="nextline_photos">
-          {% for image in nextline_images %}
-            <a href='{{ image.data|get_item:"image" }}' class='first_line' rel="gallery1"
-               id="user_image_{{ image.id }}">
-              {% if is_owner %}
-                <span class="del-image" rel="{{ image.id }}"></span>
-              {% endif %}
-              <img width='53' height='53' alt='image description' src="{{ image.data|get_item:'thumb' }}">
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-      <a href="#" class="opener" {% if howmany == 0 %}style="visibility:  hidden;"{% endif %}><span>... ещё
-        {% if howmany > 0 %}{{ howmany }}{% endif %}</span> <em>свернуть</em></a>
-    </div>
-  </div>
-  <div class="bar2"></div>
-  </div>
-  <div class="frame">
-    <div class="toggle-block slide">
-      <h2>{{ User.lastname }} <br/>{{ User.firstname }} {{ User.surname }}</h2>
-      {% if is_owner %}
-        <div class="link-holder">
-          <a href="{% url 'lichnie.views.lichnie1' %}" class="link">Редактировать личную информацию</a>
-        </div>
-      {% endif %}
-      <div class="info-holder">
-        {% if User.birthday|IsData %}
-          <span class="info">Дата рождения: <em>{{ User.birthday|date:"d M Y" }}</em></span>
-        {% endif %}
-        {% if User.sex|IsData %}
-          <span class="info">Пол: <em>{% if User.sex == 'male' %}мужской{% elif User.sex == 'female' %}
-            женский{% endif %}</em></span>
-        {% endif %}
-      </div>
-      {% if User.spec_id|IsData %}
-        <div class="info-holder">
-							<span class="info">
-								{% if User.spec_id|IsData %}
-                  Основная специальность: <em>{{ User.spec_id }}</em>
-                {% endif %}
-                {% if User.experience|IsData %}
-                  <em class="divider">Стаж: {{ User.experience }} лет</em>
-                {% endif %}
-							</span>
-        </div>
-      {% endif %}
-      {% if User.addspeciality|IsData %}
-        <div class="info-holder">
-          <span class="info">Дополнительная специальность: <em>{{ User.addspeciality }}</em><em
-            class="divider">Стаж: {{ User.addexperience }} лет</em></span>
-        </div>
-      {% endif %}
-      {% if User.graduate|IsData %}
-        <div class="info-holder">
-          <span class="info">Учёная степень:  <em>{{ User.graduate }}</em></span>
-        </div>
-      {% endif %}
-      {% if User.dissertation|IsData %}
-        <div class="info-holder">
-          <span class="info">Тема диссертации: <em>{{ User.dissertation }}</em></span>
-        </div>
-      {% endif %}
-      {% if User.title|IsData %}
-        <div class="info-holder">
-          <span class="info">Звание:  <em>{{ User.title }} </em></span>
-        </div>
-      {% endif %}
-      {% if User.category.name|IsData %}
-        <div class="info-holder">
-          <span class="info">Категория: <br/>  <em>{{ User.category.name }} <br/>по специальности
-            «{{ User.spec_id }}»</em></span>
-        </div>
-      {% endif %}
-      {% if User.awords %}
-        <div class="info-holder">
-          <span class="info">Достижения и награды: </span>
-          <p><b>{{ User.awords.name }}</b></p>
-        </div>
-      {% endif %}
-      <div class="info-holder">
-      <a href="#" class="opener"><span>показать подробную информацию</span><em>скрыть подробную информацию</em></a>
-      </div>
-      <div class="slide">
-        {% if User.organization|IsData %}
-          <div class="info-holder">
-								<span class="info">
-									{% if User.organization|normalize|IsData %}
-                    Место работы:
-
-                    
-                    {{ User.organization|normalize }}
-                  {% endif %}
-                  {% if User.job|normalize|IsData %}
-                    <br/>
-                    {{ User.job|normalize }}
-                  {% endif %}
-                  {% if User.site|normalize|IsData %}
-                    <br/>
-                    Сайт:<br/>
-                      {% if User.site|normalize|slice:":4" == 'http' %}
-                                                <a href="{{ User.site|normalize }}">{{ User.site|normalize }}</a>
-                      {%  else %}
-                    <a href="http://{{ User.site|normalize }}">{{ User.site|normalize }}</a>
-
-                  {% endif %}
-                  {% endif %}
-
-								</span>
-          </div>
-        {% endif %}
-        <div class="info-holder">
-          {% if User.school|IsData %}
-            <span class="info">Образование:
-
-            <em>{{ User.school }}{% if User.graduate_year|IsData %} ‘{{ User.graduate_year }}{% endif %}</em>
-          {% endif %}
-          {% if User.faculty|IsData %}
-            <br/>
-            Факультет: <em>{{ User.faculty }}</em>
-          {% endif %}
-          {% if User.cathedra|IsData %}
-            <br/>
-            Кафедра: <em>{{ User.cathedra }}</em>
-          {% endif %}
-          </span>
-        </div>
-        <span class="heading">Контактная информация:</span>
-							<span class="contact">
-								{% if User.country %}{{ User.country }},{% endif %}
-								{% if User.town %}{{ User.town }}{% endif %}
-                {% if User.email|IsData and User.email_visible != 'no_visible' %}
-                <!-- br/>
-                  E-mail:
-                  <a href="#">{ #{ User.email }#}</a -->
-                {% endif %}
-                {% if User.phone_number and User.phone_visible != 'no_visible' %}
-                  <br/>
-                  Телефон:{{ User.phone_number }}
-                {% endif %}
-                {% if User.ICQ_Skype|IsData %}
-                  <br/>
-                  ICQ({{ User.ICQ_Skype }})
-                {% endif %}
-							</span>
-        {% if User.social|IsData %}
-          <span>Профили в социальных сетях/сайт:</span><br>
-          <a href="#">{{ User.social }} </a><br/>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- Заголовок -->
-  <div class="content-block-center-head">
-    <span>Ваша лента сообщений</span>
-  </div>
-  {% for object in object_list %}
-    {% include 'posts/one_post2.html' %}
-  {% endfor %}
-  <script>
-    function SendComment(result_id, form_id, url) {
-        if($(this).data('locked') == 1){
-            return false;
-        }
-        var form = $(this);
-      var text = jQuery("#" + form_id).children(".form-filed-3").val();
-      if (text.trim() == '') {
-        alert('Комментарий не может быть пустым');
-      } else {
-          $(this).data('locked', 1);
-        jQuery.ajax({
-          url: url, //Адрес подгружаемой страницы
-          type: "POST", //Тип запроса
-          dataType: "html", //Тип данных
-          data: jQuery("#" + form_id).serialize(),
-          success: function (response) { //Если все нормально
-              $(this).data('locked', 0);
-            document.getElementById(result_id).innerHTML = response;
-          },
-          error: function (response) { //Если ошибка
-              $(this).data('locked', 0);
-            document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
-          }
-        });
-      }
-    }
-
-    function SendLike(id, service_id, id_result) {
-      jQuery.ajax({
-        url: 'https://vrachivmeste.ru/likes/', //Адрес подгружаемой страницы
-        type: 'get', //Тип запроса
-        data: {'id': id, 'service_id': service_id, 'user_id':{{ user.id }} },
-        success: function (response) { //Если все нормально
-          document.getElementById(id_result).innerHTML = response;
-        },
-        error: function (response) { //Если ошибка
-          alert("Ошибка");
-        }
-      });
-    }
-
-    var thisWork = 1;
-    function getNextP() {
-
-      if (thisWork == 1) {
-        thisWork = 0;
-        $.ajax({
-          type: 'get',
-          url: "{{ path }}",
-          data: {'page': thisPageNum, 'spec_id': spec_id, 'format': format.join()},
-          success: function (data) {
-            //$("#upBlock").css('display','none');
-            $(".content-block-center").html($(".content-block-center").html() + " " + data);
-            thisPageNum = thisPageNum + 1;
-            thisWork = 1;
-          }
-        });
-      }
-    }
-
-    var scrH = $(window).height();
-    var scrHP = $(".content-block-center").height();
-
-    $(window).scroll(function () {
-      var scro = $(this).scrollTop();
-      var scrHP = $(".content-block-center").height();
-      var scrH2 = 0;
-      scrH2 = scrH + scro;
-      var leftH = scrHP - scrH2;
-      if (leftH < 300) {
-        getNextP();
-      }
-    });
-    $(document).ready(function () {
-      /* Apply fancybox to multiple items */
-
-      $("a.first_line").fancybox({
-        'transitionIn': 'elastic',
-        'transitionOut': 'elastic',
-        'speedIn': 600,
-        'speedOut': 200,
-        'overlayShow': false
-      });
-
-    });
-
-  </script>
-
+{% block before_footer %}
 {% endblock %}

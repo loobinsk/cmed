@@ -108,10 +108,7 @@ $(document).ready(function () {
     jQuery(document).ajaxSend(function (event, jqxhr, settings) {
         if (!(/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type))) {
             // ERROR Cookie IE
-            if (jQuery.browser.msie)
-                jqxhr.setRequestHeader("X-CSRFToken", jQuery("input[name='csrfmiddlewaretoken']").val());
-            else
-                jqxhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 jqxhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
         }
     });
 
@@ -271,7 +268,7 @@ $(document).ready(function () {
                 alert('Пожалуйста загрузите картинку!!!');
                 return 0;
             }
-            Dajaxice.groups.addgroup(Dajax.process, {'Spec_id': $('select[name="spec_id"]').val(), 'Text': $('.form-filed-13').val(), 'Title': $('input[name="title"]').val(), 'File': $(file_0).attr('file')});
+            addgroup({'Spec_id': $('select[name="spec_id"]').val(), 'Text': $('.form-filed-13').val(), 'Title': $('input[name="title"]').val(), 'File': $(file_0).attr('file')});
         }
         $('div.content-block-center-write').hide();
         $('div.content-block-center-write-form').slideDown();
@@ -314,9 +311,41 @@ $(document).ready(function () {
             alert('Введите Ваши контактные данные: телефон или email');
             return;
         }
-        Dajaxice.medtus.feedback(Dajax.process, data);
+       feedback(data);
+        $(".popup-close").click();
+
     })
 });
+var showLoader = function (status) {
+    if (status) {
+        if ($('#preloader').length == 0) {
+
+            $('<div id="preloader" title="Ожидайте..."/>').appendTo($('body'));
+        }
+    }
+    else {
+        $('#preloader').remove();
+    }
+}
+
+	function addgroup(senddata){
+             $.get('/groups/addgroup/', senddata, function(data){
+                    alert(data);
+                    location.reload();
+							});
+
+	};
+
+
+	function feedback(senddata){
+             $.get('/medtus/feedback/', senddata, function(data){
+                 if(data.length < 200) {
+                     alert(data);
+                 } else {
+                      alert("Отправка сообщений доступна только зарегистрированным пользователям");
+                 }
+             });
+	};
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -324,3 +353,4 @@ function getParameterByName(name) {
             results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+

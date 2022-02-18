@@ -83,6 +83,7 @@ class ProgressAdminForm(forms.ModelForm):
 
     class Meta:
         model = Progress
+        fields = '__all__'
 
 
 

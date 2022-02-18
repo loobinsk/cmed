@@ -109,6 +109,8 @@ class AbstractBaseUser_(models.Model):
     last_login = models.DateTimeField('last login', default=timezone.now)
 
     is_active = True
+    is_anonymous = False
+    is_authenticated = True
 
     REQUIRED_FIELDS = []
 
@@ -125,19 +127,19 @@ class AbstractBaseUser_(models.Model):
     def natural_key(self):
         return (self.get_username(),)
 
-    def is_anonymous(self):
+    #def is_anonymous(self):
         """
         Always returns False. This is a way of comparing User objects to
         anonymous users.
         """
-        return False
+    #    return False
 
-    def is_authenticated(self):
+    #def is_authenticated(self):
         """
         Always return True. This is a way to tell if the user has been
         authenticated in templates.
         """
-        return True
+    #    return True
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
@@ -255,7 +257,7 @@ class MyUser(AbstractBaseUser_, PermissionsMixin):
         return self.email
 
     def __unicode__(self):
-        return self.email
+        return unicode(self.email)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -367,7 +369,7 @@ class EventAccess(models.Model):
             item[0].save()
 
     @classmethod
-    def check(cls, event_type, user, time=False):
+    def check_new(cls, event_type, user, time=False):
         if not time:
             time = timezone.now()
         if not isinstance(user, MyUser):

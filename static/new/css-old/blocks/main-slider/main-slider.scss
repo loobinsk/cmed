@@ -1,0 +1,98 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.main-slider__card {
+  padding: 60px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main-slider__item {
+  margin: 0;
+}
+.main-slider__items {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: 991px) {
+    flex-wrap: wrap;
+  }
+}
+
+.main-slider__amount {
+  display: flex;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 10px;
+  }
+
+  .main-slider__amout-svg {
+    border-radius: 21px;
+    background-color: $color-base;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    .main-slider__amout-img {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+
+      width: 35px;
+      height: 35px;
+
+      @media screen and (max-width: 991px) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .main-slider__amount-main {
+    margin-left: 15px;
+  }
+  .main-slider__amount-number {
+    font-weight: 700;
+  }
+
+  .main-slider__text {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: $font-size + 1px;
+  }
+}
+
+.main-slider__left-block {
+  max-width: 503px;
+  padding-top: 50px;
+  @media screen and (max-width: 991px) {
+    padding-top: 0;
+  }
+}
+
+.main-slider__calendar-btn {
+  margin: 30px auto 0;
+}
+
+.main-slider {
+  .slick-dots {
+    position: absolute;
+    top: 40%;
+    right: 16%;
+    bottom: auto;
+    left: auto;
+    transform: rotate(270deg);
+    margin: 20px 0;
+    text-align: left;
+
+    width: auto;
+
+    @media screen and (max-width: 1900px) {
+      right: 0;
+    }
+    @media screen and (max-width: 1500px) {
+      display: none;
+    }
+  }
+}

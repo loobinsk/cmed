@@ -1,0 +1,39 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.link {
+  transition: opacity 0.2s linear, color 0.2s linear, border 0.2s linear;
+  transition: color 0.2s linear, background 0.2s linear, border 0.2s linear;
+
+  text-decoration: none;
+  color: $text-secondary;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $color-second;
+  }
+}
+
+.link-solid {
+  color: $text-secondary;
+  text-decoration: underline;
+  width: max-content;
+  font-size: $font-size - 1px;
+  display: block;
+
+  &:hover,
+  &:active,
+  &.active,
+  &:focus {
+    color: $color-base;
+    text-decoration: underline;
+  }
+}
+
+.link-mini {
+  font-size: 12px;
+  line-height: 100%;
+  text-decoration-line: underline;
+  color: #292929;
+}

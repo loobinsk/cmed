@@ -1,138 +1,172 @@
-{% extends 'base.html' %}
-{% load tz %}
-{% load static %}
+{% extends "base.html" %}
 {% load account_tags %}
+{% load tz %}
+{% block title_page %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load staticfiles %}
 {% block js_page %}
-    <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.popup.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.utils.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.form.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+<script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
-{% block title %}Диалоги{% endblock %}
-{% block top_block %}
-    <div class="content-block-top-block-1-window-filter" id="window-filter">
-        <div class="content-block-top-block-1-window-filter-content"></div>
-        <div class="content-block-top-block-1-window-filter-bottom">
-            <input type="submit" id="save-filter" value="Сохранить параметры" class="form-key-7"/>
-        </div>
-    </div>
+{% block after_header %}
+{% include 'circle/header_circle.html' %}
 {% endblock %}
+
+
 {% block content %}
-    <!-- Центральная колонка -->
-    <div class="groups-area">
-        {% if all_msgs %}
-            <div class="holder" id="dialog_admin">
-                    <div class="content-block-center-item-head-photo-bg">
-                        <a target="_parent" href="/circle/dialog/admin">
-                            <div class="content-block-center-item-head-photo"
-                                 style="background-image:url({% static 'images/mt.png' %})"></div>
-                        </a>
-                    </div>
-                    <div class="description">
-                        <h3>
-                            <a href="/circle/dialog/admin">Администрация</a>
-                           </h3>
 
-                        <p class="text">{{ all_msgs.msgs | allmsgs_cut |last|safe|linebreaks }}</p>
-                        <a class="link01" href="/circle/dialog/admin">
-            {{ all_msgs.datetime | allmsgsdate_cut |last |timezone:"Europe/Moscow"}}
-<img src="
-                                {% static 'images/arrow01.png' %}"
-                                                                  width="11"
-                                                                  height="7"
-                                                                  alt="image description"></a>
+ <section class="row-block p-y">
+
+                        <div class="personal-area__info">
+                            <h1 class="title-1">Личные сообщения</h1>
+                            <div class="tabs">
+
+                                <div class="tabs-header">
+                                    <div class="tabs-header__item active js-tab-trigger" data-tab="1">Сообщения <span>{% Unreaded user.id %}</span></div>
+                                    <div class="tabs-header__item js-tab-trigger" data-tab="2">Доклады </div>
+                                 {% comment %}   <div class="tabs-header__item js-tab-trigger" data-tab="3">Статьи </div> {% endcomment %}
+                                </div>
 
 
-                    </div>
-                    <div class="links">
-                        {% AdmUnreaded_one user.id %}
-                    </div>
-                </div>
-        {% endif %}
-        {% for D in page_obj.object_list %}
+                                <div class="tabs-content">
+                                    <div class="tabs-content__item active js-tab-content" data-tab="1">
+                                                  <form action="/circle/dialog/1" method="post">
+						{% csrf_token %}
+                                            <div class="conferense__comment-write">
+
+						 <textarea name="text" autofocus class="form-control" type="text" placeholder="Написать сообщение администрации"></textarea>
+					             <div class="conferense__comment-write-btn">
+                                                    <button type="submit" class="btn conferense__comment-sent"></button>
+                                                </div>
+						<input name="authBid" type="hidden" value="1">
+                                                    </div>
+					</form></br>
+
+
+
+
+
+
+                                    </div>
+                                               <div class="title-1">Диалоги <span>(10)</span></div>
+
+
+
+
+            {% for D in page_obj.object_list %}
 	    	{% if D.authA != user and D.authA and D.authB %}
-                <div class="holder" id="dialog_{{ D.id }}">
-                    <div class="content-block-center-item-head-photo-bg">
-                        <a target="_parent" href="{% url 'lichnie2' D.authA.id %}">
-                            <div class="content-block-center-item-head-photo"
-                                 style="background-image:url({% get_avatar_preview_sizexy D.authA.id 77 77 %}), url({{ D.authA.avatar }})"></div>
-                        </a>
-                    </div>
-                    <div class="description">
-                        <h3>
-                            <a href="{% url 'lichnie2' D.authA.id %}">{{ D.authA.lastname }} {{ D.authA.firstname }} {{ D.authA.surname }}</a>
-                            <em>{{ D.authA.spec_id }}</em></h3>
+                  <div class="personal-area__dialog"id="dialog_{{ D.id }}">
 
-                        <p class="text">{{ D.lastrecord }}</p>
-                        <a class="link01" href="{% url 'dialog' D.authA.id %}">{{ D.createdate }}<img src="
+                        <a target="_parent" href="{% url 'lichnie2' D.authA.id %}">
+                             <div class="personal-area__message-avatar" style="background-image:url({% get_avatar_preview_sizexy D.authA.id 77 77 %}), url({{ D.authA.avatar }})"></div>
+
+                        </a>
+
+                   <div class="personal-area__message-header-name">
+                        <div class="title-4 font-weight-bold">
+                            <a href="{% url 'lichnie2' D.authA.id %}">{{ D.authA.lastname }} {{ D.authA.firstname }} {{ D.authA.surname }}</a> </div>
+                            <div class="title-5">{{ D.authA.spec_id }} </div>
+                   </br>
+                       <div class="title-5"><i>{{ D.lastrecord }}</i> </div>
+                       <a class="link01" href="{% url 'dialog' D.authA.id %}">{{ D.createdate }}<img src="
 
                                 {% if D.lastrecord.auth == user %}{% static 'images/arrow01.png' %}{% else %}{% static 'images/arrow02.png' %}{% endif %}"
                                                                                                       width="11"
                                                                                                       height="7"
                                                                                                       alt="image description"></a>
+                         </div>
+
+                         <a href="{% url 'dialog' D.authA.id %}" class="link-mini  m-r-20">Написать личное сообщение</a>
+                                <a href="" class="link-mini">Удалить</a>
                     </div>
-                    <div class="links">
-                        <a class="delete-group" style="cursor:pointer;"
-                           onclick="if(confirm('Вы уверены что хотите удалить диалог с этим пользователем?')){Dajaxice.circle.removedialog(Dajax.process, {'dialogid':'{{ D.id }}'})}">Удалить
-                            диалог</a>
-                        {% Unreaded_one user.id D.id D.authA.id %}
-                    </div>
-                </div>
+
+
             {% else %}
                 {% if D.authA and D.authB %}
-                    <div class="holder" id="dialog_{{ D.id }}">
+                  <div class="personal-area__dialog"id="dialog_{{ D.id }}">
 
-                        <div class="content-block-center-item-head-photo-bg">
-                            <a target="_parent" href="{% url 'lichnie2' D.authB.id %}">
-                                <div class="content-block-center-item-head-photo"
-                                     style="background-image:url({% get_avatar_preview_sizexy D.authB.id 77 77 %}), url({{ D.authB.avatar }})"></div>
-                            </a>
-                        </div>
+                        <a target="_parent" href="{% url 'lichnie2' D.authA.id %}">
+                             <div class="personal-area__message-avatar" style="background-image:url({% get_avatar_preview_sizexy D.authB.id 77 77 %}), url({{ D.authB.avatar }})"></div>
 
-                        <div class="description">
+                        </a>
 
-                            <h3>
-                                <a href="{% url 'lichnie2' D.authB.id %}">{{ D.authB.lastname }} {{ D.authB.firstname }} {{ D.authB.surname }}</a>
-                                <em>{{ D.authB.spec_id }}</em></h3>
+                   <div class="personal-area__message-header-name">
+                        <div class="title-4 font-weight-bold">
+                            <a href="{% url 'lichnie2' D.authB.id %}">{{ D.authB.lastname }} {{ D.authB.firstname }} {{ D.authB.surname }}</a> </div>
+                            <div class="title-5">{{ D.authB.spec_id }} </div>
+                                       </br>
+                       <div class="title-5"><i>{{ D.lastrecord }}</i> </div>
+                       <a class="link01" href="{% url 'dialog' D.authB.id %}">{{ D.createdate }}<img src="
 
-                            <p class="text">{{ D.lastrecord }}</p>
+                                {% if D.lastrecord.auth == user %}{% static 'images/arrow01.png' %}{% else %}{% static 'images/arrow02.png' %}{% endif %}"
+                                                                                                      width="11"
+                                                                                                      height="7"
+                                                                                                      alt="image description"></a>
+                         </div>
 
-                            <a class="link01" href="{% url 'dialog' D.authB.id %}">{{ D.lastrecord.createdate }}<img
-                                    src="
-
-                                            {% if D.lastrecord.auth == user %}{% static 'images/arrow01.png' %}{% else %}{% static 'images/arrow02.png' %}{% endif %}"
-                                    width="11" height="7" alt="image description"></a>
-
-                        </div>
-                        <div class="links">
-                            <a class="delete-group" style="cursor:pointer;"
-                               onclick="if(confirm('Вы уверены что хотите удалить диалог с этим пользователем?')){Dajaxice.circle.removedialog(Dajax.process, {'dialogid':'{{ D.id }}'})}">Удалить
-                                диалог</a>
-
-                            {% Unreaded_one user.id D.id D.authB.id %}
-
-                        </div>
+                         <a href="{% url 'dialog' D.authB.id %}" class="link-mini m-r-20">Написать личное сообщение</a>
+                                <a href=""  onclick="if(confirm('Вы уверены что хотите удалить диалог с этим пользователем?')){removedialog({'dialogid':'{{ D.id }}'})}" class="link-mini">Удалить</a>
                     </div>
+
+
                 {% endif %}
             {% endif %}
         {% endfor %}
 
-        {% if page_obj.paginator.num_pages > 1 %}
-        <div class="pagination">
-            Страницы:
-            <span class="page-links">
-                <span class="page-current">
-                    {% for i in page_obj.paginator.page_range %}
+                                    </div>
 
-                            <a href="/circle/alldialogs/?page={{ i }}">{{i}}</a>
 
-                    {% endfor %}
-                </span>
-            </span>
-        </div>
-        {% endif %}
+                                    <div class="tabs-content__item js-tab-content" data-tab="2">
+                                      {% if all_msgs %}
+                                            <div class="holder" id="dialog_admin">
+                                                    <div class="content-block-center-item-head-photo-bg">
+                                                        <a target="_parent" href="/circle/dialog/admin">
+                                                            <div class="content-block-center-item-head-photo"
+                                                                 style="background-image:url({% static 'images/mt.png' %})"></div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h3>
+                                                            <a href="/circle/dialog/admin">Администрация</a>
+                                                           </h3>
 
-    </div>
+                                                        <p class="text">{{ all_msgs.msgs | allmsgs_cut |last|safe|linebreaks }}</p>
+                                                        <a class="link01" href="/circle/dialog/admin">
+                                            {{ all_msgs.datetime | allmsgsdate_cut |last |timezone:"Europe/Moscow"}}
+                                <img src="
+                                                                {% static 'images/arrow01.png' %}"
+                                                                                                  width="11"
+                                                                                                  height="7"
+                                                                                                  alt="image description"></a>
+
+
+                                                    </div>
+                                                    <div class="links">
+                                                        <a href="/circle/dialog/admin" >Прочитать все сообщения</a>
+                                                    </div>
+                                                </div>
+                                        {% endif %}
+                                    </div>
+                        </div>
+
+
+
+
+
+        </section>
+
+<script>
+	function removedialog(senddata){
+             $.get('/circle/removedialog/', senddata, function(data){
+                    //alert(data);
+                    location.reload();
+							});
+
+	};
+
+    </script>
+
+{% endblock %}
+
+{% block before_footer %}
 {% endblock %}

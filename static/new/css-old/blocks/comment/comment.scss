@@ -1,0 +1,63 @@
+@import "../vars/vars.scss";
+@import "../../main/include-media";
+
+.comment {
+  margin-top: 20px;
+}
+
+.comment__chat {
+  border: 1px solid #cdcdcd;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px 30px 12px 20px;
+  position: relative;
+}
+.comment__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.comment__header-left {
+  display: flex;
+  align-items: center;
+}
+.comment__avatar {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.comment__prof {
+  font-size: 12px;
+  line-height: 120%;
+
+  color: #6d6d6d;
+}
+
+.comment__header-right {
+  .title-4 {
+    color: #6d6d6d;
+  }
+}
+
+.comment__chat-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid #cdcdcd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-top: -5px;
+  padding: 15px 30px 10px 10px;
+}
+
+.comment____chat-text {
+  padding-left: 58px;
+  @media screen and (max-width: 768px) {
+    padding-left: 0;
+  }
+}

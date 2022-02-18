@@ -1,16 +1,61 @@
-{% extends "base.html" %}{% load account_tags %}
-{% block title_page %}{{ title }}{% endblock %}
-{% block title %}{{ title }}{% endblock %}{% load staticfiles %}
+{% extends "base.html" %}{% load account_tags staticfiles %}
+{% block title_page %}{{ title|striptags }}{% endblock %}
+{% block title %}{{ title|safe }}{% endblock %}
 {% block js_page %}
-  <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
-  <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript" charset="utf-8"></script>
-  <script src="{% static 'js/dajaxice.core.js' %}" type="text/javascript" charset="utf-8"></script>
-  <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'js/detect.js' %}"></script>
+    <script src="{% static 'js/jquery.form.min.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
-{% block filter_content %}
-{% endblock %}
+{{ type_is }}
+
+
 {% block content %}
-  {% if user.is_authenticated %}
+<!--content-->
+<main class="content">
+    <div class="lecturers">
+        <section class="row-block p-b">
+            <div class="container">
+                <div class="my-row">
+                    <div class="my-col-12 my-col-lg-9">
+                        <h1 class="h1">Наши лекторы</h1>
+                        <div class="lecturers__alphabet">
+
+
+
+
+            {% for letter in lecturers_letters %}
+
+                  {% if request.GET.letter|lower == letter|lower %}
+                    <a href="" class="lecturers__letters active">{{ letter }}</a>
+                  {% else %}
+                    <a href="{% url "lecturers" %}?letter={{letter}}" class="lecturers__letters">{{ letter }}</a>
+                  {% endif %}
+
+            {% endfor %}
+        {% if request.GET.letter %}
+    <a href="{% url "lecturers" %}" class="lecturers__letters lecturers__letters_all">Все</a>
+        {% else %}
+           <a href="" class="lecturers__letters lecturers__letters_all">Все</a>
+        {% endif %}
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+</main>
+<!--/content-->
+
+
+     <div id="lenta">
+     {% if user.is_authenticated %}
     {% if object_list|length %}
       {% for object in object_list %}
         {% include 'lecturers/one_lecturer.html' %}
@@ -38,71 +83,93 @@
       <br/>
     </div>
   {% endif %}
-  <script>
-  {% if user.is_authenticated %}
-    var thisWork = 1;
-    function getNextP() {
+     </div>
+     {% if user.is_authenticated %}
+<button id="next10" class="btn-default btn m-t-50 m-auto ">Показать еще</button>
+      {% endif %}
+    <script>
+{% comment %}
 
-        if (thisWork == 1) {
-            thisWork = 0;
+    $('.content-block-center-item-content img').each(function (index) {
+        this.style.width = "100%";
+        this.style.height = "100%";
+    })
+{% endcomment %}
 
-            var queryData = {'page': thisPageNum, 'letter': '{{ request.GET.letter }}', 'search': $('input[name="search"]').val()};
-            $.ajax({
-                type: 'get',
-                url: "{{ path }}",
-                data: queryData,
-                success: function (data) {
-                    $(data).appendTo(".content-block-center");
-                    thisPageNum = thisPageNum + 1;
-                    thisWork = 1;
-                    $('.content-block-center-item-content hr').each(function (index) {
-                        this.style.width = "100%";
-                    })
+    $('.content-block-center-item-content hr').each(function (index) {
+        this.style.width = "100%";
+    })
+
+    function SendComment(result_id, form_id, url) {
+        var text = jQuery("#" + form_id).children(".form-filed-3").val();
+        if (text.trim() == '') {
+            alert('Комментарий не может быть пустым');
+        } else {
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                dataType: "html",
+                data: jQuery("#" + form_id).serialize(),
+                success: function (response) { //Если все нормально
+                    document.getElementById(result_id).innerHTML = response;
+                },
+                error: function (response) { //Если ошибка
+                    document.getElementById(result_id).innerHTML = "Ошибка при отправке формы";
                 }
             });
         }
     }
 
-    var scrH = $(window).height();
-    var scrHP = $(".content-block-center").height();
+    function SendLike(id, service_id, id_result) {
+        jQuery.ajax({
+            url: 'https://vrachivmeste.ru/likes/', //Адрес подгружаемой страницы
+            type: 'get', //Тип запроса
+            data: {'id': id, 'service_id': service_id, 'user_id':{{ user.id }} },
+            success: function (response) { //Если все нормально
+                document.getElementById(id_result).innerHTML = response;
+            },
+            error: function (response) { //Если ошибка
+                alert("Ошибка");
+            }
+        });
+    }
+    </script>
 
-    $(window).scroll(function () {
-        var scro = $(this).scrollTop();
-        var scrHP = $(".content-block-center").height();
-        var scrH2 = 0;
-        scrH2 = scrH + scro;
-        var leftH = scrHP - scrH2;
-        if (leftH < 300) {
-            getNextP();
-        }
+<script>
+    var thisWork = 1;
+    thisPageNum = 2;
+    $('#next10').click(function (){ showLoader(true);
+	if (thisWork == 1) {
+	    thisWork = 0;
+	    jQuery.ajax({
+		type: 'get',
+		url: "{{ path }}",
+		data: {
+		    'page': thisPageNum,
+		    'letter': '{{ request.GET.letter }}',
+		    'search': $('input[name="search"]').val()
+		},
+		success: function (data) {
+		    //var page = $(data).find('input[name="page"]').val();
+		    //if (page) {
+			showLoader(false); $(data).appendTo("#lenta");
+			thisPageNum+=1;
+			thisWork = 1;
+			$('.content-block-center-item-content img').each(function (index) {
+			});
+			$('.content-block-center-item-content hr').each(function (index) {
+			    this.style.width = "100%";
+			});
+		    //}
+		},
+		error: function() {
+
+		}
+	    });
+	}
     });
-  {% endif %}
-  </script>
-{% endblock %}
+    </script>
 
 
-{% block right_block %}
-    <div class="content-block-right-lecturers">
-        <h1>
-          Лекторы
-        </h1>: <br/>
-        {% if request.GET.letter %}
-          <a href="{% url "lecturers" %}" class="all-lecturers">Все</a>
-        {% else %}
-          <span class="all-lecturers">Все</span>
-        {% endif %}
 
-        <ul>
-            {% for letter in lecturers_letters %}
-                <li>
-                  {% if request.GET.letter|lower == letter|lower %}
-                    <span class="active">{{ letter }}</span>
-                  {% else %}
-                    <a href="{% url "lecturers" %}?letter={{letter}}">{{ letter }}</a>
-                  {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {{ block.super }}
 {% endblock %}

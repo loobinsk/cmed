@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes import fields
 from datetime import datetime, timedelta
 from django.utils import timezone
 from tinymce.models import HTMLField
@@ -104,7 +104,7 @@ class Visited(models.Model):
 	lastview = models.DateTimeField(auto_now_add=True)
 
 	content_type = models.ForeignKey(ContentType)
-	content_object = generic.GenericForeignKey('content_type', 'material_id')
+	content_object = fields.GenericForeignKey('content_type', 'material_id')
 
 	@classmethod
 	def record(cls, obj):
@@ -143,6 +143,10 @@ class Translation(models.Model):
 	title = models.CharField(max_length=255, blank=False, default=u'Трансляция')
 	data_open = HTMLField(default=None, blank=True, verbose_name=u'Открытые данные')
 	data = HTMLField(default=None, blank=True, verbose_name=u'Данные')
+	begindate = models.DateTimeField(null=True, blank=True, verbose_name=u'Дата и время начала трансляции')
+	enddate = models.DateTimeField(null=True, blank=True, verbose_name=u'Дата и время окончания трансляции')
+	is_accredited = models.BooleanField(blank=True, default=0, verbose_name=u'Аккредитован НМО')
+	checks_count = models.IntegerField(default=0, verbose_name=u'Кол-во проверок присутствия пользователя на странице', blank=True)
 	active = models.BooleanField(default=True, verbose_name=u'Активность')
 
 	def __unicode__(self):
@@ -161,6 +165,9 @@ class Translation(models.Model):
 
 	link = property(translation_link)
 
+class TranslationModal(models.Model):
+	translation = models.ForeignKey('medtus.Translation')
+	datetime = models.DateTimeField(null=False, blank=False, verbose_name=u'Дата и время проверки')
 
 class TranslationVisit(models.Model):
 	dt_create = models.DateTimeField(auto_now_add=True)
@@ -171,6 +178,16 @@ class TranslationVisit(models.Model):
 	class Meta:
 		ordering = ['-dt_create']
 
+
+class TranslationViewer(models.Model):
+	user = models.ForeignKey('account.MyUser')
+	post = models.ForeignKey('medtus.Translation')
+	checks_counter = models.IntegerField(default=0, blank=False)
+	dt_create = models.DateTimeField(auto_now_add=True)
+	dt_update = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-dt_create']
 
 class Feedback(models.Model):
 	"""
@@ -199,6 +216,7 @@ class ContentPage(models.Model):
 	private = models.BooleanField(default=False, verbose_name="Закрыть страницу")
 	page_alias = models.CharField(max_length=100, blank=False, default="trs321", verbose_name=u"Ссылка")
 	email_field = models.BooleanField(default=False, verbose_name=u"Показывать поле email?")
+	phone_field = models.BooleanField(default=False, verbose_name=u"Показывать поле телефон?")
 	
 	def __unicode__(self):
 		return u"%s" % (self.title,)
@@ -210,6 +228,7 @@ class ContentPage(models.Model):
 class PrivateContentPageUsers(models.Model):
 	full_name = models.CharField(max_length=255, blank=False, verbose_name=u"ФИО")
 	email = models.CharField(max_length=255, blank=True, verbose_name=u"email")
+	phone = models.CharField(max_length=255, blank=True, verbose_name=u"phone")
 	city = models.CharField(max_length=255, blank=False, verbose_name=u"Город")
 	speciality = models.CharField(max_length=255, blank=False, verbose_name=u"Специальность")
 	page = models.ForeignKey('medtus.ContentPage', verbose_name=u"Страница")	

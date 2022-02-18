@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.middleware.csrf import get_token
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 
 from account.models import MyUser, AdditionalImage, Category, Aword
@@ -169,7 +169,8 @@ def saveprofile(request):
         user.surname = request.POST['surname']
         if 'sex' in request.POST:
             user.sex = request.POST['sex']
-        birthday = request.POST['birthday'].split()
+        birthday = request.POST['birthday'].split('/')
+        #print(birthday)
         try:
             d1 = datetime.strptime('{0} {1} {2}'.format(birthday[0], birthday[1], birthday[2]), "%d %m %Y")
             user.birthday = d1.strftime("%Y-%m-%d")
@@ -255,9 +256,7 @@ def lichnie1(request):
         user.country = Countries.objects.get(pk=1)
         user.save()
 
-    return render_to_response(
-        'lichnie/lichnie1.html',
-        {
+    return render(request, 'lichnie/lichnie1.html',{
             'birthday': user.birthday,
             'spec_list': Specialities.objects.all().order_by('name'),
             'addspeciality_list': Specialities.objects.all(),
@@ -267,8 +266,7 @@ def lichnie1(request):
             'town_list': Towns.objects.filter(country_id=user.country.id).order_by('order', 'name'),
             'csrf_token_value': get_token(request),
             'category_list': Category.objects.all(),
-        },
-        context)
+        },context.flatten())
 
 
 @csrf_exempt
