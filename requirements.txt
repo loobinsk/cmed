@@ -1,22 +1,30 @@
+BTrees==4.9.2
 DateTime==4.0.1
 dateutils==0.6.6
 Django==1.11
-django-dajax-me==0.9.4
-django-dajaxice==0.7
-django-dajaxice-me==0.8
+
+# django-dajax-me==0.9.4
+# django-dajaxice==0.7
+# django-dajaxice-me==0.8
+
 django-extensions==1.9.9
-django-model-utils==2.6
-django-tinymce==2.8.0
+django-filebrowser==3.9.2
+django-grappelli==2.10.4
+django-model-utils==3.0.0
+django-tinymce==2.7.0
 easy-thumbnails==1.4
 feedgen==0.3.2
 fpconst==0.7.2
+futures==3.3.0
 gunicorn==19.4.5
 lxml==3.5.0
+multipart==0.1.1
 MySQL-python==1.2.5
 mysqldbda==1.0.2
 persistent==4.0.8
 Pillow==6.2.2
 python-dateutil==2.4.2
+python-gettext==4.0
 pytz==2014.10
 rcssmin==1.0.6
 rjsmin==1.0.12
@@ -27,12 +35,15 @@ SOAPpy==0.12.1
 sorl-thumbnail==12.5.0
 sqlparse==0.1.14
 transaction==1.4.3
+trollius==2.2.1
 typing==3.10.0.0
 virtualenv==1.11.6
 Wand==0.4.4
+wheel==0.37.1
 wstools==0.4.3
 zc.lockfile==1.1.0
+ZConfig==3.6.0
 zdaemon==4.0.0
+ZEO==5.2.3
+ZODB==5.6.0
 ZODB3==3.11.0
-django-grappelli==2.10.4
-django-filebrowser==3.9.2
