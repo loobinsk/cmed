@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls import include, url
 #from dajaxice.core import dajaxice_autodiscover
 from django.views.generic import TemplateView
@@ -60,21 +61,21 @@ urlpatterns = [
     url(r'^photo/fileupload/(?P<sizex>\d+)/(?P<sizey>\d+)$', fileupload,  name='photos.fileupload'),
     url(r'^photo/add/$',  addphoto,  name='photos.addphoto'),
     url(r'^tinymce/', include('tinymce.urls')),
-    #url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
+    # url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
     url(r'^banners/', include('banners.urls')),
     url(r'^translation/', include('medtus.urls')),
     url(r'^medtus/', include('medtus.urls')),
 
-    #tests
+    # tests
     url(r'^quiz/', include('quiz.urls')),
 
-    #redirects
+    # redirects
     url(r'^video/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailvideos', permanent=True), name='detailvideos_old'),
     url(r'^events/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailevent', permanent=True), name='detailevent_old'),
     url(r'^photogallery/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='galleries_detail', permanent=True), name='galleries_detail_old'),
     url(r'^groups/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailgroup', permanent=True), name='detailgroup_old'),
 
-    #posts
+    # posts
     url(r'^news/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
     url(r'^articles/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
     url(r'^vacancies/view/(?P<pk>\d+)/?$', RedirectView.as_view(pattern_name='detailpractice', permanent=True), name='detailpractice_old'),
@@ -88,16 +89,15 @@ urlpatterns = [
     # url(r'^trs5/$', 'medtus.views.trs5', name='trs5'),
     # url(r'^mediakit/$', 'medtus.views.mediakit', name='mediakit'),
     url(r'^about/$', education, name='education'),
-     url(r'^contacts/$', contacts, name='contacts'),
+    url(r'^contacts/$', contacts, name='contacts'),
     url(r'^enlargecounter$', login_required(enlargeCounter), name='enlargeCounter'),
     url(r'^online/$', online, name='online'),
-    #url(r'^nmo/$', RedirectView.as_view(url='/circle/dialog/nmo', permanent=False), name='nmo'),
+    # url(r'^nmo/$', RedirectView.as_view(url='/circle/dialog/nmo', permanent=False), name='nmo'),
     url(r'^nmo/$', login_required(circle_views.NmoDialogView.as_view()), name='nmo'),
     url(r'^contacts/$', contacts, name='contacts'),
     url(r'^(?P<page_alias>.+?)/$', static_page),
+] + staticfiles_urlpatterns()
 
-
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

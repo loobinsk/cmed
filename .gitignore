@@ -49,7 +49,9 @@ tmtagsHistory
 node_modules/
 site_media/
 media/
-cmedu/settings*
+# cmedu/settings*
+cmedu/local_settings*
 _logging_*
-/static/
-_dumpfile_*
+/.static/
+/.logs/
+Pipfile

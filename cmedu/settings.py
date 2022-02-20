@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 
 SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+PROJECT_PATH = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -23,10 +22,13 @@ SECRET_KEY = '@=6=2e@!f-vj&o*@u97#tgm0q$(ftxu(85=n*2-6vygardy%-y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#DEBUG = False
-#TEMPLATE_DEBUG = DEBUG
+# DEBUG = False
+# TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1', 'www.vrvm.ru', 'vrvm.ru', 'vrachivmeste.ru', 'www.vrachivmeste.ru','45.80.69.219']
+ALLOWED_HOSTS = [
+        'localhost', '127.0.0.1', 'www.vrvm.ru', 'vrvm.ru',
+        'vrachivmeste.ru', 'www.vrachivmeste.ru', '45.80.69.219'
+    ]
 
 # Application definition
 
@@ -39,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.sites',
+    # 'django.contrib.sites',
     'django_extensions',
     'tinymce',
     'sorl.thumbnail',
@@ -129,44 +131,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-#STATICFILES_FINDERS = [
- #   'dajaxice.finders.DajaxiceFinder',
+# STATICFILES_FINDERS = [
+#   'dajaxice.finders.DajaxiceFinder',
 #     'compressor.finders.CompressorFinder',
 # ]
 
 
-STATIC_URL = '/static/'
-
-#MEDIA_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/media'
-#MEDIA_URL = '/media/'
-#PUBLIC_HTML_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name'
-#STATIC_ROOT = '/var/www/meddjango/data/www/medtus.djangohost.name/static'
-
-MEDIA_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/media'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/media'
+
 PUBLIC_HTML_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name'
+
+STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/vrachivmeste.ru/medtus.djangohost.name/static'
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static/'),
+)
 
 FILEBROWSER_DIRECTORY = ''
 DIRECTORY = ''
 
-SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
-
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
-TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 AUTH_USER_MODEL = 'account.MyUser'
 
 LOGIN_URL = '/account/login'
 
-
-# EMAIL_PORT = 25
-# EMAIL_HOST = '127.0.0.1'
 
 ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
 COORD_EMAIL = 'vrvm.koordinator@gmail.com'
@@ -178,26 +167,36 @@ EMAIL_HOST_USER = 'vrvm.ru@gmail.com'
 EMAIL_HOST_PASSWORD = 'KAG2e{bTp?'
 
 
-#COORD_EMAIL = 'vrvm.koordinator@gmail.com'
-#EMAIL_PORT = 25
-#EMAIL_HOST = '127.0.0.1'
-#ADMIN_EMAIL = 'vrvm.redaktor@gmail.com'
-
-
 AVATAR_SIZE = 200, 200
 SITE_URL = 'vrachivmeste.ru'
-
 
 
 TINYMCE_JS_URL = os.path.join(SITE_URL, '/static/tiny_mce/tiny_mce_src.js')
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tiny_mce")
 TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",
-    'plugins': "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-    'theme_advanced_buttons1': "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontsizeselect",
-    'theme_advanced_buttons2': "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-    'theme_advanced_buttons3': "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-    'theme_advanced_buttons4': "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+    'plugins': 'autolink,lists,spellchecker,pagebreak,style,layer,table,save,'
+               'advhr,advimage,advlink,emotions,iespell,inlinepopups,'
+               'insertdatetime,preview,media,searchreplace,print,contextmenu,'
+               'paste,directionality,fullscreen,noneditable,visualchars,'
+               'nonbreaking,xhtmlxtras,template',
+    'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
+                               'justifyleft,justifycenter,justifyright,'
+                               'justifyfull,|,styleselect,formatselect,'
+                               'fontsizeselect',
+    'theme_advanced_buttons2': 'cut,copy,paste,pastetext,pasteword,|,search,'
+                               'replace,|,bullist,numlist,|,outdent,indent,'
+                               'blockquote,|,undo,redo,|,link,unlink,anchor,'
+                               'image,cleanup,help,code,|,insertdate,'
+                               'inserttime,preview,|,forecolor,backcolor',
+    'theme_advanced_buttons3': 'tablecontrols,|,hr,removeformat,visualaid,|,'
+                               'sub,sup,|,charmap,emotions,iespell,media,'
+                               'advhr,|,print,|,ltr,rtl,|,fullscreen',
+    'theme_advanced_buttons4': 'insertlayer,moveforward,movebackward,absolute,'
+                               '|,styleprops,spellchecker,|,cite,abbr,acronym,'
+                               'del,ins,attribs,|,visualchars,nonbreaking,'
+                               'template,blockquote,pagebreak,|,insertfile,'
+                               'insertimage',
     'theme_advanced_toolbar_location': "top",
     'theme_advanced_toolbar_align': "left",
     'theme_advanced_statusbar_location': "bottom",
@@ -208,23 +207,25 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 335,
     'relative_urls': False,
     'convert_urls': False,
-    'extended_valid_elements': 'iframe[src|title|width|height|allowfullscreen|frameborder]',
+    'extended_valid_elements': 'iframe[src|title|width|height|allowfullscreen|'
+                               'frameborder]',
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
 
-#TEMPLATE_CONTEXT_PROCESSORS += (
+# TEMPLATE_CONTEXT_PROCESSORS += (
 #    'django.core.context_processors.request',
 #    'cmedu.context_processors.request',
-#)
+# )
+
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(PROJECT_PATH, 'templates')
-                 ],
+        "DIRS": [TEMPLATE_PATH],
         "APP_DIRS": True,
         "OPTIONS": {
-                "context_processors": [
+            "context_processors": [
                 "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.i18n",
@@ -232,7 +233,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                #"account.context_processors.account",
+                # "account.context_processors.account",
                 "cmedu.context_processors.request",
                 "django.template.context_processors.request"
             ],
@@ -263,7 +264,7 @@ LOGGING = {
         'production_file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '_logging_main.log',
+            'filename': '.logs/_logging_main.log',
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 7,
             'formatter': 'main_formatter',
@@ -271,7 +272,7 @@ LOGGING = {
         'debug_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '_logging_main_debug.log',
+            'filename': '.logs/_logging_main_debug.log',
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 7,
             'formatter': 'main_formatter',
