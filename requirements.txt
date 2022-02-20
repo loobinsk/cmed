@@ -7,6 +7,7 @@ Django==1.11
 # django-dajaxice==0.7
 # django-dajaxice-me==0.8
 
+django-crontab==0.7.1
 django-extensions==1.9.9
 django-filebrowser==3.9.2
 django-grappelli==2.10.4

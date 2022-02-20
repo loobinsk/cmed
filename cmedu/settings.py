@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'django.contrib.sites',
+    'django_crontab',
     'django_extensions',
     'tinymce',
     'sorl.thumbnail',
@@ -342,6 +343,12 @@ TEMPLATE_VARS = {
 DEFAULT_FROM_EMAIL = 'Врачи Вместе <noreply@vrvm.ru>'
 
 RSS_PASS_DEFAULT, RSS_CATEGORY_DEFAULT = 30, 30
+
+
+CRONJOBS = [
+    ('30 2 * * *', 'django.core.management.call_command', ['boost_views']),
+]
+
 
 # file with local settings
 try:
