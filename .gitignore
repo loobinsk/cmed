@@ -55,3 +55,4 @@ _logging_*
 /.static/
 /.logs/
 Pipfile
+/.virtual/
