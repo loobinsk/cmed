@@ -17,17 +17,19 @@ def boost_views_for_latest_news(views_count=None):
     if views_count is None or not isinstance(views_count, int):
         views_count = 30
 
-    post_date = timezone.now().date() - timedelta(days=1)
-    yesterday_posts = Posts.objects.filter(type=1, status=0) \
+    start_date = timezone.now() - timedelta(days=30)
+    end_date = timezone.now() - timedelta(days=1)
+    month_posts = Posts.objects.filter(type=1, status=0) \
         .filter(
-            Q(begindate__date=post_date) | Q(createdate__date=post_date)
-        ).only('begindate', 'createdate')[:10]
+            Q(begindate__range=[start_date, end_date])
+            | Q(createdate__range=[start_date, end_date])
+        ).only('begindate', 'createdate')
 
     ids = []
 
-    for post in yesterday_posts:
-        if (post.begindate and post.begindate.date() == post_date) or \
-                (not post.begindate and post.createdate.date() == post_date):
+    for post in month_posts:
+        if (post.begindate and start_date <= post.begindate <= end_date) or \
+                (not post.begindate and start_date <= post.createdate <= end_date):
             # boost
             ids.append(post.id)
 
