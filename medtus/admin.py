@@ -1,12 +1,14 @@
 import os
 import urllib
 
+from django.utils.html import format_html
+from django.core.urlresolvers import reverse
 from django.contrib import admin
 #from mce_filebrowser.admin import MCEFilebrowserAdmin
 from django.conf import settings
 
 from medtus.models import MaterialVideo, PrivateContentPageUsers, MaterialPhoto, Translation, Feedback, Specialities, Towns, ContentPage, \
-    TranslationVisit, TranslationViewer, TranslationModal
+    TranslationVisit, TranslationViewer, TranslationModal, Countries, Regions
 from cuter.cuter import resize_and_crop
 from lenta.views import do_URL
 from account.mixins import CSVTruncateAdmin
@@ -118,19 +120,71 @@ class CabModelForm( forms.ModelForm ):
         model = Specialities
         fields = '__all__'
 
+
 class SpecAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'title')
     form = CabModelForm
 
+
 class TownAdmin(admin.ModelAdmin):
-    list_display = ('id', 'country_id', 'region', 'name')
+    list_display = ('id', 'region', 'name')
     search_fields = ('name', )
+
+    _regions = list(Regions.objects.all().values_list('id', 'title'))
 
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("size", "okrug", "checked", )
         form = super(TownAdmin, self).get_form(request, obj, **kwargs)
         return form
 
+    def region(self, object):
+        region = next(
+                (x for x in self._regions if x[0] == object.region_id),
+                None
+            )
+
+        if region:
+            return region[1]
+
+
+class RegionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'country', 'title', 'name', 'towns')
+    search_fields = ('name', 'title', )
+
+    _countries = list(Countries.objects.all())
+    _towns = Towns.objects.all().values_list('region_id', 'name', 'id')
+
+    def country(self, object):
+        country = next(
+                (x for x in self._countries if x.id == object.country_id),
+                None
+            )
+
+        if country:
+            return country.title
+
+    def towns(self, object):
+        '''
+            List of cities with links to edit the city.
+        '''
+
+        element = u'<a style="cursor:pointer;padding-right:10px" ' \
+                  u'href="{}" target="_blank">{}</a> '
+        html_total = ''
+
+        for town in filter(lambda x: x[0] == object.id, self._towns):
+            html_total += element.format(
+                    reverse("admin:medtus_towns_change", args=(town[2],)),
+                    town[1]
+                )
+
+        return format_html(
+            u'<div style="max-width:500px">' + html_total + u'</div>')
+
+
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'name')
+    search_fields = ('name', )
 
 
 class ContentPageAdmin(admin.ModelAdmin):
@@ -138,11 +192,13 @@ class ContentPageAdmin(admin.ModelAdmin):
     # def has_add_permission(self, request):
     #     return not ContentPage.objects.exists()
 
+
 class PrivateContentPageUsersAdmin(CSVTruncateAdmin, admin.ModelAdmin):
     list_display = ('full_name', 'email', 'phone', 'speciality', 'city', 'page', 'dt_create')
     list_filter = ('page',)
     list_per_page = 100
     csv_record_limit = 200000
+
 
 class TranslationVisitAdmin(admin.ModelAdmin):
     list_display = ('dt_create', 'dt_update', 'post', 'user')
@@ -154,6 +210,8 @@ admin.site.register(MaterialPhoto, PhotoAdmin)
 admin.site.register(Translation, TranslationAdmin)
 admin.site.register(TranslationModal, TranslationModalAdmin)
 admin.site.register(Specialities, SpecAdmin)
+# admin.site.register(Countries, CountryAdmin)
+admin.site.register(Regions, RegionAdmin)
 admin.site.register(Towns, TownAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ContentPage, ContentPageAdmin)

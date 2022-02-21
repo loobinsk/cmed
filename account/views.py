@@ -22,7 +22,7 @@ from django.db.transaction import atomic
 from quiz.models import Quiz
 from account.forms import RegisterStep1Form, RegisterStep2Form, RegisterStep3Form
 from .models import MyUser, AdditionalImage, AllMsg
-from medtus.models import Specialities, Towns, Countries
+from medtus.models import Specialities, Towns, Countries, Regions
 from cuter.cuter import resize_and_crop
 from fileshandle.views import FileUploadTo
 from simplejson import dumps, loads
@@ -203,16 +203,36 @@ def register1(request):
 
 
 def register2(request):
+    def build_html_select_form(objects, first_title=None, field_name=None):
+        out = []
+        out.append(u'<option value="0">{}</option>'.format(first_title))
+        for object in objects:
+            out.append(u'<option value="{0}">{1}</option>'.format(
+                            object.id, getattr(object, field_name or 'name')))
+        return out
+
     # Like before, get the request's context.
     if request.method == 'GET' and request.is_ajax():
-        town_list = Towns.objects.filter(country_id=request.GET.get('country')).order_by('name')
-        out = []
-        out.append(u'<option value="0">Выберите город</option>')
-        for town in town_list:
-            out.append(u'<option value="{0}">{1}</option>'.format(town.id, town.name))
-        return HttpResponse(out)
+        if request.GET.get('country', None):
+            first_title = u'Выберите регион'
+            queryset = Regions.objects.filter(
+                    country_id=request.GET.get('country')
+                ).order_by('name')
+            return HttpResponse(
+                        build_html_select_form(queryset, first_title, 'title'))
+        elif request.GET.get('region', None):
+            # Get towns by region. After set country and region.
+            first_title = u'Выберите город'
+            queryset = Towns.objects.filter(
+                    region_id=request.GET.get('region')
+                ).order_by('name')
+            return HttpResponse(build_html_select_form(queryset, first_title))
+        else:
+            return HttpResponse(u'<option value="0">---------</option>')
+
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('register4'))
+
     step2_form = RegisterStep2Form()
     if request.method == 'POST':
         step2_form = RegisterStep2Form(data=request.POST)
@@ -220,6 +240,7 @@ def register2(request):
             return HttpResponseRedirect(reverse('register3'))
     else:
         step2_form = RegisterStep2Form()
+
     # Render the template depending on the context.
     return render(request,
         'account/register.html',
@@ -255,6 +276,10 @@ def register3(request):
                 profile.town = Towns.objects.get(id=request.session['town'])
             except Towns.DoesNotExist:
                 profile.town = None
+            try:
+                profile.region = Regions.objects.get(id=request.session['region'])
+            except Regions.DoesNotExist:
+                profile.region = None
             try:
                 profile.country = Countries.objects.get(id=request.session['country'])
             except Countries.DoesNotExist:
@@ -375,12 +400,12 @@ def logfiles():
         if "sending" in file:
             logfiles.append(file)
     return logfiles
-    
-def allmsgs(request, **kwargs):    
+
+def allmsgs(request, **kwargs):
     return render(request, 'circle/MassDialog.html',{'log_files': logfiles()})
 
 @atomic
-def allmsg(request, **kwargs):    
+def allmsg(request, **kwargs):
     if re.search("[?].*", request.POST.get('url')):
         xxx = re.search("[?].*", request.POST.get('url')).group(0)
         xx=re.sub("[?]","",xxx)
@@ -502,12 +527,12 @@ def allmsgcodes(request, **kwargs):
         htmsg="не отправлено, недостаточно кодов: "+str(len(codes))+" < "+str(len(users))
         return render(request, 'circle/MassDialog.html',{'msg':htmsg})
     file_content=u'Сообщение:\n'+message+u'\nВремя отправки:'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+u'\nСообщение с кодами НМО отправлено '+str(len(users))+u' пользователям: \n'
-    for i,user in enumerate(users):        
+    for i,user in enumerate(users):
         msg, created = AllMsg.objects.get_or_create(user=user, type=1)
         msg.unreaded=int(msg.unreaded)+1
         msg.msgs=msg.msgs+message+u'<br><b>КОД: </b>'+codes[i]+'|'
         msg.datetime=str(msg.datetime)+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'|'
-        msg.type=1        
+        msg.type=1
         msg.save()
 
         try:
@@ -562,7 +587,7 @@ def allmsgcodes(request, **kwargs):
                       lastname+u', '+\
                       spec+u', '+town+u', '+\
                       country+\
-                      u' код:'+codes[i]+u' - доставлено\n'          
+                      u' код:'+codes[i]+u' - доставлено\n'
 
     f = open(os.path.join(settings.STATIC_ROOT,
                           'sending-NMO.log-'+str(timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S"))+'.txt'), 'w+')

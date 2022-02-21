@@ -307,7 +307,7 @@
                                 <div class="title-3 m-b-30">Контактная информация:</div>
                                 <div class="contact-page__row">
                                     <div class="contact-page__left">
-                                        <div class="title-4">Выберите страну *</div>
+                                        <div class="title-4">Выберите страну *:</div>
                                     </div>
                                     <div class="contact-page__right">
                                         <select class="select2" name="country" id="country_change" >
@@ -321,7 +321,21 @@
 
                                 <div class="contact-page__row">
                                     <div class="contact-page__left">
-                                        <div class="title-4">Выберите город *</div>
+                                        <div class="title-4">Регион *:</div>
+                                    </div>
+                                    <div class="contact-page__right">
+                                        <select class="select2" name="region" id="region_change">
+                                            <option selected value="1" >Выберите регион</option>
+                                    {% for t in town_list %}
+                                        <option value="{{ t.id }}" {% if town|stringformat:"s" == t.id|stringformat:"s" %} selected {% endif %}>{{ t.name }}</option>
+                                    {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="contact-page__row">
+                                    <div class="contact-page__left">
+                                        <div class="title-4">Город *:</div>
                                     </div>
                                     <div class="contact-page__right">
                                         <select class="select2" name="town" id="town_change">
@@ -382,11 +396,19 @@
 
 <script>
 	$('#country_change').change(function (){
-             $.get('/account/register2/', {country: $('#country_change').find(":selected").val()}, function(data){
-                {   $("#town_change").empty();
-                    $(data).appendTo("#town_change");
-				}
-			});
+        $.get('/account/register2/', {country: $('#country_change').find(":selected").val()}, function(data){
+            $("#region_change").empty();
+            $("#town_change").empty();
+            $('<option value="0">Выберите город</option>').appendTo('#town_change');
 
-	});
-    </script>
+            $(data).appendTo("#region_change");
+
+            $('#region_change').change(function (){
+                $.get('/account/register2/', {region: $('#region_change').find(":selected").val()}, function(data){
+                    $("#town_change").empty();
+                    $(data).appendTo("#town_change");
+                });
+            });
+        });
+    });
+</script>

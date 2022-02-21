@@ -81,11 +81,11 @@ class RegisterStep2Form(forms.ModelForm):
     mandatory_fields = {'surname': u'Поле Имя не заполнено', 'firstname': u'Поле Отчество не заполнено',
                         'lastname': u'Поле Фамилия не заполнено',
                         'spec_id': u'Поле Основная специальность не заполнено', 'country': u'Поле Страна не заполнено',
-                        'town': u'Поле Город не заполнено', 'organization': u'Поле организация не заполнено'}
+                        'town': u'Поле Регион не заполнено', 'town': u'Поле Город не заполнено', 'organization': u'Поле организация не заполнено'}
     allfields = {'surname': '', 'firstname': '', 'lastname': '', 'avatar': '', 'sex': '', 'birthday': '', 'spec_id': '',
                  'experience': '', 'addspeciality': '', 'addexperience': '', 'graduate': '', 'dissertation': '',
                  'title': '', 'addtitle': '', 'category': '', 'awords': '', 'organization': '', 'job': '', 'site': '',
-                 'school': '', 'graduate_year': '', 'faculty': '', 'cathedra': '', 'country': '', 'town': '',
+                 'school': '', 'graduate_year': '', 'faculty': '', 'cathedra': '', 'country': '', 'region': '', 'town': '',
                  'phone_number': '', 'phone_visible': '', 'ICQ_Skype': '', 'social': '', 'no_found_school': ''}
     error = ""
 
@@ -162,7 +162,7 @@ class RegisterStep2Form(forms.ModelForm):
                 self.allfields[k] = ''
 
     def getTown(self, country):
-        return Towns.objects.filter(country_id__name=country)
+        return []  # Towns.objects.filter(country_id__name=country)
 
     def mandatory_valid(self):
         cf = forms.CharField()
@@ -192,7 +192,8 @@ class RegisterStep2Form(forms.ModelForm):
                               'country_list': Countries.objects.all(),
                               'category_list': Category.objects.all(),
                               'awords_list': Aword.objects.all(),
-                              'town_list': Towns.objects.filter(country_id=country), 'error': self.error}
+                              'town_list': [],  # Towns.objects.filter(country_id=country),
+                              'error': self.error}
         for k, v in self.allfields.iteritems():
             if request.session.get(k):
                 template_key_value[k] = request.session.get(k, '')
@@ -207,7 +208,7 @@ class RegisterStep2Form(forms.ModelForm):
 class RegisterStep1Form(forms.ModelForm):
     username = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
-    agreed = forms.CheckboxInput()    
+    agreed = forms.CheckboxInput()
     error = ''
 
     def render(self, request):
@@ -262,4 +263,3 @@ class RegisterStep1Form(forms.ModelForm):
     class Meta:
         model = User
         fields = []
-

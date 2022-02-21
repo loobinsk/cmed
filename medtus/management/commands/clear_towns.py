@@ -9,10 +9,11 @@ class Command(BaseCommand):
     help = u'Убирает дубли городов'
 
     def handle(self, *args, **options):
-        for town in Towns.objects.order_by('id'):
-            duplicates = Towns.objects.filter(name=town.name, country_id=town.country_id, region=town.region) \
-                .exclude(pk=town.pk)
-            for dtown in duplicates:
-                Events.objects.filter(town_id=dtown).update(town_id=town)
-                MyUser.objects.filter(town=dtown).update(town=town)
-                dtown.delete()
+        pass
+        # for town in Towns.objects.order_by('id'):
+        #     duplicates = Towns.objects.filter(name=town.name, country_id=town.country_id, region=town.region) \
+        #         .exclude(pk=town.pk)
+        #     for dtown in duplicates:
+        #         Events.objects.filter(town_id=dtown).update(town_id=town)
+        #         MyUser.objects.filter(town=dtown).update(town=town)
+        #         dtown.delete()

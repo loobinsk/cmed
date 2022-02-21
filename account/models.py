@@ -186,7 +186,7 @@ updatedate
 lastvisit
 lastaccess
 type
-user_ptr_id 	
+user_ptr_id
 """
 
 
@@ -224,6 +224,7 @@ class MyUser(AbstractBaseUser_, PermissionsMixin):
     faculty = models.CharField(max_length=256, blank=True, null=True)
     cathedra = models.CharField(max_length=256, blank=True, null=True)
     country = models.ForeignKey('medtus.Countries', db_column='country', null=True, blank=True, verbose_name=u'Страна', db_index=True)
+    region = models.ForeignKey('medtus.Regions', db_column='region', null=True, blank=True, verbose_name=u'Регион', db_index=True)
     town = models.ForeignKey('medtus.Towns', db_column='town', null=True, blank=True, verbose_name=u'Город', db_index=True)
     phone_number = models.CharField(max_length=256, blank=True, null=True)
     phone_visible = models.CharField(max_length=256, blank=True, null=True)

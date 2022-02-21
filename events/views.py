@@ -226,7 +226,7 @@ def addevent(request):
     else:
         specialities_list = Specialities.objects.all().order_by('name')
         countries_list = Countries.objects.all().order_by('title')
-        towns_list = Towns.objects.filter(country_id=1).order_by('name')
+        towns_list = Towns.objects.all().order_by('name')[:100]
 
         context = {
             'specialities_list': specialities_list,

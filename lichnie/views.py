@@ -263,7 +263,7 @@ def lichnie1(request):
             'graduate_list': Graduate.objects.all(),
             'title_list': Title.objects.all(),
             'country_list': Countries.objects.all(),
-            'town_list': Towns.objects.filter(country_id=user.country.id).order_by('order', 'name'),
+            'town_list': [],  # Towns.objects.filter(country_id=user.country.id).order_by('order', 'name'),
             'csrf_token_value': get_token(request),
             'category_list': Category.objects.all(),
         },context.flatten())
